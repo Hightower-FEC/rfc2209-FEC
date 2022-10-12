@@ -1,10 +1,11 @@
 import React from 'react';
+import SelectSize from './SelectSize.jsx';
 
 const AddCart = () => {
 
   return (
     <div>
-      Hello
+      <SelectSize />
     </div>
   );
 };
