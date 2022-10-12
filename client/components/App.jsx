@@ -1,11 +1,21 @@
 import React from "react";
 
-const App = () =>{
-    return (
-        <h1>
-            Welcome to React App thats build using Webpack and Babel separately
-        </h1>
-    )
-}
+import TopBar from './TopBar.jsx';
+import ProductDetail from './ProductDetail/ProductDetail.jsx';
+import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
+import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
+import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
-export default App
+const App = () =>{
+  return (
+    <div>
+      <TopBar/>
+      <ProductDetail/>
+      <QuestionsAnswers/>
+      <RatingsReviews/>
+      <RelatedItems/>
+    </div>
+  );
+};
+
+export default App;
