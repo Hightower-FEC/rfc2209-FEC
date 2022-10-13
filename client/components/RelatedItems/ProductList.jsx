@@ -1,10 +1,10 @@
 import React from 'react';
 import ProductCard from './ProductCard.jsx';
 
-const ProductList = ({currentProductID}) => {
+const ProductList = ({product}) => {
   return (
     <>
-      {currentProductID.map((product, key) => {
+      {product.map((product, key) => {
         return (
           <ProductCard product={product} key={key}/>
         );
