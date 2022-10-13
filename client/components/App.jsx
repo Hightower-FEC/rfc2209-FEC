@@ -12,12 +12,11 @@ import { API_KEY, URL } from '../../config/config.js';
 
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
+  console.log(axios.defaults.headers.common);
+
 
   useEffect(() => {
-    axios.get(`${URL}/products`, {
-      headers: {
-        'Authorization': API_KEY
-      }})
+    axios.get(`${URL}/products`)
       .then((response) => {
         setCurrentProductID(response.data[0].id);
       })
