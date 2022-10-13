@@ -4,7 +4,7 @@ import ImageSlider from './ImageSlider.jsx';
 const styles = {
   width: '500px',
   height: '350px',
-  margin: '0 auto'
+  margin: '0 auto',
 };
 
 const {useState, useEffect} = React;

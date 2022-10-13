@@ -22,6 +22,7 @@ const Overview = ({ productID }) => {
       })
       .catch((err) => console.log(err));
   }, []);
+
   if (currentStyle) {
     return (
       <div>
