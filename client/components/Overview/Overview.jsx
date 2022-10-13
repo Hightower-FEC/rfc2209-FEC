@@ -1,5 +1,6 @@
 import React from 'react';
 import AddCart from './AddCart.jsx';
+import ImageGallery from './ImageGallery.jsx';
 
 const Overview = () =>{
   return (
