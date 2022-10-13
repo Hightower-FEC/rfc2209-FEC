@@ -8,10 +8,7 @@ const RelatedItems = ({productID}) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`${URL}/products/${productID}/related`, {
-      headers: {
-        'Authorization': API_KEY
-      }})
+    axios.get(`${URL}/products/${productID}/related`)
       .then((response) => {
         console.log('This is the response', response);
         setProducts(response.data);
