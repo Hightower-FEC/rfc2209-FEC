@@ -13,7 +13,7 @@ const RelatedItems = ({productID}) => {
         'Authorization': API_KEY
       }})
       .then((response) => {
-        console.log('This is the response.data', response.data);
+        console.log('This is the response', response);
         setProducts(response.data);
       })
       .catch((error) => {
