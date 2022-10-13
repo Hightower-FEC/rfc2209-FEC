@@ -1,9 +1,14 @@
 import React from 'react';
+import ProductCard from './ProductCard.jsx';
 
-const ProductList = () => {
+const ProductList = ({products}) => {
   return (
     <>
-      This is the product list
+      {products.map((product, key) => {
+        return (
+          <ProductCard product={product} key={key}/>
+        );
+      })}
     </>
   );
 };
