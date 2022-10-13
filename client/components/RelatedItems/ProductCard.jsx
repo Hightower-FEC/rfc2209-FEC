@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ProductCard = () => {
+const ProductCard = ({product}) => {
   return (
-    <div>This is an individual card</div>
+    <div>{product}</div>
   );
 };
 
