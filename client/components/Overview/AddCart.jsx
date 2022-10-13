@@ -4,7 +4,6 @@ const AddCart = () => {
 
   return (
     <div>
-      Hello
     </div>
   );
 };

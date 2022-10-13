@@ -1,6 +1,6 @@
 import React from 'react';
 import AddCart from './AddCart.jsx';
-import ImageGallery from './ImageGallery.jsx';
+import ImageGallery from './Image_Gallery/ImageGallery.jsx';
 
 const Overview = () =>{
   return (
@@ -8,6 +8,7 @@ const Overview = () =>{
       <h1>
       ProductDetail
       </h1>
+      <ImageGallery />
       <AddCart />
     </div>
   );
