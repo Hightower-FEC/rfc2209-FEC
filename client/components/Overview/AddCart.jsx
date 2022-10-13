@@ -5,10 +5,7 @@ const AddCart = () => {
 
   return (
     <div>
-<<<<<<< HEAD
       <SelectSize />
-=======
->>>>>>> image-gallery
     </div>
   );
 };
