@@ -31,10 +31,10 @@ const App = () => {
     return (
       <div>
         <TopBar/>
-        <Overview product={currentProductID}/>
-        <QuestionsAnswers product={currentProductID}/>
-        <RatingsReviews product={currentProductID}/>
-        <RelatedItems product={currentProductID}/>
+        <Overview productID={currentProductID}/>
+        <QuestionsAnswers productID={currentProductID}/>
+        <RatingsReviews productID={currentProductID}/>
+        <RelatedItems productID={currentProductID}/>
       </div>
     );
   }
