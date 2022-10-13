@@ -8,11 +8,11 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
-import { API_KEY, BASE_URL, CAMPUS_CODE } from '../config/config.js';
+import { API_KEY, BASE_URL, CAMPUS_CODE } from '../../config/config.js';
 
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
-  console.log(currentProductID);
+
   useEffect(() => {
     axios.get(`${BASE_URL}/${CAMPUS_CODE}/products`, {
       headers: {
