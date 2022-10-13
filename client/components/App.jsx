@@ -8,13 +8,13 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
-import { API_KEY, BASE_URL, CAMPUS_CODE } from '../../config/config.js';
+import { API_KEY, URL } from '../../config/config.js';
 
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/${CAMPUS_CODE}/products`, {
+    axios.get(`${URL}/products`, {
       headers: {
         'Authorization': API_KEY
       }})
@@ -31,10 +31,10 @@ const App = () => {
     return (
       <div>
         <TopBar/>
-        <Overview product={currentProductID}/>
-        <QuestionsAnswers product={currentProductID}/>
-        <RatingsReviews product={currentProductID}/>
-        <RelatedItems product={currentProductID}/>
+        <Overview productID={currentProductID}/>
+        <QuestionsAnswers productID={currentProductID}/>
+        <RatingsReviews productID={currentProductID}/>
+        <RelatedItems productID={currentProductID}/>
       </div>
     );
   }
