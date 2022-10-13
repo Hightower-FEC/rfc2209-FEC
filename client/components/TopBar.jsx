@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const TopBar = () =>{
-    return (
-        <h1>
-            TopBar
-        </h1>
-    )
-}
+  return (
+    <h1>
+      TopBar
+    </h1>
+  );
+};
 
-export default TopBar
+export default TopBar;
