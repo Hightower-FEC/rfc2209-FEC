@@ -2,7 +2,7 @@ import React from 'react';
 import AddCart from './AddCart.jsx';
 import ImageGallery from './Image_Gallery/ImageGallery.jsx';
 
-const Overview = () =>{
+const Overview = () => {
   return (
     <div>
       <h1>
