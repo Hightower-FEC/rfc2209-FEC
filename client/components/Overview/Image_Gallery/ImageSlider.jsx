@@ -1,7 +1,7 @@
 import React from 'react';
 const { useState, useEffect } = React;
 
-const ImageSlider = (props) => {
+const ImageSlider = ({images}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
 
@@ -15,9 +15,11 @@ const ImageSlider = (props) => {
     top: '50%',
     transform: 'translate(0, -50%)',
     left: '32px',
+    textShadow: '0 0 7px black',
     fontSize: '45px',
-    color: '#fff',
+    color: 'white',
     zIndex: 1,
+    userSelect: 'none',
     cursor: 'pointer'
   };
 
@@ -26,9 +28,11 @@ const ImageSlider = (props) => {
     top: '50%',
     transform: 'translate(0, -50%)',
     right: '32px',
+    textShadow: '0 0 7px black',
     fontSize: '45px',
-    color: '#fff',
+    color: 'white',
     zIndex: 1,
+    userSelect: 'none',
     cursor: 'pointer'
   };
 
@@ -36,9 +40,11 @@ const ImageSlider = (props) => {
     width: '100%',
     height: '100%',
     borderRadius: '10px',
-    backgroundImage: 'center',
-    backgroundSize: 'cover',
-    backgroundImage: `url(${props.images[currentIndex].url})`
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: '#DDDDDD',
+    backgroundSize: 'contain',
+    backgroundImage: `url(${images[currentIndex].url})`
   };
 
   const thumbnailContainer = {
@@ -57,12 +63,13 @@ const ImageSlider = (props) => {
       margin: '0 5px',
       backgroundSize: 'cover',
       backgroundImage: 'center',
+      cursor: 'pointer',
       backgroundImage: `url(${image.url})`
     };
   };
 
   const goToNextImage = () => {
-    if (currentIndex === props.images.length - 1) { return; }
+    if (currentIndex === images.length - 1) { return; }
     setCurrentIndex(currentIndex + 1);
   };
 
@@ -74,6 +81,10 @@ const ImageSlider = (props) => {
   const toggleShowArrows = () => {
     console.log('toggling');
     setShowArrows(!showArrows);
+  };
+
+  const handleThumbnailClick = (index) => {
+    setCurrentIndex(index);
   };
 
   return (
@@ -89,9 +100,9 @@ const ImageSlider = (props) => {
       }
       <div style={slideStyles}></div>
       <div style={thumbnailContainer}>
-        {props.images.map((image, i) => {
+        {images.map((image, i) => {
           return (
-            <div key={i} style={thumbnailStyles(image)}>
+            <div key={i} onClick={() => { handleThumbnailClick(i); }} style={thumbnailStyles(image)}>
             </div>
           );
         })}
