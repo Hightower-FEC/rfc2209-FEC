@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
@@ -44,4 +45,20 @@ const App = () => {
   );
 };
 
+=======
+import React from 'react';
+import RelatedItems from './RelatedItems.jsx';
+
+const App = () =>{
+  return (
+    <>
+      <h1>
+        Welcome to React App thats build using Webpack and Babel separately
+      </h1>
+      <RelatedItems />
+    </>
+  );
+};
+
+>>>>>>> 24d997be26229768af22eacc5ed48e0bdcb23736
 export default App;
