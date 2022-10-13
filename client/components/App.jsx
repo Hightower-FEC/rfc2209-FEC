@@ -8,7 +8,7 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 
-import { API_KEY, URL } from '../../config/config.js';
+import { URL } from '../../config/config.js';
 
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
