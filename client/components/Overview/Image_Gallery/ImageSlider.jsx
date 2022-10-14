@@ -15,8 +15,8 @@ const ImageSlider = ({images}) => {
     top: '50%',
     transform: 'translate(0, -50%)',
     left: '32px',
-    textShadow: '0 0 7px black',
-    fontSize: '45px',
+    textShadow: '0 0 2px black',
+    fontSize: '75px',
     color: 'white',
     zIndex: 1,
     userSelect: 'none',
@@ -28,8 +28,8 @@ const ImageSlider = ({images}) => {
     top: '50%',
     transform: 'translate(0, -50%)',
     right: '32px',
-    textShadow: '0 0 7px black',
-    fontSize: '45px',
+    textShadow: '0 0 2px black',
+    fontSize: '75px',
     color: 'white',
     zIndex: 1,
     userSelect: 'none',
@@ -49,20 +49,22 @@ const ImageSlider = ({images}) => {
 
   const thumbnailContainer = {
     display: 'flex',
-    justifyContent: 'center',
-    margin: '5px 10px',
-    height: '100%'
+    justifyContent: 'space-between',
+    marginTop: '10px',
+    height: '100px',
+    width: '100%'
   };
 
   const thumbnailStyles = (image) => {
     return {
       minHeight: '15%',
       minWidth: '15%',
-      maxHeight: '25%',
+      maxHeight: '100%',
       maxWidth: '25%',
       margin: '0 5px',
       backgroundSize: 'cover',
       backgroundImage: 'center',
+      borderRadius: '2px',
       cursor: 'pointer',
       backgroundImage: `url(${image.url})`
     };
@@ -94,8 +96,8 @@ const ImageSlider = ({images}) => {
     >
       {showArrows &&
         <>
-          <div style={leftPointerStyles} onClick={goToPreviousImage}>❮</div>
-          <div style={rightPointerStyles} onClick={goToNextImage}>❯</div>
+          <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
+          <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
         </>
       }
       <div style={slideStyles}></div>

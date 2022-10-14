@@ -2,21 +2,21 @@ import React from 'react';
 import ImageSlider from './ImageSlider.jsx';
 
 const styles = {
-  width: '500px',
-  height: '350px',
-  margin: '0 auto',
+  width: '600px',
+  height: '400px',
+  margin: '0 20px 0 0'
 };
 
 const {useState, useEffect} = React;
 
 const ImageGallery = ({ productStyle }) => {
   const [currentPhotos, setCurrentPhotos] = useState(productStyle.photos);
-  console.log(productStyle);
+  // console.log(productStyle);
 
   return (
     <div>
       <div style={styles}>
-        <ImageSlider images={currentPhotos}/>
+        <ImageSlider images={productStyle.photos}/>
       </div>
     </div>
   );
