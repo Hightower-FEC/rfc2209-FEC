@@ -4,13 +4,11 @@ import axios from 'axios';
 import { API_KEY, URL } from '../../../config/config.js';
 
 const RelatedItems = ({productID}) => {
-  console.log(productID);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}/related`)
       .then((response) => {
-        console.log('This is the response', response);
         setProducts(response.data);
       })
       .catch((error) => {
