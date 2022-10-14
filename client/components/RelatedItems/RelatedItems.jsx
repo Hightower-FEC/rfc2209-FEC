@@ -3,16 +3,6 @@ import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { API_KEY, URL } from '../../../config/config.js';
 
-<<<<<<< HEAD
-const RelatedItems = () =>{
-  return (
-    <h1>
-      RelatedItems
-    </h1>
-  );
-};
-
-=======
 const RelatedItems = ({productID}) => {
   const [products, setProducts] = useState([]);
 
@@ -36,5 +26,4 @@ const RelatedItems = ({productID}) => {
   );
 };
 
->>>>>>> 49e5923a28ea75c259eddb2a9490ef42229a1d68
 export default RelatedItems;
