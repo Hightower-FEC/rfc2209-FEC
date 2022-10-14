@@ -8,10 +8,10 @@ import Reviews from './Reviews.jsx';
 const RatingsReviews = ({productID}) =>{
   return (
     <div>
-      <h1>
+      <h3>
         RatingsReviews
-      </h1>
-      <div>
+      </h3>
+      <div style={{display: 'flex', flexDirection: 'row'}}>
         <Summary/>
         <Reviews/>
       </div>
