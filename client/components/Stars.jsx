@@ -26,11 +26,9 @@ const Stars = ({productID}) => {
 
 
   return percentRating ? (
-    <h1>
-      <div style={{fontSize: 12}}>
-        <span>★★★★★</span>
-      </div>
-    </h1>
+    <div style={{fontSize: 12}}>
+      <span>★★★★★</span>
+    </div>
   ) : <></>;
 };
 
