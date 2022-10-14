@@ -12,8 +12,6 @@ import { URL } from '../../config/config.js';
 
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
-  console.log(axios.defaults.headers.common);
-
 
   useEffect(() => {
     axios.get(`${URL}/products`)
