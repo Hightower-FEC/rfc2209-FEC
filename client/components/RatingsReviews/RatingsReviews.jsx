@@ -4,7 +4,6 @@ import axios from 'axios';
 import Summary from './Summary.jsx';
 import Reviews from './Reviews.jsx';
 
-
 const RatingsReviews = ({productID}) =>{
   return (
     <div>
@@ -12,8 +11,8 @@ const RatingsReviews = ({productID}) =>{
         RatingsReviews
       </h3>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Summary/>
-        <Reviews/>
+        <Summary productID={productID}/>
+        <Reviews productID={productID}/>
       </div>
     </div>
 
