@@ -1,5 +1,5 @@
 .thumbnails {
-  width: 200px;
+  width: 175px;
   height: 150px;
 }
 
@@ -19,4 +19,8 @@
 
 .default-price {
   font-size: 12px;
+}
+
+#favorite-related {
+  float: right;
 }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { API_KEY, URL } from '../../../config/config.js';
+import { URL } from '../../../config/config.js';
 
 const ProductCard = ({product}) => {
   const [card, setCard] = useState({});
@@ -14,7 +14,6 @@ const ProductCard = ({product}) => {
       .then(() => {
         axios.get(`${URL}/products/${product}/styles`)
           .then((response) => {
-            console.log('This is the style data', response.data)
             setImage(response.data.results[0].photos[0].thumbnail_url);
           })
       })
@@ -23,6 +22,7 @@ const ProductCard = ({product}) => {
 
   return (
     <div className="product-card">
+      <span id="favorite-related">✩</span>
       <img className="thumbnails" src={image}></img>
       <div className="category">{card.category}</div>
       <div><strong>{card.name}</strong></div>

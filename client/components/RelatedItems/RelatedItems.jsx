@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ProductList from './ProductList.jsx';
 import axios from 'axios';
-import { API_KEY, URL } from '../../../config/config.js';
+import { URL } from '../../../config/config.js';
 
 const RelatedItems = ({productID}) => {
   const [products, setProducts] = useState([]);
