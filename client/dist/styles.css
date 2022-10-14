@@ -1,6 +1,22 @@
 .thumbnails {
-  max-width: 250px;
-  min-width: 100px;
+  width: 200px;
   height: 150px;
+}
 
+/* RELATED ITEMS & OUTFITS */
+
+.product-card {
+  display: inline-block;
+  width: 20%;
+  padding: 2%;
+  margin: 2%;
+  border: 1px solid;
+}
+
+.category {
+  font-size: 14px;
+}
+
+.default-price {
+  font-size: 12px;
 }
