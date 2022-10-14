@@ -61,7 +61,7 @@ const ImageSlider = ({images}) => {
       minWidth: '15%',
       maxHeight: '100%',
       maxWidth: '25%',
-      margin: '0 5px',
+      margin: '0 0 0 0',
       backgroundSize: 'cover',
       backgroundImage: 'center',
       borderRadius: '2px',

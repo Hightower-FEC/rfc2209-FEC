@@ -1,5 +1,5 @@
 import React from 'react';
-import AddCart from './StyleSelector/AddCart.jsx';
+import AddToCartForm from './Form/AddToCartForm.jsx';
 import ImageGallery from './Image_Gallery/ImageGallery.jsx';
 import axios from 'axios';
 
@@ -51,7 +51,7 @@ const Overview = ({ productID }) => {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignContent: 'flex-start',
     width: '100%',
     height: '50%'
@@ -71,6 +71,23 @@ const Overview = ({ productID }) => {
     };
   };
 
+  const itemCategoryStyle = {
+    fontSize: '16px',
+    fontWeight: '500'
+  };
+
+  const itemNameStyle = {
+    fontSize: '40px',
+    marginBottom: '20px',
+    fontWeight: '700'
+  };
+
+  const selectedStyleStyles = {
+    fontSize: '16px',
+    marginTop: '25px',
+    marginBottom: '10px'
+  };
+
   const handleStyleClick = (index) => {
     console.log(currentProductStyles);
     setCurrentStyle(currentProductStyles.results[index]);
@@ -82,10 +99,10 @@ const Overview = ({ productID }) => {
       <div style={overviewContainerStyles}>
         <ImageGallery productStyle={currentStyle}/>
         <div style={productInfoContainerStyles}>
-          <h3>{currentProduct.category}</h3>
-          <h1>{currentProduct.name}</h1>
-          <p>{currentStyle.original_price}</p>
-          <p><b>STYLE {'>'}</b> {currentStyle.name}</p>
+          <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
+          <div style={itemNameStyle}>{currentProduct.name}</div>
+          <div>{currentStyle.original_price}</div>
+          <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
           <div style={stylesContainer}>
             {currentProductStyles.results.map((style, i) => {
               return (
@@ -96,8 +113,7 @@ const Overview = ({ productID }) => {
               );
             })}
           </div>
-
-          <AddCart />
+          <AddToCartForm />
         </div>
       </div>
     );

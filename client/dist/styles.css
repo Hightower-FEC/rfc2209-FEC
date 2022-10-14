@@ -1,6 +1,11 @@
-.thumbnails {
-  max-width: 250px;
-  min-width: 100px;
-  height: 150px;
+* {
+  font-family: 'Montserrat', sans-serif;
+}
 
+select {
+  background-color: #F1F1F1;
+}
+
+button {
+  height: 40px
 }
