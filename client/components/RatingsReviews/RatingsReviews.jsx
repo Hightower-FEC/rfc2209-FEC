@@ -4,7 +4,20 @@ import axios from 'axios';
 import Summary from './Summary.jsx';
 import Reviews from './Reviews.jsx';
 
+import { URL } from '../../../config/config.js';
+
 const RatingsReviews = ({productID}) =>{
+
+  useEffect(() => {
+    axios.get(`${URL}/reviews?product_id=${productID}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <div>
       <h3>
