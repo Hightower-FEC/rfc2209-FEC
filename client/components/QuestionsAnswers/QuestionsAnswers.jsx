@@ -16,14 +16,21 @@ const QuestionsAnswers = ({productID}) => {
     })
       .then((response) => {
         // Data is array of objects where each object contains properties for a question like question_body, question_date, answers (object), etc
-        let data = response.data.results;
-        console.log('Success GET: ', data); // Success log
-        setQuestions(response.data.results);
+        let allQuestions = response.data.results;
+        console.log('Success GET: ', allQuestions); // Success log
+        setQuestions(allQuestions);
+        // return allQuestions;
       })
       .catch((err) => {
         console.log('Failed GET: ', err);
       });
   };
+
+
+  // Fetch questions for product id upon page render
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
   // Function to filter the questions array based on the search term
   const handleSearch = (search) => {
@@ -40,10 +47,6 @@ const QuestionsAnswers = ({productID}) => {
     console.log('Modal pop up');
   };
 
-  // Fetch questions for product id upon page render
-  useEffect(() => {
-    getQuestions();
-  }, []);
 
   return (
     <div>
@@ -82,11 +85,8 @@ const Search = ({handleSearch}) => {
 const QuestionList = ({questions}) => {
 
   return (
-    questions.map((question, i) => {
-      if (question.reported === false) {
-        return <QuestionEntry question={question} key={i}/>;
-      }
-    }));
+    questions.map((question, i) => <QuestionEntry question={question} key={i}/>)
+  );
 };
 
 // Sub-component for QuestionList: QuestionEntry
@@ -109,7 +109,7 @@ const AnswerList = ({answers}) => {
 
   return (
     <div>
-      <strong> A: </strong>
+      <strong > A: </strong>
       <span>{answerIDs.map((id, i) => <AnswerEntry answer={answers[id]} key={i} />)} </span>
     </div>
   );
