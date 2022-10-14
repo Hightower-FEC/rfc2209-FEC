@@ -1,12 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import Review from './Review.jsx';
+import axios from 'axios';
 
-const Reviews = () =>{
+const Reviews = ({productID}) =>{
+
   return (
     <div>
-      <h1>
-      Reviews
-      </h1>
+      <h4>
+        248 reviews, sorted by relevance
+      </h4>
       <div>
+        <Review productID={productID}/>
       </div>
     </div>
 
