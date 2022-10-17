@@ -9,13 +9,13 @@ const styles = {
 
 const {useState, useEffect} = React;
 
-const ImageGallery = ({ productStyle }) => {
+const ImageGallery = ({ productStyle, handleImageClick }) => {
   // console.log(productStyle);
 
   return (
     <div>
       <div style={styles}>
-        <ImageSlider images={productStyle.photos}/>
+        <ImageSlider handleImageClick={handleImageClick} images={productStyle.photos}/>
       </div>
     </div>
   );

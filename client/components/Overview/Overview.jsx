@@ -1,6 +1,7 @@
 import React from 'react';
 import AddToCartForm from './Form/AddToCartForm.jsx';
 import ImageGallery from './Image_Gallery/ImageGallery.jsx';
+import ExpandedView from './Image_Gallery/ExpandedView.jsx';
 import axios from 'axios';
 
 import { URL } from '../../../config/config.js';
@@ -11,6 +12,11 @@ const Overview = ({ productID }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStyle, setCurrentStyle] = useState(null);
   const [currentProduct, setCurrentProduct] = useState(null);
+
+  const [currentImages, setCurrentImages] = useState([]);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [toggleView, setToggleView] = useState(false);
+
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
@@ -100,10 +106,26 @@ const Overview = ({ productID }) => {
     setCurrentIndex(index);
   };
 
+  const handleImageClick = (images, index) => {
+    console.log('handling image click', images, index);
+    setCurrentImages(images);
+    setImageIndex(index);
+    setToggleView(true);
+  };
+
+  const toggleOffView = () => {
+    setToggleView(false);
+  };
+
   if (currentStyle && currentProduct) {
+    if (toggleView) {
+      return (
+        <ExpandedView toggleOffView={toggleOffView} images={currentImages} index={imageIndex}/>
+      );
+    }
     return (
       <div style={overviewContainerStyles}>
-        <ImageGallery productStyle={currentStyle}/>
+        <ImageGallery handleImageClick={handleImageClick} productStyle={currentStyle}/>
         <div style={productInfoContainerStyles}>
           <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
           <div style={itemNameStyle}>{currentProduct.name}</div>

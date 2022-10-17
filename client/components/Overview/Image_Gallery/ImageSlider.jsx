@@ -1,7 +1,10 @@
 import React from 'react';
+import Zoom from 'react-medium-image-zoom';
+import 'react-medium-image-zoom/dist/styles.css';
+
 const { useState, useEffect } = React;
 
-const ImageSlider = ({images}) => {
+const ImageSlider = ({images, handleImageClick}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const [currentPhotos, setCurrentPhotos] = useState(images);
@@ -46,6 +49,7 @@ const ImageSlider = ({images}) => {
   const slideStyles = {
     width: '100%',
     height: '100%',
+    position: 'relative',
     borderRadius: '10px',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -55,6 +59,7 @@ const ImageSlider = ({images}) => {
   };
 
   const thumbnailContainer = {
+    zIndex: 2,
     display: 'flex',
     position: 'absolute',
     justifyContent: 'space-between',
@@ -70,6 +75,7 @@ const ImageSlider = ({images}) => {
 
   const thumbnailStyles = (image) => {
     return {
+
       minHeight: '15%',
       minWidth: '15%',
       maxHeight: '100%',
@@ -124,7 +130,7 @@ const ImageSlider = ({images}) => {
       onMouseLeave={toggleShowArrows}
     >
       {showArrows &&
-        <div style={{position: 'absolute', height: '900px', width: '600px'}}>
+        <div style={{position: 'absolute', height: '900px', width: '600px'}} >
           <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
           <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
           <div style={thumbnailContainer}>
@@ -143,7 +149,9 @@ const ImageSlider = ({images}) => {
           </div>
         </div>
       }
-      <div style={slideStyles}></div>
+
+      <div style={slideStyles} onClick={() => { handleImageClick(images, currentIndex); }}></div>
+
     </div>
   );
 };
