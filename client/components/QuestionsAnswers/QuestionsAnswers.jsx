@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-
 import { URL } from '../../../config/config.js';
+import QuestionList from './QuestionList.jsx';
+import Search from './Search.jsx';
 
 const QuestionsAnswers = ({productID}) => {
   // productID = 66642
@@ -11,7 +12,7 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: 66645
+        product_id: 66646
       }
     })
       .then((response) => {
@@ -26,7 +27,6 @@ const QuestionsAnswers = ({productID}) => {
       });
   };
 
-
   // Fetch questions for product id upon page render
   useEffect(() => {
     getQuestions();
@@ -34,7 +34,7 @@ const QuestionsAnswers = ({productID}) => {
 
   // Function to filter the questions array based on the search term
   const handleSearch = (search) => {
-    console.log('Inside handle search: ', search);
+    console.log('Inside handle search:', search);
   };
 
   // Function to render the rest of the questions
@@ -47,86 +47,28 @@ const QuestionsAnswers = ({productID}) => {
     console.log('Modal pop up');
   };
 
+  // Send a PUT request to update the question's helpfulness
+  const handleQuestionHelpful = (questionId, helpful) => {
+    let isHelpful = helpful ? 'helpful' : 'not helpful';
+    console.log(`Marked question id ${questionId} ${isHelpful}`);
+  };
+
+  // Send a PUT request to update the answer's helpfulness
+  const handleAnswerHelpful = (answerId, helpful) => {
+    let isHelpful = helpful ? 'helpful' : 'not helpful';
+    console.log(`Marked answer id ${answerId} ${isHelpful}`);
+  };
 
   return (
-    <div>
+    <div >
       <h1>Questions and Answers</h1>
       <Search handleSearch={handleSearch}/>
-      <QuestionList questions={questions} />
-      <button id='more-questions' onClick={moreQuestions}>More Answered Questions</button>
-      <button id='add-question' onClick={addQuestion}>Add A Question</button>
+      <QuestionList questions={questions} handleQuestionHelpful={handleQuestionHelpful} handleAnswerHelpful={handleAnswerHelpful} />
+      <button className='moreQuestions' onClick={moreQuestions}>More Answered Questions</button>
+      <button className='addQuestion' onClick={addQuestion}>Add A Question</button>
     </div>
   );
 };
 
-// Sub-component: Search Bar
-const Search = ({handleSearch}) => {
-  // Set search state to an empty string
-  const [search, setSearch] = useState('');
-
-
-  const handleSubmit = ((e) => {
-    e.preventDefault();
-    console.log('Submit search for: ', search);
-    handleSearch(search);
-    setSearch('');
-  });
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input id='search' onChange={((e) => setSearch(e.target.value))} value = {search} placeholder ='Have a question? Search for answers...' />
-      <button type='submit'>🔍︎</button>
-    </form>
-  );
-};
-
-// Sub-component: QuestionsList
-// By default, load up to FOUR questions on page render
-const QuestionList = ({questions}) => {
-
-  return (
-    questions.map((question, i) => <QuestionEntry question={question} key={i}/>)
-  );
-};
-
-// Sub-component for QuestionList: QuestionEntry
-const QuestionEntry = ({question, i}) => {
-
-  return (
-    <div>
-      <strong> Q: {question.question_body} </strong>
-      <span> Helpful? <a>Yes</a> ({question.question_helpfulness}) | <a>Add Answer</a> </span>
-      <AnswerList answers = {question.answers}/>
-    </div>
-  );
-};
-
-// Sub-component for QuestionEntry: AnswerList
-// Up to TWO answers should be display for each question
-const AnswerList = ({answers}) => {
-  console.log('Inside answers list: ', answers);
-  let answerIDs = Object.keys(answers);
-
-  return (
-    <div>
-      <strong > A: </strong>
-      <span>{answerIDs.map((id, i) => <AnswerEntry answer={answers[id]} key={i} />)} </span>
-    </div>
-  );
-};
-
-// Sub-component for AnswerList: AnswerEntry
-const AnswerEntry = ({answer}) => {
-  // console.log('Inside answer entry');
-
-  return (
-    <div>
-      {answer.body} <br />
-      <sub>
-        by {answer.answerer_name}, {answer.date} | Helpful? Yes ({answer.helpfulness}) | Report
-      </sub>
-    </div>
-  );
-};
 
 export default QuestionsAnswers;
