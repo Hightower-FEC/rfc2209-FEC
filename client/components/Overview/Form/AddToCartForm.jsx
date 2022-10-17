@@ -19,6 +19,7 @@ const quantityStyles = {
 const buttonStyles = {
   fontWeight: 'bold',
   width: '75%',
+  flex: '2 1 auto'
 };
 
 const formContainerStyles = {
@@ -31,28 +32,57 @@ const formContainerStyles = {
 };
 
 const starButtonStyles = {
-  width: '21%',
   fontSize: '25px',
 };
 
-const AddToCartForm = () => {
+const {useState} = React;
+
+const AddToCartForm = ({currentStyle}) => {
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedQty, setSelectedQty] = useState('');
+
+  const handleSizeChange = (event) => {
+    console.log(event.target.value);
+    setSelectedSize(event.target.value);
+  };
+
+  const handleQtyChange = (event) => {
+    console.log(event.target.value);
+    setSelectedQty(event.target.value);
+  };
+
   return (
     <div style={formContainerStyles}>
-      <select style={selectStyles} id="size_select" defaultValue="none">
-        <option value="none" disabled hidden>SELECT SIZE</option>
-        <option value="small">Small</option>
-        <option value="medium">Medium</option>
-        <option value="large">Large</option>
-        <option value="xl">XL</option>
+      <select
+        style={selectStyles}
+        onChange={handleSizeChange}
+        id="size_select"
+        value={selectedSize}
+      >
+        <option value="" disabled hidden>SELECT SIZE</option>
+        {Object.keys(currentStyle.skus).map((key, i) => {
+          return <option
+            key={i}
+            value={key}
+          >
+            {currentStyle.skus[key].size}
+          </option>;
+        })}
+
       </select>
-      <select style={quantityStyles} defaultValue="1">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
+      <select style={quantityStyles} value={selectedQty} onChange={handleQtyChange}>
+        {
+          selectedSize !== '' ?
+            Array.from({length: currentStyle.skus[selectedSize].quantity}, (num, i) => i + 1).map((number, i) => {
+              return (<option key={i} value={number}>{number}</option>);
+            })
+            :
+            <option value="" disabled hidden>QTY</option>
+        }
+
+
       </select>
-      <button style={buttonStyles} type="button" value="ADD TO CART">ADD TO CART <strong style={{marginLeft: '40%'}}>＋</strong></button>
+      <button style={buttonStyles} type="button" value="ADD TO CART">ADD TO CART</button>
       <button style={starButtonStyles} type="button" value="★">★</button>
     </div>
   );

@@ -4,6 +4,13 @@ const { useState, useEffect } = React;
 const ImageSlider = ({images}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
+  const [currentPhotos, setCurrentPhotos] = useState(images);
+
+  useEffect(() => {
+    console.log('useeffect ran');
+    setCurrentIndex(0);
+  }, [images]);
+
 
   const containerStyles = {
     height: '100%',
@@ -16,7 +23,7 @@ const ImageSlider = ({images}) => {
     transform: 'translate(0, -50%)',
     left: '32px',
     textShadow: '0 0 2px black',
-    fontSize: '75px',
+    fontSize: '100px',
     color: 'white',
     zIndex: 1,
     userSelect: 'none',
@@ -29,7 +36,7 @@ const ImageSlider = ({images}) => {
     transform: 'translate(0, -50%)',
     right: '32px',
     textShadow: '0 0 2px black',
-    fontSize: '75px',
+    fontSize: '100px',
     color: 'white',
     zIndex: 1,
     userSelect: 'none',
@@ -49,10 +56,16 @@ const ImageSlider = ({images}) => {
 
   const thumbnailContainer = {
     display: 'flex',
+    position: 'absolute',
     justifyContent: 'space-between',
-    marginTop: '10px',
+    padding: '20px',
+    top: '91%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    borderRadius: '10px',
     height: '100px',
-    width: '100%'
+    width: '90%'
   };
 
   const thumbnailStyles = (image) => {
@@ -65,6 +78,22 @@ const ImageSlider = ({images}) => {
       backgroundSize: 'cover',
       backgroundImage: 'center',
       borderRadius: '2px',
+      cursor: 'pointer',
+      backgroundImage: `url(${image.url})`
+    };
+  };
+
+  const selectedThumbnailStyles = (image) => {
+    return {
+      minHeight: '15%',
+      minWidth: '15%',
+      maxHeight: '100%',
+      maxWidth: '25%',
+      margin: '0 0 0 0',
+      backgroundSize: 'cover',
+      backgroundImage: 'center',
+      borderRadius: '2px',
+      border: '2px solid white',
       cursor: 'pointer',
       backgroundImage: `url(${image.url})`
     };
@@ -95,20 +124,26 @@ const ImageSlider = ({images}) => {
       onMouseLeave={toggleShowArrows}
     >
       {showArrows &&
-        <>
+        <div style={{position: 'absolute', height: '900px', width: '600px'}}>
           <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
           <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
-        </>
+          <div style={thumbnailContainer}>
+            {images.map((image, i) => {
+              if (i === currentIndex) {
+                return (
+                  <div key={i} onClick={() => { handleThumbnailClick(i); }} style={selectedThumbnailStyles(image)}>
+                  </div>
+                );
+              }
+              return (
+                <div key={i} onClick={() => { handleThumbnailClick(i); }} style={thumbnailStyles(image)}>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       }
       <div style={slideStyles}></div>
-      <div style={thumbnailContainer}>
-        {images.map((image, i) => {
-          return (
-            <div key={i} onClick={() => { handleThumbnailClick(i); }} style={thumbnailStyles(image)}>
-            </div>
-          );
-        })}
-      </div>
     </div>
   );
 };

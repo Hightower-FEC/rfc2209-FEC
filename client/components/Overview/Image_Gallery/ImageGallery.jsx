@@ -3,14 +3,13 @@ import ImageSlider from './ImageSlider.jsx';
 
 const styles = {
   width: '600px',
-  height: '400px',
+  height: '900px',
   margin: '0 20px 0 0'
 };
 
 const {useState, useEffect} = React;
 
 const ImageGallery = ({ productStyle }) => {
-  const [currentPhotos, setCurrentPhotos] = useState(productStyle.photos);
   // console.log(productStyle);
 
   return (

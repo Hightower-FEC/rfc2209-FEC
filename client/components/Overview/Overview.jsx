@@ -25,7 +25,7 @@ const Overview = ({ productID }) => {
     axios.get(`${URL}/products/${productID}/styles`)
       .then((response) => {
         // console.log('product styles:', response.data);
-        // console.log('product style:', response.data.results[currentIndex]);
+        console.log('product style:', response.data.results[currentIndex]);
         setCurrentProductStyles(response.data);
         setCurrentStyle(response.data.results[currentIndex]);
       })
@@ -44,48 +44,54 @@ const Overview = ({ productID }) => {
 
   const productInfoContainerStyles = {
     margin: '0 0 0 20px',
-    width: '300px'
+    display: 'flex',
+    width: '400px',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignContent: 'space-between',
   };
 
   const stylesContainer = {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignContent: 'flex-start',
-    width: '100%',
-    height: '50%'
+    gap: '30px',
+    width: 'auto',
+    height: 'auto',
+    padding: '15px',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    borderRadius: '10px'
   };
 
   const styleStyles = (image) => {
     return {
-      height: '75px',
-      width: '75px',
+      height: '90px',
+      width: '90px',
       backgroundSize: 'cover',
       backgroundImage: 'center',
       cursor: 'pointer',
-      marginTop: '10px',
-      marginRight: '10px',
       backgroundImage: `url(${image.thumbnail_url})`,
       borderRadius: '50%'
     };
   };
 
   const itemCategoryStyle = {
-    fontSize: '16px',
-    fontWeight: '500'
+    fontSize: '20px',
+    fontWeight: '500',
+    marginBottom: '30px'
   };
 
   const itemNameStyle = {
-    fontSize: '40px',
-    marginBottom: '20px',
+    fontSize: '70px',
+    marginBottom: '60px',
     fontWeight: '700'
   };
 
   const selectedStyleStyles = {
-    fontSize: '16px',
-    marginTop: '25px',
-    marginBottom: '10px'
+    fontSize: '20px',
+    marginTop: '100px'
   };
 
   const handleStyleClick = (index) => {
@@ -113,7 +119,7 @@ const Overview = ({ productID }) => {
               );
             })}
           </div>
-          <AddToCartForm />
+          <AddToCartForm currentStyle={currentStyle}/>
         </div>
       </div>
     );
