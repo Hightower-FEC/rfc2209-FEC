@@ -1,17 +1,10 @@
 .thumbnails {
-  width: 175px;
+  max-width: 250px;
+  min-width: 150px;
   height: 150px;
 }
 
 /* RELATED ITEMS & OUTFITS */
-
-.product-card {
-  display: inline-block;
-  width: 20%;
-  padding: 2%;
-  margin: 2%;
-  border: 1px solid;
-}
 
 .category {
   font-size: 14px;
@@ -23,4 +16,38 @@
 
 #favorite-related {
   float: right;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-view {
+  white-space: nowrap;
+}
+
+.product-card {
+  display: inline-block;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  background-color: rgb(198, 207, 208);
+  color: #fff;
+  transition: transform 0.3s;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+}
+
+.indicators > button {
+  margin: 5px;
+}
+
+.related-thumbnails {
+  width: 250px;
+  height: 150px;
 }
