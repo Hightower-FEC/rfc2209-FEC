@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
+import ComparisonModal from './ComparisonModal.jsx';
 
 const ProductCard = ({product, index, width}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     axios.get(`${URL}/products/${product}`)
@@ -22,7 +24,10 @@ const ProductCard = ({product, index, width}) => {
 
   return (
     <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`}}>
-      <span id="favorite-related">✩</span>
+      <span id="favorite-related" onClick={() => {
+        setShowModal(!showModal);
+      }}>✩</span>
+      <ComparisonModal show={showModal} toggle={setShowModal}/>
       <img className="related-thumbnails" src={image}></img>
       <div className="category">{card.category}</div>
       <div><strong>{card.name}</strong></div>
