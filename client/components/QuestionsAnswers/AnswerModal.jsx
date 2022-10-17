@@ -19,7 +19,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
     justifyContent: 'center'
   };
   const modalContent = {
-    width: 500 + 'px',
+    width: 750 + 'px',
     backgroundColor: '#fff'
   };
   const modalHeadFoot = {
@@ -31,20 +31,27 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
     borderBottom: 1 + 'px solid #eee',
   };
 
-  // Pass formatted question data to parent component
-  const handleSubmit = () => {
-    let formatAnswer = {
-      question_body: answer,
-      asker_name: nickname,
-      asker_email: email
-    };
-    submitAnswer(formatAnswer);
-    onClose();
+  // Helper function to verify email address
+  const verifyEmail = (email) => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    return regex.test(email);
   };
 
-  // if (!showQModal) {
-  //   return null;
-  // }
+  // Pass formatted question data to parent component
+  const handleSubmit = () => {
+    if (answer === '' || nickname === '' || email === '' || !verifyEmail(email)) {
+      alert('You must enter the correct information');
+    } else {
+      let formatAnswer = {
+        body: answer,
+        answerer_name: nickname,
+        answerer_email: email
+      };
+      submitAnswer(formatAnswer);
+      onClose();
+    }
+  };
+
   return (showAModal && (
     <div className='modal' style={modalStyle} onClick={onClose}>
       <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
@@ -61,10 +68,11 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
 
           <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
           <input type='text' id='your-nickname' placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
+          <span>For privacy reasons, do not use your full name or email address</span><br/>
 
           <label htmlFor='your-email'>Your Email*</label><br/>
           <input type='text' id='your-email' onChange={(e) => setEmail(e.target.value)}/> <br/>
-          <span>For privacy reasons, do NOT use your full name or email address!</span>
+          <span>For authentication reasons, you will not be emailed</span><br/>
         </div>
 
         {/* Modal Footer */}

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
-import QuestionList from './QuestionList.jsx';
 import Search from './Search.jsx';
+import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 
@@ -14,15 +14,12 @@ const QuestionsAnswers = ({productID}) => {
   const [name, setName] = useState('');
   // Question modal state
   const [showQModal, setQShow] = useState(false);
-  // // Answer modal state
-  // const [showAModal, setAShow] = useState(false);
 
   // Get product name for question modal
   const getProductName = () => {
     axios.get(`${URL}/products/${productID}`)
       .then((response) => {
         setName(response.data.name);
-        // console.log('Product name', response.data.name);
       })
       .catch((err) => {
         console.log('Failed to get product name', err);
@@ -33,7 +30,7 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: 66646
+        product_id: productID
       }
     })
       .then((response) => {
@@ -48,7 +45,7 @@ const QuestionsAnswers = ({productID}) => {
       });
   };
 
-  // Fetch questions for product id upon page render
+  // Fetch questions and product name for id upon page render
   useEffect(() => {
     getQuestions();
     getProductName();
@@ -68,7 +65,6 @@ const QuestionsAnswers = ({productID}) => {
   const submitQuestion = (questionObj) => {
     console.log('Question from modal', questionObj);
   };
-
   // Helper function to submit question from modal
   const submitAnswer = (answerObj) => {
     console.log('Answer from modal', answerObj);

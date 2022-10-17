@@ -20,7 +20,7 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
     justifyContent: 'center'
   };
   const modalContent = {
-    width: 500 + 'px',
+    width: 750 + 'px',
     backgroundColor: '#fff'
   };
   const modalHeadFoot = {
@@ -32,20 +32,27 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
     borderBottom: 1 + 'px solid #eee',
   };
 
-  // Pass formatted question data to parent component
-  const handleSubmit = () => {
-    let formatQuestion = {
-      question_body: ask,
-      asker_name: nickname,
-      asker_email: email
-    };
-    submitQuestion(formatQuestion);
-    onClose();
+  // Helper function to verify email address
+  const verifyEmail = (email) => {
+    let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    return regex.test(email);
   };
 
-  // if (!showQModal) {
-  //   return null;
-  // }
+  // Pass formatted question data to parent component
+  const handleSubmit = () => {
+    if (ask === '' || nickname === '' || email === '' || !verifyEmail(email)) {
+      alert('You must enter the correct information');
+    } else {
+      let formatQuestion = {
+        question_body: ask,
+        asker_name: nickname,
+        asker_email: email
+      };
+      submitQuestion(formatQuestion);
+      onClose();
+    }
+  };
+
   return (showQModal && (
     <div className='modal' style={modalStyle} onClick={onClose}>
       <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
