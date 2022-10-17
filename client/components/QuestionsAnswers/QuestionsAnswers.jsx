@@ -36,9 +36,7 @@ const QuestionsAnswers = ({productID}) => {
       .then((response) => {
         // Data is array of objects where each object contains properties for a question like question_body, question_date, answers (object), etc
         let allQuestions = response.data.results;
-        console.log('Success GET: ', allQuestions); // Success log
         setQuestions(allQuestions);
-        // return allQuestions;
       })
       .catch((err) => {
         console.log('Failed GET: ', err);
