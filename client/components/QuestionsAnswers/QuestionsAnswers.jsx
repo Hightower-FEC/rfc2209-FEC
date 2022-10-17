@@ -5,6 +5,7 @@ import QuestionList from './QuestionList.jsx';
 import Search from './Search.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
+
 const QuestionsAnswers = ({productID}) => {
   // productID = 66642
   // Questions array state
@@ -13,8 +14,8 @@ const QuestionsAnswers = ({productID}) => {
   const [name, setName] = useState('');
   // Question modal state
   const [showQModal, setQShow] = useState(false);
-  // Answer modal state
-  const [showAModal, setAShow] = useState(false);
+  // // Answer modal state
+  // const [showAModal, setAShow] = useState(false);
 
   // Get product name for question modal
   const getProductName = () => {
@@ -63,14 +64,14 @@ const QuestionsAnswers = ({productID}) => {
     console.log('Render more questions');
   };
 
-  // Helper Function to render modal
-  const addQuestion = () => {
-    console.log('Modal pop up');
+  // Helper function to submit question from modal
+  const submitQuestion = (questionObj) => {
+    console.log('Question from modal', questionObj);
   };
 
   // Helper function to submit question from modal
-  const submitQuestion = (questionObj) => {
-    console.log('Question from modal', questionObj)
+  const submitAnswer = (answerObj) => {
+    console.log('Answer from modal', answerObj);
   };
 
   // Send a PUT request to update the question's helpfulness
@@ -90,11 +91,13 @@ const QuestionsAnswers = ({productID}) => {
       <h1>Questions and Answers</h1>
       <Search handleSearch={handleSearch}/>
       <QuestionList
+        name={name}
         questions={questions}
+        submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
         handleAnswerHelpful={handleAnswerHelpful} />
       <button className='moreQuestions' onClick={moreQuestions}>More Answered Questions</button>
-      <button className='addQuestion' onClick={()=> setQShow(true)}>Add A Question</button>
+      <button className='questionModal' onClick={() => setQShow(true)}>Add A Question</button>
       <QuestionModal
         name={name}
         showQModal={showQModal}
