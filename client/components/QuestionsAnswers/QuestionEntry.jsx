@@ -4,12 +4,10 @@ import AnswerModal from './AnswerModal.jsx';
 
 // Sub-component for QuestionList: QuestionEntry
 const QuestionEntry = ({question, i, name, submitAnswer, handleQuestionHelpful, handleAnswerHelpful}) => {
-  // console.log('Inside question entry', question);
-
   const [showAModal, setAShow] = useState(false);
 
-  let helpful = false;
   // Helper function to toggle helpfulness flag and pass data to parent function
+  let helpful = false;
   const handleClickHelpfulness = () => {
     helpful = !helpful;
     handleQuestionHelpful(question.question_id, helpful);

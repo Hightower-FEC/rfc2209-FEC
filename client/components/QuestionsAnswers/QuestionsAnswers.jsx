@@ -16,6 +16,10 @@ const QuestionsAnswers = ({productID}) => {
   const [name, setName] = useState('');
   // Question modal state
   const [showQModal, setQShow] = useState(false);
+  // Count questions to render
+  const [count, setCount] = useState(1);
+  // Renders two questions at a time
+  let increment = 2;
 
   // Get product name for question modal
   const getProductName = () => {
@@ -38,7 +42,10 @@ const QuestionsAnswers = ({productID}) => {
       .then((response) => {
         // Data is array of objects where each object contains properties for a question like question_body, question_date, answers (object), etc
         let allQuestions = response.data.results;
-        setQuestions(allQuestions);
+        // Sort the questions array based on the descending helpfulness
+        let sortQuestions = allQuestions.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
+        // console.log('Sort questions by helpfulness: ', sortQuestions);
+        setQuestions(sortQuestions);
       })
       .catch((err) => {
         console.log('Failed GET: ', err);
@@ -56,10 +63,20 @@ const QuestionsAnswers = ({productID}) => {
     console.log('Inside handle search:', search);
   };
 
-  // Function to render the rest of the questions
-  const moreQuestions = () => {
-    console.log('Render more questions');
+  //----- Expand Question List Functionality -----
+  // console.log('Question count', count);
+  // console.log('Total questions: ', questions);
+  // Helper function to slice the list in increments of two
+  const expandQuestionList = (count, increment) => {
+    return questions.slice(0, count * increment);
   };
+  let currentList = expandQuestionList(count, increment);
+
+  // Helper function to show and hide the question list button
+  const showMoreQuestionButton = (count, increment) => {
+    return (count * increment) < questions.length;
+  };
+  //---------------------------------------------
 
   // Helper function to submit question from modal
   const submitQuestion = (questionObj) => {
@@ -86,20 +103,26 @@ const QuestionsAnswers = ({productID}) => {
     <div >
       <h1>Questions and Answers</h1>
       <Search handleSearch={handleSearch}/>
+
       <QuestionList
         name={name}
-        questions={questions}
+        questions={currentList}
         submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
-        handleAnswerHelpful={handleAnswerHelpful} />
+        handleAnswerHelpful={handleAnswerHelpful}
+      />
 
-      <button className='moreQuestions' onClick={moreQuestions}>More Answered Questions</button>
+      {(showMoreQuestionButton(count, increment)) &&
+      (<button className='moreQuestions' onClick={() => setCount(count + 1)}>More Answered Questions</button>)}
+
       <button className='questionModal' onClick={() => setQShow(true)}>Add A Question</button>
+
       <QuestionModal
         name={name}
         showQModal={showQModal}
         onClose={() => setQShow(false)}
-        submitQuestion={submitQuestion}/>
+        submitQuestion={submitQuestion}
+      />
     </div>
   );
 };
