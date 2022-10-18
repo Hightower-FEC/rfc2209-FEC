@@ -21,7 +21,7 @@ const Overview = ({ productID }) => {
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
       .then((response) => {
-        // console.log('product details:', response.data);
+        console.log('product details:', response.data);
         setCurrentProduct(response.data);
       })
       .catch((err) => console.log(err));
@@ -124,26 +124,72 @@ const Overview = ({ productID }) => {
       );
     }
     return (
-      <div style={overviewContainerStyles}>
-        <ImageGallery handleImageClick={handleImageClick} productStyle={currentStyle}/>
-        <div style={productInfoContainerStyles}>
-          <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
-          <div style={itemNameStyle}>{currentProduct.name}</div>
-          <div>{currentStyle.original_price}</div>
-          <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
-          <div style={stylesContainer}>
-            {currentProductStyles.results.map((style, i) => {
-              return (
-                <div key={i}
-                  style={styleStyles(style.photos[0])}
-                  onClick={() => { handleStyleClick(i); }}
-                ></div>
-              );
-            })}
+      <>
+        <div style={overviewContainerStyles}>
+          <ImageGallery handleImageClick={handleImageClick} productStyle={currentStyle}/>
+          <div style={productInfoContainerStyles}>
+            <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
+            <div style={itemNameStyle}>{currentProduct.name}</div>
+            <div>{currentStyle.original_price}</div>
+            <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
+            <div style={stylesContainer}>
+              {currentProductStyles.results.map((style, i) => {
+                return (
+                  <div key={i}
+                    style={styleStyles(style.photos[0])}
+                    onClick={() => { handleStyleClick(i); }}
+                  ></div>
+                );
+              })}
+            </div>
+            <AddToCartForm currentStyle={currentStyle}/>
           </div>
-          <AddToCartForm currentStyle={currentStyle}/>
         </div>
-      </div>
+
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignContent: 'center',
+          width: '1200px',
+          height: '150px',
+          margin: '20px auto'
+        }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '75%',
+            marginTop: '30px',
+            borderRight: '2px solid black'
+          }}>
+            <div style={{
+              fontSize: '24px',
+              fontWeight: '600',
+
+            }}>{currentProduct.slogan}</div>
+            <div style={{
+              width: '100%',
+              marginTop: '30px',
+              lineHeight: '28px',
+              fontSize: '18px',
+            }}>{currentProduct.description}</div>
+          </div>
+          <div style={{
+            width: '15%',
+            padding: '30px',
+            margin: '10px 0 0 0',
+            lineHeight: '28px',
+            fontSize: '18px'
+          }}>
+            <ul>
+              {currentProduct.features.map((feature, i) => {
+                return <li><b>{feature.feature + ' '}</b> {feature.value}</li>;
+              })}
+            </ul>
+          </div>
+
+        </div>
+      </>
     );
   }
   return null;

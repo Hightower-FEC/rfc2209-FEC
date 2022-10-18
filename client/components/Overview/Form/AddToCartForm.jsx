@@ -3,26 +3,31 @@ import React from 'react';
 const selectStyles = {
   width: '60%',
   padding: '10px',
-  fontSize: '14px',
+  fontSize: '18px',
   fontWeight: 'bold',
+  height: '60px',
   flex: '4 1 20%',
 };
 
 const quantityStyles = {
-  fontSize: '14px',
+  fontSize: '18px',
   width: '20px',
   fontWeight: 'bold',
   padding: '10px',
   flex: '2 1 auto',
+  height: '60px',
 };
 
 const buttonStyles = {
+  fontSize: '18px',
   fontWeight: 'bold',
-  width: '75%',
+  width: '70%',
+  height: '60px',
   flex: '2 1 auto'
 };
 
 const formContainerStyles = {
+  fontSize: '18px',
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'flex-start',
@@ -32,7 +37,9 @@ const formContainerStyles = {
 };
 
 const starButtonStyles = {
-  fontSize: '25px',
+  fontSize: '28px',
+  height: '60px',
+  flex: '1 1 auto'
 };
 
 const {useState} = React;

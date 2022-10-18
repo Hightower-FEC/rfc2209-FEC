@@ -10,7 +10,6 @@ const ImageSlider = ({images, handleImageClick}) => {
   const [currentPhotos, setCurrentPhotos] = useState(images);
 
   useEffect(() => {
-    console.log('useeffect ran');
     setCurrentIndex(0);
   }, [images]);
 
@@ -116,7 +115,6 @@ const ImageSlider = ({images, handleImageClick}) => {
   };
 
   const toggleShowArrows = () => {
-    console.log('toggling');
     setShowArrows(!showArrows);
   };
 
