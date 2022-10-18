@@ -7,7 +7,9 @@ import QuestionModal from './QuestionModal.jsx';
 
 
 const QuestionsAnswers = ({productID}) => {
-  // productID = 66642
+  // productID = 66642;
+  // For testing different products
+  let testID = 66641;
   // Questions array state
   const [questions, setQuestions] = useState([]);
   // Product name state
@@ -17,7 +19,7 @@ const QuestionsAnswers = ({productID}) => {
 
   // Get product name for question modal
   const getProductName = () => {
-    axios.get(`${URL}/products/${productID}`)
+    axios.get(`${URL}/products/${testID}`)
       .then((response) => {
         setName(response.data.name);
       })
@@ -30,7 +32,7 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: productID
+        product_id: testID
       }
     })
       .then((response) => {
@@ -90,6 +92,7 @@ const QuestionsAnswers = ({productID}) => {
         submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
         handleAnswerHelpful={handleAnswerHelpful} />
+
       <button className='moreQuestions' onClick={moreQuestions}>More Answered Questions</button>
       <button className='questionModal' onClick={() => setQShow(true)}>Add A Question</button>
       <QuestionModal

@@ -18,8 +18,8 @@ const QuestionEntry = ({question, i, name, submitAnswer, handleQuestionHelpful, 
   return (
     <div>
       <strong> Q: {question.question_body} </strong>
-      <span> Helpful? <a href='#' onClick={handleClickHelpfulness}>Yes</a> ({question.question_helpfulness}) |
-        <a href='#' onClick={() => setAShow(true)}>Add Answer</a>
+      <span> Helpful? <a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a> ({question.question_helpfulness}) |
+        <a href='javascript:null' onClick={() => setAShow(true)}>Add Answer</a>
       </span>
       <AnswerList
         answers = {question.answers}
