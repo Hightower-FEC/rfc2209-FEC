@@ -27,7 +27,7 @@ const Overview = ({ productID }) => {
         setCurrentProduct(response.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [productID]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}/styles`)
@@ -38,7 +38,7 @@ const Overview = ({ productID }) => {
         setCurrentStyle(response.data.results[currentIndex]);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [productID]);
 
   useEffect(() => {
     console.log('selected style:', currentStyle);
