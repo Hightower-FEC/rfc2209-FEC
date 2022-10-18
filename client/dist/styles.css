@@ -38,10 +38,10 @@
   justify-content: center;
   height: 350px;
   background-color: rgb(229, 231, 231);
-  background-repeat: no-repeat;
-  background-size: cover;
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .indicators {
@@ -68,6 +68,7 @@
   justify-content: center;
   align-items: center;
   display: flex;
+  z-index: 1;
 }
 
 .modal-content {
@@ -84,7 +85,8 @@
 
 .modal-header {
   margin: 0;
-  font-size: 10px;
+  padding-top: 15px;
+  font-size: 12px;
   font-weight: normal;
   text-align: left;
 }
@@ -97,18 +99,20 @@
   text-align: right;
 }
 
-.characteristic {
+.feature {
   text-align: center;
   flex: 5 100%;
 }
 
 .table-row {
+  margin: 1%;
+  padding: 1%;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
 }
 
-#blank {
+.blank {
   flex: 5 100%;
 }
 
@@ -129,8 +133,8 @@ tbody > * {
 .leftArrow, .rightArrow {
   position: absolute;
   bottom: 40%;
-  font-size: 45px;
-  color: #fff;
+  font-size: 60px;
+  color: red;
   z-index: 1;
 }
 .leftArrow {
@@ -140,4 +144,10 @@ tbody > * {
 .rightArrow {
   right: 10%;
   cursor: e-resize;
+}
+
+.upper-half {
+  height: 280px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

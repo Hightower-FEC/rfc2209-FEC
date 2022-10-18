@@ -6,7 +6,7 @@ const ProductList = ({products}) => {
 
   const updateIndex = (index) => {
     if (index < 0) {
-      index = React.Children.count(products) - 2;
+      index = React.Children.count(products) - 1;
     } else if (index >= React.Children.count(products)) {
       index = 0;
     }
@@ -20,18 +20,16 @@ const ProductList = ({products}) => {
           return <ProductCard product={product} index={index} key={key} width={'25%'}/>;
         })}
       </div>
-      <div className="indicators">
-        <div className="leftArrow" onClick={() => {
-          updateIndex(index - 2);
-        }}>
+      {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {
+        updateIndex(index - 1);
+      }}>
           ‹
-        </div>
-        <div className="rightArrow" onClick={() => {
-          updateIndex(index + 2);
-        }}>
+      </div></div> : null}
+      {index < React.Children.count(products) - 1 ? <div className="indicators"><div className="rightArrow" onClick={() => {
+        updateIndex(index + 1);
+      }}>
           ›
-        </div>
-      </div>
+      </div></div> : null}
     </div>
   );
 };

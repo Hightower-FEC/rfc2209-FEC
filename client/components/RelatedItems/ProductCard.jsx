@@ -7,11 +7,13 @@ const ProductCard = ({product, index, width}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [features, setFeatures] = useState([]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${product}`)
       .then((response) => {
         setCard(response.data);
+        setFeatures(response.data.features);
       })
       .then(() => {
         axios.get(`${URL}/products/${product}/styles`)
@@ -24,16 +26,22 @@ const ProductCard = ({product, index, width}) => {
 
   return (
     <>
-      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}}>
-        <span id="favorite-related" onClick={() => {
-          setShowModal(true);
-        }}><strong>✩</strong></span>
-        <div className="category">{card.category}</div>
-        <div><strong>{card.name}</strong></div>
-        <div className="default-price">{card.default_price}</div>
-        <div>Stars</div>
+      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} onClick={() => {
+        alert('Clicking the product card should redirect to the detail page for the product');
+      }}>
+        <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
+          <span id="favorite-related" onClick={() => {
+            setShowModal(true);
+          }}><strong>✩</strong></span>
+        </div>
+        <div className="bottom-half">
+          <div className="category">{card.category}</div>
+          <div><strong>{card.name}</strong></div>
+          <div className="default-price">{card.default_price}</div>
+          <div>Stars</div>
+        </div>
       </div>
-      <ComparisonModal show={showModal} onClose={() => {
+      <ComparisonModal show={showModal} name={card.name} features={features} onClose={() => {
         setShowModal(false);
       }}/>
     </>

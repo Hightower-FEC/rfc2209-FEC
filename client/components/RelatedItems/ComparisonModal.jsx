@@ -1,6 +1,7 @@
 import React from 'react';
+import TableRow from './TableRow.jsx';
 
-const ComparisonModal = ({show, onClose}) => {
+const ComparisonModal = ({show, onClose, name, features}) => {
   if (!show) {
     return null;
   }
@@ -10,30 +11,18 @@ const ComparisonModal = ({show, onClose}) => {
       <div className="modal-content">
         <h5 className="modal-header">COMPARING</h5>
         <div id="product-names">
-          <h3>Product1</h3>
-          <h3 id="blank"></h3>
+          <h3>{name}</h3>
+          <h3 className="blank"></h3>
           <h3>Product2</h3>
         </div>
+        <div className="blank"></div>
         <table>
           <tbody>
-            <tr className="table-row">
-              <td className="product-col1">✔</td>
-              <td className="characteristic">...lorem ipsum...</td>
-              <td className="product-col2">✔</td>
-            </tr>
-            <tr className="table-row">
-              <td className="product-col1">✔</td>
-              <td className="characteristic">...dolor sit amet...</td>
-              <td className="product-col2">✔</td>
-            </tr>
-            <tr className="table-row">
-              <td className="product-col1"></td>
-              <td className="characteristic">...consectetur...</td>
-              <td className="product-col2">✔</td>
-            </tr>
+            {features.map((feature, key) => {
+              return <TableRow feature={feature} key={key}/>;
+            })}
           </tbody>
         </table>
-        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
