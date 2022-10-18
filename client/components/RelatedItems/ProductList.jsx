@@ -6,7 +6,7 @@ const ProductList = ({products}) => {
 
   const updateIndex = (index) => {
     if (index < 0) {
-      index = React.Children.count(products) - 1;
+      index = React.Children.count(products) - 2;
     } else if (index >= React.Children.count(products)) {
       index = 0;
     }
@@ -17,17 +17,17 @@ const ProductList = ({products}) => {
     <div className="carousel">
       <div className="carousel-view">
         {products.map((product, key) => {
-          return <ProductCard product={product} index={index} key={key} width={'50%'}/>;
+          return <ProductCard product={product} index={index} key={key} width={'25%'}/>;
         })}
       </div>
       <div className="indicators">
         <button onClick={() => {
-          updateIndex(index - 1);
+          updateIndex(index - 2);
         }}>
           Previous
         </button>
         <button onClick={() => {
-          updateIndex(index + 1);
+          updateIndex(index + 2);
         }}>
           Next
         </button>

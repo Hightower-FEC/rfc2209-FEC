@@ -1,39 +1,39 @@
 import React from 'react';
 
-const ComparisonModal = ({show, toggle}) => {
+const ComparisonModal = ({show, onClose}) => {
   if (!show) {
     return null;
   }
 
   return (
-    <div className="compare-modal">
+    <div className="compare-modal" onClick={onClose}>
       <div className="modal-content">
-        <h4 className="modal-header">COMPARING</h4>
-        <table className="compare-table">
-          <tr>
-            <th>Product1</th>
-            <th>Characteristics</th>
-            <th>Product2</th>
-          </tr>
-          <tr>
-            <td>Checkmark1</td>
-            <td>...lorem ipsum...</td>
-            <td>Checkmark2</td>
-          </tr>
-          <tr>
-            <td>Checkmark1</td>
-            <td>...dolor sit amet...</td>
-            <td>Checkmark2</td>
-          </tr>
-          <tr>
-            <td>Blank</td>
-            <td>...consectetur...</td>
-            <td>Checkmark2</td>
-          </tr>
+        <h5 className="modal-header">COMPARING</h5>
+        <div id="product-names">
+          <h3>Product1</h3>
+          <h3 id="blank"></h3>
+          <h3>Product2</h3>
+        </div>
+        <table>
+          <tbody>
+            <tr className="table-row">
+              <td className="product-col1">✔</td>
+              <td className="characteristic">...lorem ipsum...</td>
+              <td className="product-col2">✔</td>
+            </tr>
+            <tr className="table-row">
+              <td className="product-col1">✔</td>
+              <td className="characteristic">...dolor sit amet...</td>
+              <td className="product-col2">✔</td>
+            </tr>
+            <tr className="table-row">
+              <td className="product-col1"></td>
+              <td className="characteristic">...consectetur...</td>
+              <td className="product-col2">✔</td>
+            </tr>
+          </tbody>
         </table>
-        <button onClick={() => {
-          toggle(false);
-        }}>Close</button>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
