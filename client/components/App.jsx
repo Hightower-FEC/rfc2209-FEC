@@ -12,19 +12,16 @@ import { URL } from '../../config/config.js';
 
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
-  console.log(axios.defaults.headers.common);
-
 
   useEffect(() => {
     axios.get(`${URL}/products`)
       .then((response) => {
-        setCurrentProductID(response.data[0].id);
+        setCurrentProductID(response.data[4].id);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
 
   if (currentProductID) {
     return (
