@@ -17,6 +17,8 @@ const Overview = ({ productID }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [toggleView, setToggleView] = useState(false);
 
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedQty, setSelectedQty] = useState('');
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
@@ -38,9 +40,9 @@ const Overview = ({ productID }) => {
       .catch((err) => console.log(err));
   }, []);
 
-  // useEffect(() => {
-  //   console.log(currentStyle);
-  // }, [currentStyle]);
+  useEffect(() => {
+    console.log('selected style:', currentStyle);
+  }, [currentStyle]);
 
   const overviewContainerStyles = {
     display: 'flex',
@@ -61,12 +63,12 @@ const Overview = ({ productID }) => {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignContent: 'flex-start',
     gap: '30px',
-    width: 'auto',
+    width: 'fit-content',
     height: 'auto',
-    padding: '15px',
+    padding: '15px 15px 15px 35px',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     borderRadius: '10px'
   };
@@ -101,9 +103,12 @@ const Overview = ({ productID }) => {
   };
 
   const handleStyleClick = (index) => {
-    console.log(currentProductStyles);
+    // console.log(currentProductStyles);
+    setSelectedQty('');
+    setSelectedSize('');
     setCurrentStyle(currentProductStyles.results[index]);
     setCurrentIndex(index);
+    setImageIndex(0);
   };
 
   const handleImageClick = (images, index) => {
@@ -113,8 +118,19 @@ const Overview = ({ productID }) => {
     setToggleView(true);
   };
 
-  const toggleOffView = () => {
+  const toggleOffView = (index) => {
+    setImageIndex(index);
     setToggleView(false);
+  };
+
+  const handleSizeChange = (event) => {
+    console.log(event.target.value);
+    setSelectedSize(event.target.value);
+  };
+
+  const handleQtyChange = (event) => {
+    console.log(event.target.value);
+    setSelectedQty(event.target.value);
   };
 
   if (currentStyle && currentProduct) {
@@ -126,7 +142,7 @@ const Overview = ({ productID }) => {
     return (
       <>
         <div style={overviewContainerStyles}>
-          <ImageGallery handleImageClick={handleImageClick} productStyle={currentStyle}/>
+          <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
             <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
             <div style={itemNameStyle}>{currentProduct.name}</div>
@@ -142,7 +158,7 @@ const Overview = ({ productID }) => {
                 );
               })}
             </div>
-            <AddToCartForm currentStyle={currentStyle}/>
+            <AddToCartForm currentStyle={currentStyle} handleSizeChange={handleSizeChange} handleQtyChange={handleQtyChange} selectedSize={selectedSize} selectedQty={selectedQty}/>
           </div>
         </div>
 
@@ -152,38 +168,38 @@ const Overview = ({ productID }) => {
           justifyContent: 'center',
           alignContent: 'center',
           width: '1200px',
-          height: '150px',
+          height: 'fit-content',
           margin: '20px auto'
         }}>
           <div style={{
             display: 'flex',
             flexDirection: 'column',
-            width: '75%',
+            width: '65%',
             marginTop: '30px',
-            borderRight: '2px solid black'
+            borderRight: '2px solid rgba(0, 0, 0, 0.3)'
           }}>
             <div style={{
               fontSize: '24px',
               fontWeight: '600',
-
+              width: '90%',
             }}>{currentProduct.slogan}</div>
             <div style={{
-              width: '100%',
+              width: '90%',
               marginTop: '30px',
               lineHeight: '28px',
               fontSize: '18px',
             }}>{currentProduct.description}</div>
           </div>
           <div style={{
-            width: '15%',
-            padding: '30px',
+            width: 'fit-content',
+            padding: '0',
             margin: '10px 0 0 0',
             lineHeight: '28px',
             fontSize: '18px'
           }}>
             <ul>
               {currentProduct.features.map((feature, i) => {
-                return <li><b>{feature.feature + ' '}</b> {feature.value}</li>;
+                return <li key={i}><b>{feature.feature + ' '}</b> {feature.value}</li>;
               })}
             </ul>
           </div>

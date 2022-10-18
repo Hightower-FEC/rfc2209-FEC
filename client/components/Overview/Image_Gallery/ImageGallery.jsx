@@ -9,13 +9,19 @@ const styles = {
 
 const {useState, useEffect} = React;
 
-const ImageGallery = ({ productStyle, handleImageClick }) => {
-  // console.log(productStyle);
+const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
+  useEffect(() => {
+    console.log(productStyle.name);
+  }, [productStyle]);
 
   return (
     <div>
       <div style={styles}>
-        <ImageSlider handleImageClick={handleImageClick} images={productStyle.photos}/>
+        <ImageSlider
+          handleImageClick={handleImageClick}
+          images={productStyle.photos}
+          imageIndex={imageIndex}
+        />
       </div>
     </div>
   );

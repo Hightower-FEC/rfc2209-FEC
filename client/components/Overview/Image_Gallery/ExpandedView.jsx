@@ -141,7 +141,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
             );
           })}
         </div>
-        <div style={imgStyles} onClick={toggleOffView}>
+        <div style={imgStyles} onClick={() => { toggleOffView(currentIndex); }}>
           <div style = {{
             position: 'absolute',
             right: '20px',
