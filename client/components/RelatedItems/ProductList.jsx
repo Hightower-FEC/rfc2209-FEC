@@ -21,16 +21,16 @@ const ProductList = ({products}) => {
         })}
       </div>
       <div className="indicators">
-        <button onClick={() => {
+        <div className="leftArrow" onClick={() => {
           updateIndex(index - 2);
         }}>
-          Previous
-        </button>
-        <button onClick={() => {
+          ‹
+        </div>
+        <div className="rightArrow" onClick={() => {
           updateIndex(index + 2);
         }}>
-          Next
-        </button>
+          ›
+        </div>
       </div>
     </div>
   );

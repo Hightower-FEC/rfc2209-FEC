@@ -16,10 +16,14 @@
 
 #favorite-related {
   float: right;
+  cursor: alias;
+  font-size: 20px;
+  color: blanchedalmond;
 }
 
 .carousel {
   overflow: hidden;
+  position: relative;
 }
 
 .carousel-view {
@@ -32,9 +36,11 @@
   margin: 1%;
   align-items: center;
   justify-content: center;
-  height: 220px;
-  background-color: rgb(198, 207, 208);
-  color: #fff;
+  height: 350px;
+  background-color: rgb(229, 231, 231);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
 }
 
@@ -49,7 +55,7 @@
 
 .related-thumbnails {
   width: 250px;
-  height: 150px;
+  height: 300px;
 }
 
 .compare-modal {
@@ -58,7 +64,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.873);
   justify-content: center;
   align-items: center;
   display: flex;
@@ -66,7 +72,7 @@
 
 .modal-content {
   width: 500px;
-  background-color: rgb(158, 155, 155);
+  background-color: rgb(224, 219, 219);
   display: flex;
   flex-flow: row wrap;
 }
@@ -118,4 +124,20 @@ h3 {
 
 tbody > * {
   padding: 1%;
+}
+
+.leftArrow, .rightArrow {
+  position: absolute;
+  bottom: 40%;
+  font-size: 45px;
+  color: #fff;
+  z-index: 1;
+}
+.leftArrow {
+  left: 10%;
+  cursor: w-resize;
+}
+.rightArrow {
+  right: 10%;
+  cursor: e-resize;
 }

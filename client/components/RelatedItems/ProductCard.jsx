@@ -24,19 +24,18 @@ const ProductCard = ({product, index, width}) => {
 
   return (
     <>
-      <ComparisonModal show={showModal} onClose={() => {
-        setShowModal(false);
-      }}/>
-      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`}}>
+      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}}>
         <span id="favorite-related" onClick={() => {
           setShowModal(true);
-        }}>✩</span>
-        <img className="related-thumbnails" src={image}></img>
+        }}><strong>✩</strong></span>
         <div className="category">{card.category}</div>
         <div><strong>{card.name}</strong></div>
         <div className="default-price">{card.default_price}</div>
         <div>Stars</div>
       </div>
+      <ComparisonModal show={showModal} onClose={() => {
+        setShowModal(false);
+      }}/>
     </>
   );
 };
