@@ -16,6 +16,7 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
   // console.log('Total answers: ', sortAnswers);
 
 
+
   // console.log('Answer count', count);
   // Helper function to slice the list in increments of two
   const expandAnswerList = (count, increment) => {
@@ -28,17 +29,24 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
     return (count * increment) < sortAnswers.length;
   };
 
+  // Helper function to show the answer list if there is at least one answer
+  const hasAnswer = () => {
+    return sortAnswers.length > 0;
+  };
+
   return (
-    <div>
-      <strong > A: </strong>
-      <span>{currentList.map((answer, i) =>
-        <AnswerEntry
-          answer={answer} key={i}
-          handleAnswerHelpful={handleAnswerHelpful} />)}
-      </span>
-      {showMoreAnswerLink(count, increment) &&
-      (<a className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>More Answers</a>)}
-    </div>
+    hasAnswer() ?
+      (<div>
+        <strong > A: </strong>
+        <span>{currentList.map((answer, i) =>
+          <AnswerEntry
+            answer={answer} key={i}
+            handleAnswerHelpful={handleAnswerHelpful} />)}
+        </span>
+        {showMoreAnswerLink(count, increment) &&
+        (<a className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>More Answers</a>)}
+      </div>
+      ) : <div>No answer for this question yet</div>
   );
 };
 

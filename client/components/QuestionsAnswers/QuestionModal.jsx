@@ -46,7 +46,10 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
       let formatQuestion = {
         question_body: ask,
         asker_name: nickname,
-        asker_email: email
+        asker_email: email,
+        question_helpfulness: 0,
+        answers: {},
+        reported: false
       };
       submitQuestion(formatQuestion);
       onClose();

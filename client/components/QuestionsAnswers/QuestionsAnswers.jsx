@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
-import Search from './Search.jsx';
+// import Search from './Search.jsx';
 import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
@@ -10,10 +10,16 @@ const QuestionsAnswers = ({productID}) => {
   // productID = 66642;
   // For testing different products
   let testID = 66641;
-  // Questions array state
-  const [questions, setQuestions] = useState([]);
+
   // Product name state
   const [name, setName] = useState('');
+  // Questions array state
+  const [questions, setQuestions] = useState([]);
+  // Search array state
+  const [found, setFound] = useState([]);
+  // Search term state
+  const [query, setQuery] = useState('');
+
   // Question modal state
   const [showQModal, setQShow] = useState(false);
   // Count questions to render
@@ -59,18 +65,18 @@ const QuestionsAnswers = ({productID}) => {
   }, []);
 
   // Function to filter the questions array based on the search term
-  const handleSearch = (search) => {
-    console.log('Inside handle search:', search);
-  };
+  // const handleSearch = (search) => {
+  //   console.log('Inside handle search:', search);
+  // };
 
   //----- Expand Question List Functionality -----
   // console.log('Question count', count);
-  // console.log('Total questions: ', questions);
+  console.log('Total questions: ', questions);
   // Helper function to slice the list in increments of two
-  const expandQuestionList = (count, increment) => {
-    return questions.slice(0, count * increment);
+  const expandQuestionList = (list, count, increment) => {
+    return list.slice(0, count * increment);
   };
-  let currentList = expandQuestionList(count, increment);
+  // let currentList = expandQuestionList(questions, count, increment);
 
   // Helper function to show and hide the question list button
   const showMoreQuestionButton = (count, increment) => {
@@ -81,32 +87,73 @@ const QuestionsAnswers = ({productID}) => {
   // Helper function to submit question from modal
   const submitQuestion = (questionObj) => {
     console.log('Question from modal', questionObj);
+    // setQuestions([questionObj, ...questions]);
   };
   // Helper function to submit question from modal
   const submitAnswer = (answerObj) => {
     console.log('Answer from modal', answerObj);
   };
-
   // Send a PUT request to update the question's helpfulness
   const handleQuestionHelpful = (questionId, helpful) => {
     let isHelpful = helpful ? 'helpful' : 'not helpful';
     console.log(`Marked question id ${questionId} ${isHelpful}`);
   };
-
   // Send a PUT request to update the answer's helpfulness
   const handleAnswerHelpful = (answerId, helpful) => {
     let isHelpful = helpful ? 'helpful' : 'not helpful';
     console.log(`Marked answer id ${answerId} ${isHelpful}`);
   };
 
+
+  // Function to filter questions list in real time
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+    const results = questions.filter(question => {
+      if (e.target.value.length > 2) {
+        return question.question_body.toLowerCase().includes(e.target.value.toLowerCase());
+      }
+    });
+    setFound(results);
+  };
+
+  // Function to switch between the default list and the filter list if the query has 3 or more characters in the search input
+  const switchList = (searchStr) => {
+    return searchStr.length <= 2 ?
+      expandQuestionList(questions, count, increment) :
+      expandQuestionList(found, count, increment);
+  };
+
+  const Search = ({handleSearch}) => {
+    //  const [search, setSearch] = useState('');
+    const handleSubmit = ((e) => {
+      e.preventDefault();
+      console.log('Submit search for: ', search);
+      handleSearch(search);
+      setSearch('');
+    });
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <input id='search' onChange={handleInputChange} value={query} placeholder ='Have a question? Search for answers...' />
+        <button type='submit'>🔍︎</button>
+      </form>
+    );
+  };
+
+
   return (
     <div >
       <h1>Questions and Answers</h1>
-      <Search handleSearch={handleSearch}/>
-
+      {/* <Search handleSearch={handleSearch}/> */}
+      <div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input type='search' value={query} onChange={handleInputChange} placeholder ='Have a question? Search for answers...'/>
+          <button type='submit'>🔍︎</button>
+        </form>
+      </div>
       <QuestionList
         name={name}
-        questions={currentList}
+        questions={switchList(query)}
         submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
         handleAnswerHelpful={handleAnswerHelpful}
