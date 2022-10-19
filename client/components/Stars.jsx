@@ -7,7 +7,6 @@ import { URL } from '../../config/config.js';
 
 const Stars = ({productID, size}) => {
   size = size || '12px';
-  console.log(size);
   const [percentRating, setPercentRating] = useState();
 
   useEffect(() => {
