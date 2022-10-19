@@ -18,10 +18,10 @@ const Review = ({productID, review}) =>{
         <a>{review.reviewer_name}, {new Date(review.date).toUTCString().split(',')[1].split('00:')[0]}</a>
       </div>
       <h4>
-        {review.body}
+        {review.summary}
       </h4>
       <div>
-        <p>{review.summary}</p>
+        <p>{review.body}</p>
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         Helpful? Yes ({review.helpfulness}) | Report
