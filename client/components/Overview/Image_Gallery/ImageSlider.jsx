@@ -17,6 +17,8 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     setCurrentIndex(imageIndex);
     setCurrentPhotos(images);
     setCurrentPhoto(images[imageIndex]);
+    setFirstThumbnailIndex(0);
+    setLastThumbnailIndex(4);
     setVisibleThumbnails(images.slice(0, 5));
     // if (imageIndex > lastThumbnailIndex) {
     //   setLastThumbnailIndex(imageIndex + 5);
