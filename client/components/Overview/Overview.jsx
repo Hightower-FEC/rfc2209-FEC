@@ -68,7 +68,7 @@ const Overview = ({ productID }) => {
     gap: '30px',
     width: 'fit-content',
     height: 'auto',
-    padding: '15px 15px 15px 35px',
+    padding: '15px 35px 15px 35px',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     borderRadius: '10px'
   };

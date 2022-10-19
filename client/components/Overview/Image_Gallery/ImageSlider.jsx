@@ -12,8 +12,8 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const [lastThumbnailIndex, setLastThumbnailIndex] = useState(4);
 
   useEffect(() => {
-    // console.log('image index:', imageIndex);
-    // console.log('last index:', lastThumbnailIndex);
+    console.log('image index:', imageIndex);
+    console.log('last index:', lastThumbnailIndex);
     setCurrentIndex(imageIndex);
     setCurrentPhotos(images);
     setCurrentPhoto(images[imageIndex]);
@@ -26,8 +26,8 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   useEffect(() => {
     // console.log('vis', visibleThumbnails);
-    console.log('first index:', firstThumbnailIndex);
-    console.log('last index:', lastThumbnailIndex);
+    // console.log('first index:', firstThumbnailIndex);
+    // console.log('last index:', lastThumbnailIndex);
     setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex, lastThumbnailIndex + 1));
     // console.log('current photo', currentPhoto);
   }, [lastThumbnailIndex]);
@@ -107,7 +107,8 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     zIndex: 2,
     display: 'flex',
     position: 'absolute',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    gap: '2%',
     padding: '20px 50px 20px 50px',
     top: '91%',
     left: '50%',
@@ -177,6 +178,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     } else {
       setFirstThumbnailIndex(firstThumbnailIndex + 5);
       setLastThumbnailIndex(lastThumbnailIndex + 5);
+
     }
     // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 5, lastThumbnailIndex + 6));
   };
