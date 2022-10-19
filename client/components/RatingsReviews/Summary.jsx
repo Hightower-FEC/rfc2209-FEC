@@ -6,7 +6,7 @@ const Summary = ({productID, reviews}) => {
   const [averageRating, setAverageRating] = useState();
   const [percentWhoRecommend, setPercentWhoRecommend] = useState();
   const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
-  console.log(reviews);
+  //console.log(reviews);
 
   /**
    *
