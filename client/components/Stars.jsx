@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
+import Star from './star.svg';
+
 import { URL } from '../../config/config.js';
 
 const Stars = ({productID}) => {
@@ -26,7 +28,7 @@ const Stars = ({productID}) => {
 
   return percentRating ? (
     <div style={{fontSize: 12}}>
-      <span>★★★★★</span>
+      <Star/>
     </div>
   ) : <></>;
 };
