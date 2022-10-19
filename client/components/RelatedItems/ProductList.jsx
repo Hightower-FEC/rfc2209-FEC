@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ProductCard from './ProductCard.jsx';
 
 const ProductList = ({products, handleRelated}) => {
   const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [products]);
 
   const updateIndex = (index) => {
     if (index < 0) {

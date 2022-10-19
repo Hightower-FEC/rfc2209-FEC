@@ -24,13 +24,8 @@ const App = () => {
   }, []);
 
   const handleRelated = (id) => {
-    console.log('inside of handle related', id);
     setCurrentProductID(id);
   };
-
-  useEffect(() => {
-    console.log('id with useEffect', currentProductID);
-  }, [currentProductID]);
 
   if (currentProductID) {
     return (

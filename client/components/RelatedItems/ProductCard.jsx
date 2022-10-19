@@ -18,11 +18,11 @@ const ProductCard = ({product, index, width, handleRelated}) => {
       .then(() => {
         axios.get(`${URL}/products/${product}/styles`)
           .then((response) => {
-            setImage(response.data.results[0].photos[0].thumbnail_url);
+            setImage(response.data.results[0].photos[0].url);
           });
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [product]);
 
   return (
     <>
