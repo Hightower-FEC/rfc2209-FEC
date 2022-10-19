@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
+import { formatDistanceToNow, parseISO } from "date-fns";
+
+
 import Stars from '../Stars.jsx';
 const Review = ({productID, review}) =>{
   /**
@@ -11,7 +14,8 @@ const Review = ({productID, review}) =>{
     <div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <Stars productID={productID}/>
-        <a>{review.reviewer_name}, {review.date}</a>
+        {/* **********************We need to fix this!!! Terrible formatting of date********************** */}
+        <a>{review.reviewer_name}, {new Date(review.date).toUTCString().split(',')[1].split('00:')[0]}</a>
       </div>
       <h4>
         {review.body}
