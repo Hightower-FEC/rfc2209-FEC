@@ -2,15 +2,35 @@ import React, {useState, useEffect} from 'react';
 import Review from './Review.jsx';
 import axios from 'axios';
 
-const Reviews = ({productID}) =>{
+const Reviews = ({productID, reviews}) =>{
+  const [sortedBy, setSortedBy] = useState('relevance');
+  const [renderedReviews, setRenderedReviews] = useState(reviews.slice(0, 2));
+  const sorts = ['newest', 'helpfulness', 'relevance'];
+
+  useEffect(() => {
+    // Call drilled func
+  }, [sortedBy]);
+
 
   return (
     <div>
+      {/* Header */}
       <h4>
-        248 reviews, sorted by relevance
+        {reviews.length} reviews, sorted by {sortedBy}
       </h4>
+      {/* Map reviews */}
       <div>
-        <Review productID={productID}/>
+        {renderedReviews.map((review) => {
+          return (
+            <Review review={review}/>
+          );
+        })}
+      </div>
+
+      {/* Buttons for adding or loading reviews */}
+      <div>
+        <button>More Reviews</button>
+        <button>Add a review +</button>
       </div>
     </div>
 
