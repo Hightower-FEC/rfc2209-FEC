@@ -5,7 +5,9 @@ import Star from './Star.jsx';
 
 import { URL } from '../../config/config.js';
 
-const Stars = ({productID}) => {
+const Stars = ({productID, size}) => {
+  size = size || '12px';
+  console.log(size);
   const [percentRating, setPercentRating] = useState();
 
   useEffect(() => {
@@ -28,8 +30,8 @@ const Stars = ({productID}) => {
   return percentRating ? (
     <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
       {console.log(percentRating)}
-      <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: '12px'}}>
-        <div style={{position: 'absolute', width: `${percentRating}%`, height: '12px', backgroundColor:'black', zIndex:-1}}/>
+      <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: `${size}`}}>
+        <div style={{position: 'absolute', width: `${percentRating}%`, height: `${size}`, backgroundColor:'black', zIndex:-1}}/>
         <Star/>
         <Star/>
         <Star/>
