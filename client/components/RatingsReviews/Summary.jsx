@@ -2,32 +2,58 @@ import React, {useState, useEffect} from 'react';
 
 import Stars from '../Stars.jsx';
 
-const Summary = ({productID}) =>{
-  return (
+const Summary = ({productID, reviews}) => {
+  const [averageRating, setAverageRating] = useState();
+  const [percentWhoRecommend, setPercentWhoRecommend] = useState();
+  const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
+  console.log(reviews);
+
+  /**
+   *
+   */
+  useEffect(() => {
+    let totalStars = 0;
+    let recommendations = 0;
+    let reviewsByStar = [0, 0, 0, 0, 0];
+
+
+    for (let i = 0; i < reviews.length; i++) {
+      totalStars += reviews[i].rating;
+      recommendations += reviews[i].recommend;
+      reviewsByStar[reviews[i].rating - 1]++;
+    }
+
+    setAverageRating(totalStars / reviews.length);
+    setPercentWhoRecommend(recommendations / reviews.length * 100);
+    setNumOfReviewsByStar(reviewsByStar);
+  }, []);
+
+
+  return averageRating ? (
     <div>
       <h1 style={{display: 'flex', flexDirection: 'row'}}>
-        3.5 <Stars productID={productID}/>
+        {averageRating} <Stars productID={productID}/>
       </h1>
       <div>
         <div>
-          100% of reviews recommend this product
+          {percentWhoRecommend}% of reviews recommend this product
         </div>
 
         <div>
           <div>
-            <a>5 stars</a><a>-----</a>
+            <a>5 stars</a><a>{numOfReviewsByStar[4]}</a>
           </div>
           <div>
-            <a>4 stars</a><a>-----</a>
+            <a>4 stars</a><a>{numOfReviewsByStar[3]}</a>
           </div>
           <div>
-            <a>3 stars</a><a>-----</a>
+            <a>3 stars</a><a>{numOfReviewsByStar[2]}</a>
           </div>
           <div>
-            <a>2 stars</a><a>-----</a>
+            <a>2 stars</a><a>{numOfReviewsByStar[1]}</a>
           </div>
           <div>
-            <a>1 stars</a><a>-----</a>
+            <a>1 stars</a><a>{numOfReviewsByStar[0]}</a>
           </div>
         </div>
 
@@ -48,7 +74,7 @@ const Summary = ({productID}) =>{
       </div>
     </div>
 
-  );
+  ) : <></>;
 };
 
 export default Summary;
