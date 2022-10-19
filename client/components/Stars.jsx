@@ -25,12 +25,11 @@ const Stars = ({productID}) => {
   }, []);
 
 
-
   return percentRating ? (
     <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
       {console.log(percentRating)}
-      <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: '24px'}}>
-        <div style={{position: 'absolute', width: `${percentRating}%`, height: '24px', backgroundColor:'black', zIndex:-1}}/>
+      <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: '12px'}}>
+        <div style={{position: 'absolute', width: `${percentRating}%`, height: '12px', backgroundColor:'black', zIndex:-1}}/>
         <Star/>
         <Star/>
         <Star/>
