@@ -2,6 +2,7 @@ import React from 'react';
 import AddToCartForm from './Form/AddToCartForm.jsx';
 import ImageGallery from './Image_Gallery/ImageGallery.jsx';
 import ExpandedView from './Image_Gallery/ExpandedView.jsx';
+import Stars from '../Stars.jsx';
 import axios from 'axios';
 
 import { URL } from '../../../config/config.js';
@@ -151,6 +152,9 @@ const Overview = ({ productID }) => {
           <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
             <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
+            <div style={{width: 'fit-content'}}>
+              <Stars productID={productID}/>
+            </div>
             <div style={itemNameStyle}>{currentProduct.name}</div>
             <div>{currentStyle.original_price}</div>
             <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
