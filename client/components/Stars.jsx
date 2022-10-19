@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import Star from './star.svg';
+import Star from './Star.jsx';
 
 import { URL } from '../../config/config.js';
 
@@ -27,8 +27,17 @@ const Stars = ({productID}) => {
 
 
   return percentRating ? (
-    <div style={{fontSize: 12}}>
-      <Star/>
+    <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
+      {console.log(percentRating)}
+      <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: '24px'}}>
+        <div style={{position: 'absolute', width: `${percentRating}%`, height: '24px', backgroundColor:'black', zIndex:-1}}/>
+        <Star/>
+        <Star/>
+        <Star/>
+        <Star/>
+        <Star/>
+
+      </div>
     </div>
   ) : <></>;
 };
