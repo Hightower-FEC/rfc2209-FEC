@@ -16,7 +16,14 @@ const Reviews = ({productID, reviews}) =>{
     <div>
       {/* Header */}
       <h4>
-        {reviews.length} reviews, sorted by {sortedBy}
+        {reviews.length} reviews, sorted by
+        <select>
+          {sorts.map((sort, index) => {
+            return (
+              <option value={sort}>{sort}</option>
+            );
+          })}
+        </select>
       </h4>
       {/* Map reviews */}
       <div>
