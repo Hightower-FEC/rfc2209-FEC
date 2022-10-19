@@ -172,19 +172,11 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   };
 
   const goToNextSetOfThumbnails = () => {
-    if (firstThumbnailIndex + 5 >= currentPhotos.length - 1) {
-      if (firstThumbnailIndex + 5 === currentPhotos.length - 1) {
-      } else {
-        setFirstThumbnailIndex(currentPhotos.length - 1);
-      }
-      // setLastThumbnailIndex(currentPhotos.length);
-      if (lastThumbnailIndex < currentPhotos.length - 1) {
-        setLastThumbnailIndex(lastThumbnailIndex + 5);
-      }
+    if (lastThumbnailIndex >= currentPhotos.length - 1) {
+      return;
     } else {
       setFirstThumbnailIndex(firstThumbnailIndex + 5);
       setLastThumbnailIndex(lastThumbnailIndex + 5);
-
     }
     // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 5, lastThumbnailIndex + 6));
   };
