@@ -7,9 +7,9 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const [showArrows, setShowArrows] = useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(images[imageIndex]);
   const [currentPhotos, setCurrentPhotos] = useState(images);
-  const [visibleThumbnails, setVisibleThumbnails] = useState(images.slice(0, 5));
+  const [visibleThumbnails, setVisibleThumbnails] = useState(images.slice(0, 7));
   const [firstThumbnailIndex, setFirstThumbnailIndex] = useState(0);
-  const [lastThumbnailIndex, setLastThumbnailIndex] = useState(4);
+  const [lastThumbnailIndex, setLastThumbnailIndex] = useState(6);
 
   useEffect(() => {
     console.log('image index:', imageIndex);
@@ -18,12 +18,8 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     setCurrentPhotos(images);
     setCurrentPhoto(images[imageIndex]);
     setFirstThumbnailIndex(0);
-    setLastThumbnailIndex(4);
-    setVisibleThumbnails(images.slice(0, 5));
-    // if (imageIndex > lastThumbnailIndex) {
-    //   setLastThumbnailIndex(imageIndex + 5);
-    //   setFirstThumbnailIndex(imageIndex);
-    // }
+    setLastThumbnailIndex(6);
+    setVisibleThumbnails(images.slice(0, 7));
   }, [images]);
 
   useEffect(() => {
@@ -37,6 +33,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const containerStyles = {
     height: '100%',
+    width: '100%',
     position: 'relative'
   };
 
@@ -68,9 +65,9 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const leftThumbnailPointerStyles = {
     position: 'absolute',
-    top: '90%',
+    top: '89%',
     transform: 'translate(0, -50%)',
-    left: '20px',
+    left: '60px',
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
@@ -81,9 +78,9 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const rightThumbnailPointerStyles = {
     position: 'absolute',
-    top: '90%',
+    top: '89%',
     transform: 'translate(0, -50%)',
-    right: '20px',
+    right: '60px',
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
@@ -112,7 +109,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     justifyContent: 'flex-start',
     gap: '2%',
     padding: '20px 50px 20px 50px',
-    top: '91%',
+    top: '90%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -124,7 +121,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const thumbnailStyles = (image) => {
     return {
       minHeight: '15%',
-      minWidth: '18%',
+      minWidth: '100px',
       maxHeight: '100%',
       maxWidth: '20%',
       margin: '0 0 0 0',
@@ -140,7 +137,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const selectedThumbnailStyles = (image) => {
     return {
       minHeight: '15%',
-      minWidth: '18%',
+      minWidth: '100px',
       maxHeight: '100%',
       maxWidth: '20%',
       margin: '0 0 0 0',
@@ -178,22 +175,22 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     if (lastThumbnailIndex >= currentPhotos.length - 1) {
       return;
     } else {
-      setFirstThumbnailIndex(firstThumbnailIndex + 5);
-      setLastThumbnailIndex(lastThumbnailIndex + 5);
+      setFirstThumbnailIndex(firstThumbnailIndex + 6);
+      setLastThumbnailIndex(lastThumbnailIndex + 6);
 
     }
-    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 5, lastThumbnailIndex + 6));
+    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 6, lastThumbnailIndex + 6));
   };
 
   const goToPreviousSetOfThumbnails = () => {
-    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex - 5, lastThumbnailIndex - 6));
-    if (firstThumbnailIndex - 5 <= 0) {
+    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex - 6, lastThumbnailIndex - 6));
+    if (firstThumbnailIndex - 6 <= 0) {
       setFirstThumbnailIndex(0);
       // setLastThumbnailIndex(4);
-      setLastThumbnailIndex(4);
+      setLastThumbnailIndex(6);
     } else {
-      setFirstThumbnailIndex(firstThumbnailIndex - 5);
-      setLastThumbnailIndex(lastThumbnailIndex - 5);
+      setFirstThumbnailIndex(firstThumbnailIndex - 6);
+      setLastThumbnailIndex(lastThumbnailIndex - 6);
     }
   };
 
@@ -203,7 +200,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
       onMouseLeave={toggleShowArrows}
     >
       {showArrows &&
-        <div style={{position: 'absolute', height: '900px', width: '600px'}} >
+        <div style={{position: 'absolute', height: '100%', width: '100%'}} >
           <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
           <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
           <div style={leftThumbnailPointerStyles} onClick={goToPreviousSetOfThumbnails}>‹</div>

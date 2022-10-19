@@ -2,8 +2,8 @@ import React from 'react';
 import ImageSlider from './ImageSlider.jsx';
 
 const styles = {
-  width: '600px',
-  height: '900px',
+  width: '1000px',
+  height: '800px',
   margin: '0 20px 0 0'
 };
 
