@@ -14,6 +14,10 @@ const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
 
   useEffect(() => {
+    console.log('id:', currentProductID);
+  });
+
+  useEffect(() => {
     axios.get(`${URL}/products`)
       .then((response) => {
         setCurrentProductID(response.data[4].id);
@@ -23,6 +27,10 @@ const App = () => {
       });
   }, []);
 
+  const handleRelatedItemClick = (id) => {
+    setCurrentProductID(id);
+  };
+
   if (currentProductID) {
     return (
       <div>
@@ -30,7 +38,7 @@ const App = () => {
         <Overview productID={currentProductID}/>
         <QuestionsAnswers productID={currentProductID}/>
         <RatingsReviews productID={currentProductID}/>
-        <RelatedItems productID={currentProductID}/>
+        <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/>
       </div>
     );
   }
