@@ -3,7 +3,7 @@ import axios from 'axios';
 import { URL } from '../../../config/config.js';
 import ComparisonModal from './ComparisonModal.jsx';
 
-const ProductCard = ({product, index, width, handleRelated}) => {
+const ProductCard = ({product, productA, index, width, handleRelated}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -13,7 +13,6 @@ const ProductCard = ({product, index, width, handleRelated}) => {
     axios.get(`${URL}/products/${product}`)
       .then((response) => {
         setCard(response.data);
-        setFeatures(response.data.features);
       })
       .then(() => {
         axios.get(`${URL}/products/${product}/styles`)
@@ -26,22 +25,24 @@ const ProductCard = ({product, index, width, handleRelated}) => {
 
   return (
     <>
-      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} onClick={() => {
-        handleRelated(card.id);
-      }}>
+      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} >
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" onClick={() => {
             setShowModal(true);
+            const allFeatures = productA.features.concat(card.features);
+            setFeatures(allFeatures);
           }}><strong>✩</strong></span>
         </div>
         <div className="bottom-half">
           <div className="category">{card.category}</div>
           <div><strong>{card.name}</strong></div>
           <div className="default-price">{card.default_price}</div>
-          <div>Stars</div>
+          <div onClick={() => {
+        handleRelated(card.id);
+      }}>Stars</div>
         </div>
       </div>
-      <ComparisonModal show={showModal} name={card.name} features={features} onClose={() => {
+      <ComparisonModal show={showModal} productA={productA} productB={card} features={features} onClose={() => {
         setShowModal(false);
       }}/>
     </>

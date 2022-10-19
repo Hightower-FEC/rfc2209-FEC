@@ -5,11 +5,18 @@ import { URL } from '../../../config/config.js';
 
 const RelatedItems = ({productID, handleRelated}) => {
   const [products, setProducts] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState({});
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}/related`)
       .then((response) => {
         setProducts(response.data);
+      })
+      .then(() => {
+        axios.get(`${URL}/products/${productID}`)
+          .then((response) => {
+            setCurrentProduct(response.data);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -21,7 +28,7 @@ const RelatedItems = ({productID, handleRelated}) => {
       <h1>
         RelatedItems
       </h1>
-      <ProductList products={products} handleRelated={handleRelated}/>
+      <ProductList products={products} productA={currentProduct} handleRelated={handleRelated}/>
     </div>
   );
 };

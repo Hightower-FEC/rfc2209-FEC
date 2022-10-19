@@ -1,11 +1,11 @@
 import React from 'react';
 
-const TableRow = ({feature}) => {
+const TableRow = ({feature, index, productA, productB}) => {
   return (
     <tr className="table-row">
-      {feature.value !== undefined ? <td className="product-col1">✔</td> : null}
+      {productA.includes(feature) ? <td className="product-col1">✔</td> : null}
       <td className="feature">{feature.value} {feature.feature}</td>
-      <td className="product-col2"></td>
+      {productB.includes(feature) ? <td className="product-col2">✔</td> : null}
     </tr>
   );
 };
