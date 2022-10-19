@@ -22,7 +22,7 @@ const Reviews = ({productID, reviews}) =>{
       <div>
         {renderedReviews.map((review) => {
           return (
-            <Review review={review}/>
+            <Review productID={productID} review={review}/>
           );
         })}
       </div>
