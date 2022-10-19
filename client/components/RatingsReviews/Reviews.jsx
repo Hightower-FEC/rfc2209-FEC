@@ -4,21 +4,21 @@ import axios from 'axios';
 
 const Reviews = ({productID, reviews, handleSetSort}) =>{
   const [sortedBy, setSortedBy] = useState('relevance');
-  const [renderedReviews, setRenderedReviews] = useState(reviews.slice(0, 2));
+  const [numofReviewsToRender, setNumofReviewsToRender] = useState(2);
   const sorts = ['relevance', 'helpfulness', 'newest'];
 
   useEffect(() => {
     handleSetSort(sortedBy);
-    setRenderedReviews([...reviews.slice(0, renderedReviews.length)]);
   }, [sortedBy]);
 
+  const renderedReviews = reviews.slice(0, numofReviewsToRender);
 
 
   /**
-   * Sets the renderedReviews to be currently renderedReviews, plus the next two reviews from our passed reviews (and using slice insures that if there is only one more review, there are no bad side effects)
+   * Increments number of reviews to render
    */
   const handleMoreReviewsClick = () => {
-    setRenderedReviews([...renderedReviews, ...reviews.slice(renderedReviews.length, renderedReviews.length + 2)]);
+    setNumofReviewsToRender(numofReviewsToRender + 2);
   };
 
   /**
