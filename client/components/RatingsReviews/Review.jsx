@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 
-const Review = ({productID}) =>{
+const Review = ({review}) =>{
   return (
     <div>
       <h1>
-        Review
+        {review.review_id}
       </h1>
       <div>
       </div>
