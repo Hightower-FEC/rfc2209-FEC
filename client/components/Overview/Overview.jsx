@@ -21,13 +21,18 @@ const Overview = ({ productID }) => {
   const [selectedQty, setSelectedQty] = useState('');
 
   useEffect(() => {
+    setCurrentIndex(0);
+  }, [productID]);
+
+  useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
       .then((response) => {
         console.log('product details:', response.data);
         setCurrentProduct(response.data);
       })
       .catch((err) => console.log(err));
-  }, [productID]);
+
+  }, [currentIndex, productID]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}/styles`)
@@ -38,7 +43,7 @@ const Overview = ({ productID }) => {
         setCurrentStyle(response.data.results[currentIndex]);
       })
       .catch((err) => console.log(err));
-  }, [productID]);
+  }, [currentIndex, productID]);
 
   useEffect(() => {
     console.log('selected style:', currentStyle);
@@ -141,6 +146,7 @@ const Overview = ({ productID }) => {
     }
     return (
       <>
+        <div style={{height: '150px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>

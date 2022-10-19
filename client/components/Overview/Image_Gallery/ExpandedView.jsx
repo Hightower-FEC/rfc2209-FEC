@@ -124,6 +124,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
 
   return (
     <div>
+      <div style={{height: '90px'}}></div>
       <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
       <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
       <div style={imgContainerStyles}>
