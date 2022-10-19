@@ -12,12 +12,12 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const [lastThumbnailIndex, setLastThumbnailIndex] = useState(4);
 
   useEffect(() => {
-    console.log('image index:', imageIndex);
-    console.log('last index:', lastThumbnailIndex);
+    // console.log('image index:', imageIndex);
+    // console.log('last index:', lastThumbnailIndex);
     setCurrentIndex(imageIndex);
     setCurrentPhotos(images);
     setCurrentPhoto(images[imageIndex]);
-    // setVisibleThumbnails(images.slice(0, 5));
+    setVisibleThumbnails(images.slice(0, 5));
     // if (imageIndex > lastThumbnailIndex) {
     //   setLastThumbnailIndex(imageIndex + 5);
     //   setFirstThumbnailIndex(imageIndex);
@@ -26,8 +26,8 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   useEffect(() => {
     // console.log('vis', visibleThumbnails);
-    // console.log('first index:', firstThumbnailIndex);
-    // console.log('last index:', lastThumbnailIndex);
+    console.log('first index:', firstThumbnailIndex);
+    console.log('last index:', lastThumbnailIndex);
     setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex, lastThumbnailIndex + 1));
     // console.log('current photo', currentPhoto);
   }, [lastThumbnailIndex]);
@@ -172,16 +172,11 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   };
 
   const goToNextSetOfThumbnails = () => {
-    if (firstThumbnailIndex + 5 >= currentPhotos.length - 1) {
-      setFirstThumbnailIndex(currentPhotos.length - 1);
-      // setLastThumbnailIndex(currentPhotos.length);
-      if (lastThumbnailIndex < currentPhotos.length - 1) {
-        setLastThumbnailIndex(lastThumbnailIndex + 5);
-      }
+    if (lastThumbnailIndex >= currentPhotos.length - 1) {
+      return;
     } else {
       setFirstThumbnailIndex(firstThumbnailIndex + 5);
       setLastThumbnailIndex(lastThumbnailIndex + 5);
-
     }
     // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 5, lastThumbnailIndex + 6));
   };
