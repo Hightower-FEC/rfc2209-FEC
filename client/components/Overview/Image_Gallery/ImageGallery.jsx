@@ -10,9 +10,9 @@ const styles = {
 const {useState, useEffect} = React;
 
 const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
-  useEffect(() => {
-    console.log(productStyle.name);
-  }, [productStyle]);
+  // useEffect(() => {
+  //   console.log(productStyle.name);
+  // }, [productStyle]);
 
   return (
     <div>

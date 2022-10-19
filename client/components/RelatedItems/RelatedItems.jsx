@@ -3,7 +3,7 @@ import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
 
-const RelatedItems = ({productID}) => {
+const RelatedItems = ({productID, handleRelated}) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -14,14 +14,14 @@ const RelatedItems = ({productID}) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [productID]);
 
   return (
     <div>
       <h1>
         RelatedItems
       </h1>
-      <ProductList products={products}/>
+      <ProductList products={products} handleRelated={handleRelated}/>
     </div>
   );
 };

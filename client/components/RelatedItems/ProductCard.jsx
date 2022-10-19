@@ -3,7 +3,7 @@ import axios from 'axios';
 import { URL } from '../../../config/config.js';
 import ComparisonModal from './ComparisonModal.jsx';
 
-const ProductCard = ({product, index, width}) => {
+const ProductCard = ({product, index, width, handleRelated}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
   const [showModal, setShowModal] = useState(false);
@@ -27,7 +27,7 @@ const ProductCard = ({product, index, width}) => {
   return (
     <>
       <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} onClick={() => {
-        alert('Clicking the product card should redirect to the detail page for the product');
+        handleRelated(card.id);
       }}>
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" onClick={() => {

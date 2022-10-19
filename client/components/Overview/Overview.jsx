@@ -20,29 +20,37 @@ const Overview = ({ productID }) => {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQty, setSelectedQty] = useState('');
 
+  // useEffect(() => {
+  //   console.log('inside of overview', productID);
+  // }, [productID]);
+
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
       .then((response) => {
-        console.log('product details:', response.data);
         setCurrentProduct(response.data);
       })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    axios.get(`${URL}/products/${productID}/styles`)
-      .then((response) => {
-        // console.log('product styles:', response.data);
-        console.log('product style:', response.data.results[currentIndex]);
-        setCurrentProductStyles(response.data);
-        setCurrentStyle(response.data.results[currentIndex]);
+      .then(() => {
+        axios.get(`${URL}/products/${productID}/styles`)
+          .then((response) => {
+            setCurrentProductStyles(response.data);
+            setCurrentStyle(response.data.results[currentIndex]);
+          });
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [productID]);
 
-  useEffect(() => {
-    console.log('selected style:', currentStyle);
-  }, [currentStyle]);
+  // useEffect(() => {
+  //   axios.get(`${URL}/products/${productID}/styles`)
+  //     .then((response) => {
+  //       setCurrentProductStyles(response.data);
+  //       setCurrentStyle(response.data.results[currentIndex]);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log('selected style:', currentStyle);
+  // }, [currentStyle]);
 
   const overviewContainerStyles = {
     display: 'flex',
