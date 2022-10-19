@@ -1,4 +1,12 @@
 import React from 'react';
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  PinterestShareButton,
+  PinterestIcon
+} from 'react-share';
 
 const selectStyles = {
   width: '60%',
@@ -23,7 +31,7 @@ const buttonStyles = {
   fontWeight: 'bold',
   width: '70%',
   height: '60px',
-  flex: '2 1 auto'
+  flex: '2 2 auto'
 };
 
 const formContainerStyles = {
@@ -37,14 +45,30 @@ const formContainerStyles = {
 };
 
 const starButtonStyles = {
-  fontSize: '28px',
+  fontSize: '25px',
   height: '60px',
-  flex: '1 1 auto'
+  flex: '2 1 auto'
+};
+
+const shareButtonStyles = {
+  display: 'flex',
+  justifyContent: 'flex-start',
+  alignContent: 'flex-start',
+  gap: '10px',
+  padding: '0',
+  width: 'fit-content',
+  height: 'fit-content',
 };
 
 const {useState, useEffect} = React;
 
 const AddToCartForm = ({currentStyle, handleSizeChange, handleQtyChange, selectedSize, selectedQty}) => {
+
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   if (currentStyle) {
     return (
@@ -79,7 +103,39 @@ const AddToCartForm = ({currentStyle, handleSizeChange, handleQtyChange, selecte
 
         </select>
         <button style={buttonStyles} type="button" value="ADD TO CART">ADD TO CART</button>
-        <button style={starButtonStyles} type="button" value="★">★</button>
+        <button
+          style={starButtonStyles}
+          type="button"
+          onClick={toggleFavorite}>
+          {isFavorite ? <i className="fa-solid fa-star"></i> : <i className="far fa-star"></i>}
+        </button>
+
+        <div style={shareButtonStyles}>
+          <div>
+            <FacebookShareButton
+              url={'http://github.com'}
+              quote={'Checkout this PRODUCT_NAME from Atelier'}>
+              <FacebookIcon size={50} round={true}/>
+            </FacebookShareButton>
+          </div>
+
+          <div>
+            <TwitterShareButton
+              url={'http://github.com'}
+              quote={'Checkout this PRODUCT_NAME from Atelier'}>
+              <TwitterIcon size={50} round={true}/>
+            </TwitterShareButton>
+          </div>
+
+          <div>
+            <PinterestShareButton
+              url={'http://github.com'}
+              media={currentStyle.photos[0].url}
+              quote={'Checkout this PRODUCT_NAME from Atelier'}>
+              <PinterestIcon size={50} round={true}/>
+            </PinterestShareButton>
+          </div>
+        </div>
       </div>
     );
   }
