@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ProductCard from './ProductCard.jsx';
 
-const ProductList = ({products, productA, handleRelated}) => {
+const ProductList = ({products, productA, handleRelatedItemClick}) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const ProductList = ({products, productA, handleRelated}) => {
     <div className="carousel">
       <div className="carousel-view">
         {products.map((product, key) => {
-          return <ProductCard product={product} productA={productA} index={index} key={key} width={'25%'} handleRelated={handleRelated}/>;
+          return <ProductCard product={product} productA={productA} index={index} key={key} width={'25%'} handleRelatedItemClick={handleRelatedItemClick}/>;
         })}
       </div>
       {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {

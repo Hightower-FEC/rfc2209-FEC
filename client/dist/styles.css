@@ -3,6 +3,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  margin: 0px;
+}
+
 select {
   background-color: #F1F1F1;
 }
