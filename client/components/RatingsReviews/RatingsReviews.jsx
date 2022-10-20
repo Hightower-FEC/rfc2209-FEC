@@ -11,7 +11,7 @@ const RatingsReviews = ({productID}) =>{
    * Init reviews as undefined - nothing is rendered unless this state has value
    */
   const [reviews, setReviews] = useState();
-
+  console.log(productID);
   /**
    * On render, try and get reviews using the productID
    */
@@ -23,7 +23,7 @@ const RatingsReviews = ({productID}) =>{
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [productID]);
 
   /**
    * Retrieve reviews from API passing a specified sort parameter
