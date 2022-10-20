@@ -10,16 +10,16 @@ const QuestionsAnswers = ({productID}) => {
   // productID = 66642;
   // For testing different products
   let testID = 66641;
+  let testPage = 1;
 
   // Product name state
   const [name, setName] = useState('');
-  // Questions array state
+  // Sorted questions state
   const [questions, setQuestions] = useState([]);
-  // Search array state
+  // Searched questions state
   const [found, setFound] = useState([]);
   // Search term state
   const [query, setQuery] = useState('');
-
   // Question modal state
   const [showQModal, setQShow] = useState(false);
   // Count questions to render
@@ -42,7 +42,8 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: testID
+        product_id: testID,
+        page: testPage
       }
     })
       .then((response) => {
@@ -71,7 +72,7 @@ const QuestionsAnswers = ({productID}) => {
 
   //----- Expand Question List Functionality -----
   // console.log('Question count', count);
-  console.log('Total questions: ', questions);
+  // console.log('Total questions: ', questions);
   // Helper function to slice the list in increments of two
   const expandQuestionList = (list, count, increment) => {
     return list.slice(0, count * increment);
@@ -113,6 +114,16 @@ const QuestionsAnswers = ({productID}) => {
         return question.question_body.toLowerCase().includes(e.target.value.toLowerCase());
       }
     });
+
+    // Future Enhancement of highlighting search word in real time
+    // results.map(question => {
+    //   let newQuestion = question.question_body.replace(
+    //     new RegExp(e.target.value, 'g'),
+    //     match => `<mark>${match}</mark>`);
+    //   return newQuestion;
+    // });
+
+    (results.length > 0) && console.log('Filter results: ', results);
     setFound(results);
   };
 
@@ -140,15 +151,23 @@ const QuestionsAnswers = ({productID}) => {
     );
   };
 
+  const searchField = {
+    justifyContent: 'center',
+    margin: 'auto',
+    width: '50%'
+  };
+  const searchBtn = {
+
+  };
 
   return (
     <div >
       <h1>Questions and Answers</h1>
       {/* <Search handleSearch={handleSearch}/> */}
-      <div>
+      <div >
         <form onSubmit={(e) => e.preventDefault()}>
-          <input type='search' value={query} onChange={handleInputChange} placeholder ='Have a question? Search for answers...'/>
-          <button type='submit'>🔍︎</button>
+          <input type='search' value={query} onChange={handleInputChange} placeholder ='Have a question? Search for answers...' style={searchField}/>
+          <button type='submit' style={searchBtn}>🔍︎</button>
         </form>
       </div>
       <QuestionList
