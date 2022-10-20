@@ -4,13 +4,34 @@ import React, {useState, useEffect} from 'react';
 import Stars from '../Stars.jsx';
 const Review = ({productID, review}) =>{
   /**
-   * I think I will need to use local storage for this...
+   * Add review_id to helpful in localStorage and in POST req to API
    */
-  const [helpful, setHelpful] = useState();
+  const handleHelpfulClick = () => {
+    if (!localStorage.helpful) {
+      localStorage.helpful = [];
+    }
+    // Post
+    // .then(() => {
+    //    localStorage.helpful.push(productID);
+    //  });
+    console.log(localStorage.helpful);
+    localStorage.helpful.push(review.review_id);
 
+
+  };
+
+  /**
+   * Report review to API in PUT req and store that report in localStorage
+   */
+  const handleReportClick = () => {
+    console.log('report');
+  };
 
   const recommended = review.recommend ? <div></div> : null;
   const response = review.response ? <div></div> : null;
+  const helpful = !localStorage.helpful || localStorage.helpful.indexOf(review.review_id) === -1 ? <u onClick={handleHelpfulClick}> Yes</u> : <u> Yes</u>;
+  const reported = !localStorage.reported || localStorage.reported.indexOf(review.review_id) === -1 ? <u onClick={handleReportClick}> Report </u> : <u> Reported </u>;
+
   return (
     <div style={{padding: '20px', borderBottom: 'solid'}}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -25,7 +46,7 @@ const Review = ({productID, review}) =>{
         <p>{review.body}</p>
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <a>Helpful? <u onClick={()=>{console.log('yes');}}> Yes</u> ({review.helpfulness}) | <u onClick={()=>{console.log('report');}}> Report </u></a>
+        <a>Helpful? {helpful} ({review.helpfulness}) | {reported}</a>
       </div>
     </div>
 
