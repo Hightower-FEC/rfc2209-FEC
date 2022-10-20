@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { API_KEY, URL } from '../../../config/config.js';
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, handleRelatedItemClick}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
 
@@ -14,16 +14,17 @@ const ProductCard = ({product}) => {
       .then(() => {
         axios.get(`${URL}/products/${product}/styles`)
           .then((response) => {
-            console.log('This is the style data', response.data)
+            // console.log('This is the style data', response.data);
             setImage(response.data.results[0].photos[0].thumbnail_url);
-          })
+          });
       })
       .catch(err => console.log(err));
   }, []);
 
   return (
-    <div className="product-card">
+    <div className="product-card" onClick={() => { handleRelatedItemClick(card.id); }}>
       <img className="thumbnails" src={image}></img>
+      <div className="category">{card.id}</div>
       <div className="category">{card.category}</div>
       <div><strong>{card.name}</strong></div>
       <div className="default-price">{card.default_price}</div>

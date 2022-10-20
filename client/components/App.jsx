@@ -14,24 +14,31 @@ const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
 
   useEffect(() => {
+    console.log('id:', currentProductID);
+  });
+
+  useEffect(() => {
     axios.get(`${URL}/products`)
       .then((response) => {
-        setCurrentProductID(response.data[0].id);
+        setCurrentProductID(response.data[4].id);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
+  const handleRelatedItemClick = (id) => {
+    setCurrentProductID(id);
+  };
 
   if (currentProductID) {
     return (
       <div>
         <TopBar/>
         <Overview productID={currentProductID}/>
+        <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/>
         <QuestionsAnswers productID={currentProductID}/>
         <RatingsReviews productID={currentProductID}/>
-        <RelatedItems productID={currentProductID}/>
       </div>
     );
   }
