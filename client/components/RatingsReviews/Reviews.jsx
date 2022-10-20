@@ -59,7 +59,7 @@ const Reviews = ({productID, reviews, handleSetSort}) =>{
       </div>
 
       {/* Buttons for adding or loading reviews */}
-      <div>
+      <div style={{padding: '20px'}}>
         {moreReviews}
         <button onClick={handleAddReviewClick}>Add a review +</button>
       </div>
