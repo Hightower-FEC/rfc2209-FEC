@@ -146,9 +146,15 @@ tbody > * {
 .leftArrow, .rightArrow {
   position: absolute;
   bottom: 40%;
-  font-size: 60px;
-  color: red;
+  font-size: 50px;
+  text-shadow: 6px 0 #000;
+  font-weight: 600;
+  color: white;
   z-index: 1;
+}
+
+.leftArrow:hover, .rightArrow:hover {
+  font-size: 80px;
 }
 .leftArrow {
   left: 10%;
