@@ -23,13 +23,30 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
       .catch(err => console.log(err));
   }, [product]);
 
+  const combineFeatures = (product1, product2) => {
+    let repeatedFeatures = {};
+    let combinedFeatures = [];
+    for (let i = 0; i < product1.length; i++) {
+      repeatedFeatures[product1[i].feature] = product1[i].value;
+      combinedFeatures.push(product1[i]);
+    }
+    for (let i = 0; i < product2.length; i++) {
+      if (product2[i].value === repeatedFeatures[product2[i].feature]) {
+        continue;
+      }
+      combinedFeatures.push(product2[i]);
+    }
+    console.log(combinedFeatures);
+    return combinedFeatures;
+  };
+
   return (
     <>
       <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} >
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" onClick={() => {
             setShowModal(true);
-            const allFeatures = productA.features.concat(card.features);
+            const allFeatures = combineFeatures(productA.features, card.features);
             setFeatures(allFeatures);
           }}><strong>✩</strong></span>
         </div>
@@ -38,8 +55,9 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
           <div><strong>{card.name}</strong></div>
           <div className="default-price">{card.default_price}</div>
           <div onClick={() => {
-        handleRelated(card.id);
-      }}>Stars</div>
+            //placed this event handler here because clicking on the span with the star counted as clicking the entire product card
+            handleRelated(card.id);
+          }}>Stars</div>
         </div>
       </div>
       <ComparisonModal show={showModal} productA={productA} productB={card} features={features} onClose={() => {
