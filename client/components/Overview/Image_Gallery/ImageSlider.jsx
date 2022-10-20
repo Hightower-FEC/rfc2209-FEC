@@ -12,8 +12,6 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const [lastThumbnailIndex, setLastThumbnailIndex] = useState(6);
 
   useEffect(() => {
-    console.log('image index:', imageIndex);
-    console.log('last index:', lastThumbnailIndex);
     setCurrentIndex(imageIndex);
     setCurrentPhotos(images);
     setCurrentPhoto(images[imageIndex]);

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-
 import TopBar from './TopBar.jsx';
 import Overview from './Overview/Overview.jsx';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
@@ -13,6 +12,7 @@ import { URL } from '../../config/config.js';
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
 
+  //Why is this useEffect needed when a random number could be assigned as default state?
   useEffect(() => {
     console.log('id:', currentProductID);
   });
@@ -20,14 +20,15 @@ const App = () => {
   useEffect(() => {
     axios.get(`${URL}/products`)
       .then((response) => {
-        setCurrentProductID(response.data[4].id);
+        setCurrentProductID(response.data[0].id);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const handleRelatedItemClick = (id) => {
+  const handleRelated = (id) => {
+
     setCurrentProductID(id);
   };
 
@@ -39,10 +40,12 @@ const App = () => {
         <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/>
         <QuestionsAnswers productID={currentProductID}/>
         <RatingsReviews productID={currentProductID}/>
+        <RelatedItems productID={currentProductID} handleRelated={handleRelated}/>
       </div>
     );
   }
 
+  //What is this supposed to do?
   return (
     <TopBar/>
   );
