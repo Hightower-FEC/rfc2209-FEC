@@ -5,7 +5,7 @@ import ComparisonModal from './ComparisonModal.jsx';
 
 const ProductCard = ({product, productA, index, width, handleRelated}) => {
   const [card, setCard] = useState({});
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(productA);
   const [salePrice, setSalePrice] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [features, setFeatures] = useState([]);
