@@ -6,6 +6,7 @@ import ComparisonModal from './ComparisonModal.jsx';
 const ProductCard = ({product, productA, index, width, handleRelated}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
+  const [salePrice, setSalePrice] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [features, setFeatures] = useState([]);
 
@@ -18,6 +19,7 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
         axios.get(`${URL}/products/${product}/styles`)
           .then((response) => {
             setImage(response.data.results[0].photos[0].url);
+            setSalePrice(response.data.results[0].sale_price);
           });
       })
       .catch(err => console.log(err));
@@ -53,7 +55,7 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
         <div className="bottom-half">
           <div className="category">{card.category}</div>
           <div><strong>{card.name}</strong></div>
-          <div className="default-price">{card.default_price}</div>
+          {salePrice ? <div className="sale-price">{salePrice} <s>{card.default_price}</s></div> : <div className="default-price">{card.default_price}</div>}
           <div onClick={() => {
             //placed this event handler here because clicking on the span with the star counted as clicking the entire product card
             handleRelated(card.id);

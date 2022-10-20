@@ -23,8 +23,8 @@ button {
   font-size: 14px;
 }
 
-.default-price {
-  font-size: 12px;
+.default-price, .sale-price {
+  font-size: 14px;
 }
 
 #favorite-related {
@@ -163,4 +163,8 @@ tbody > * {
   height: 280px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.sale-price {
+  color: red;
 }
