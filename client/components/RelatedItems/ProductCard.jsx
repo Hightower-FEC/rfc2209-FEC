@@ -38,15 +38,17 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
       }
       combinedFeatures.push(product2[i]);
     }
-    console.log(combinedFeatures);
     return combinedFeatures;
   };
 
   return (
     <>
-      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} >
+      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} onClick={() => {
+        handleRelated(card.id);
+      }}>
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
-          <span id="favorite-related" onClick={() => {
+          <span id="favorite-related" onClick={(event) => {
+            event.stopPropagation();
             setShowModal(true);
             const allFeatures = combineFeatures(productA.features, card.features);
             setFeatures(allFeatures);
@@ -56,10 +58,10 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
           <div className="category">{card.category}</div>
           <div><strong>{card.name}</strong></div>
           {salePrice ? <div className="sale-price">{salePrice} <s>{card.default_price}</s></div> : <div className="default-price">{card.default_price}</div>}
-          <div onClick={() => {
+          <div /*onClick={() => {
             //placed this event handler here because clicking on the span with the star counted as clicking the entire product card
             handleRelated(card.id);
-          }}>Stars</div>
+          }}*/>Stars</div>
         </div>
       </div>
       <ComparisonModal show={showModal} productA={productA} productB={card} features={features} onClose={() => {

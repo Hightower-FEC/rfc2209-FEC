@@ -31,7 +31,12 @@ button {
   float: right;
   cursor: alias;
   font-size: 20px;
+  background: -webkit-radial-gradient(black, blanchedalmond);
   color: blanchedalmond;
+}
+
+#favorite-related:hover {
+  font-size: 35px;
 }
 
 .carousel {
