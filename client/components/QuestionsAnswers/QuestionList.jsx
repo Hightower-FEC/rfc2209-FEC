@@ -5,13 +5,19 @@ import QuestionEntry from './QuestionEntry.jsx';
 // By default, load up to TWO questions on page render
 const QuestionList = ({questions, name, query, submitAnswer, handleQuestionHelpful, handleAnswerHelpful}) => {
 
+  const questionListStyle = {
+    textAlign: 'left'
+  };
+
   return (
-    questions.map((question, i) => <QuestionEntry
-      question={question} key={i} name={name} query={query}
-      submitAnswer={submitAnswer}
-      handleQuestionHelpful={handleQuestionHelpful}
-      handleAnswerHelpful={handleAnswerHelpful}
-    />)
+    <div style={questionListStyle}>
+      {questions.map((question, i) => <QuestionEntry
+        question={question} key={i} name={name} query={query}
+        submitAnswer={submitAnswer}
+        handleQuestionHelpful={handleQuestionHelpful}
+        handleAnswerHelpful={handleAnswerHelpful}
+      />)}
+    </div>
   );
 };
 

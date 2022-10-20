@@ -20,16 +20,16 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
     justifyContent: 'center'
   };
   const modalContent = {
-    width: 750 + 'px',
+    width: '80%',
     backgroundColor: '#fff'
   };
   const modalHeadFoot = {
-    padding: 10 + 'px'
+    padding: '10px'
   };
   const modalBody = {
-    padding: 10 + 'px',
-    borerTop: 1 + 'px solid #eee',
-    borderBottom: 1 + 'px solid #eee',
+    padding: '10px',
+    borerTop: '1px solid #eee',
+    borderBottom: '1px solid #eee',
   };
 
   // Helper function to verify email address

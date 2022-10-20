@@ -13,31 +13,37 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
     handleAnswerHelpful(answer.id, helpful);
   };
 
-
   // Send PUT request to report this answer
   const handleClickReport = () => {
     setReport(true);
     console.log(`You have reported answer ${answer.id} to admin`);
   };
-
   // Format date into readable format for user
   const formatDate = (date) => {
     return new Date(`${date}`).toDateString().slice(3);
   };
 
+  const answerStyle = {
+    margin: '10px 0 0 30px'
+  };
+  const answerer = {
+    fontSize: '16px',
+    margin: '25px 0',
+    color: 'black'
+  };
+
   return (
-    <div>
+    <div style={answerStyle}>
       {answer.body} <br/>
       { (answer.photos.length > 0) &&
-      <Images images={answer.photos} />} <br/>
-      <sub>
-        <span>
-          by {answer.answerer_name}, {formatDate(answer.date)} | Helpful?
-          <a href='javascript:null' onClick={handleClickHelpfulness}> Yes </a> ({answer.helpfulness}) |
-          {!report ? <a href='javascript:null' onClick={handleClickReport}> Report </a> : <span> Reported </span>}
-        </span>
-      </sub>
-
+      <Images images={answer.photos} />}
+      <span style={answerer}>
+        by {answer.answerer_name}, {formatDate(answer.date)} | Helpful?
+        <a href='javascript:null' onClick={handleClickHelpfulness}> Yes </a> ({answer.helpfulness}) |
+        {!report ?
+          <a href='javascript:null' onClick={handleClickReport}> Report </a> :
+          <span> Reported </span>}
+      </span>
     </div>
   );
 };

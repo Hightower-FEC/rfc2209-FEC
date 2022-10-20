@@ -15,8 +15,6 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
   let sortAnswers = allAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
   // console.log('Total answers: ', sortAnswers);
 
-
-
   // console.log('Answer count', count);
   // Helper function to slice the list in increments of two
   const expandAnswerList = (count, increment) => {
@@ -34,17 +32,38 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
     return sortAnswers.length > 0;
   };
 
+  const answerStyle = {
+    display: 'block',
+    margin: '10px 0'
+  };
+  const A = {
+    display: 'inline-block',
+    float: 'left',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    margin: '0 10px 0 0'
+  };
+  const moreAnswer = {
+    margin: '0 0 10px 30px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    textDecoration: 'none',
+    color: 'black'
+  };
+
   return (
     hasAnswer() ?
-      (<div>
-        <strong > A: </strong>
-        <span>{currentList.map((answer, i) =>
+      (<div style={answerStyle}>
+        <span style={A}> A: </span>
+        <span style={answerStyle}>{currentList.map((answer, i) =>
           <AnswerEntry
             answer={answer} key={i}
             handleAnswerHelpful={handleAnswerHelpful} />)}
         </span>
-        {showMoreAnswerLink(count, increment) &&
-        (<a className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>More Answers</a>)}
+        <span>
+          {showMoreAnswerLink(count, increment) &&
+          (<a style={moreAnswer} className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>MORE ANSWERS</a>)}
+        </span>
       </div>
       ) :
       <div>No answer for this question yet</div>

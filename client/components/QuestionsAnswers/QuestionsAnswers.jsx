@@ -151,23 +151,46 @@ const QuestionsAnswers = ({productID}) => {
     );
   };
 
-  const searchField = {
-    justifyContent: 'center',
-    margin: 'auto',
-    width: '50%'
+  // --------------- CSS Style ---------------
+  const container = {
+    textAlign: 'left',
+    margin: '0 10rem 0 10rem'
   };
-  const searchBtn = {
-
+  const searchField = {
+    display: 'inline-block',
+    textAlign: 'left',
+    margin: '0 0 1rem 0',
+    height: '50px',
+    width: '100%',
+    fontSize: '24px'
+  };
+  const moreQuestionsBtn = {
+    display: 'inline-block',
+    margin: '10px 20px 0 0',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    width: '33%',
+    height: '60px'
+  };
+  const addQuestionBtn = {
+    display: 'inline-block',
+    margin: '10px 20px 0 0',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    width: '20%',
+    height: '60px'
   };
 
   return (
-    <div >
-      <h1>Questions and Answers</h1>
+    <div style={container}>
+      <h1 >Questions and Answers</h1>
       {/* <Search handleSearch={handleSearch}/> */}
       <div >
         <form onSubmit={(e) => e.preventDefault()}>
-          <input type='search' value={query} onChange={handleInputChange} placeholder ='Have a question? Search for answers...' style={searchField}/>
-          <button type='submit' style={searchBtn}>🔍︎</button>
+          <input type='search' value={query} onChange={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+          {/* <button type='submit' style={searchBtn}>🔍︎</button> */}
         </form>
       </div>
       <QuestionList
@@ -179,9 +202,9 @@ const QuestionsAnswers = ({productID}) => {
       />
 
       {(showMoreQuestionButton(query, count, increment)) &&
-      (<button className='moreQuestions' onClick={() => setCount(count + 1)}>More Answered Questions</button>)}
+      (<button className='moreQuestions' onClick={() => setCount(count + 1)} style={moreQuestionsBtn}>MORE ANSWERED QUESTIONS</button>)}
 
-      <button className='questionModal' onClick={() => setQShow(true)}>Add A Question</button>
+      <button className='questionModal' onClick={() => setQShow(true)} style={addQuestionBtn}>ADD A QUESTION +</button>
 
       <QuestionModal
         name={name}

@@ -19,7 +19,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
     justifyContent: 'center'
   };
   const modalContent = {
-    width: 750 + 'px',
+    width: '80%',
     backgroundColor: '#fff'
   };
   const modalHeadFoot = {

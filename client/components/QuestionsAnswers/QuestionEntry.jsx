@@ -13,11 +13,31 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     handleQuestionHelpful(question.question_id, helpful);
   };
 
+  const questionStyle = {
+    display: 'block',
+    fontSize: '20px',
+    margin: '25px 0'
+  };
+  const Q = {
+    display: 'inline-block',
+    float: 'left',
+    fontWeight: 'bold',
+    margin: '0 10px 0 0'
+  };
+  const questionBody = {
+    fontWeight: 'bold'
+  };
+  const links = {
+    display: 'inline-block',
+    float: 'right',
+    fontSize: '16px'
+  };
 
   return (
-    <div>
-      <strong > Q: {question.question_body} </strong>
-      <span> Helpful? <a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a> ({question.question_helpfulness}) |
+    <div style={questionStyle}>
+      <span style={Q}> Q: </span>
+      <span style={questionBody}> {question.question_body} </span>
+      <span style={links}> Helpful? <a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a> ({question.question_helpfulness}) |
         <a href='javascript:null' onClick={() => setAShow(true)}>Add Answer</a>
       </span>
       <AnswerList
