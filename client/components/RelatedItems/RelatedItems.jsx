@@ -3,7 +3,7 @@ import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
 
-const RelatedItems = ({productID, handleRelated}) => {
+const RelatedItems = ({productID, handleRelatedItemClick}) => {
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
 
@@ -28,7 +28,7 @@ const RelatedItems = ({productID, handleRelated}) => {
       <h1>
         RelatedItems
       </h1>
-      <ProductList products={products} productA={currentProduct} handleRelated={handleRelated}/>
+      <ProductList products={products} productA={currentProduct} handleRelatedItemClick={handleRelatedItemClick}/>
     </div>
   );
 };

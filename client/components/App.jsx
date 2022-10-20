@@ -27,8 +27,7 @@ const App = () => {
       });
   }, []);
 
-  const handleRelated = (id) => {
-
+  const handleRelatedItemClick = (id) => {
     setCurrentProductID(id);
   };
 
@@ -40,7 +39,6 @@ const App = () => {
         <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/>
         <QuestionsAnswers productID={currentProductID}/>
         <RatingsReviews productID={currentProductID}/>
-        <RelatedItems productID={currentProductID} handleRelated={handleRelated}/>
       </div>
     );
   }

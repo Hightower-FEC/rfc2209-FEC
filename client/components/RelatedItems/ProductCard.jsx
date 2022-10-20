@@ -4,7 +4,7 @@ import { URL } from '../../../config/config.js';
 import ComparisonModal from './ComparisonModal.jsx';
 
 
-const ProductCard = ({product, productA, index, width, handleRelated}) => {
+const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState();
   const [salePrice, setSalePrice] = useState(null);
@@ -46,7 +46,7 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
 
     <>
       <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} onClick={() => {
-        handleRelated(card.id);
+        handleRelatedItemClick(card.id);
       }}>
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" onClick={(event) => {
