@@ -8,10 +8,13 @@ const Review = ({productID, review}) =>{
    */
   const [helpful, setHelpful] = useState();
 
+
+  const recommended = review.recommend ? <div></div> : null;
+  const response = review.response ? <div></div> : null;
   return (
-    <div>
+    <div style={{padding: '20px', borderBottom: 'solid'}}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Stars productID={productID}/>
+        <Stars rating={review.rating}/>
         {/* **********************We need to fix this!!! Terrible formatting of date********************** */}
         <a>{review.reviewer_name}, {review.date}</a>
       </div>
@@ -22,7 +25,7 @@ const Review = ({productID, review}) =>{
         <p>{review.body}</p>
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        Helpful? Yes ({review.helpfulness}) | Report
+        <a>Helpful? <u onClick={()=>{console.log('yes');}}> Yes</u> ({review.helpfulness}) | <u onClick={()=>{console.log('report');}}> Report </u></a>
       </div>
     </div>
 
