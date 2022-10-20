@@ -2,6 +2,7 @@ import React from 'react';
 import AddToCartForm from './Form/AddToCartForm.jsx';
 import ImageGallery from './Image_Gallery/ImageGallery.jsx';
 import ExpandedView from './Image_Gallery/ExpandedView.jsx';
+import Stars from '../Stars.jsx';
 import axios from 'axios';
 
 import { URL } from '../../../config/config.js';
@@ -23,6 +24,10 @@ const Overview = ({ productID }) => {
   // useEffect(() => {
   //   console.log('inside of overview', productID);
   // }, [productID]);
+
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [productID]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
@@ -64,6 +69,7 @@ const Overview = ({ productID }) => {
     width: '400px',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    gap: '20px',
     alignContent: 'space-between',
   };
 
@@ -72,13 +78,14 @@ const Overview = ({ productID }) => {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    alignContent: 'flex-start',
-    gap: '30px',
+    gap: '20px',
+    marginTop: '10px',
     width: 'fit-content',
-    height: 'auto',
-    padding: '15px 15px 15px 35px',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    borderRadius: '10px'
+    height: 'fit-content',
+    padding: '15px 25px 15px 25px',
+    backgroundColor: '#DDDDDD',
+    borderRadius: '10px',
+    marginRight: '40px'
   };
 
   const styleStyles = (image) => {
@@ -89,25 +96,24 @@ const Overview = ({ productID }) => {
       backgroundImage: 'center',
       cursor: 'pointer',
       backgroundImage: `url(${image.thumbnail_url})`,
-      borderRadius: '50%'
+      borderRadius: '50%',
+      flex: '0 0 auto'
     };
   };
 
   const itemCategoryStyle = {
     fontSize: '20px',
     fontWeight: '500',
-    marginBottom: '30px'
+    marginBottom: '10px'
   };
 
   const itemNameStyle = {
     fontSize: '70px',
-    marginBottom: '60px',
     fontWeight: '700'
   };
 
   const selectedStyleStyles = {
     fontSize: '20px',
-    marginTop: '100px'
   };
 
   const handleStyleClick = (index) => {
@@ -149,22 +155,30 @@ const Overview = ({ productID }) => {
     }
     return (
       <>
+        <div style={{height: '125px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
-            <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
-            <div style={itemNameStyle}>{currentProduct.name}</div>
+            <div>
+              <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
+              <div style={{width: 'fit-content'}}>
+                <Stars productID={productID} size={'25px'}/>
+              </div>
+              <div style={itemNameStyle}>{currentProduct.name}</div>
+            </div>
             <div>{currentStyle.original_price}</div>
-            <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
-            <div style={stylesContainer}>
-              {currentProductStyles.results.map((style, i) => {
-                return (
-                  <div key={i}
-                    style={styleStyles(style.photos[0])}
-                    onClick={() => { handleStyleClick(i); }}
-                  ></div>
-                );
-              })}
+            <div>
+              <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
+              <div style={stylesContainer}>
+                {currentProductStyles.results.map((style, i) => {
+                  return (
+                    <div key={i}
+                      style={styleStyles(style.photos[0])}
+                      onClick={() => { handleStyleClick(i); }}
+                    ></div>
+                  );
+                })}
+              </div>
             </div>
             <AddToCartForm currentStyle={currentStyle} handleSizeChange={handleSizeChange} handleQtyChange={handleQtyChange} selectedSize={selectedSize} selectedQty={selectedQty}/>
           </div>
@@ -193,7 +207,7 @@ const Overview = ({ productID }) => {
             }}>{currentProduct.slogan}</div>
             <div style={{
               width: '90%',
-              marginTop: '30px',
+              marginTop: '10px',
               lineHeight: '28px',
               fontSize: '18px',
             }}>{currentProduct.description}</div>
