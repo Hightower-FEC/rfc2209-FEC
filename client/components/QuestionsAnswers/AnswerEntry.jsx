@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import Images from './Images.jsx';
 
 // Sub-component for AnswerList: AnswerEntry
 const AnswerEntry = ({answer, handleAnswerHelpful}) => {
-  // console.log('Inside answer entry', answer);
+  console.log('Inside answer entry', answer);
   const [report, setReport] = useState(false);
 
   let helpful = false;
@@ -11,6 +12,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
     helpful = !helpful;
     handleAnswerHelpful(answer.id, helpful);
   };
+
 
   // Send PUT request to report this answer
   const handleClickReport = () => {
@@ -26,6 +28,8 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
   return (
     <div>
       {answer.body} <br/>
+      { (answer.photos.length > 0) &&
+      <Images images={answer.photos} />} <br/>
       <sub>
         <span>
           by {answer.answerer_name}, {formatDate(answer.date)} | Helpful?
@@ -33,6 +37,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
           {!report ? <a href='javascript:null' onClick={handleClickReport}> Report </a> : <span> Reported </span>}
         </span>
       </sub>
+
     </div>
   );
 };

@@ -46,7 +46,8 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
         {showMoreAnswerLink(count, increment) &&
         (<a className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>More Answers</a>)}
       </div>
-      ) : <div>No answer for this question yet</div>
+      ) :
+      <div>No answer for this question yet</div>
   );
 };
 

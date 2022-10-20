@@ -80,8 +80,8 @@ const QuestionsAnswers = ({productID}) => {
   // let currentList = expandQuestionList(questions, count, increment);
 
   // Helper function to show and hide the question list button
-  const showMoreQuestionButton = (count, increment) => {
-    return (count * increment) < questions.length;
+  const showMoreQuestionButton = (query, count, increment) => {
+    return (query.length <= 2) ? (count * increment) < questions.length : (count * increment) < found.length;
   };
   //---------------------------------------------
 
@@ -178,7 +178,7 @@ const QuestionsAnswers = ({productID}) => {
         handleAnswerHelpful={handleAnswerHelpful}
       />
 
-      {(showMoreQuestionButton(count, increment)) &&
+      {(showMoreQuestionButton(query, count, increment)) &&
       (<button className='moreQuestions' onClick={() => setCount(count + 1)}>More Answered Questions</button>)}
 
       <button className='questionModal' onClick={() => setQShow(true)}>Add A Question</button>
