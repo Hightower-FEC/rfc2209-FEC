@@ -58,10 +58,7 @@ const ProductCard = ({product, productA, index, width, handleRelated}) => {
           <div className="category">{card.category}</div>
           <div><strong>{card.name}</strong></div>
           {salePrice ? <div className="sale-price">{salePrice} <s>{card.default_price}</s></div> : <div className="default-price">{card.default_price}</div>}
-          <div /*onClick={() => {
-            //placed this event handler here because clicking on the span with the star counted as clicking the entire product card
-            handleRelated(card.id);
-          }}*/>Stars</div>
+          <div>Stars</div>
         </div>
       </div>
       <ComparisonModal show={showModal} productA={productA} productB={card} features={features} onClose={() => {
