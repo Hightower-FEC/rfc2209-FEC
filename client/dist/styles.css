@@ -1,22 +1,185 @@
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  margin: 0px;
+}
+
+select {
+  background-color: #F1F1F1;
+}
+
+button {
+  height: 40px
+}
+
 .thumbnails {
-  width: 200px;
+  max-width: 250px;
+  min-width: 150px;
   height: 150px;
 }
 
 /* RELATED ITEMS & OUTFITS */
 
-.product-card {
-  display: inline-block;
-  width: 20%;
-  padding: 2%;
-  margin: 2%;
-  border: 1px solid;
-}
-
 .category {
   font-size: 14px;
 }
 
-.default-price {
+.default-price, .sale-price {
+  font-size: 14px;
+}
+
+#favorite-related {
+  float: right;
+  cursor: alias;
+  font-size: 20px;
+  background: -webkit-radial-gradient(black, blanchedalmond);
+  color: blanchedalmond;
+}
+
+#favorite-related:hover {
+  font-size: 35px;
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-view {
+  white-space: nowrap;
+}
+
+.product-card {
+  display: inline-block;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  background-color: rgb(229, 231, 231);
+  color: rgba(241, 236, 236, 0.929);
+  transition: transform 0.3s;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+}
+
+.indicators > button {
+  margin: 5px;
+}
+
+.related-thumbnails {
+  width: 250px;
+  height: 300px;
+}
+
+.compare-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.873);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+}
+
+.modal-content {
+  width: 500px;
+  background-color: rgb(224, 219, 219);
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.modal-content > * {
+  padding: 1% 3%;
+  flex: 1 100%;
+}
+
+.modal-header {
+  margin: 0;
+  padding-top: 15px;
   font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+}
+
+.product-col1 {
+  text-align: left;
+}
+
+.product-col2 {
+  text-align: right;
+}
+
+.feature {
+  text-align: center;
+  flex: 5 100%;
+}
+
+.table-row {
+  margin: 1%;
+  padding: 1%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.blank {
+  flex: 5 100%;
+}
+
+#product-names {
+  margin: 0;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+h3 {
+  margin: 0;
+}
+
+tbody > * {
+  padding: 1%;
+}
+
+.leftArrow, .rightArrow {
+  position: absolute;
+  bottom: 40%;
+  font-size: 50px;
+  text-shadow: 6px 0 #000;
+  font-weight: 600;
+  color: white;
+  z-index: 1;
+}
+
+.leftArrow:hover, .rightArrow:hover {
+  font-size: 80px;
+}
+.leftArrow {
+  left: 10%;
+  cursor: w-resize;
+}
+.rightArrow {
+  right: 10%;
+  cursor: e-resize;
+}
+
+.upper-half {
+  height: 280px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.sale-price {
+  color: red;
 }
