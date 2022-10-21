@@ -5,24 +5,28 @@ import Star from './Star.jsx';
 
 import { URL } from '../../config/config.js';
 
-const Stars = ({productID, size}) => {
-  size = size || '12px';
+const Stars = ({rating, productID, size = '12px'}) => {
   const [percentRating, setPercentRating] = useState();
 
   useEffect(() => {
-    axios.get(`${URL}/reviews?product_id=${productID}`)
-      .then((response) => {
-        let results = response.data.results;
-        let sumRatings = 0;
-        for (let i = 0; i < results.length; i++) {
-          sumRatings += results[i].rating;
-        }
-        // Take total of ratings sum, divide by number of ratings to get average rating.  Divide average rating by 5 (highest possible rating), then multiple by 100 to get percent.
-        setPercentRating((sumRatings / results.length) / .05);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (productID) {
+      axios.get(`${URL}/reviews?product_id=${productID}`)
+        .then((response) => {
+          let results = response.data.results;
+          let sumRatings = 0;
+          for (let i = 0; i < results.length; i++) {
+            sumRatings += results[i].rating;
+          }
+          // Take total of ratings sum, divide by number of ratings to get average rating.  Divide average rating by 5 (highest possible rating), then multiple by 100 to get percent.
+
+          setPercentRating((sumRatings / results.length) / .05);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (rating) {
+      setPercentRating(rating / .05);
+    }
   }, []);
 
 
