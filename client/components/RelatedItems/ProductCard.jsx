@@ -43,10 +43,6 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
     return combinedFeatures;
   };
 
-  useEffect(() => {
-    console.log('This is the product', product);
-  });
-
   return (
 
     <>

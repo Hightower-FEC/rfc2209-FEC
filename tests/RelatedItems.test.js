@@ -3,7 +3,8 @@
  */
 
 import React from 'react';
-import {createRoot, render, unmountComponentAtNode} from 'react-dom';
+import {createRoot} from 'react-dom/client';
+import {render, unmountComponentAtNode} from 'react-dom';
 import {act} from 'react-dom/test-utils';
 import RelatedItems from '../client/components/RelatedItems/RelatedItems.jsx';
 import TableRow from '../client/components/RelatedItems/TableRow.jsx';
@@ -22,10 +23,11 @@ afterEach(() => {
   container = null;
 });
 
-it('Renders with or without data', () => {
+it('Renders with or without data', async () => {
   act(() => {
-    const root = createRoot(container);
-    root.render(<TableRow/>);
+    // const root = createRoot(container);
+    // root.render(<TableRow/>);
+    render(<TableRow />, container);
   });
-  expect(container.textContent).toBe('whatever');
+  await expect(container.textContent).toMatchObject('whatever');
 });
