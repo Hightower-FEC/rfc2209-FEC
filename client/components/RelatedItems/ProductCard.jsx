@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
 import ComparisonModal from './ComparisonModal.jsx';
+import Stars from '../Stars.jsx';
 
 
 const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) => {
   const [card, setCard] = useState({});
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(productA);
   const [salePrice, setSalePrice] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [features, setFeatures] = useState([]);
@@ -60,7 +61,9 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
           <div className="category">{card.category}</div>
           <div><strong>{card.name}</strong></div>
           {salePrice ? <div className="sale-price">{salePrice} <s>{card.default_price}</s></div> : <div className="default-price">{card.default_price}</div>}
-          <div>Stars</div>
+          <div style={{width: 'fit-content'}}>
+            <Stars productID={product}/>
+          </div>
         </div>
       </div>
       <ComparisonModal show={showModal} productA={productA} productB={card} features={features} onClose={() => {

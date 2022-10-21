@@ -23,7 +23,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
       duration: 0.3,
       ease: 'exp.out'
     });
-  }, [currentIndex]);
+  }, []);
 
   const imgStyles = {
     width: '100%',

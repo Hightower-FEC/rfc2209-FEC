@@ -30,18 +30,18 @@ const Overview = ({ productID }) => {
 
   useEffect(() => {
     setCurrentIndex(0);
-    gsap.to(overviewRef.current, {
-      delay: 0,
-      opacity: 0,
-      duration: 0,
-      ease: 'exp.out'
-    });
-    gsap.to(overviewRef.current, {
-      delay: 0.2,
-      opacity: 1,
-      duration: 0.3,
-      ease: 'exp.out'
-    });
+    // gsap.to(overviewRef.current, {
+    //   delay: 0,
+    //   opacity: 0,
+    //   duration: 0,
+    //   ease: 'exp.out'
+    // });
+    // gsap.to(overviewRef.current, {
+    //   delay: 0.2,
+    //   opacity: 1,
+    //   duration: 0.3,
+    //   ease: 'exp.out'
+    // });
   }, [productID]);
 
   useEffect(() => {
