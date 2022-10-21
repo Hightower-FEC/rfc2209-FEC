@@ -1,15 +1,19 @@
 import React from 'react';
+import { gsap } from 'gsap';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(images[imageIndex]);
   const [currentPhotos, setCurrentPhotos] = useState(images);
+  const [nextPhoto, setNextPhoto] = useState(images[imageIndex + 1]);
   const [visibleThumbnails, setVisibleThumbnails] = useState(images.slice(0, 7));
   const [firstThumbnailIndex, setFirstThumbnailIndex] = useState(0);
   const [lastThumbnailIndex, setLastThumbnailIndex] = useState(6);
+
+  const currentImgRef = useRef(null);
 
   useEffect(() => {
     setCurrentIndex(imageIndex);
@@ -25,9 +29,22 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     // console.log('first index:', firstThumbnailIndex);
     // console.log('last index:', lastThumbnailIndex);
     setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex, lastThumbnailIndex + 1));
-    // console.log('current photo', currentPhoto);
   }, [lastThumbnailIndex]);
 
+
+  useEffect(() => {
+    gsap.to(currentImgRef.current, {
+      opacity: 0,
+      delay: 0,
+      duration: 0.5,
+      ease: 'expo.out'
+    });
+    gsap.to(currentImgRef.current, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'exp.out'
+    });
+  }, [currentIndex]);
 
   const containerStyles = {
     height: '100%',
@@ -43,7 +60,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
-    zIndex: 1,
+    zIndex: 2,
     userSelect: 'none',
     cursor: 'pointer'
   };
@@ -56,7 +73,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
-    zIndex: 1,
+    zIndex: 2,
     userSelect: 'none',
     cursor: 'pointer'
   };
@@ -89,8 +106,9 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const slideStyles = {
     width: '100%',
+    zIndex: 1,
     height: '100%',
-    position: 'relative',
+    position: 'absolute',
     borderRadius: '10px',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -99,6 +117,34 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     backgroundImage: `url(${currentPhoto.url})`,
     cursor: 'zoom-in'
   };
+
+  // const nextSlideStyles = {
+  //   width: '100%',
+  //   height: '100%',
+  //   position: 'absolute',
+  //   borderRadius: '10px',
+  //   backgroundPosition: 'center',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundColor: '#DDDDDD',
+  //   backgroundSize: 'contain',
+  //   backgroundImage: `url(${nextPhoto.url})`,
+  //   cursor: 'zoom-in'
+  // };
+
+  // const mappedSlideStyles = (photo) => {
+  //   return {
+  //     width: '100%',
+  //     height: '100%',
+  //     position: 'absolute',
+  //     borderRadius: '10px',
+  //     backgroundPosition: 'center',
+  //     backgroundRepeat: 'no-repeat',
+  //     backgroundColor: '#DDDDDD',
+  //     backgroundSize: 'contain',
+  //     backgroundImage: `url(${photo.url})`,
+  //     cursor: 'zoom-in'
+  //   };
+  // };
 
   const thumbnailContainer = {
     zIndex: 2,
@@ -150,6 +196,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const goToNextImage = () => {
     if (currentIndex === images.length - 1) { return; }
+
     setCurrentPhoto(images[currentIndex + 1]);
     setCurrentIndex(currentIndex + 1);
   };
@@ -220,7 +267,14 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
         </div>
       }
 
-      <div style={slideStyles} onClick={() => { handleImageClick(currentPhotos, currentIndex); }}></div>
+      {/* <ul>
+        {currentPhotos.map((photo, i) => {
+          return <div key={i} style={mappedSlideStyles(photo)}></div>;
+        })}
+
+      </ul> */}
+      <div style={slideStyles} ref={currentImgRef} onClick={() => { handleImageClick(currentPhotos, currentIndex); }}></div>
+      {/* <div style={nextSlideStyles} ref={nextImgRef}></div> */}
 
     </div>
   );
