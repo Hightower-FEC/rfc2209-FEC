@@ -1,29 +1,27 @@
 import React from 'react';
+import { gsap } from 'gsap';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 
 const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const [currentPhoto, setCurrentPhoto] = useState(images[imageIndex]);
   const [currentPhotos, setCurrentPhotos] = useState(images);
-  const [visibleThumbnails, setVisibleThumbnails] = useState(images.slice(0, 5));
+  const [nextPhoto, setNextPhoto] = useState(images[imageIndex + 1]);
+  const [visibleThumbnails, setVisibleThumbnails] = useState(images.slice(0, 7));
   const [firstThumbnailIndex, setFirstThumbnailIndex] = useState(0);
-  const [lastThumbnailIndex, setLastThumbnailIndex] = useState(4);
+  const [lastThumbnailIndex, setLastThumbnailIndex] = useState(6);
+
+  const currentImgRef = useRef(null);
 
   useEffect(() => {
-    console.log('image index:', imageIndex);
-    console.log('last index:', lastThumbnailIndex);
     setCurrentIndex(imageIndex);
     setCurrentPhotos(images);
     setCurrentPhoto(images[imageIndex]);
     setFirstThumbnailIndex(0);
-    setLastThumbnailIndex(4);
-    setVisibleThumbnails(images.slice(0, 5));
-    // if (imageIndex > lastThumbnailIndex) {
-    //   setLastThumbnailIndex(imageIndex + 5);
-    //   setFirstThumbnailIndex(imageIndex);
-    // }
+    setLastThumbnailIndex(6);
+    setVisibleThumbnails(images.slice(0, 7));
   }, [images]);
 
   useEffect(() => {
@@ -31,12 +29,26 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     // console.log('first index:', firstThumbnailIndex);
     // console.log('last index:', lastThumbnailIndex);
     setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex, lastThumbnailIndex + 1));
-    // console.log('current photo', currentPhoto);
   }, [lastThumbnailIndex]);
 
 
+  useEffect(() => {
+    gsap.to(currentImgRef.current, {
+      opacity: 0,
+      delay: 0,
+      duration: 0.5,
+      ease: 'expo.out'
+    });
+    gsap.to(currentImgRef.current, {
+      opacity: 1,
+      duration: 0.5,
+      ease: 'exp.out'
+    });
+  }, [currentIndex]);
+
   const containerStyles = {
     height: '100%',
+    width: '100%',
     position: 'relative'
   };
 
@@ -48,7 +60,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
-    zIndex: 1,
+    zIndex: 2,
     userSelect: 'none',
     cursor: 'pointer'
   };
@@ -61,16 +73,16 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
-    zIndex: 1,
+    zIndex: 2,
     userSelect: 'none',
     cursor: 'pointer'
   };
 
   const leftThumbnailPointerStyles = {
     position: 'absolute',
-    top: '90%',
+    top: '89%',
     transform: 'translate(0, -50%)',
-    left: '20px',
+    left: '60px',
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
@@ -81,9 +93,9 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const rightThumbnailPointerStyles = {
     position: 'absolute',
-    top: '90%',
+    top: '89%',
     transform: 'translate(0, -50%)',
-    right: '20px',
+    right: '60px',
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
@@ -94,8 +106,9 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const slideStyles = {
     width: '100%',
+    zIndex: 1,
     height: '100%',
-    position: 'relative',
+    position: 'absolute',
     borderRadius: '10px',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -105,6 +118,34 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     cursor: 'zoom-in'
   };
 
+  // const nextSlideStyles = {
+  //   width: '100%',
+  //   height: '100%',
+  //   position: 'absolute',
+  //   borderRadius: '10px',
+  //   backgroundPosition: 'center',
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundColor: '#DDDDDD',
+  //   backgroundSize: 'contain',
+  //   backgroundImage: `url(${nextPhoto.url})`,
+  //   cursor: 'zoom-in'
+  // };
+
+  // const mappedSlideStyles = (photo) => {
+  //   return {
+  //     width: '100%',
+  //     height: '100%',
+  //     position: 'absolute',
+  //     borderRadius: '10px',
+  //     backgroundPosition: 'center',
+  //     backgroundRepeat: 'no-repeat',
+  //     backgroundColor: '#DDDDDD',
+  //     backgroundSize: 'contain',
+  //     backgroundImage: `url(${photo.url})`,
+  //     cursor: 'zoom-in'
+  //   };
+  // };
+
   const thumbnailContainer = {
     zIndex: 2,
     display: 'flex',
@@ -112,7 +153,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     justifyContent: 'flex-start',
     gap: '2%',
     padding: '20px 50px 20px 50px',
-    top: '91%',
+    top: '90%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -124,7 +165,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const thumbnailStyles = (image) => {
     return {
       minHeight: '15%',
-      minWidth: '18%',
+      minWidth: '100px',
       maxHeight: '100%',
       maxWidth: '20%',
       margin: '0 0 0 0',
@@ -140,7 +181,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
   const selectedThumbnailStyles = (image) => {
     return {
       minHeight: '15%',
-      minWidth: '18%',
+      minWidth: '100px',
       maxHeight: '100%',
       maxWidth: '20%',
       margin: '0 0 0 0',
@@ -155,6 +196,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
   const goToNextImage = () => {
     if (currentIndex === images.length - 1) { return; }
+
     setCurrentPhoto(images[currentIndex + 1]);
     setCurrentIndex(currentIndex + 1);
   };
@@ -178,22 +220,22 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
     if (lastThumbnailIndex >= currentPhotos.length - 1) {
       return;
     } else {
-      setFirstThumbnailIndex(firstThumbnailIndex + 5);
-      setLastThumbnailIndex(lastThumbnailIndex + 5);
+      setFirstThumbnailIndex(firstThumbnailIndex + 6);
+      setLastThumbnailIndex(lastThumbnailIndex + 6);
 
     }
-    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 5, lastThumbnailIndex + 6));
+    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex + 6, lastThumbnailIndex + 6));
   };
 
   const goToPreviousSetOfThumbnails = () => {
-    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex - 5, lastThumbnailIndex - 6));
-    if (firstThumbnailIndex - 5 <= 0) {
+    // setVisibleThumbnails(currentPhotos.slice(firstThumbnailIndex - 6, lastThumbnailIndex - 6));
+    if (firstThumbnailIndex - 6 <= 0) {
       setFirstThumbnailIndex(0);
       // setLastThumbnailIndex(4);
-      setLastThumbnailIndex(4);
+      setLastThumbnailIndex(6);
     } else {
-      setFirstThumbnailIndex(firstThumbnailIndex - 5);
-      setLastThumbnailIndex(lastThumbnailIndex - 5);
+      setFirstThumbnailIndex(firstThumbnailIndex - 6);
+      setLastThumbnailIndex(lastThumbnailIndex - 6);
     }
   };
 
@@ -203,7 +245,7 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
       onMouseLeave={toggleShowArrows}
     >
       {showArrows &&
-        <div style={{position: 'absolute', height: '900px', width: '600px'}} >
+        <div style={{position: 'absolute', height: '100%', width: '100%'}} >
           <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
           <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
           <div style={leftThumbnailPointerStyles} onClick={goToPreviousSetOfThumbnails}>‹</div>
@@ -225,7 +267,14 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
         </div>
       }
 
-      <div style={slideStyles} onClick={() => { handleImageClick(currentPhotos, currentIndex); }}></div>
+      {/* <ul>
+        {currentPhotos.map((photo, i) => {
+          return <div key={i} style={mappedSlideStyles(photo)}></div>;
+        })}
+
+      </ul> */}
+      <div style={slideStyles} ref={currentImgRef} onClick={() => { handleImageClick(currentPhotos, currentIndex); }}></div>
+      {/* <div style={nextSlideStyles} ref={nextImgRef}></div> */}
 
     </div>
   );
