@@ -13,16 +13,27 @@ module.exports = (req, res, next) => {
     return cookies;
   }, {});
 
-  if (parsedCookies.helpful) {
-    req.helpful = parsedCookies.helpful;
+  if (parsedCookies.helpfulReviews) {
+    req.helpfulReviews = parsedCookies.helpfulReviews;
+  } else {
+    req.helpfulReviews = {};
   }
 
-  if (parsedCookies.reported) {
-    req.reported = parsedCookies.reported;
+  if (parsedCookies.reportedReviews) {
+    req.reportedReviews = parsedCookies.reported;
+  } else {
+    req.reportedReviews = {};
   }
 
   if (req.method === 'PUT') {
+    var partitions = req.url.split('/');
+    var slug = partitions[partitions.length - 1];
 
+    if (slug === 'helpful') {
+      req.
+    } else if (slug === 'report') {
+
+    }
   }
 
   next();
