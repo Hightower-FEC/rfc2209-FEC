@@ -1,6 +1,6 @@
 import React from 'react';
 import AddToCartForm from './Form/AddToCartForm.jsx';
-import ImageGallery from './Image_Gallery/ImageGallery.jsx';
+import ImageGallery from './Image_Gallery/ImageGalleryV2.jsx';
 import ExpandedView from './Image_Gallery/ExpandedView.jsx';
 import Stars from '../Stars.jsx';
 import axios from 'axios';
