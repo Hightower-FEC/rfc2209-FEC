@@ -5,6 +5,7 @@ import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 
+
 const QuestionsAnswers = ({productID}) => {
   // default productID = 66642
 
