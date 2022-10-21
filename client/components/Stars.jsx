@@ -24,7 +24,7 @@ const Stars = ({rating, productID, size = '12px'}) => {
         .catch((error) => {
           console.log(error);
         });
-    } else {
+    } else if (rating) {
       setPercentRating(rating / .05);
     }
   }, []);
