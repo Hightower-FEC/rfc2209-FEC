@@ -30,7 +30,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   const links = {
     display: 'inline-block',
     float: 'right',
-    fontSize: '16px'
+    fontSize: '18px'
   };
 
   return (

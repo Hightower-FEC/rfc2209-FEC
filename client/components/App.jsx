@@ -37,10 +37,9 @@ const App = () => {
       <div>
         <TopBar/>
         <Overview productID={currentProductID}/>
-
+        <RelatedItems productID={currentProductID} handleRelated={handleRelated}/>
         <QuestionsAnswers productID={currentProductID}/>
         <RatingsReviews productID={currentProductID}/>
-        <RelatedItems productID={currentProductID} handleRelated={handleRelated}/>
       </div>
     );
   }

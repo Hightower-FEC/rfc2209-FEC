@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
-// import Search from './Search.jsx';
 import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 
 const QuestionsAnswers = ({productID}) => {
-  // productID = 66642;
+  // default productID = 66642
+
   // For testing different products
   let testID = 66641;
   let testPage = 1;
@@ -29,7 +29,7 @@ const QuestionsAnswers = ({productID}) => {
 
   // Get product name for question modal
   const getProductName = () => {
-    axios.get(`${URL}/products/${testID}`)
+    axios.get(`${URL}/products/${productID}`)
       .then((response) => {
         setName(response.data.name);
       })
@@ -42,8 +42,7 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: testID,
-        page: testPage
+        product_id: productID
       }
     })
       .then((response) => {
@@ -59,16 +58,12 @@ const QuestionsAnswers = ({productID}) => {
       });
   };
 
-  // Fetch questions and product name for id upon page render
+  // Fetch questions and product name for id upon page render and when productID changes
   useEffect(() => {
     getQuestions();
     getProductName();
-  }, []);
+  }, [productID]);
 
-  // Function to filter the questions array based on the search term
-  // const handleSearch = (search) => {
-  //   console.log('Inside handle search:', search);
-  // };
 
   //----- Expand Question List Functionality -----
   // console.log('Question count', count);
@@ -85,6 +80,7 @@ const QuestionsAnswers = ({productID}) => {
   };
   //---------------------------------------------
 
+  //------------------ TO DO ---------------------
   // Helper function to submit question from modal
   const submitQuestion = (questionObj) => {
     console.log('Question from modal', questionObj);
@@ -104,7 +100,7 @@ const QuestionsAnswers = ({productID}) => {
     let isHelpful = helpful ? 'helpful' : 'not helpful';
     console.log(`Marked answer id ${answerId} ${isHelpful}`);
   };
-
+  //---------------------------------------------
 
   // Function to filter questions list in real time
   const handleInputChange = (e) => {
@@ -114,7 +110,6 @@ const QuestionsAnswers = ({productID}) => {
         return question.question_body.toLowerCase().includes(e.target.value.toLowerCase());
       }
     });
-
     // Future Enhancement of highlighting search word in real time
     // results.map(question => {
     //   let newQuestion = question.question_body.replace(
@@ -122,8 +117,7 @@ const QuestionsAnswers = ({productID}) => {
     //     match => `<mark>${match}</mark>`);
     //   return newQuestion;
     // });
-
-    (results.length > 0) && console.log('Filter results: ', results);
+    (results.length > 0) && console.log('Filtered questions: ', results);
     setFound(results);
   };
 
@@ -132,23 +126,6 @@ const QuestionsAnswers = ({productID}) => {
     return searchStr.length <= 2 ?
       expandQuestionList(questions, count, increment) :
       expandQuestionList(found, count, increment);
-  };
-
-  const Search = ({handleSearch}) => {
-    //  const [search, setSearch] = useState('');
-    const handleSubmit = ((e) => {
-      e.preventDefault();
-      console.log('Submit search for: ', search);
-      handleSearch(search);
-      setSearch('');
-    });
-
-    return (
-      <form onSubmit={handleSubmit}>
-        <input id='search' onChange={handleInputChange} value={query} placeholder ='Have a question? Search for answers...' />
-        <button type='submit'>🔍︎</button>
-      </form>
-    );
   };
 
   // --------------- CSS Style ---------------
@@ -182,15 +159,14 @@ const QuestionsAnswers = ({productID}) => {
     width: '20%',
     height: '60px'
   };
+  //---------------------------------------------
 
   return (
     <div style={container}>
       <h1 >Questions and Answers</h1>
-      {/* <Search handleSearch={handleSearch}/> */}
       <div >
         <form onSubmit={(e) => e.preventDefault()}>
           <input type='search' value={query} onChange={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-          {/* <button type='submit' style={searchBtn}>🔍︎</button> */}
         </form>
       </div>
       <QuestionList

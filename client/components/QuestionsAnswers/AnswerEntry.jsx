@@ -3,7 +3,7 @@ import Images from './Images.jsx';
 
 // Sub-component for AnswerList: AnswerEntry
 const AnswerEntry = ({answer, handleAnswerHelpful}) => {
-  console.log('Inside answer entry', answer);
+  // console.log('Inside answer entry', answer);
   const [report, setReport] = useState(false);
 
   let helpful = false;
