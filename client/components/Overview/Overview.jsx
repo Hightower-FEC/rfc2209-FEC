@@ -4,9 +4,11 @@ import ImageGallery from './Image_Gallery/ImageGallery.jsx';
 import ExpandedView from './Image_Gallery/ExpandedView.jsx';
 import Stars from '../Stars.jsx';
 import axios from 'axios';
+import { gsap } from 'gsap';
+
 
 import { URL } from '../../../config/config.js';
-const { useEffect, useState } = React;
+const { useEffect, useState, useRef } = React;
 
 const Overview = ({ productID }) => {
   const [currentProductStyles, setCurrentProductStyles] = useState(null);
@@ -21,33 +23,41 @@ const Overview = ({ productID }) => {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQty, setSelectedQty] = useState('');
 
+  // useEffect(() => {
+  //   console.log('inside of overview', productID);
+  // }, [productID]);
+  const overviewRef = useRef(null);
+
   useEffect(() => {
     setCurrentIndex(0);
+    gsap.to(overviewRef.current, {
+      delay: 0,
+      opacity: 0,
+      duration: 0,
+      ease: 'exp.out'
+    });
+    gsap.to(overviewRef.current, {
+      delay: 0.2,
+      opacity: 1,
+      duration: 0.3,
+      ease: 'exp.out'
+    });
   }, [productID]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
       .then((response) => {
-        console.log('product details:', response.data);
         setCurrentProduct(response.data);
       })
-      .catch((err) => console.log(err));
-
-  }, [currentIndex, productID]);
-
-  useEffect(() => {
-    axios.get(`${URL}/products/${productID}/styles`)
-      .then((response) => {
-        console.log('product style:', response.data.results[currentIndex]);
-        setCurrentProductStyles(response.data);
-        setCurrentStyle(response.data.results[currentIndex]);
+      .then(() => {
+        axios.get(`${URL}/products/${productID}/styles`)
+          .then((response) => {
+            setCurrentProductStyles(response.data);
+            setCurrentStyle(response.data.results[currentIndex]);
+          });
       })
       .catch((err) => console.log(err));
-  }, [currentIndex, productID]);
-
-  useEffect(() => {
-    console.log('selected style:', currentStyle);
-  }, [currentStyle]);
+  }, [productID]);
 
   const overviewContainerStyles = {
     display: 'flex',
@@ -146,7 +156,7 @@ const Overview = ({ productID }) => {
       );
     }
     return (
-      <>
+      <div ref={overviewRef}>
         <div style={{height: '125px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
@@ -219,7 +229,7 @@ const Overview = ({ productID }) => {
           </div>
 
         </div>
-      </>
+      </div>
     );
   }
   return null;
