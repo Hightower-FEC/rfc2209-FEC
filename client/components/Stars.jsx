@@ -27,7 +27,7 @@ const Stars = ({rating, productID, size = '12px'}) => {
     } else if (rating) {
       setPercentRating(rating / .05);
     }
-  }, []);
+  }, [rating, productID]);
 
 
   return percentRating ? (
