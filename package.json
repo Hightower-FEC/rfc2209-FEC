@@ -16,6 +16,7 @@
     "@barba/core": "^2.9.7",
     "axios": "^1.1.2",
     "babel-preset-es2015": "^6.24.1",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "gsap": "^3.11.3",
     "latest": "^0.2.0",
