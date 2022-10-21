@@ -1,11 +1,29 @@
 import React from 'react';
+import { gsap } from 'gsap';
 
-const {useState} = React;
+const {useState, useRef, useEffect} = React;
 
 
 const ExpandedView = ({toggleOffView, images, index}) => {
   const [currentIndex, setCurrentIndex] = useState(index);
   const [showArrows, setShowArrows] = useState(false);
+
+  const viewRef = useRef(null);
+
+  useEffect(() => {
+    gsap.to(viewRef.current, {
+      delay: 0,
+      opacity: 0,
+      duration: 0,
+      ease: 'exp.out'
+    });
+    gsap.to(viewRef.current, {
+      delay: 0,
+      opacity: 1,
+      duration: 0.3,
+      ease: 'exp.out'
+    });
+  }, [currentIndex]);
 
   const imgStyles = {
     width: '100%',
@@ -142,7 +160,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
             );
           })}
         </div>
-        <div style={imgStyles} onClick={() => { toggleOffView(currentIndex); }}>
+        <div ref={viewRef} style={imgStyles} onClick={() => { toggleOffView(currentIndex); }}>
           <div style = {{
             position: 'absolute',
             right: '20px',
