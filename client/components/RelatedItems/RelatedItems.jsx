@@ -33,7 +33,7 @@ const RelatedItems = ({productID, handleRelatedItemClick}) => {
       <h1>
         Your Outfit
       </h1>
-      <OutfitList product={currentProduct}/>
+      <OutfitList product={currentProduct} />
     </div>
   );
 };

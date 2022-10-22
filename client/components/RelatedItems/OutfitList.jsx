@@ -7,6 +7,16 @@ const OutfitList = ({product}) => {
 
   let outfitCollection = [];
 
+  const updateIndex = (index) => {
+    console.log('inside of update index', outfits.length);
+    if (index < 0) {
+      index = outfits.length - 1;
+    } else if (index > outfits) {
+      index = 0;
+    }
+    setIndex(index);
+  };
+
   const addOutfit = (item) => {
     outfitCollection.push(item);
     console.log(outfitCollection);
@@ -27,16 +37,16 @@ const OutfitList = ({product}) => {
           </div>
         </div>
       </div>
-      {/* {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {
+      {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {
         updateIndex(index - 1);
       }}>
           ‹
       </div></div> : null}
-      {index < React.Children.count(outfits) - 1 ? <div className="indicators"><div className="rightArrow" onClick={() => {
+      {index < outfits.length ? <div className="indicators"><div className="rightArrow" onClick={() => {
         updateIndex(index + 1);
       }}>
           ›
-      </div></div> : null} */}
+      </div></div> : null}
     </div>
   );
 };
