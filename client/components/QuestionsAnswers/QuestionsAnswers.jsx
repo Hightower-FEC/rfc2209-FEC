@@ -9,7 +9,7 @@ const QuestionsAnswers = ({productID}) => {
   // default productID = 66642
 
   // For testing different products
-  let testID = 66643;
+  let testID = 66642;
   let testCount = 10;
 
   // Product name state
@@ -121,13 +121,13 @@ const QuestionsAnswers = ({productID}) => {
     //   return newQuestion;
     // });
 
-    // let oldText = document.getElementById('question-body').innerText;
-    // if (e.target.value.length > 2) {
-    //   let text = oldText;
-    //   let re = new RegExp(e.target.value, 'g');
-    //   let newText = text.replace(re, `<mark>${e.target.value}</mark>`);
-    //   document.getElementById('question-body').innerHTML = newText;
-    // }
+    let oldText = document.getElementById('question-body').innerText;
+    if (e.target.value.length > 2) {
+      let text = oldText;
+      let re = new RegExp(e.target.value, 'g');
+      let newText = text.replace(re, `<mark>${e.target.value}</mark>`);
+      document.getElementById('question-body').innerHTML = newText;
+    }
 
     // results.map(question => {
     //   let text = question.question_body;
