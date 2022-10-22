@@ -203,10 +203,12 @@ const ExpandedView = ({toggleOffView, images, index}) => {
         </div> */}
 
         <div style={styles.expandedImageCarousel}>
-          <div style={styles.expandedPhotoContainer(currentIndex)}>
+          <div ref={viewRef} style={styles.expandedPhotoContainer(currentIndex)}>
             {currentPhotos.map((photo, index) => {
               return (
-                <div style={styles.expandedContainerStyles}>
+                <div
+                  key={index}
+                  style={styles.expandedContainerStyles}>
                   <div style={imgStyles}></div>
                 </div>
               );
