@@ -1,6 +1,6 @@
 import React from 'react';
 import AddToCartForm from './Form/AddToCartForm.jsx';
-import ImageGallery from './Image_Gallery/ImageGallery.jsx';
+import ImageGallery from './Image_Gallery/ImageGalleryV2.jsx';
 import ExpandedView from './Image_Gallery/ExpandedView.jsx';
 import Stars from '../Stars.jsx';
 import axios from 'axios';
@@ -62,13 +62,16 @@ const Overview = ({ productID }) => {
   const overviewContainerStyles = {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
   };
 
   const productInfoContainerStyles = {
     margin: '0 0 0 20px',
+    flex: '1 2 auto',
     display: 'flex',
-    width: '400px',
+    // minWidth: '400px',
+    maxWidth: '400px',
     flexDirection: 'column',
     justifyContent: 'space-between',
     gap: '20px',
@@ -159,7 +162,7 @@ const Overview = ({ productID }) => {
       <div ref={overviewRef}>
         <div style={{height: '125px'}}></div>
         <div style={overviewContainerStyles}>
-          <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
+          <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
