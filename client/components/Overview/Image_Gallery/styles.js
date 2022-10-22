@@ -167,6 +167,32 @@ export const styles = {
 
   },
 
+  expandedImageCarousel: {
+    height: '100vh',
+    width: '100vw',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+
+  expandedPhotoContainer: (index) => {
+    return {
+      whiteSpace: 'nowrap',
+      transition: 'transform 0.3s',
+      transform: `translateX(-${index * 100}%)`,
+      width: 'auto',
+      height: '100vh',
+    };
+  },
+
+  expandedContainerStyles: {
+    display: 'inline-block',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 'auto',
+    height: '100vh',
+    position: 'relative'
+  },
+
   thumbContainerStyles: {
     display: 'inline-flex',
     alignItems: 'center',
