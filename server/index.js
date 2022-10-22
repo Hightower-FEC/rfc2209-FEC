@@ -1,9 +1,9 @@
-const express = require("express");
-const path = require("path");
+const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.get('/', (req, res) => {
   res.send('hello');
@@ -11,4 +11,4 @@ app.get('/', (req, res) => {
 
 
 app.listen(3001);
-console.log(`Listening at http://localhost:3001`);
+console.log('Listening at http://localhost:3001');
