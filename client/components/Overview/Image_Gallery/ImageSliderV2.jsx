@@ -4,17 +4,19 @@ import {styles} from './styles.js';
 const {useState, useEffect} = React;
 
 
-const ImageSlider = ({ photos }) => {
-  const [currentPhoto, setCurrentPhoto] = useState(photos[0]);
+const ImageSlider = ({ photo, currentIndex, handleImageClick, currentPhotos }) => {
+  // const [currentPhoto, setCurrentPhoto] = useState(photos[0]);
 
   useEffect(() => {
-    console.log(currentPhoto);
-    setCurrentPhoto(photos[0]);
-  }, [photos]);
+    // console.log(photo);
+    // setCurrentPhoto(photos[0]);
+  }, [photo]);
 
   return (
     <div style={styles.containerStyles} >
-      <div style={styles.currentPhoto(currentPhoto)}></div>
+      <div
+        onClick={() => { handleImageClick(currentPhotos, currentIndex); }}
+        style={styles.currentPhoto(photo)}></div>
     </div>
   );
 };
