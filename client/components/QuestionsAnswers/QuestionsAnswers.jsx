@@ -9,8 +9,8 @@ const QuestionsAnswers = ({productID}) => {
   // default productID = 66642
 
   // For testing different products
-  let testID = 66641;
-  let testPage = 1;
+  let testID = 66643;
+  let testCount = 10;
 
   // Product name state
   const [name, setName] = useState('');
@@ -42,7 +42,8 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: productID
+        product_id: testID,
+        count: 10
       }
     })
       .then((response) => {
@@ -110,13 +111,31 @@ const QuestionsAnswers = ({productID}) => {
         return question.question_body.toLowerCase().includes(e.target.value.toLowerCase());
       }
     });
+    console.log('Before regex Question', results);
     // Future Enhancement of highlighting search word in real time
     // results.map(question => {
-    //   let newQuestion = question.question_body.replace(
-    //     new RegExp(e.target.value, 'g'),
-    //     match => `<mark>${match}</mark>`);
+    //   console.log('result map');
+    //   let oldQuestion = question.question_body;
+    //   let re = new RegExp(e.target.value, 'g');
+    //   let newQuestion = oldQuestion.replace(re, `<mark>${e.target.value}</mark>`);
     //   return newQuestion;
     // });
+
+    // let oldText = document.getElementById('question-body').innerText;
+    // if (e.target.value.length > 2) {
+    //   let text = oldText;
+    //   let re = new RegExp(e.target.value, 'g');
+    //   let newText = text.replace(re, `<mark>${e.target.value}</mark>`);
+    //   document.getElementById('question-body').innerHTML = newText;
+    // }
+
+    // results.map(question => {
+    //   let text = question.question_body;
+    //   let re = new RegExp(e.target.value, 'g');
+    //   let newText = text.replace(re, `<mark>${e.target.value}</mark>`);
+    //   return newText;
+    // })
+
     (results.length > 0) && console.log('Filtered questions: ', results);
     setFound(results);
   };
@@ -159,15 +178,27 @@ const QuestionsAnswers = ({productID}) => {
     width: '20%',
     height: '60px'
   };
+  const noQuestionMsg = {
+    display: 'block',
+    textAlign: 'center',
+    margin: '2rem 0 2rem 0',
+    justifyContent: 'center',
+    fontSize: '24px'
+  };
   //---------------------------------------------
 
   return (
     <div style={container}>
       <h1 >Questions and Answers</h1>
       <div >
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input type='search' value={query} onChange={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-        </form>
+        {questions.length > 0 ?
+          (<form onSubmit={(e) => e.preventDefault()}>
+            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+          </form>) :
+          (<span style={noQuestionMsg}>
+            No questions for this product yet. Be the first to add one!
+          </span>)
+        }
       </div>
       <QuestionList
         name={name}
