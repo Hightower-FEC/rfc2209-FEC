@@ -15,7 +15,7 @@ const OutfitList = ({product}) => {
 
   return (
     <div className="carousel">
-      <div className="carousel-view">
+      <div className="carousel-outfit">
         {outfits.map((outfit, key) => {
           return <OutfitCard outfit={outfit} index={index} key={key} width={'25%'} />;
         })}
