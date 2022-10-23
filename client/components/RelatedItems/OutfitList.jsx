@@ -17,7 +17,6 @@ const OutfitList = ({product}) => {
   }, [outfits]);
 
   const updateIndex = (index) => {
-    console.log('inside of update index', outfits.length);
     if (index < 0) {
       index = outfits.length - 1;
     } else if (index > outfits) {
@@ -41,9 +40,15 @@ const OutfitList = ({product}) => {
         }) : null}
         <div className="product-card" style={{width: '25%'}}>
           <div className="plus-container">
-            <img src="assets/blueplus.webp" alt="plus symbol" className="plus-symbol" onClick={() => {
+            <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
               addOutfit(product);
             }}></img>
+          </div>
+          <div className="clear-container">
+            <button id="clear-button" onClick={() => {
+              setOutfits([]);
+              window.localStorage.clear();
+            }}>Clear Outfits</button>
           </div>
         </div>
       </div>
@@ -52,7 +57,7 @@ const OutfitList = ({product}) => {
       }}>
           ‹
       </div></div> : null}
-      {index < outfits.length ? <div className="indicators"><div className="rightArrow" onClick={() => {
+      {outfits.length > 2 ? <div className="indicators"><div className="rightArrow" onClick={() => {
         updateIndex(index + 1);
       }}>
           ›

@@ -54,6 +54,7 @@ button {
 }
 
 .carousel-outfit {
+  display: flex;
   white-space: nowrap;
 }
 
@@ -192,13 +193,28 @@ tbody > * {
   bottom: 0;
 }
 
-.plus-symbol {
+#plus-symbol {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 60%;
 }
 
-.plus-symbol:hover {
+#plus-symbol:hover {
   width: 75%;
+}
+
+.clear-container {
+  position: relative;
+  left: 0;
+  top: 60%;
+  right: 0;
+  bottom: 0;
+}
+
+#clear-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
 }
