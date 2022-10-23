@@ -14,15 +14,14 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
     top: '0',
     right: '0',
     bottom: '0',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: '9999999'
   };
   const modalContent = {
-    width: '60%',
-    height: '35%',
+    width: '75%',
     borderRadius: '1rem',
     backgroundColor: '#fff'
   };
@@ -37,9 +36,38 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
 
   const modalBody = {
     padding: '10px',
+    fontSize: '18px',
     borderTop: '1px solid #eee',
     borderBottom: '1px solid #eee',
+    margin: '0 0 0 2rem'
   };
+  const nicknameStyle = {
+    display: 'inline-block',
+    textAlign: 'left',
+    margin: '0 0 1rem 0',
+    height: '40px',
+    width: '50%',
+    fontSize: '24px'
+  };
+  const emailStyle = {
+    display: 'inline-block',
+    textAlign: 'left',
+    margin: '0 0 1rem 0',
+    height: '40px',
+    width: '50%',
+    fontSize: '24px'
+  };
+  const questionStyle = {
+    width: '90%',
+    height: '100px',
+    fontSize: '24px',
+    boxSizing: 'border-box',
+    borderRadius: '5px',
+    backgroundColor: '#f8f8f8',
+    fontSize: '18px',
+    resize: 'none'
+  };
+
 
   const footer = {
     display: 'flex',
@@ -122,20 +150,18 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
           <h4>Ask Your Question</h4>
           <h4 className='product'>About the {name}</h4>
           <div className='error' style={error}></div><br/>
-          {/* <span className='error2' style={error}></span><br/>
-          <span className='error3' style={error}></span> */}
         </div>
 
         {/* Modal Body */}
         <div className='modal-body' style={modalBody}>
           <label htmlFor='your-question'>Your Question*</label><br/>
-          <textarea id='your-question' rows='4' cols='50' onChange={(e) => setAsk(e.target.value)}/> <br/>
+          <textarea id='your-question' rows='5' cols='200' placeholder='Enter your question here' onChange={(e) => setAsk(e.target.value)} style={questionStyle}/> <br/>
 
           <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
-          <input type='text' id='your-nickname'placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
+          <input type='text' id='your-nickname' placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} style={nicknameStyle}/> <br/>
 
           <label htmlFor='your-email'>Your Email*</label><br/>
-          <input type='text' id='your-email' onChange={(e) => setEmail(e.target.value)}/> <br/>
+          <input type='text' id='your-email' placeholder='Example: johndoe@gmail.com' onChange={(e) => setEmail(e.target.value)} style={emailStyle}/> <br/>
           <span>For privacy reasons, do NOT use your full name or email address!</span>
         </div>
 
