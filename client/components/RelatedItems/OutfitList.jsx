@@ -19,7 +19,6 @@ const OutfitList = ({product}) => {
 
   const addOutfit = (item) => {
     outfitCollection.push(item);
-    console.log(outfitCollection);
     setOutfits(outfitCollection);
   };
 
