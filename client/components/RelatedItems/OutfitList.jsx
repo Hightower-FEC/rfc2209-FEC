@@ -1,11 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import OutfitCard from './OutfitCard.jsx';
 
 const OutfitList = ({product}) => {
   const [index, setIndex] = useState(0);
   const [outfits, setOutfits] = useState([]);
 
-  let outfitCollection = [];
+  useEffect(() => {
+    const data = window.localStorage.getItem('Atelier Outfit Creation List');
+    if (data !== null) {
+      setOutfits(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('Atelier Outfit Creation List', JSON.stringify(outfits));
+  }, [outfits]);
 
   const updateIndex = (index) => {
     console.log('inside of update index', outfits.length);
@@ -18,16 +27,18 @@ const OutfitList = ({product}) => {
   };
 
   const addOutfit = (item) => {
-    outfitCollection.push(item);
+    let newItem = [];
+    newItem.push(item);
+    const outfitCollection = outfits.concat(newItem);
     setOutfits(outfitCollection);
   };
 
   return (
     <div className="carousel">
       <div className="carousel-outfit">
-        {outfits.map((outfit, key) => {
+        {outfits.length > 0 ? outfits.map((outfit, key) => {
           return <OutfitCard outfit={outfit} index={index} key={key} width={'25%'} />;
-        })}
+        }) : null}
         <div className="product-card" style={{width: '25%'}}>
           <div className="plus-container">
             <img src="assets/blueplus.webp" alt="plus symbol" className="plus-symbol" onClick={() => {
