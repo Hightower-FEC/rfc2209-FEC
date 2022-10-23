@@ -19,7 +19,7 @@ const ProductList = ({products, productA, handleRelatedItemClick}) => {
 
   return (
     <div className="carousel">
-      <div className="carousel-view">
+      <div className="carousel-related">
         {products.map((product, key) => {
           return <ProductCard product={product} productA={productA} index={index} key={key} width={'25%'} handleRelatedItemClick={handleRelatedItemClick}/>;
         })}
@@ -29,7 +29,7 @@ const ProductList = ({products, productA, handleRelatedItemClick}) => {
       }}>
           ‹
       </div></div> : null}
-      {index < React.Children.count(products) - 1 ? <div className="indicators"><div className="rightArrow" onClick={() => {
+      {index < React.Children.count(products) - 3 ? <div className="indicators"><div className="rightArrow" onClick={() => {
         updateIndex(index + 1);
       }}>
           ›
