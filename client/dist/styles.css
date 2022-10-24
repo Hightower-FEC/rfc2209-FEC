@@ -39,26 +39,39 @@ button {
 /* RELATED ITEMS & OUTFITS */
 
 .category {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-name {
+  font-size: 26px;
+  font-weight: bolder;
+  margin: 5px 0 5px 0;
+  width: 250px;
+  white-space: wrap;
 }
 
 .default-price, .sale-price {
   font-size: 14px;
+  font-weight: 600;
 }
 
 #favorite-related {
   float: right;
-  cursor: alias;
+  cursor: pointer;
   font-size: 20px;
-  background: -webkit-radial-gradient(black, blanchedalmond);
-  color: blanchedalmond;
+  transition: 0.3s;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: #F1F1F1;
 }
 
 #favorite-related:hover {
-  font-size: 35px;
+  text-shadow: 0 0 10px white;
 }
 
 .carousel {
+  margin: 0 10px 0 10px;
   overflow: hidden;
   position: relative;
 }
@@ -84,7 +97,10 @@ button {
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 
 .indicators {
@@ -183,18 +199,29 @@ tbody > * {
 }
 .leftArrow {
   left: 10%;
-  cursor: w-resize;
+  cursor: pointer;
 }
 .rightArrow {
   right: 10%;
-  cursor: e-resize;
+  cursor: pointer;
 }
 
 .upper-half {
-  height: 280px;
+  height: 50%;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.bottom-half {
+  bottom: 20px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+  width: 100%;
+  white-space: pre-wrap;
+  position: absolute;
+}
+
+
+
 
 .sale-price {
   color: red;
