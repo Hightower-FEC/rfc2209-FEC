@@ -10,7 +10,7 @@ import { gsap } from 'gsap';
 import { URL } from '../../../config/config.js';
 const { useEffect, useState, useRef } = React;
 
-const Overview = ({ productID }) => {
+const Overview = ({ productID, interactions}) => {
   const [currentProductStyles, setCurrentProductStyles] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStyle, setCurrentStyle] = useState(null);
@@ -156,7 +156,7 @@ const Overview = ({ productID }) => {
       );
     }
     return (
-      <div ref={overviewRef}>
+      <div ref={overviewRef} onClick={(e) => interactions(e, 'Overview')}>
         <div style={{height: '125px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>

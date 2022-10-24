@@ -52,8 +52,8 @@ const App = () => {
     return (
       <div >
         <TopBar/>
-        <Overview productID={currentProductID}/>
-        <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/>
+        <Overview productID={currentProductID} interactions={interactions}/>
+        <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick} interactions={interactions}/>
         <QuestionsAnswers productID={currentProductID} interactions={interactions}/>
         <RatingsReviews productID={currentProductID}/>
       </div>
