@@ -70,6 +70,7 @@ button {
 
 .carousel-outfit {
   display: flex;
+  /* overflow-x: auto; */
   white-space: nowrap;
 }
 
@@ -85,6 +86,21 @@ button {
   transition: transform 0.3s;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.outfit-card {
+  display: inline-block;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  background-color: rgba(220,222,223,255);
+  color: rgba(241, 236, 236, 0.929);
+  transition: transform 0.3s;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* flex-flow: column nowrap */
 }
 
 .indicators {
@@ -203,7 +219,7 @@ tbody > * {
 .plus-container {
   position: relative;
   left: 0;
-  top: 25%;
+  top: 20%;
   right: 0;
   bottom: 0;
 }
@@ -219,15 +235,15 @@ tbody > * {
   width: 75%;
 }
 
-.clear-container {
+.add-container {
   position: relative;
   left: 0;
-  top: 60%;
+  top: 25%;
   right: 0;
   bottom: 0;
 }
 
-#clear-button {
+#add-button {
   display: block;
   margin-left: auto;
   margin-right: auto;
