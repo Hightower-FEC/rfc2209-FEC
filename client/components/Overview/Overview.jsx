@@ -10,7 +10,7 @@ import { gsap } from 'gsap';
 import { URL } from '../../../config/config.js';
 const { useEffect, useState, useRef } = React;
 
-const Overview = ({ productID }) => {
+const Overview = ({ productID, interactions}) => {
   const [currentProductStyles, setCurrentProductStyles] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStyle, setCurrentStyle] = useState(null);
@@ -57,7 +57,7 @@ const Overview = ({ productID }) => {
     maxWidth: '400px',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    gap: '20px',
+    gap: '10px',
     alignContent: 'space-between',
   };
 
@@ -66,21 +66,22 @@ const Overview = ({ productID }) => {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    gap: '20px',
+    gap: '15px',
     marginTop: '10px',
     width: 'fit-content',
     height: 'fit-content',
     padding: '15px 25px 15px 25px',
     backgroundColor: '#DDDDDD',
     borderRadius: '10px',
-    marginRight: '40px'
+    // marginRight: '40px'
   };
 
   const styleStyles = (image) => {
     return {
-      height: '90px',
-      width: '90px',
+      height: '70px',
+      width: '70px',
       backgroundSize: 'cover',
+      backgroundPosition: 'center center',
       backgroundImage: 'center',
       cursor: 'pointer',
       backgroundImage: `url(${image.thumbnail_url})`,
@@ -90,18 +91,18 @@ const Overview = ({ productID }) => {
   };
 
   const itemCategoryStyle = {
-    fontSize: '20px',
+    fontSize: '16px',
     fontWeight: '500',
     marginBottom: '10px'
   };
 
   const itemNameStyle = {
-    fontSize: '70px',
+    fontSize: '50px',
     fontWeight: '700'
   };
 
   const selectedStyleStyles = {
-    fontSize: '20px',
+    fontSize: '16px',
   };
 
   const handleStyleClick = (index) => {
@@ -139,7 +140,7 @@ const Overview = ({ productID }) => {
       );
     }
     return (
-      <div ref={overviewRef}>
+      <div ref={overviewRef} onClick={(e) => interactions(e, 'Overview')}>
         <div style={{height: '125px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
@@ -147,7 +148,7 @@ const Overview = ({ productID }) => {
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
               <div style={{width: 'fit-content'}}>
-                <Stars productID={productID} size={'25px'}/>
+                <Stars productID={productID} size={'20px'}/>
               </div>
               <div style={itemNameStyle}>{currentProduct.name}</div>
             </div>

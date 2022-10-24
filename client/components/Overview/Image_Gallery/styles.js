@@ -1,8 +1,7 @@
 export const styles = {
   currentPhoto: (currentPhoto) => {
     return {
-      width: '1000px',
-      maxWidth: '1000px',
+      width: '800px',
       zIndex: 1,
       height: '100%',
       position: 'absolute',
@@ -79,9 +78,8 @@ export const styles = {
     display: 'inline-block',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '1000px',
-    maxWidth: '1000px',
-    height: '800px',
+    width: '800px',
+    height: '600px',
     position: 'relative'
   },
 
@@ -116,8 +114,8 @@ export const styles = {
       whiteSpace: 'nowrap',
       transition: 'transform 0.3s',
       transform: `translateX(-${index * 100}%)`,
-      width: '1000px',
-      height: '800px',
+      width: '800px',
+      height: '600px',
     };
   },
 
@@ -145,21 +143,20 @@ export const styles = {
     transform: 'translate(-50%, -50%)',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     borderRadius: '10px',
-    height: '100px',
+    height: '80px',
     width: '80%'
   },
 
   imageCarousel: {
-    width: '1000px',
-    maxWidth: '1000px',
-    height: '800px',
+    width: '800px',
+    height: '600px',
     position: 'relative',
     overflow: 'hidden',
   },
 
   thumbnailCarousel: {
     zIndex: 3,
-    width: '800px',
+    width: '600px',
     overflow: 'hidden',
     position: 'absolute',
     bottom: '20px',
@@ -198,15 +195,15 @@ export const styles = {
     alignItems: 'center',
     gap: '5px',
     justifyContent: 'center',
-    height: '120px',
+    height: '90px',
     position: 'relative',
   },
 
   thumbnailBackground: {
     zIndex: 2,
     position: 'absolute',
-    height: '120px',
-    width: '800px',
+    height: '90px',
+    width: '600px',
     borderRadius: '10px',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     padding: '10px 50px 10px 50px',

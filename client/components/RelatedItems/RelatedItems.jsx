@@ -4,7 +4,7 @@ import OutfitList from './OutfitList.jsx';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
 
-const RelatedItems = ({productID, handleRelatedItemClick}) => {
+const RelatedItems = ({productID, handleRelatedItemClick, interactions}) => {
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
 
@@ -25,8 +25,8 @@ const RelatedItems = ({productID, handleRelatedItemClick}) => {
   }, [productID]);
 
   return (
-    <div>
-      <h1>
+    <div onClick={(e) => interactions(e, 'RelatedItems')}>
+      <h1 style={{margin: '70px 0 0 138px', fontSize: '30px'}}>
         Related Items
       </h1>
       <ProductList products={products} productA={currentProduct} handleRelatedItemClick={handleRelatedItemClick} />

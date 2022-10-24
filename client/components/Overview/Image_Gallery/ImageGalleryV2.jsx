@@ -56,7 +56,7 @@ const ImageGallery = ({ productStyle, handleImageClick }) => {
   };
 
   return (
-    <div style={{position: 'relative', height: '800px'}}>
+    <div style={{position: 'relative', height: '600px'}}>
       <div className="imageGalleryOptions">
         <div style={styles.leftPointer} onClick={goToPreviousImage}>‹</div>
         <div style={styles.rightPointer} onClick={goToNextImage}>›</div>
@@ -119,8 +119,8 @@ const ThumbnailSlider = ({ photo, currentIndex, handleThumbnailClick, currentPho
             borderRadius: '10px',
             cursor: 'pointer',
             marginRight: '10px',
-            height: '110px',
-            width: '110px',
+            height: '80px',
+            width: '80px',
             border: '2px solid white',
             backgroundImage: `url(${photo.thumbnail_url})`
           }}></div>
@@ -138,8 +138,8 @@ const ThumbnailSlider = ({ photo, currentIndex, handleThumbnailClick, currentPho
             borderRadius: '10px',
             cursor: 'pointer',
             marginRight: '10px',
-            height: '110px',
-            width: '110px',
+            height: '80px',
+            width: '80px',
             backgroundImage: `url(${photo.thumbnail_url})`
           }}></div>
       </div>
