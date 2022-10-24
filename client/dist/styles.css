@@ -71,7 +71,7 @@ button {
 }
 
 .carousel {
-  margin: 0 10px 0 10px;
+  margin: 0 120px 0 120px;
   overflow: hidden;
   position: relative;
 }
@@ -203,22 +203,19 @@ tbody > * {
 .leftArrow, .rightArrow {
   position: absolute;
   bottom: 40%;
-  font-size: 50px;
-  text-shadow: 6px 0 #000;
-  font-weight: 600;
+  font-size: 100px;
+  text-shadow: 0 0 10px #000;
   color: white;
   z-index: 1;
 }
 
-.leftArrow:hover, .rightArrow:hover {
-  font-size: 80px;
-}
+
 .leftArrow {
-  left: 10%;
+  left: 2%;
   cursor: pointer;
 }
 .rightArrow {
-  right: 10%;
+  right: 2%;
   cursor: pointer;
 }
 

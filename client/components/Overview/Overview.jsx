@@ -96,7 +96,7 @@ const Overview = ({ productID }) => {
   };
 
   const itemNameStyle = {
-    fontSize: '70px',
+    fontSize: '60px',
     fontWeight: '700'
   };
 
