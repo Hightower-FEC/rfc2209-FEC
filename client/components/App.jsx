@@ -25,14 +25,6 @@ const App = () => {
       .catch((error) => {
         console.log(error);
       });
-    axios.put('/reviews/2/report')
-      .then((response) => {
-        console.log('hi');
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   }, []);
 
   const handleRelatedItemClick = (id) => {
@@ -42,11 +34,11 @@ const App = () => {
   if (currentProductID) {
     return (
       <div>
-        {/* <TopBar/> */}
-        {/* <Overview productID={currentProductID}/> */}
-        {/* <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/> */}
-        {/* <QuestionsAnswers productID={currentProductID}/>
-        <RatingsReviews productID={currentProductID}/> */}
+        <TopBar/>
+        <Overview productID={currentProductID}/>
+        <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick}/>
+        <QuestionsAnswers productID={currentProductID}/>
+        <RatingsReviews productID={currentProductID}/>
       </div>
     );
   }
