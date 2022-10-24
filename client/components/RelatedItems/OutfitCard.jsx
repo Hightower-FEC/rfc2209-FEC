@@ -20,9 +20,8 @@ const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClic
       <div className="outfit-card" style={{width: width, backgroundImage: `url(${image})`}}>
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" onClick={() => {
-            console.log('inside of remove outfit', number);
             handleRemoveOutfitClick(number);
-          }}><strong>✩</strong></span>
+          }}><strong>⊖</strong></span>
         </div>
         <div className="bottom-half">
           <div className="category">{outfit.category}</div>

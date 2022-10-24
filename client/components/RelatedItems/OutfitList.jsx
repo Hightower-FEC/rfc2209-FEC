@@ -49,11 +49,8 @@ const OutfitList = ({product}) => {
               addOutfit(product);
             }}></img>
           </div>
-          <div className="clear-container">
-            <button id="clear-button" onClick={() => {
-              setOutfits([]);
-              window.localStorage.clear();
-            }}>Clear Outfits</button>
+          <div className="add-container">
+            <button id="add-button">Add to Outfit</button>
           </div>
         </div>
       </div>

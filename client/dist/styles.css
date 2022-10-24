@@ -204,7 +204,7 @@ tbody > * {
 .plus-container {
   position: relative;
   left: 0;
-  top: 25%;
+  top: 20%;
   right: 0;
   bottom: 0;
 }
@@ -220,15 +220,15 @@ tbody > * {
   width: 75%;
 }
 
-.clear-container {
+.add-container {
   position: relative;
   left: 0;
-  top: 40%;
+  top: 25%;
   right: 0;
   bottom: 0;
 }
 
-#clear-button {
+#add-button {
   display: block;
   margin-left: auto;
   margin-right: auto;
