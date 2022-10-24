@@ -276,3 +276,9 @@ tbody > * {
   margin-right: auto;
   width: 60%;
 }
+
+.go-top {
+  position: fixed;
+  bottom: 2px;
+  right: 2px;
+}
