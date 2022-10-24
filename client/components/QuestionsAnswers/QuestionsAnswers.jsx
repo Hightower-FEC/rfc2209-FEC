@@ -6,10 +6,9 @@ import QuestionModal from './QuestionModal.jsx';
 
 
 const QuestionsAnswers = ({productID, interactions}) => {
-  // default productID = 66642
 
   // For testing different products
-  let testID = 66641;
+  let testID = 66649;
   let testCount = 10;
 
   // Product name state
@@ -93,13 +92,31 @@ const QuestionsAnswers = ({productID, interactions}) => {
   };
   // Send a PUT request to update the question's helpfulness
   const handleQuestionHelpful = (questionId, helpful) => {
-    let isHelpful = helpful ? 'helpful' : 'not helpful';
-    console.log(`Marked question id ${questionId} ${isHelpful}`);
+    // Receive a 204 status upon successful PUT request
+    axios.put(`${URL}/qa/questions/${questionId}/helpful`)
+      .then((res) => console.log(`Marked question id ${questionId} helpful. Response: `, res))
+      .catch((err) => console.log(`Could not mark question id ${questionId} helpful. Error: `, err));
   };
   // Send a PUT request to update the answer's helpfulness
   const handleAnswerHelpful = (answerId, helpful) => {
-    let isHelpful = helpful ? 'helpful' : 'not helpful';
-    console.log(`Marked answer id ${answerId} ${isHelpful}`);
+    // Receive a status 204 upon successful PUT request
+    axios.put(`${URL}/qa/answers/${answerId}/helpful`)
+      .then((res) => console.log(`Marked answer id ${answerId} helpful. Response: `, res))
+      .catch((err) => console.log(`Could not mark answer id ${answerId} helpful. Error: `, err));
+  };
+  // Send a PUT request to report the question
+  const handleQuestionReport = (questionId) => {
+    // Receive a status 204 upon successful PUT request
+    axios.put(`${URL}/qa/questions/${questionId}/report`)
+      .then((res) => console.log(`Reported question id ${answerId} to admin. Response:`, res))
+      .catch((err) => console.log(`Could not report question id ${answerId} to admin. Error: `, err));
+  };
+  // Send a PUT request to report the answer
+  const handleAnswerReport = (answerId) => {
+    // Receive a status 204 upon successful PUT request
+    axios.put(`${URL}/qa/answers/${answerId}/report`)
+      .then((res) => console.log(`Reported answer id ${answerId} to admin. Response:`, res))
+      .catch((err) => console.log(`Could not report answer id ${answerId} to admin. Error: `, err));
   };
   //---------------------------------------------
 
@@ -147,7 +164,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
 
   // Function to switch between the default list and the filter list if the query has 3 or more characters in the search input
   const switchList = (searchStr) => {
-    return searchStr.length <= 2 ?
+    return searchStr.length < 3 ?
       expandQuestionList(questions, count, increment) :
       expandQuestionList(found, count, increment);
   };
@@ -163,7 +180,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
     margin: '0 0 1rem 0',
     height: '50px',
     width: '100%',
-    fontSize: '24px'
+    fontSize: '24px',
   };
   const moreQuestionsBtn = {
     display: 'inline-block',
@@ -210,7 +227,9 @@ const QuestionsAnswers = ({productID, interactions}) => {
         questions={switchList(query)}
         submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
+        handleQuestionReport={handleQuestionReport}
         handleAnswerHelpful={handleAnswerHelpful}
+        handleAnswerReport={handleAnswerReport}
       />
 
       {(showMoreQuestionButton(query, count, increment)) &&

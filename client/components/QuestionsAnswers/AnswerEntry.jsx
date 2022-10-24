@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 import Images from './Images.jsx';
 
 // Sub-component for AnswerList: AnswerEntry
-const AnswerEntry = ({answer, handleAnswerHelpful}) => {
+const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
   // console.log('Inside answer entry', answer);
   const [report, setReport] = useState(false);
   const [helpfulness, setHelpfulness] = useState(false);
@@ -25,7 +26,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
   // Send PUT request to report this answer
   const handleClickReport = () => {
     setReport(true);
-    console.log(`You have reported answer ${answer.id} to admin`);
+    handleAnswerReport(answer.id);
   };
   // Format date into readable format for user
   const formatDate = (date) => {

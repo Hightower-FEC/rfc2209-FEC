@@ -3,7 +3,7 @@ import AnswerEntry from './AnswerEntry.jsx';
 
 // Sub-component for QuestionEntry: AnswerList
 // Up to TWO answers should be display for each question
-const AnswerList = ({answers, handleAnswerHelpful}) => {
+const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
 
   const [count, setCount] = useState(1);
   // Number of answers to render at a time
@@ -50,6 +50,11 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
     textDecoration: 'none',
     color: 'black'
   };
+  const noAnswer = {
+    fontStyle: 'italic',
+    display: 'block',
+    margin: '10px 0 0 30px'
+  };
 
   return (
     hasAnswer() ?
@@ -58,7 +63,9 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
         <span style={answerStyle}>{currentList.map((answer, i) =>
           <AnswerEntry
             answer={answer} key={i}
-            handleAnswerHelpful={handleAnswerHelpful} />)}
+            handleAnswerHelpful={handleAnswerHelpful}
+            handleAnswerReport={handleAnswerReport}
+          />)}
         </span>
         <span>
           {showMoreAnswerLink(count, increment) &&
@@ -66,7 +73,7 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
         </span>
       </div>
       ) :
-      <div>No answer for this question yet</div>
+      <span class='noAnswer' style={noAnswer}>No answer for this question yet</span>
   );
 };
 

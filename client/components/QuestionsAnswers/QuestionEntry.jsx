@@ -3,7 +3,7 @@ import AnswerList from './AnswerList.jsx';
 import AnswerModal from './AnswerModal.jsx';
 
 // Sub-component for QuestionList: QuestionEntry
-const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHelpful, handleAnswerHelpful}) => {
+const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHelpful, handleQuestionReport, handleAnswerHelpful, handleAnswerReport}) => {
 
   const [helpfulness, setHelpfulness] = useState(false);
   const [helpCount, setHelpCount] = useState(question.question_helpfulness);
@@ -23,10 +23,11 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     handleQuestionHelpful(question.question_id, helpful);
   };
 
+
   const questionStyle = {
     display: 'block',
     fontSize: '20px',
-    margin: '25px 0'
+    margin: '25px 0',
   };
   const Q = {
     display: 'inline-block',
@@ -57,7 +58,9 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
       </span>
       <AnswerList
         answers = {question.answers}
-        handleAnswerHelpful={handleAnswerHelpful}/>
+        handleAnswerHelpful={handleAnswerHelpful}
+        handleAnswerReport={handleAnswerReport}
+      />
       <AnswerModal
         name={name}
         showAModal={showAModal}
