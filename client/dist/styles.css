@@ -236,9 +236,6 @@ tbody > * {
   position: absolute;
 }
 
-
-
-
 .sale-price {
   color: red;
 }
@@ -278,7 +275,8 @@ tbody > * {
 }
 
 .go-top {
+  z-index: 1;
   position: fixed;
-  bottom: 2px;
-  right: 2px;
+  bottom: 20px;
+  right: 20px;
 }

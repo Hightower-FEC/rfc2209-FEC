@@ -54,7 +54,7 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
     <>
       <div className="product-card" style={{width: '300px', transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`, position: 'relative'}} onClick={() => {
         handleRelatedItemClick(card.id);
-        window.scrollTo(0, 400);
+        window.scrollTo({top: 20, behavior: 'smooth'});
       }}>
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" className="fa-solid fa-star" onClick={(event) => {

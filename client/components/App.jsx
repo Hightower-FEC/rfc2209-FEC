@@ -6,7 +6,7 @@ import Overview from './Overview/Overview.jsx';
 import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
-import ScrollToComponent from './Scroll/ScrollToComponent.js';
+import ScrollToComponent from './Scroll/ScrollToComponent.jsx';
 
 import { URL } from '../../config/config.js';
 

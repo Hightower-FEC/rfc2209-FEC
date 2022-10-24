@@ -4,7 +4,7 @@ const ScrollToComponent = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
-    if (window.scrollY > 500) {
+    if (window.scrollY > 700) {
       setIsVisible(true);
     } else {
       setIsVisible(false);
@@ -27,7 +27,7 @@ const ScrollToComponent = () => {
 
   return (
     <div className="go-top">
-      {isVisible ? <button>Go to top</button> : null}
+      {isVisible ? <button onClick={scrollToTop}>Go to top</button> : null}
     </div>
   );
 };
