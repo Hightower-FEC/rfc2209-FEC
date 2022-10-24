@@ -1,11 +1,12 @@
 import React from 'react';
 import { gsap } from 'gsap';
-
+import {styles} from './styles.js';
 const {useState, useRef, useEffect} = React;
 
 
 const ExpandedView = ({toggleOffView, images, index}) => {
   const [currentIndex, setCurrentIndex] = useState(index);
+  const [currentPhotos, setCurrentPhotos] = useState(images);
   const [showArrows, setShowArrows] = useState(false);
 
   const viewRef = useRef(null);
@@ -26,7 +27,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
   }, []);
 
   const imgStyles = {
-    width: '100%',
+    width: '100vw',
     height: '100%',
     position: 'relative',
     borderRadius: '10px',
@@ -46,7 +47,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
-    zIndex: 1,
+    zIndex: 3,
     userSelect: 'none',
     cursor: 'pointer'
   };
@@ -59,7 +60,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
-    zIndex: 1,
+    zIndex: 3,
     userSelect: 'none',
     cursor: 'pointer'
   };
@@ -72,7 +73,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
   };
 
   const exitButtonStyles = {
-    zIndex: 2,
+    zIndex: 6,
     width: '100%',
     height: '100%',
     backgroundSize: 'contain',
@@ -81,7 +82,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
   };
 
   const thumbnailContainer = {
-    zIndex: 2,
+    zIndex: 3,
     flexDirection: 'column',
     display: 'flex',
     position: 'absolute',
@@ -144,6 +145,30 @@ const ExpandedView = ({toggleOffView, images, index}) => {
     <div>
       <div style={{height: '90px'}}></div>
       <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
+      <div style={
+        {
+          position: 'absolute',
+          height: '100vh',
+          width: '100vw',
+          zIndex: 2,
+          cursor: 'zoom-out'
+        }
+      } onClick={() => { toggleOffView(currentIndex); }}
+      ></div>
+      <div style = {{
+        position: 'absolute',
+        right: '40px',
+        height: '30px',
+        width: '30px',
+        top: '120px',
+        zIndex: 6,
+        backgroundColor: 'white',
+        padding: '10px',
+        borderRadius: '50%',
+        cursor: 'zoom-out'
+      }}>
+        <div style={exitButtonStyles} onClick={toggleOffView}></div>
+      </div>
       <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
       <div style={imgContainerStyles}>
         <div style={thumbnailContainer}>
@@ -160,7 +185,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
             );
           })}
         </div>
-        <div ref={viewRef} style={imgStyles} onClick={() => { toggleOffView(currentIndex); }}>
+        {/* <div ref={viewRef} style={imgStyles} onClick={() => { toggleOffView(currentIndex); }}>
           <div style = {{
             position: 'absolute',
             right: '20px',
@@ -174,6 +199,21 @@ const ExpandedView = ({toggleOffView, images, index}) => {
             cursor: 'zoom-out'
           }}>
             <div style={exitButtonStyles} onClick={toggleOffView}></div>
+          </div>
+        </div> */}
+
+        <div style={styles.expandedImageCarousel}>
+          <div ref={viewRef} style={styles.expandedPhotoContainer(currentIndex)}>
+            {currentPhotos.map((photo, index) => {
+              return (
+                <div
+                  key={index}
+                  style={styles.expandedContainerStyles}>
+                  <div style={imgStyles}></div>
+                </div>
+              );
+            })}
+
           </div>
         </div>
       </div>

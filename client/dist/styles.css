@@ -1,10 +1,12 @@
 
 * {
   font-family: 'Montserrat', sans-serif;
+
 }
 
 body {
   margin: 0px;
+  background-color: #F1F1F1;
 }
 
 select {
@@ -19,6 +21,19 @@ button {
   max-width: 250px;
   min-width: 150px;
   height: 150px;
+}
+
+.imageGalleryOptions {
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.imageGalleryOptions:hover {
+  opacity: 1;
 }
 
 /* RELATED ITEMS & OUTFITS */
@@ -48,7 +63,13 @@ button {
   position: relative;
 }
 
-.carousel-view {
+.carousel-related {
+  justify-content: space-between;
+  white-space: nowrap;
+}
+
+.carousel-outfit {
+  display: flex;
   white-space: nowrap;
 }
 
@@ -59,7 +80,7 @@ button {
   align-items: center;
   justify-content: center;
   height: 350px;
-  background-color: rgb(229, 231, 231);
+  background-color: rgba(220,222,223,255);
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
   background-repeat: no-repeat;
@@ -73,11 +94,6 @@ button {
 
 .indicators > button {
   margin: 5px;
-}
-
-.related-thumbnails {
-  width: 250px;
-  height: 300px;
 }
 
 .compare-modal {
@@ -182,4 +198,38 @@ tbody > * {
 
 .sale-price {
   color: red;
+}
+
+.plus-container {
+  position: relative;
+  left: 0;
+  top: 25%;
+  right: 0;
+  bottom: 0;
+}
+
+#plus-symbol {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+#plus-symbol:hover {
+  width: 75%;
+}
+
+.clear-container {
+  position: relative;
+  left: 0;
+  top: 60%;
+  right: 0;
+  bottom: 0;
+}
+
+#clear-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
 }

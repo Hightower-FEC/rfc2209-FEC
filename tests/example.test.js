@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import {createRoot} from 'react-dom/client';
 import {render, unmountComponentAtNode} from 'react-dom';
 import {act} from 'react-dom/test-utils';
 
@@ -28,17 +29,23 @@ afterEach(() => {
 it('renders with or without a name', () => {
   //act() is a helper function from react-dom/test-utils that makes sure all updates related to all "units" of interaction (e.g., tasks like rendering, user events, data fetching, etc.) have been processed and applied to the DOM before you make any assertions.
   act(() => {
-    render(<Example />, container);
+    const root = createRoot(container);
+    root.render(<Example />);
+    //render(<Example />, container);
   });
   expect(container.textContent).toBe('Hey, stranger');
 
   act(() => {
-    render(<Example name="Jenny" />, container);
+    const root = createRoot(container);
+    root.render(<Example name="Jenny" />);
+    //render(<Example name="Jenny" />, container);
   });
   expect(container.textContent).toBe('Hello, Jenny!');
 
   act(() => {
-    render(<Example name="Margaret" />, container);
+    const root = createRoot(container);
+    root.render(<Example name="Margaret" />);
+    //render(<Example name="Margaret" />, container);
   });
   expect(container.textContent).toBe('Hello, Margaret!');
 });
