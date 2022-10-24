@@ -18,7 +18,7 @@ const ComparisonModal = ({show, onClose, productA, productB, features}) => {
         <div className="blank"></div>
         <table>
           <tbody>
-            {features.map((feature, key) => {
+            {features.filter(Boolean).map((feature, key) => {
               return <TableRow feature={feature} productA={productA.features} productB={productB.features} key={key} index={key}/>;
             })}
           </tbody>

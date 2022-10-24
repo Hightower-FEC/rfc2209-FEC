@@ -31,10 +31,16 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
     let repeatedFeatures = {};
     let combinedFeatures = [];
     for (let i = 0; i < product1.length; i++) {
+      if (!product1[i].value) {
+        continue;
+      }
       repeatedFeatures[product1[i].feature] = product1[i].value;
       combinedFeatures.push(product1[i]);
     }
     for (let i = 0; i < product2.length; i++) {
+      if (!product2[i].value) {
+        continue;
+      }
       if (product2[i].value === repeatedFeatures[product2[i].feature]) {
         continue;
       }
