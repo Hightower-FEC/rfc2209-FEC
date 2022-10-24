@@ -54,6 +54,7 @@ const Stars = ({rating, productID, size = '12px'}) => {
     <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
       {/* {console.log(percentRating)} */}
       <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: `${size}`}}>
+        <div style={{position: 'absolute', width: '100%', height: `${size}`, backgroundColor: '#ddd', zIndex: -2}}/>
         <div style={{position: 'absolute', width: `${percentRating}%`, height: `${size}`, backgroundColor: 'black', zIndex: -1}}/>
         <Star/>
         <Star/>
