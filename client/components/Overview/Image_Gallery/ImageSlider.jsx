@@ -33,17 +33,17 @@ const ImageSlider = ({images, handleImageClick, imageIndex}) => {
 
 
   useEffect(() => {
-    gsap.to(currentImgRef.current, {
-      opacity: 0,
-      delay: 0,
-      duration: 0.5,
-      ease: 'expo.out'
-    });
-    gsap.to(currentImgRef.current, {
-      opacity: 1,
-      duration: 0.5,
-      ease: 'exp.out'
-    });
+    // gsap.to(currentImgRef.current, {
+    //   opacity: 0,
+    //   delay: 0,
+    //   duration: 0.5,
+    //   ease: 'expo.out'
+    // });
+    // gsap.to(currentImgRef.current, {
+    //   opacity: 1,
+    //   duration: 0.5,
+    //   ease: 'exp.out'
+    // });
   }, [currentIndex]);
 
   const containerStyles = {
