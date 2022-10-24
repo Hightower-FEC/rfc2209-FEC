@@ -9,7 +9,7 @@ const QuestionsAnswers = ({productID}) => {
   // default productID = 66642
 
   // For testing different products
-  let testID = 66642;
+  let testID = 66641;
   let testCount = 10;
 
   // Product name state
@@ -111,34 +111,39 @@ const QuestionsAnswers = ({productID}) => {
         return question.question_body.toLowerCase().includes(e.target.value.toLowerCase());
       }
     });
-    console.log('Before regex Question', results);
-    // Future Enhancement of highlighting search word in real time
-    // results.map(question => {
-    //   console.log('result map');
-    //   let oldQuestion = question.question_body;
-    //   let re = new RegExp(e.target.value, 'g');
-    //   let newQuestion = oldQuestion.replace(re, `<mark>${e.target.value}</mark>`);
-    //   return newQuestion;
-    // });
-
-    let oldText = document.getElementById('question-body').innerText;
-    if (e.target.value.length > 2) {
-      let text = oldText;
-      let re = new RegExp(e.target.value, 'g');
-      let newText = text.replace(re, `<mark>${e.target.value}</mark>`);
-      document.getElementById('question-body').innerHTML = newText;
-    }
-
-    // results.map(question => {
-    //   let text = question.question_body;
-    //   let re = new RegExp(e.target.value, 'g');
-    //   let newText = text.replace(re, `<mark>${e.target.value}</mark>`);
-    //   return newText;
-    // })
-
+    // console.log('Before regex Question', results);
     (results.length > 0) && console.log('Filtered questions: ', results);
     setFound(results);
+
+    // Future Enhancement of highlighting search word in real time
+    // let oldTexts = document.getElementsByClassName('question-body');
+    // console.log('getElements', oldTexts);
+    // for (let i = 0; i < oldTexts.length; i++) {
+    //   if (e.target.value.length >= 0) {
+    //     let text = oldTexts[i];
+    //     let re = new RegExp(e.target.value, 'g');
+    //     let newText = text.innerText.replace(re, `<mark>${e.target.value}</mark>`);
+    //     text.innerHTML = newText;
+    //   }
+    // }
   };
+
+  // const highlightWord = (e) => {
+  //   let oldTexts = document.getElementsByClassName('question-body');
+  //   console.log('getElements', oldTexts);
+  //   for (let i = 0; i < oldTexts.length; i++) {
+  //     if (e.target.value.length >= 0) {
+  //       let text = oldTexts[i];
+  //       let re = new RegExp(e.target.value, 'g');
+  //       let newText = text.innerText.replace(re, `<mark>${e.target.value}</mark>`);
+  //       text.innerHTML = newText;
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log('useEffect', query);
+  //   highlightWord(query);
+  // }, [query]);
 
   // Function to switch between the default list and the filter list if the query has 3 or more characters in the search input
   const switchList = (searchStr) => {
@@ -183,7 +188,7 @@ const QuestionsAnswers = ({productID}) => {
     textAlign: 'center',
     margin: '2rem 0 2rem 0',
     justifyContent: 'center',
-    fontSize: '24px'
+    fontSize: '2em'
   };
   //---------------------------------------------
 

@@ -46,7 +46,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   return (
     <div style={questionStyle}>
       <span style={Q}> Q: </span>
-      <span id='question-body' style={questionBody}> {question.question_body} </span>
+      <span className='question-body' style={questionBody}> {question.question_body} </span>
       <span style={links}> Helpful?
         {!helpfulness ?
           (<a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a>) :
