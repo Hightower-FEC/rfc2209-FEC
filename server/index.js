@@ -17,7 +17,7 @@ const AUTH = {
 };
 
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
 app.get('/reviews:page?:count?:sort?:product_id?', (req, res) => {
@@ -95,4 +95,4 @@ app.put('/reviews/:review_id/report', (req, res) => {
 });
 
 app.listen(3001);
-console.log(`Listening at http://localhost:3001`);
+console.log('Listening at http://localhost:3001');

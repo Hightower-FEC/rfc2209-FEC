@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ProductList from './ProductList.jsx';
+import OutfitList from './OutfitList.jsx';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
 
@@ -26,9 +27,13 @@ const RelatedItems = ({productID, handleRelatedItemClick}) => {
   return (
     <div>
       <h1>
-        RelatedItems
+        Related Items
       </h1>
-      <ProductList products={products} productA={currentProduct} handleRelatedItemClick={handleRelatedItemClick}/>
+      <ProductList products={products} productA={currentProduct} handleRelatedItemClick={handleRelatedItemClick} />
+      <h1>
+        Your Outfit
+      </h1>
+      <OutfitList product={currentProduct} />
     </div>
   );
 };
