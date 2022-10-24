@@ -1,30 +1,37 @@
 import React, {useState, useEffect} from 'react';
 
+import axios from 'axios';
+
 import Stars from '../Stars.jsx';
 
 const Summary = ({productID, reviews}) => {
   const [averageRating, setAverageRating] = useState();
   const [percentWhoRecommend, setPercentWhoRecommend] = useState();
   const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
+  const [numOfRatings, setNumOfRatings] = useState();
+
 
   /**
    *
    */
   useEffect(() => {
-    let totalStars = 0;
-    let recommendations = 0;
-    let reviewsByStar = [0, 0, 0, 0, 0];
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta?product_id=${productID}`)
+      .then((response) => {
+        console.log(response.data);
+        response = response.data;
+        let numOfReviews = Number(response.recommended['true']) + Number(response.recommended['false']);
+        let reviewsByStar = [0, 0, 0, 0, 0];
+        let totalStars = 0;
+        for (let rating in response.ratings) {
+          totalStars += Number(rating) * response.ratings[rating];
+          reviewsByStar[rating - 1] = response.ratings[rating];
+        }
 
-
-    for (let i = 0; i < reviews.length; i++) {
-      totalStars += reviews[i].rating;
-      recommendations += reviews[i].recommend;
-      reviewsByStar[reviews[i].rating - 1]++;
-    }
-
-    setAverageRating((Math.round((totalStars / reviews.length) * 100) / 100).toFixed(1));
-    setPercentWhoRecommend((Math.round((recommendations / reviews.length * 100) * 100) / 100).toFixed(0));
-    setNumOfReviewsByStar(reviewsByStar);
+        setAverageRating((Math.round((totalStars / numOfRatings) * 100) / 100).toFixed(1));
+        setPercentWhoRecommend((Math.round((response.recommended['true'] / numOfRatings * 100) * 100) / 100).toFixed(0));
+        setNumOfReviewsByStar(reviewsByStar);
+        setNumOfRatings(numOfReviews);
+      });
   }, [productID, reviews]);
 
 
@@ -40,19 +47,58 @@ const Summary = ({productID, reviews}) => {
 
         <div>
           <div>
-            <a>5 stars</a><a>{numOfReviewsByStar[4]}</a>
+            <u>5 stars</u>
+            <div style={{position: 'relative',
+              width: '100%',
+              height: '15px',
+              background: '#ddd',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[4] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
           <div>
-            <a>4 stars</a><a>{numOfReviewsByStar[3]}</a>
+            <u>4 stars</u>
+            <div style={{position: 'relative',
+              width: '100%',
+              height: '15px',
+              background: '#ddd',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[3] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
           <div>
-            <a>3 stars</a><a>{numOfReviewsByStar[2]}</a>
+            <u>3 stars</u>
+            <div style={{position: 'relative',
+              width: '100%',
+              height: '15px',
+              background: '#ddd',
+              overflow: 'hidden'}}>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[2] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
           <div>
-            <a>2 stars</a><a>{numOfReviewsByStar[1]}</a>
+            <u>2 stars</u>
+            <div style={{position: 'relative',
+              width: '100%',
+              height: '15px',
+              background: '#ddd',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[1] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
           <div>
-            <a>1 stars</a><a>{numOfReviewsByStar[0]}</a>
+            <u>1 stars</u>
+            <div style={{position: 'relative',
+              width: '100%',
+              height: '15px',
+              background: '#ddd',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[0] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
         </div>
 
