@@ -2,11 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const axios = require('axios');
-const cookieParser = require('cookie-parser');
 const cookieHandler = require('./middleware/cookieHandler');
 
 const app = express();
-app.use(cookieParser());
 app.use(cookieHandler);
 
 const GIT_KEY = process.env.GIT_KEY;
