@@ -43,7 +43,8 @@ const App = () => {
   }
 
   return (
-    <TopBar/>
+    // <TopBar/>
+    <div></div>
   );
 };
 
