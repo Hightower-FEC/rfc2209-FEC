@@ -12,7 +12,6 @@ import { URL } from '../../config/config.js';
 const App = () => {
   const [currentProductID, setCurrentProductID] = useState();
 
-  //Why is this useEffect needed when a random number could be assigned as default state?
   useEffect(() => {
     console.log('id:', currentProductID);
   });
@@ -20,7 +19,7 @@ const App = () => {
   useEffect(() => {
     axios.get(`${URL}/products`)
       .then((response) => {
-        setCurrentProductID(response.data[0].id);
+        setCurrentProductID(response.data[4].id);
       })
       .catch((error) => {
         console.log(error);
@@ -60,9 +59,9 @@ const App = () => {
     );
   }
 
-  //What is this supposed to do?
   return (
-    <TopBar/>
+    // <TopBar/>
+    <div></div>
   );
 };
 
