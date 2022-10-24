@@ -48,6 +48,16 @@ const Review = ({productID, review}) =>{
       });
   };
 
+  const parseDate = (reviewDate) => {
+    reviewDate = new Date(reviewDate);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let year = reviewDate.getFullYear();
+    let date = reviewDate.getDate().toString().padStart(2, '0');
+    let month = months[reviewDate.getMonth()];
+
+    return `${month} ${date}, ${year}`;
+  };
+
   const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick}> Report </u>;
   const recommended = review.recommend ? <div></div> : null;
   const response = review.response ? <div></div> : null;
@@ -58,7 +68,7 @@ const Review = ({productID, review}) =>{
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <Stars rating={review.rating}/>
         {/* **********************We need to fix this!!! Terrible formatting of date********************** */}
-        <a>{review.reviewer_name}, {review.date}</a>
+        <a>{review.reviewer_name}, {parseDate(review.date)}</a>
       </div>
       <h4>
         {review.summary}
