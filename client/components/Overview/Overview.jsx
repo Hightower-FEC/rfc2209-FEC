@@ -1,6 +1,6 @@
 import React from 'react';
 import AddToCartForm from './Form/AddToCartForm.jsx';
-import ImageGallery from './Image_Gallery/ImageGallery.jsx';
+import ImageGallery from './Image_Gallery/ImageGalleryV2.jsx';
 import ExpandedView from './Image_Gallery/ExpandedView.jsx';
 import Stars from '../Stars.jsx';
 import axios from 'axios';
@@ -23,26 +23,7 @@ const Overview = ({ productID }) => {
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedQty, setSelectedQty] = useState('');
 
-  // useEffect(() => {
-  //   console.log('inside of overview', productID);
-  // }, [productID]);
   const overviewRef = useRef(null);
-
-  useEffect(() => {
-    setCurrentIndex(0);
-    gsap.to(overviewRef.current, {
-      delay: 0,
-      opacity: 0,
-      duration: 0,
-      ease: 'exp.out'
-    });
-    gsap.to(overviewRef.current, {
-      delay: 0.2,
-      opacity: 1,
-      duration: 0.3,
-      ease: 'exp.out'
-    });
-  }, [productID]);
 
   useEffect(() => {
     axios.get(`${URL}/products/${productID}`)
@@ -52,23 +33,28 @@ const Overview = ({ productID }) => {
       .then(() => {
         axios.get(`${URL}/products/${productID}/styles`)
           .then((response) => {
+            setCurrentIndex(0);
             setCurrentProductStyles(response.data);
-            setCurrentStyle(response.data.results[currentIndex]);
+            setCurrentStyle(response.data.results[0]);
           });
       })
       .catch((err) => console.log(err));
   }, [productID]);
 
+
   const overviewContainerStyles = {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
   };
 
   const productInfoContainerStyles = {
     margin: '0 0 0 20px',
+    flex: '1 2 auto',
     display: 'flex',
-    width: '400px',
+    // minWidth: '400px',
+    maxWidth: '400px',
     flexDirection: 'column',
     justifyContent: 'space-between',
     gap: '20px',
@@ -128,7 +114,6 @@ const Overview = ({ productID }) => {
   };
 
   const handleImageClick = (images, index) => {
-    console.log('handling image click', images, index);
     setCurrentImages(images);
     setImageIndex(index);
     setToggleView(true);
@@ -140,12 +125,10 @@ const Overview = ({ productID }) => {
   };
 
   const handleSizeChange = (event) => {
-    console.log(event.target.value);
     setSelectedSize(event.target.value);
   };
 
   const handleQtyChange = (event) => {
-    console.log(event.target.value);
     setSelectedQty(event.target.value);
   };
 
@@ -159,7 +142,7 @@ const Overview = ({ productID }) => {
       <div ref={overviewRef}>
         <div style={{height: '125px'}}></div>
         <div style={overviewContainerStyles}>
-          <ImageGallery imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
+          <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
