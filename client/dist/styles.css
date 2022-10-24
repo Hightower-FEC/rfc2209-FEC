@@ -39,26 +39,39 @@ button {
 /* RELATED ITEMS & OUTFITS */
 
 .category {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-name {
+  font-size: 26px;
+  font-weight: bolder;
+  margin: 5px 0 5px 0;
+  width: 250px;
+  white-space: wrap;
 }
 
 .default-price, .sale-price {
   font-size: 14px;
+  font-weight: 600;
 }
 
 #favorite-related {
   float: right;
-  cursor: alias;
+  cursor: pointer;
   font-size: 20px;
-  background: -webkit-radial-gradient(black, blanchedalmond);
-  color: blanchedalmond;
+  transition: 0.3s;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: #F1F1F1;
 }
 
 #favorite-related:hover {
-  font-size: 35px;
+  text-shadow: 0 0 10px white;
 }
 
 .carousel {
+  margin: 0 120px 0 120px;
   overflow: hidden;
   position: relative;
 }
@@ -70,6 +83,7 @@ button {
 
 .carousel-outfit {
   display: flex;
+  /* overflow-x: auto; */
   white-space: nowrap;
 }
 
@@ -84,7 +98,25 @@ button {
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+}
+
+.outfit-card {
+  display: inline-block;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  background-color: rgba(220,222,223,255);
+  color: rgba(241, 236, 236, 0.929);
+  transition: transform 0.3s;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* flex-flow: column nowrap */
 }
 
 .indicators {
@@ -171,30 +203,38 @@ tbody > * {
 .leftArrow, .rightArrow {
   position: absolute;
   bottom: 40%;
-  font-size: 50px;
-  text-shadow: 6px 0 #000;
-  font-weight: 600;
+  font-size: 100px;
+  text-shadow: 0 0 10px #000;
   color: white;
   z-index: 1;
 }
 
-.leftArrow:hover, .rightArrow:hover {
-  font-size: 80px;
-}
+
 .leftArrow {
-  left: 10%;
-  cursor: w-resize;
+  left: 2%;
+  cursor: pointer;
 }
 .rightArrow {
-  right: 10%;
-  cursor: e-resize;
+  right: 2%;
+  cursor: pointer;
 }
 
 .upper-half {
-  height: 280px;
+  height: 50%;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.bottom-half {
+  bottom: 20px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+  width: 100%;
+  white-space: pre-wrap;
+  position: absolute;
+}
+
+
+
 
 .sale-price {
   color: red;
@@ -203,7 +243,7 @@ tbody > * {
 .plus-container {
   position: relative;
   left: 0;
-  top: 25%;
+  top: 20%;
   right: 0;
   bottom: 0;
 }
@@ -219,15 +259,15 @@ tbody > * {
   width: 75%;
 }
 
-.clear-container {
+.add-container {
   position: relative;
   left: 0;
-  top: 60%;
+  top: 25%;
   right: 0;
   bottom: 0;
 }
 
-#clear-button {
+#add-button {
   display: block;
   margin-left: auto;
   margin-right: auto;
