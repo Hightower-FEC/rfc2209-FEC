@@ -1,36 +1,57 @@
 import React, {useState, useEffect} from 'react';
-
+import axios from 'axios';
 
 import Stars from '../Stars.jsx';
 const Review = ({productID, review}) =>{
+  const [isHelpful, setisHelpful] = useState(review.helpful);
+  const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
+  const [isReported, setIsReported] = useState(false);
+
   /**
-   * Add review_id to helpful in localStorage and in POST req to API
+   * Not sure why, but if without this, the number of helpful doesn't follow reviews - it just stays at the review index
+   * E.g. if we sort by helpful, and most helpful is 14, then sort by newest, it'll say the newest has 14 helpful when it should be 0.
    */
-  const handleHelpfulClick = () => {
-    if (!localStorage.helpful) {
-      localStorage.helpful = [];
-    }
-    // Post
-    // .then(() => {
-    //    localStorage.helpful.push(productID);
-    //  });
-    console.log(localStorage.helpful);
-    localStorage.helpful.push(review.review_id);
-
-
-  };
+  useEffect(() => {
+    setisHelpful(review.helpful);
+    setHelpfulCount(review.helpfulness);
+  }, [review]);
 
   /**
    * Report review to API in PUT req and store that report in localStorage
    */
   const handleReportClick = () => {
-    console.log('report');
+    axios.put(`/reviews/${review.review_id}/report`)
+      .then((response) => {
+        if (response.status === 200) {
+          setIsReported(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+
+  /**
+   * Add review_id to helpful in localStorage and in POST req to API
+   */
+  const handleHelpfulClick = () => {
+    axios.put(`/reviews/${review.review_id}/helpful`)
+      .then((response) => {
+        if (response.status === 200) {
+          setisHelpful(true);
+          setHelpfulCount(helpfulCount + 1);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick}> Report </u>;
   const recommended = review.recommend ? <div></div> : null;
   const response = review.response ? <div></div> : null;
-  const helpful = !localStorage.helpful || localStorage.helpful.indexOf(review.review_id) === -1 ? <u onClick={handleHelpfulClick}> Yes</u> : <u> Yes</u>;
-  const reported = !localStorage.reported || localStorage.reported.indexOf(review.review_id) === -1 ? <u onClick={handleReportClick}> Report </u> : <u> Reported </u>;
+  const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick}> Yes </u>;
 
   return (
     <div style={{padding: '20px', borderBottom: 'solid'}}>
@@ -46,7 +67,7 @@ const Review = ({productID, review}) =>{
         <p>{review.body}</p>
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <a>Helpful? {helpful} ({review.helpfulness}) | {reported}</a>
+        <a>Helpful? {helpful} ({helpfulCount}) | {reported}</a>
       </div>
     </div>
 
