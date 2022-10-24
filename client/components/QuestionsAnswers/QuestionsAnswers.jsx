@@ -5,7 +5,7 @@ import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 
-const QuestionsAnswers = ({productID}) => {
+const QuestionsAnswers = ({productID, interactions}) => {
   // default productID = 66642
 
   // For testing different products
@@ -193,7 +193,7 @@ const QuestionsAnswers = ({productID}) => {
   //---------------------------------------------
 
   return (
-    <div style={container}>
+    <div style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
       <h1 >Questions and Answers</h1>
       <div >
         {questions.length > 0 ?
