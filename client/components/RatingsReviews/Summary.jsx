@@ -22,8 +22,8 @@ const Summary = ({productID, reviews}) => {
       reviewsByStar[reviews[i].rating - 1]++;
     }
 
-    setAverageRating(totalStars / reviews.length);
-    setPercentWhoRecommend(recommendations / reviews.length * 100);
+    setAverageRating((Math.round((totalStars / reviews.length) * 100) / 100).toFixed(1));
+    setPercentWhoRecommend((Math.round((recommendations / reviews.length * 100) * 100) / 100).toFixed(0));
     setNumOfReviewsByStar(reviewsByStar);
   }, [productID, reviews]);
 
