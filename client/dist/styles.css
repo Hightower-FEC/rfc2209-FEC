@@ -472,3 +472,57 @@ tbody > * {
   background-color: #000;
   color: white;
 }
+
+/* Ratings */
+
+.ratings-reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 5%;
+}
+
+.summary-container {
+  width: 30%;
+  background-color: #DDDDDD;
+  padding: 0 20px 20px 20px;
+  height: fit-content;
+  border-radius: 10px;
+  z-index: -2;
+}
+
+.reviews-container {
+  width: 60%;
+}
+
+.summary-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 20px 0;
+}
+
+.bar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+  align-content: center;
+}
+
+.bar-labels {
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+}
+
+.summary-characteristics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.characteristic {
+  font-weight: bold;
+}
