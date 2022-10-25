@@ -10,7 +10,7 @@ const QuestionList = ({questions, name, query, submitAnswer, handleQuestionHelpf
   };
 
   return (
-    <div style={questionListStyle}>
+    <div data-testid='questions-list' style={questionListStyle}>
       {questions.map((question, i) => <QuestionEntry
         question={question} key={i} name={name} query={query}
         submitAnswer={submitAnswer}

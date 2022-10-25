@@ -8,8 +8,8 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAnswers = ({productID, interactions}) => {
 
   // For testing different products
-  let testID = 66641;
-  let testCount = 10;
+  let testID = 66642;
+  let testCount = 500;
 
   // Product name state
   const [name, setName] = useState('');
@@ -63,7 +63,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
     getQuestions();
     getProductName();
   }, [productID]);
-
+  console.log('All questions:', questions);
 
   //----- Expand Question List Functionality -----
   // console.log('Question count', count);
@@ -236,7 +236,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   //---------------------------------------------
 
   return (
-    <div style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
+    <div data-testid='QA-widget' style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
       <h1 >Questions and Answers</h1>
       <div >
         {questions.length > 0 ?
@@ -259,9 +259,9 @@ const QuestionsAnswers = ({productID, interactions}) => {
       />
 
       {(showMoreQuestionButton(query, count, increment)) &&
-      (<button className='moreQuestions' onClick={() => setCount(count + 1)} style={moreQuestionsBtn}>MORE ANSWERED QUESTIONS</button>)}
+      (<button data-testid='more-questions' className='moreQuestions' onClick={() => setCount(count + 1)} style={moreQuestionsBtn}>MORE ANSWERED QUESTIONS</button>)}
 
-      <button className='questionModal' onClick={() => setQShow(true)} style={addQuestionBtn}>ADD A QUESTION +</button>
+      <button data-testid='question-modal' className='questionModal' onClick={() => setQShow(true)} style={addQuestionBtn}>ADD A QUESTION +</button>
 
       <QuestionModal
         name={name}
