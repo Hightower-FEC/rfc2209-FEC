@@ -30,7 +30,81 @@ button {
   transition: 0.3s;
 }
 
+.gallery-leftPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 32px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
+.gallery-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.gallery-rightPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 32px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.thumbnail-leftPointer {
+  position: absolute;
+  top: 88%;
+  transform: translate(0, -50%);
+  left: 60px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnail-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.thumbnail-rightPointer {
+  position: absolute;
+  top: 88%;
+  transform: translate(0, -50%);
+  right: 60px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnail-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
 
 .expanded-leftPointer {
   position: absolute;
@@ -61,12 +135,12 @@ button {
 }
 
 .expanded-leftPointer:hover {
-  color: black;
+  color: rgb(34, 34, 34);
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 .expanded-rightPointer:hover {
-  color: black;
+  color: rgb(34, 34, 34);
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
@@ -77,8 +151,8 @@ button {
 }
 
 .zoom-out-button:hover {
-  background-color: #000;
-  filter: drop-shadow(0 0 10px black);
+  background-color: rgb(34, 34, 34);
+  filter: drop-shadow(0 0 5px white);
 }
 
 .zoom-out-button:hover > .zoom-out-icon {

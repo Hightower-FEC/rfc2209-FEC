@@ -58,13 +58,13 @@ const ImageGallery = ({ productStyle, handleImageClick }) => {
   return (
     <div style={{position: 'relative', height: '600px'}}>
       <div className="imageGalleryOptions">
-        <div style={styles.leftPointer} onClick={goToPreviousImage}>‹</div>
-        <div style={styles.rightPointer} onClick={goToNextImage}>›</div>
+        <div className="gallery-leftPointer" onClick={goToPreviousImage}>‹</div>
+        <div className="gallery-rightPointer" onClick={goToNextImage}>›</div>
         <div style={{height: '100%', width: '100%', cursor: 'zoom-in'}}
           onClick={() => { handleImageClick(currentPhotos, currentIndex); }}
         ></div>
-        <div style={styles.leftThumbnailPointer} onClick={goToPreviousSetOfThumbnails}>‹</div>
-        <div style={styles.rightThumbnailPointer} onClick={goToNextSetOfThumbnails}>›</div>
+        <div className="thumbnail-leftPointer" onClick={goToPreviousSetOfThumbnails}>‹</div>
+        <div className="thumbnail-rightPointer" onClick={goToNextSetOfThumbnails}>›</div>
 
         <div style={styles.thumbnailBackground}></div>
 
