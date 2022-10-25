@@ -43,7 +43,7 @@ const OutfitList = ({product}) => {
         {outfits.length > 0 ? outfits.map((outfit, key) => {
           return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
         }) : null}
-        <div className="outfit-card" style={{width: '300px'}}>
+        <div className="plus-card" style={{width: '300px'}}>
           <div className="plus-container">
             <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
               addOutfit(product);

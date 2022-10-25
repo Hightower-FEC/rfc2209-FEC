@@ -52,7 +52,7 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
   return (
 
     <>
-      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`, position: 'relative'}} onClick={() => {
+      <div className="product-card" style={{width: width, transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`}} onClick={() => {
         handleRelatedItemClick(card.id);
         window.scrollTo({top: 20, behavior: 'smooth'});
       }}>
