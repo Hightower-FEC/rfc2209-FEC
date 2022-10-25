@@ -34,12 +34,12 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
 
   const answerStyle = {
     display: 'block',
-    margin: '10px 0'
+    margin: '10px 0',
+    fontSize: '16px'
   };
   const A = {
     display: 'inline-block',
     float: 'left',
-    fontSize: '20px',
     fontWeight: 'bold',
     margin: '0 10px 0 0'
   };

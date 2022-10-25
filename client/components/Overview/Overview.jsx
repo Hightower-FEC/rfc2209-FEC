@@ -86,6 +86,7 @@ const Overview = ({ productID, interactions}) => {
     return {
       height: '70px',
       width: '70px',
+      padding: '2px',
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       backgroundImage: 'center',
@@ -98,7 +99,7 @@ const Overview = ({ productID, interactions}) => {
 
   const currentStyleStyles = (image) => {
     return {
-      border: '2px solid black',
+      border: '2px solid rgb(34, 34, 34)',
       height: '70px',
       width: '70px',
       backgroundSize: 'cover',
@@ -108,6 +109,7 @@ const Overview = ({ productID, interactions}) => {
       backgroundImage: `url(${image.thumbnail_url})`,
       borderRadius: '50%',
       flex: '0 0 auto',
+      boxShadow: 'inset 0 0 10px rgba(34, 34, 34)'
     };
   };
 

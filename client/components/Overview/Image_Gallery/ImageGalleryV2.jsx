@@ -1,8 +1,9 @@
 import React from 'react';
 import ImageSlider from './ImageSliderV2.jsx';
 import {styles} from './styles.js';
+import { gsap } from 'gsap';
 
-const {useEffect, useState} = React;
+const {useEffect, useState, useRef} = React;
 
 const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
   const [currentPhotos, setCurrentPhotos] = useState(productStyle.photos);
@@ -12,7 +13,23 @@ const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
 
   const maxThumbnailSlides = Math.floor(productStyle.photos.length / 7);
 
+  const imageGalleryRef = useRef(null);
+
   useEffect(() => {
+
+    gsap.to(imageGalleryRef.current, {
+      delay: 0,
+      opacity: 0,
+      duration: 0,
+      ease: 'exp.out'
+    });
+    gsap.to(imageGalleryRef.current, {
+      delay: 0,
+      opacity: 1,
+      duration: 0.5,
+      ease: 'exp.out'
+    });
+
     console.log(productStyle);
     setCurrentPhotos(productStyle.photos);
     setCurrentIndex(imageIndex);
@@ -52,7 +69,7 @@ const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
   };
 
   return (
-    <div style={{position: 'relative', height: '600px'}}>
+    <div ref={imageGalleryRef} style={{position: 'relative', height: '600px'}}>
       <div className="imageGalleryOptions">
         <div className="gallery-leftPointer" onClick={goToPreviousImage}>‹</div>
         <div className="gallery-rightPointer" onClick={goToNextImage}>›</div>
