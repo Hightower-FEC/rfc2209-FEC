@@ -19,11 +19,12 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
     !helpfulness && setHelpCount(helpCount + 1);
     // The helpfulness state should be set to the boolean sent back by the server
     setHelpfulness(true);
-    handleAnswerHelpful(answer.id, helpful);
+    handleAnswerHelpful(answer.id);
   };
 
   // Send PUT request to report this answer
-  const handleClickReport = () => {
+  const handleClickReport = (e) => {
+    e.preventDefault();
     setReport(true);
     handleAnswerReport(answer.id);
   };
@@ -53,7 +54,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
 
         ({helpCount}) |
         {!report ?
-          <a href='true' onClick={handleClickReport}> Report </a> :
+          <a href='true' onClick={(e) => handleClickReport(e)}> Report </a> :
           <span> Reported </span>}
       </span>
     </div>

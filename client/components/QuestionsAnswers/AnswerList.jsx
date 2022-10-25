@@ -22,13 +22,18 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
   };
   let currentList = expandAnswerList(count, increment);
 
+  // Helper function to reset the count to 1 for collapsing answer
+  const collapseAnswers = (e) => {
+    e.preventDefault();
+    setCount(1);
+  };
   // Helper function to show or hide the link
   const showMoreAnswerLink = (count, increment) => {
     return (count * increment) < sortAnswers.length;
   };
 
   // Helper function to upvote the helpfulness rating
-  const upvote = (e) => {
+  const moreAnswers = (e) => {
     e.preventDefault();
     setCount(count + 1);
   };
@@ -73,8 +78,9 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
           />)}
         </span>
         <span>
-          {showMoreAnswerLink(count, increment) &&
-          (<a style={moreAnswer} className='moreAnswers' href='true' onClick={(e) => upvote(e)}>MORE ANSWERS</a>)}
+          {showMoreAnswerLink(count, increment) ?
+            (<a style={moreAnswer} className='moreAnswers' href='true' onClick={(e) => moreAnswers(e)}>MORE ANSWERS</a>) :
+            (<a style={moreAnswer} className='collaspeAnswers' href='true' onClick={(e) => collapseAnswers(e)}>COLLAPSE ANSWERS</a>)}
         </span>
       </div>
       ) :

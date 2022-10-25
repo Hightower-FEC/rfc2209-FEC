@@ -22,17 +22,15 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     setHelpfulness(true);
     handleQuestionHelpful(question.question_id, helpful);
   };
-
-
-  // Helper function for the add answer link
-  const handleClickAddAnswer = (e) => {
-    e.preventDefault();
-    setAShow(true);
-  };
   // Helper function for the report link
   const handleClickReport = (e) => {
     e.preventDefault();
     handleQuestionReport(question.question_id);
+  };
+  // Helper function for the add answer link
+  const handleClickAddAnswer = (e) => {
+    e.preventDefault();
+    setAShow(true);
   };
 
 

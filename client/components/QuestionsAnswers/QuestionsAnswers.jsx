@@ -8,7 +8,7 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAnswers = ({productID, interactions}) => {
 
   // For testing different products
-  let testID = 66652;
+  let testID = 66641;
   let testCount = 10;
 
   // Product name state
@@ -85,7 +85,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   };
   //---------------------------------------------
 
-  //------------------ TO DO ---------------------
+  //---- Submitting Questions and Answers ----
   // Helper function to submit question from modal
   const submitQuestion = (question) => {
     // Receive a 201 status upon successful question submission
@@ -96,7 +96,8 @@ const QuestionsAnswers = ({productID, interactions}) => {
       product_id: question.productID
     })
       .then((res) => {
-        console.log('Submitted question!');
+        console.log('Submitted question! Response:', res);
+        getQuestions();
       })
       .catch((err) => {
         console.log('Failed to submit question');
@@ -111,10 +112,12 @@ const QuestionsAnswers = ({productID, interactions}) => {
       email: answerObj.answerer_email,
       photos: answerObj.photos
     })
-      .then((res) => console.log('Submitted answer!'))
-      .catch((err) => console.log('Failed to submit answer'));
+      .then((res) => {
+        console.log('Submitted answer! Response:', res);
+        getQuestions();
+      })
+      .catch((err) => console.log('Failed to submit answer. Error:', err));
   };
-  // --------------- END TO DO -------------------
 
   // -------------- Upvote Helpulness -----------
   // Send a PUT request to update the question's helpfulness
