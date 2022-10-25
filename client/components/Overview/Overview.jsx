@@ -33,6 +33,8 @@ const Overview = ({ productID, interactions}) => {
       .then(() => {
         axios.get(`${URL}/products/${productID}/styles`)
           .then((response) => {
+            setSelectedSize('');
+            setSelectedQty('');
             setCurrentIndex(0);
             setImageIndex(0);
             setCurrentProductStyles(response.data);
