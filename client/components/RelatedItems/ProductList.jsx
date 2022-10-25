@@ -20,8 +20,8 @@ const ProductList = ({products, productA, handleRelatedItemClick}) => {
   return (
     <div className="carousel">
       <div className="carousel-related">
-        {products.map((product, key) => {
-          return <ProductCard product={product} productA={productA} index={index} key={key} width={'25%'} handleRelatedItemClick={handleRelatedItemClick}/>;
+        {products.filter(Boolean).map((product, key) => {
+          return <ProductCard product={product} productA={productA} index={index} key={key} width={'300px'} handleRelatedItemClick={handleRelatedItemClick}/>;
         })}
       </div>
       {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {
