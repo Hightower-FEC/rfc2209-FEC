@@ -17,7 +17,7 @@ const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClic
 
   return (
     <>
-      <div className="outfit-card" style={{width: width, backgroundImage: `url(${image})`}}>
+      <div className="product-card" style={{width: width, backgroundImage: `url(${image})`}}>
         <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
           <span id="favorite-related" onClick={() => {
             handleRemoveOutfitClick(number);
