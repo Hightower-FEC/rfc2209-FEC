@@ -106,13 +106,17 @@ app.put('/reviews/:review_id/report', (req, res) => {
  * Endpoint for getting review metadata for a certain product
  */
 app.get('/reviews/meta:product_id?', (req, res) => {
-  axios.get(`${URL}/reviews/meta?product_id=${req.query.product_id}`, AUTH)
-    .then((response) => {
-      res.send(response.data);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
+  if (!req.query.product_id) {
+    res.status(422).send('Must pass a product_id into params');
+  } else {
+    axios.get(`${URL}/reviews/meta?product_id=${req.query.product_id}`, AUTH)
+      .then((response) => {
+        res.send(response.data);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  }
 });
 
 app.listen(3001);
