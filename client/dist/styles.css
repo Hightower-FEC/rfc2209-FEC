@@ -127,78 +127,6 @@ button {
   margin: 5px;
 }
 
-.compare-modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, 0.873);
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  z-index: 1;
-}
-
-.modal-content {
-  width: 500px;
-  background-color: rgb(224, 219, 219);
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.modal-content > * {
-  padding: 1% 3%;
-  flex: 1 100%;
-}
-
-.modal-header {
-  margin: 0;
-  padding-top: 15px;
-  font-size: 12px;
-  font-weight: normal;
-  text-align: left;
-}
-
-.product-col1 {
-  text-align: left;
-}
-
-.product-col2 {
-  text-align: right;
-}
-
-.feature {
-  text-align: center;
-  flex: 5 100%;
-}
-
-.table-row {
-  margin: 1%;
-  padding: 1%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-}
-
-.blank {
-  flex: 5 100%;
-}
-
-#product-names {
-  margin: 0;
-  display: flex;
-  flex-flow: row nowrap;
-}
-
-h3 {
-  margin: 0;
-}
-
-tbody > * {
-  padding: 1%;
-}
-
 .leftArrow, .rightArrow {
   position: absolute;
   bottom: 40%;
@@ -278,4 +206,78 @@ tbody > * {
   position: fixed;
   bottom: 20px;
   right: 20px;
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.873);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 1;
+}
+
+.modal-content {
+  width: 500px;
+  background-color: rgb(224, 219, 219);
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.modal-content > * {
+  padding: 1% 3%;
+  flex: 1 100%;
+}
+
+.modal-header {
+  margin: 0;
+  padding-top: 15px;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+}
+
+.product-col1 {
+  text-align: left;
+}
+
+.product-col2 {
+  text-align: right;
+}
+
+.feature {
+  text-align: center;
+  flex: 5 100%;
+}
+
+.table-row {
+  margin: 1%;
+  padding: 1%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.blank {
+  flex: 5 100%;
+}
+
+#product-names {
+  margin: 0;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+h3 {
+  margin: 0;
+}
+
+tbody > * {
+  padding: 1%;
 }
