@@ -82,14 +82,12 @@ button {
 }
 
 .carousel-outfit {
-  display: flex;
-  /* overflow-x: auto; */
   white-space: nowrap;
 }
 
 .product-card {
   display: inline-block;
-  position: relative;
+  /* position: relative; */
   padding: 1%;
   margin: 1%;
   align-items: center;
@@ -107,6 +105,7 @@ button {
 
 .plus-card {
   display: inline-block;
+  position: absolute;
   padding: 1%;
   margin: 1%;
   align-items: center;
