@@ -39,7 +39,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
   };
   const answerer = {
     fontStyle: 'italic',
-    fontSize: '14px',
+    fontSize: '12px',
     margin: '30px 0 0 0',
     color: 'black'
   };

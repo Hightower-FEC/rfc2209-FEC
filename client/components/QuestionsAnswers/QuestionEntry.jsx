@@ -46,19 +46,19 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   const links = {
     display: 'inline-block',
     float: 'right',
-    fontSize: '16px'
+    fontSize: '14px'
   };
 
   return (
     <div style={questionStyle}>
       <span style={Q}> Q: </span>
       <span className='question-body' style={questionBody}> {question.question_body} </span>
-      <span style={links}> Helpful?
+      <span style={links}> Helpful?{' '}
         {!helpfulness ?
           (<a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a>) :
           <span> Voted </span> }
 
-         ({helpCount}) |
+        {' '} ({helpCount}) {' '} | {' '}
         <a href='javascript:null' onClick={() => setAShow(true)}>Add Answer</a>
       </span>
       <AnswerList
