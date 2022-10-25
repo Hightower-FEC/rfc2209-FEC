@@ -44,6 +44,9 @@ const Overview = ({ productID, interactions}) => {
       .catch((err) => console.log(err));
   }, [productID]);
 
+  useEffect(() => {
+    console.log(currentStyle);
+  }, [currentStyle]);
 
   const overviewContainerStyles = {
     display: 'flex',
@@ -89,7 +92,23 @@ const Overview = ({ productID, interactions}) => {
       cursor: 'pointer',
       backgroundImage: `url(${image.thumbnail_url})`,
       borderRadius: '50%',
-      flex: '0 0 auto'
+      flex: '0 0 auto',
+    };
+  };
+
+  const currentStyleStyles = (image) => {
+    return {
+      border: '2px solid black',
+      height: '70px',
+      width: '70px',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundImage: 'center',
+      cursor: 'pointer',
+      backgroundImage: `url(${image.thumbnail_url})`,
+      borderRadius: '50%',
+      flex: '0 0 auto',
+      filter: 'drop-shadow(0 0 2px rgba(0, 0, 0, 0.4))'
     };
   };
 
@@ -160,6 +179,14 @@ const Overview = ({ productID, interactions}) => {
               <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
               <div style={stylesContainer}>
                 {currentProductStyles.results.map((style, i) => {
+                  if (currentStyle.style_id === style.style_id) {
+                    return (
+                      <div key={i}
+                        style={currentStyleStyles(style.photos[0])}
+                        onClick={() => { handleStyleClick(i); }}
+                      ></div>
+                    );
+                  }
                   return (
                     <div key={i}
                       style={styleStyles(style.photos[0])}
