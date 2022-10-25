@@ -8,7 +8,7 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAnswers = ({productID, interactions}) => {
 
   // For testing different products
-  let testID = 66649;
+  let testID = 66652;
   let testCount = 10;
 
   // Product name state
@@ -90,26 +90,31 @@ const QuestionsAnswers = ({productID, interactions}) => {
   const submitAnswer = (answerObj) => {
     console.log('Answer from modal', answerObj);
   };
+  // --------------- END TO DO -------------------
+
+  // -------------- Upvote Helpulness -----------
   // Send a PUT request to update the question's helpfulness
-  const handleQuestionHelpful = (questionId, helpful) => {
+  const handleQuestionHelpful = (questionId) => {
     // Receive a 204 status upon successful PUT request
     axios.put(`${URL}/qa/questions/${questionId}/helpful`)
       .then((res) => console.log(`Marked question id ${questionId} helpful. Response: `, res))
       .catch((err) => console.log(`Could not mark question id ${questionId} helpful. Error: `, err));
   };
   // Send a PUT request to update the answer's helpfulness
-  const handleAnswerHelpful = (answerId, helpful) => {
+  const handleAnswerHelpful = (answerId) => {
     // Receive a status 204 upon successful PUT request
     axios.put(`${URL}/qa/answers/${answerId}/helpful`)
       .then((res) => console.log(`Marked answer id ${answerId} helpful. Response: `, res))
       .catch((err) => console.log(`Could not mark answer id ${answerId} helpful. Error: `, err));
   };
+
+  // -------------- Report to Admin  -----------
   // Send a PUT request to report the question
   const handleQuestionReport = (questionId) => {
     // Receive a status 204 upon successful PUT request
     axios.put(`${URL}/qa/questions/${questionId}/report`)
-      .then((res) => console.log(`Reported question id ${answerId} to admin. Response:`, res))
-      .catch((err) => console.log(`Could not report question id ${answerId} to admin. Error: `, err));
+      .then((res) => console.log(`Reported question id ${questionId} to admin. Response:`, res))
+      .catch((err) => console.log(`Could not report question id ${questionId} to admin. Error: `, err));
   };
   // Send a PUT request to report the answer
   const handleAnswerReport = (answerId) => {

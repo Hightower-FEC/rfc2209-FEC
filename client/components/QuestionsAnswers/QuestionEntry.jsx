@@ -7,6 +7,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
 
   const [helpfulness, setHelpfulness] = useState(false);
   const [helpCount, setHelpCount] = useState(question.question_helpfulness);
+  const [report, setReport] = useState(false);
   const [showAModal, setAShow] = useState(false);
 
   // Helper function to toggle helpfulness flag and pass data to parent function
@@ -21,6 +22,18 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     // The helpfulness state should be set to the boolean sent back by the server
     setHelpfulness(true);
     handleQuestionHelpful(question.question_id, helpful);
+  };
+
+
+  // Helper function for the add answer link
+  const handleClickAddAnswer = (e) => {
+    e.preventDefault();
+    setAShow(true);
+  };
+  // Helper function for the report link
+  const handleClickReport = (e) => {
+    e.preventDefault();
+    handleQuestionReport(question.question_id);
   };
 
 
@@ -50,11 +63,11 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
       <span className='question-body' style={questionBody}> {question.question_body} </span>
       <span style={links}> Helpful?
         {!helpfulness ?
-          (<a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a>) :
+          (<a href='true' onClick={handleClickHelpfulness}>Yes</a>) :
           <span> Voted </span> }
-
          ({helpCount}) |
-        <a href='javascript:null' onClick={() => setAShow(true)}>Add Answer</a>
+        <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
+        <a href='true' onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
       </span>
       <AnswerList
         answers = {question.answers}

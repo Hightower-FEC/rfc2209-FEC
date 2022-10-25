@@ -50,11 +50,11 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
       <span style={answerer}>
         by {answer.answerer_name}, {formatDate(answer.date)} | Helpful?
         {!helpfulness ?
-          (<a href='javascript:null' onClick={handleClickHelpfulness}> Yes </a> ) : <span> Voted </span>}
+          (<a href='true' onClick={handleClickHelpfulness}> Yes </a> ) : <span> Voted </span>}
 
         ({helpCount}) |
         {!report ?
-          <a href='javascript:null' onClick={handleClickReport}> Report </a> :
+          <a href='true' onClick={handleClickReport}> Report </a> :
           <span> Reported </span>}
       </span>
     </div>

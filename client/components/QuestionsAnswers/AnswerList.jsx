@@ -27,6 +27,11 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
     return (count * increment) < sortAnswers.length;
   };
 
+  // Helper function to upvote the helpfulness rating
+  const upvote = (e) => {
+    e.preventDefault();
+    setCount(count + 1);
+  };
   // Helper function to show the answer list if there is at least one answer
   const hasAnswer = () => {
     return sortAnswers.length > 0;
@@ -69,11 +74,11 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
         </span>
         <span>
           {showMoreAnswerLink(count, increment) &&
-          (<a style={moreAnswer} className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>MORE ANSWERS</a>)}
+          (<a style={moreAnswer} className='moreAnswers' href='true' onClick={(e) => upvote(e)}>MORE ANSWERS</a>)}
         </span>
       </div>
       ) :
-      <span class='noAnswer' style={noAnswer}>No answer for this question yet</span>
+      <span className='noAnswer' style={noAnswer}>No answer for this question yet</span>
   );
 };
 
