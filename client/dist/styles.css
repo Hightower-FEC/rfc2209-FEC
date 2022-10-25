@@ -221,6 +221,19 @@ button {
   align-items: center;
   display: flex;
   z-index: 1;
+  animation-name: slidein;
+  animation-duration: 1s;
+}
+
+@keyframes slidein {
+  from {
+    margin-bottom: 100%;
+    width: 100%;
+  }
+  to {
+    margin-top: 0%;
+    width: 100%;
+  }
 }
 
 .modal-content {
