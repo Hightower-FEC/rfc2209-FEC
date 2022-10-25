@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
-const QuestionModal = ({showRModal, onClose, name, submitQuestion}) => {
+const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
 
-  // The three input fields for the question modal
+  // The three input fields for the review modal
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
@@ -39,25 +39,25 @@ const QuestionModal = ({showRModal, onClose, name, submitQuestion}) => {
     return regex.test(email);
   };
 
-  // Pass formatted question data to parent component
+  // Pass formatted review data to parent component
   const handleSubmit = () => {
     if (ask === '' || nickname === '' || email === '' || !verifyEmail(email)) {
       alert('You must enter the correct information');
     } else {
-      let formatQuestion = {
-        question_body: ask,
-        asker_name: nickname,
-        asker_email: email,
-        question_helpfulness: 0,
-        answers: {},
-        reported: false
+      let formatReview = {
+        // question_body: ask,
+        // asker_name: nickname,
+        // asker_email: email,
+        // question_helpfulness: 0,
+        // answers: {},
+        // reported: false
       };
-      submitQuestion(formatQuestion);
+      submitReview(formatReview);
       onClose();
     }
   };
 
-  return (showQModal && (
+  return showModal ?
     <div className='modal' style={modalStyle} onClick={onClose}>
       <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
@@ -97,8 +97,7 @@ const QuestionModal = ({showRModal, onClose, name, submitQuestion}) => {
           <button className='closeBtn' onClick={onClose}>Close</button>
         </div>
       </div>
-    </div>
-  ));
+    </div> : <></>;
 };
 
-export default QuestionModal;
+export default PostReviewModal;
