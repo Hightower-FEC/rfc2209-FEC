@@ -9,16 +9,15 @@ const Summary = ({productID, reviews}) => {
   const [averageRating, setAverageRating] = useState();
   const [percentWhoRecommend, setPercentWhoRecommend] = useState();
   const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
-  const [numOfRatings, setNumOfRatings] = useState();
   const [characteristics, setCharacteristics] = useState();
 
   const minMax = {
     Size: ['A size too small', 'Perfect', 'A size too wide'],
-    'Width': ['Too narrow', 'Perfect', 'Too wide'],
-    'Comfort': ['Uncomfortable', 'Perfect'],
-    'Quality': ['Poor', 'Perfect'],
-    'Length': ['Runs short', 'Perfect', 'Runs long'],
-    'Fit': ['Runs tight', 'Perfect', 'Runs long'],
+    Width: ['Too narrow', 'Perfect', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Perfect'],
+    Quality: ['Poor', 'Perfect'],
+    Length: ['Runs short', 'Perfect', 'Runs long'],
+    Fit: ['Runs tight', 'Perfect', 'Runs long'],
 
   };
 
@@ -26,7 +25,7 @@ const Summary = ({productID, reviews}) => {
    *
    */
   useEffect(() => {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/reviews/meta?product_id=${productID}`)
+    axios.get(`/reviews/meta?product_id=${productID}`)
       .then((response) => {
         console.log(response.data);
         response = response.data;
@@ -37,11 +36,10 @@ const Summary = ({productID, reviews}) => {
           totalStars += Number(rating) * response.ratings[rating];
           reviewsByStar[rating - 1] = response.ratings[rating];
         }
-
-        setAverageRating((Math.round((totalStars / numOfRatings) * 100) / 100).toFixed(1));
-        setPercentWhoRecommend((Math.round((response.recommended['true'] / numOfRatings * 100) * 100) / 100).toFixed(0));
+        console.log(response.recommended);
+        setAverageRating((Math.round((totalStars / numOfReviews) * 100) / 100).toFixed(1));
+        setPercentWhoRecommend((Math.round((response.recommended['true'] / numOfReviews * 100) * 100) / 100).toFixed(0));
         setNumOfReviewsByStar(reviewsByStar);
-        setNumOfRatings(numOfReviews);
         setCharacteristics(response.characteristics);
       });
   }, [productID, reviews]);
@@ -66,7 +64,7 @@ const Summary = ({productID, reviews}) => {
               background: '#ddd',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[4] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[4] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div>
@@ -77,7 +75,7 @@ const Summary = ({productID, reviews}) => {
               background: '#ddd',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[3] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[3] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div>
@@ -87,7 +85,7 @@ const Summary = ({productID, reviews}) => {
               height: '15px',
               background: '#ddd',
               overflow: 'hidden'}}>
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[2] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[2] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div>
@@ -98,7 +96,7 @@ const Summary = ({productID, reviews}) => {
               background: '#ddd',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[1] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[1] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div>
@@ -109,7 +107,7 @@ const Summary = ({productID, reviews}) => {
               background: '#ddd',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[0] / numOfRatings) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[0] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
         </div>
