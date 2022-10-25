@@ -16,7 +16,7 @@ const RatingsReviews = ({productID}) =>{
    * On render, try and get reviews using the productID
    */
   useEffect(() => {
-    axios.get(`reviews?product_id=${productID}`)
+    axios.get(`${URL}/reviews?product_id=${productID}`)
       .then((response) => {
         setReviews(response.data.results);
       })
@@ -29,9 +29,10 @@ const RatingsReviews = ({productID}) =>{
    * Retrieve reviews from API passing a specified sort parameter
    */
   const sortReviews = (sortBy) => {
-    axios.get(`reviews?product_id=${productID}&sort=${sortBy}`)
+    axios.get(`${URL}/reviews?product_id=${productID}&sort=${sortBy}`)
       .then((response) => {
         setReviews(response.data.results);
+
       })
       .catch((error) => {
         console.log(error);

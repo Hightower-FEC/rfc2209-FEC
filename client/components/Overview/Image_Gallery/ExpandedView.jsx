@@ -43,7 +43,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
     position: 'absolute',
     top: '50%',
     transform: 'translate(0, -50%)',
-    left: '160px',
+    left: '230px',
     textShadow: '0 0 2px black',
     fontSize: '100px',
     color: 'white',
@@ -73,7 +73,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
   };
 
   const exitButtonStyles = {
-    zIndex: 7,
+    zIndex: 6,
     width: '100%',
     height: '100%',
     backgroundSize: 'contain',
@@ -141,11 +141,10 @@ const ExpandedView = ({toggleOffView, images, index}) => {
     setCurrentIndex(index);
   };
 
-
   return (
-    <div style={{position: 'relative'}}>
-      <div style={{height: '50px'}}></div>
-      <div className="expanded-leftPointer" onClick={goToPreviousImage}>‹</div>
+    <div>
+      <div style={{height: '90px'}}></div>
+      <div style={leftPointerStyles} onClick={goToPreviousImage}>‹</div>
       <div style={
         {
           position: 'absolute',
@@ -156,10 +155,21 @@ const ExpandedView = ({toggleOffView, images, index}) => {
         }
       } onClick={() => { toggleOffView(currentIndex); }}
       ></div>
-      <div className="zoom-out-button" style={{position: 'absolute'}} onClick={() => { toggleOffView(currentIndex); }}>
-        <i className="fa-solid fa-magnifying-glass-minus zoom-out-icon"></i>
+      <div style = {{
+        position: 'absolute',
+        right: '40px',
+        height: '30px',
+        width: '30px',
+        top: '120px',
+        zIndex: 6,
+        backgroundColor: 'white',
+        padding: '10px',
+        borderRadius: '50%',
+        cursor: 'zoom-out'
+      }}>
+        <div style={exitButtonStyles} onClick={toggleOffView}></div>
       </div>
-      <div className="expanded-rightPointer" onClick={goToNextImage}>›</div>
+      <div style={rightPointerStyles} onClick={goToNextImage}>›</div>
       <div style={imgContainerStyles}>
         <div style={thumbnailContainer}>
           {images.map((image, i) => {
@@ -175,6 +185,22 @@ const ExpandedView = ({toggleOffView, images, index}) => {
             );
           })}
         </div>
+        {/* <div ref={viewRef} style={imgStyles} onClick={() => { toggleOffView(currentIndex); }}>
+          <div style = {{
+            position: 'absolute',
+            right: '20px',
+            height: '30px',
+            width: '30px',
+            top: '20px',
+            zIndex: 1,
+            backgroundColor: 'white',
+            padding: '10px',
+            borderRadius: '50%',
+            cursor: 'zoom-out'
+          }}>
+            <div style={exitButtonStyles} onClick={toggleOffView}></div>
+          </div>
+        </div> */}
 
         <div style={styles.expandedImageCarousel}>
           <div ref={viewRef} style={styles.expandedPhotoContainer(currentIndex)}>
@@ -187,6 +213,7 @@ const ExpandedView = ({toggleOffView, images, index}) => {
                 </div>
               );
             })}
+
           </div>
         </div>
       </div>
