@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ScrollToComponent = () => {
+const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -11,7 +11,7 @@ const ScrollToComponent = () => {
     }
   };
 
-  const scrollToTop = () => {
+  const scrollTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -27,9 +27,9 @@ const ScrollToComponent = () => {
 
   return (
     <div className="go-top">
-      {isVisible ? <button onClick={scrollToTop}>Go to top</button> : null}
+      {isVisible ? <button onClick={scrollTop}>Go to top</button> : null}
     </div>
   );
 };
 
-export default ScrollToComponent;
+export default ScrollToTop;

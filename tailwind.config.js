@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './client/components/Scroll/ScrollToComponent.js'
+    './client/dist/index.html'
   ],
   theme: {
     extend: {},
