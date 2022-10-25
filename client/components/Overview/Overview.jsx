@@ -108,7 +108,6 @@ const Overview = ({ productID, interactions}) => {
       backgroundImage: `url(${image.thumbnail_url})`,
       borderRadius: '50%',
       flex: '0 0 auto',
-      filter: 'drop-shadow(0 0 2px rgba(0, 0, 0, 0.4))'
     };
   };
 
