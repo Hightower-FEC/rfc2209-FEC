@@ -20,18 +20,22 @@ const Reviews = ({productID, handleSetSort}) =>{
   useEffect(() => {
     axios.get(`reviews?product_id=${productID}`)
       .then((response) => {
-        axios.get(`reviews?product_id=${productID}&sort=${sortBy}`)
-          .then((response) => {
-            setReviews(response.data.results);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        setReviews(response.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [productID]);
+
+  useEffect(() => {
+    axios.get(`reviews?product_id=${productID}&sort=${sortedBy}`)
+      .then((response) => {
+        setReviews(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [sortedBy]);
 
   /**
    * Increments number of reviews to render
