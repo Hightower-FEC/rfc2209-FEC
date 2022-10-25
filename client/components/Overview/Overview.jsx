@@ -141,7 +141,7 @@ const Overview = ({ productID, interactions}) => {
     }
     return (
       <div ref={overviewRef} onClick={(e) => interactions(e, 'Overview')}>
-        <div style={{height: '125px'}}></div>
+        <div style={{height: '110px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
