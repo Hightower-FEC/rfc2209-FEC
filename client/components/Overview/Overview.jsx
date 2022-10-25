@@ -34,6 +34,7 @@ const Overview = ({ productID, interactions}) => {
         axios.get(`${URL}/products/${productID}/styles`)
           .then((response) => {
             setCurrentIndex(0);
+            setImageIndex(0);
             setCurrentProductStyles(response.data);
             setCurrentStyle(response.data.results[0]);
           });

@@ -4,9 +4,9 @@ import {styles} from './styles.js';
 
 const {useEffect, useState} = React;
 
-const ImageGallery = ({ productStyle, handleImageClick }) => {
+const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
   const [currentPhotos, setCurrentPhotos] = useState(productStyle.photos);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(imageIndex);
 
   const [currentThumbnailIndex, setCurrentThumbnailIndex] = useState(0);
 
@@ -15,13 +15,9 @@ const ImageGallery = ({ productStyle, handleImageClick }) => {
   useEffect(() => {
     console.log(productStyle);
     setCurrentPhotos(productStyle.photos);
-    setCurrentIndex(0);
-    setCurrentThumbnailIndex(0);
+    setCurrentIndex(imageIndex);
+    setCurrentThumbnailIndex(Math.floor(imageIndex / 7));
   }, [productStyle]);
-
-  useEffect(() => {
-    // console.log(currentIndex);
-  }, [currentIndex]);
 
   const goToNextImage = () => {
     if (currentIndex === currentPhotos.length - 1) {
