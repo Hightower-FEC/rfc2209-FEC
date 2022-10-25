@@ -15,32 +15,6 @@ export const styles = {
     };
   },
 
-  leftThumbnailPointer: {
-    position: 'absolute',
-    top: '89%',
-    transform: 'translate(0, -50%)',
-    left: '60px',
-    textShadow: '0 0 2px black',
-    fontSize: '100px',
-    color: 'white',
-    zIndex: 3,
-    userSelect: 'none',
-    cursor: 'pointer'
-  },
-
-  rightThumbnailPointer: {
-    position: 'absolute',
-    top: '89%',
-    transform: 'translate(0, -50%)',
-    right: '60px',
-    textShadow: '0 0 2px black',
-    fontSize: '100px',
-    color: 'white',
-    zIndex: 3,
-    userSelect: 'none',
-    cursor: 'pointer'
-  },
-
   thumbnailStyles: (image) => {
     return {
       zIndex: 8,
@@ -81,32 +55,6 @@ export const styles = {
     width: '800px',
     height: '600px',
     position: 'relative'
-  },
-
-  leftPointer: {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    left: '32px',
-    textShadow: '0 0 2px black',
-    fontSize: '100px',
-    color: 'white',
-    zIndex: 3,
-    userSelect: 'none',
-    cursor: 'pointer'
-  },
-
-  rightPointer: {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    right: '32px',
-    textShadow: '0 0 2px black',
-    fontSize: '100px',
-    color: 'white',
-    zIndex: 3,
-    userSelect: 'none',
-    cursor: 'pointer'
   },
 
   photoContainer: (index) => {

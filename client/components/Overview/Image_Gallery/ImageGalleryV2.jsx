@@ -4,9 +4,9 @@ import {styles} from './styles.js';
 
 const {useEffect, useState} = React;
 
-const ImageGallery = ({ productStyle, handleImageClick }) => {
+const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
   const [currentPhotos, setCurrentPhotos] = useState(productStyle.photos);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(imageIndex);
 
   const [currentThumbnailIndex, setCurrentThumbnailIndex] = useState(0);
 
@@ -15,13 +15,9 @@ const ImageGallery = ({ productStyle, handleImageClick }) => {
   useEffect(() => {
     console.log(productStyle);
     setCurrentPhotos(productStyle.photos);
-    setCurrentIndex(0);
-    setCurrentThumbnailIndex(0);
+    setCurrentIndex(imageIndex);
+    setCurrentThumbnailIndex(Math.floor(imageIndex / 7));
   }, [productStyle]);
-
-  useEffect(() => {
-    // console.log(currentIndex);
-  }, [currentIndex]);
 
   const goToNextImage = () => {
     if (currentIndex === currentPhotos.length - 1) {
@@ -58,13 +54,13 @@ const ImageGallery = ({ productStyle, handleImageClick }) => {
   return (
     <div style={{position: 'relative', height: '600px'}}>
       <div className="imageGalleryOptions">
-        <div style={styles.leftPointer} onClick={goToPreviousImage}>‹</div>
-        <div style={styles.rightPointer} onClick={goToNextImage}>›</div>
+        <div className="gallery-leftPointer" onClick={goToPreviousImage}>‹</div>
+        <div className="gallery-rightPointer" onClick={goToNextImage}>›</div>
         <div style={{height: '100%', width: '100%', cursor: 'zoom-in'}}
           onClick={() => { handleImageClick(currentPhotos, currentIndex); }}
         ></div>
-        <div style={styles.leftThumbnailPointer} onClick={goToPreviousSetOfThumbnails}>‹</div>
-        <div style={styles.rightThumbnailPointer} onClick={goToNextSetOfThumbnails}>›</div>
+        <div className="thumbnail-leftPointer" onClick={goToPreviousSetOfThumbnails}>‹</div>
+        <div className="thumbnail-rightPointer" onClick={goToNextSetOfThumbnails}>›</div>
 
         <div style={styles.thumbnailBackground}></div>
 

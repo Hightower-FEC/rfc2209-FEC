@@ -33,7 +33,10 @@ const Overview = ({ productID, interactions}) => {
       .then(() => {
         axios.get(`${URL}/products/${productID}/styles`)
           .then((response) => {
+            setSelectedSize('');
+            setSelectedQty('');
             setCurrentIndex(0);
+            setImageIndex(0);
             setCurrentProductStyles(response.data);
             setCurrentStyle(response.data.results[0]);
           });
@@ -141,7 +144,7 @@ const Overview = ({ productID, interactions}) => {
     }
     return (
       <div ref={overviewRef} onClick={(e) => interactions(e, 'Overview')}>
-        <div style={{height: '125px'}}></div>
+        <div style={{height: '110px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
