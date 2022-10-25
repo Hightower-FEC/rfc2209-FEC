@@ -87,9 +87,20 @@ const QuestionsAnswers = ({productID, interactions}) => {
 
   //------------------ TO DO ---------------------
   // Helper function to submit question from modal
-  const submitQuestion = (questionObj) => {
-    console.log('Question from modal', questionObj);
-    // setQuestions([questionObj, ...questions]);
+  const submitQuestion = (question) => {
+    // Receive a 201 status upon successful question submission
+    axios.post(`${URL}/qa/questions`, {
+      body: question.body,
+      name: question.asker,
+      email: question.email,
+      product_id: question.productID
+    })
+      .then((res) => {
+        console.log('Submitted question!');
+      })
+      .catch((err) => {
+        console.log('Failed to submit question');
+      });
   };
   // Helper function to submit question from modal
   const submitAnswer = (questionId, answerObj) => {
@@ -251,6 +262,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
 
       <QuestionModal
         name={name}
+        productID={productID}
         showQModal={showQModal}
         onClose={() => setQShow(false)}
         submitQuestion={submitQuestion}

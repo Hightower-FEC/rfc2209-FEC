@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
+const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) => {
 
   // The three input fields for the question modal
   const [ask, setAsk] = useState('');
@@ -130,12 +130,10 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
     // If still valid, then submit form
     if (valid) {
       let formatQuestion = {
-        question_body: ask,
-        asker_name: nickname,
-        asker_email: email
-        // question_helpfulness: 0,
-        // answers: {},
-        // reported: false
+        body: ask,
+        asker: nickname,
+        email: email,
+        productID: productID
       };
       submitQuestion(formatQuestion);
       onClose();

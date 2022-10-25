@@ -12,9 +12,8 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
 
   // Helper function to toggle helpfulness flag and pass data to parent function
   let helpful = false;
-  const handleClickHelpfulness = () => {
-    //helpful = !helpful;
-
+  const handleClickHelpfulness = (e) => {
+    e.preventDefault();
     /* Pseudocode-ish
     Once the user clicks on 'Yes', send a PUT request to server. The server will keep track of the answer.id and a boolean will be set to false. In the server, any repeat PUT requests to the same answer id will be handled to just return the boolean instead of sending another PUT request. On the client side, I'll use the boolean to disable the link to upvote the helpfulness.
     */
@@ -63,7 +62,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
       <span className='question-body' style={questionBody}> {question.question_body} </span>
       <span style={links}> Helpful?
         {!helpfulness ?
-          (<a href='true' onClick={handleClickHelpfulness}>Yes</a>) :
+          (<a href='true' onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
           <span> Voted </span> }
          ({helpCount}) |
         <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
