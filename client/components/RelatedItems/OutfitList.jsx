@@ -41,16 +41,18 @@ const OutfitList = ({product}) => {
     <div className="carousel">
       <div className="carousel-outfit">
         {outfits.length > 0 ? outfits.map((outfit, key) => {
-          return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'25%'} />;
+          return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
         }) : null}
-        <div className="product-card" style={{width: '25%'}}>
+        <div className="plus-card" style={{width: '300px'}}>
           <div className="plus-container">
             <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
               addOutfit(product);
             }}></img>
           </div>
           <div className="add-container">
-            <button id="add-button">Add to Outfit</button>
+            <button id="add-button" onClick={() => {
+              addOutfit(product);
+            }}>Add to Outfit</button>
           </div>
         </div>
       </div>
