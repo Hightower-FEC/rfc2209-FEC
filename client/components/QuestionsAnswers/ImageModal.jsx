@@ -12,7 +12,7 @@ const ImageModal = ({url, showImage, onClose}) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: '9999999'
+    zIndex: '999'
   };
   const modalContent = {
     textAlign: 'center'

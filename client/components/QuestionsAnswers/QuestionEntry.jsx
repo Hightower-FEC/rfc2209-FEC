@@ -76,6 +76,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
       />
       <AnswerModal
         name={name}
+        questionId={question.question_id}
         showAModal={showAModal}
         questionBody={question.question_body}
         onClose={() => setAShow(false)}

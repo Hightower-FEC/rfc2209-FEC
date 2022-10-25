@@ -18,7 +18,7 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: '9999999'
+    zIndex: '999'
   };
   const modalContent = {
     width: '75%',
@@ -86,8 +86,8 @@ const QuestionModal = ({showQModal, onClose, name, submitQuestion}) => {
 
   // Helper function to verify email address
   const verifyEmail = (email) => {
-    let checkEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return email.match(checkEmail);
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return email.match(regex);
   };
   // Helper function to create a span that displays the error message on submission
   const createErrorMsg = (message) => {

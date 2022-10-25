@@ -72,7 +72,12 @@ const QuestionsAnswers = ({productID, interactions}) => {
   const expandQuestionList = (list, count, increment) => {
     return list.slice(0, count * increment);
   };
-  // let currentList = expandQuestionList(questions, count, increment);
+  // Function to switch between the default list and the filter list if the query has 3 or more characters in  search input
+  const switchList = (searchStr) => {
+    return searchStr.length < 3 ?
+      expandQuestionList(questions, count, increment) :
+      expandQuestionList(found, count, increment);
+  };
 
   // Helper function to show and hide the question list button
   const showMoreQuestionButton = (query, count, increment) => {
@@ -87,8 +92,16 @@ const QuestionsAnswers = ({productID, interactions}) => {
     // setQuestions([questionObj, ...questions]);
   };
   // Helper function to submit question from modal
-  const submitAnswer = (answerObj) => {
-    console.log('Answer from modal', answerObj);
+  const submitAnswer = (questionId, answerObj) => {
+    // Receive a 201 status upon successful answer submission
+    axios.post(`${URL}/qa/questions/${questionId}/answers`, {
+      body: answerObj.body,
+      name: answerObj.answerer_name,
+      email: answerObj.answerer_email,
+      photos: answerObj.photos
+    })
+      .then((res) => console.log('Submitted answer!'))
+      .catch((err) => console.log('Failed to submit answer'));
   };
   // --------------- END TO DO -------------------
 
@@ -167,12 +180,6 @@ const QuestionsAnswers = ({productID, interactions}) => {
   //   highlightWord(query);
   // }, [query]);
 
-  // Function to switch between the default list and the filter list if the query has 3 or more characters in the search input
-  const switchList = (searchStr) => {
-    return searchStr.length < 3 ?
-      expandQuestionList(questions, count, increment) :
-      expandQuestionList(found, count, increment);
-  };
 
   // --------------- CSS Style ---------------
   const container = {
