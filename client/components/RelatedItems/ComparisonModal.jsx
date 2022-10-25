@@ -7,7 +7,7 @@ const ComparisonModal = ({show, onClose, productA, productB, features}) => {
   }
 
   return (
-    <div className="compare-modal" onClick={onClose}>
+    <div className="modal" onClick={onClose}>
       <div className="modal-content">
         <h5 className="modal-header">COMPARING</h5>
         <div id="product-names">

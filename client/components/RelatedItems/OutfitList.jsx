@@ -26,9 +26,11 @@ const OutfitList = ({product}) => {
   };
 
   const addOutfit = (item) => {
-    let newItem = [item];
-    const outfitCollection = outfits.concat(newItem);
-    setOutfits(outfitCollection);
+    if (outfits.filter(outfit => outfit.id === item.id).length === 0) {
+      let newItem = [item];
+      const outfitCollection = outfits.concat(newItem);
+      setOutfits(outfitCollection);
+    }
   };
 
   const removeOutfit = (index) => {
@@ -43,16 +45,14 @@ const OutfitList = ({product}) => {
         {outfits.length > 0 ? outfits.map((outfit, key) => {
           return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
         }) : null}
-        <div className="plus-card" style={{width: '300px'}}>
+        <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}}>
           <div className="plus-container">
             <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
               addOutfit(product);
             }}></img>
           </div>
           <div className="add-container">
-            <button id="add-button" onClick={() => {
-              addOutfit(product);
-            }}>Add to Outfit</button>
+            <button id="add-button">Add to Outfit</button>
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@ const OutfitList = ({product}) => {
       }}>
           ‹
       </div></div> : null}
-      {outfits.length > 2 ? <div className="indicators"><div className="rightArrow" onClick={() => {
+      {outfits.length > 3 && index < outfits.length - 3 ? <div className="indicators"><div className="rightArrow" onClick={() => {
         updateIndex(index + 1);
       }}>
           ›

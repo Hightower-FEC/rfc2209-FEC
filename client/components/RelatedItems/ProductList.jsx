@@ -29,7 +29,7 @@ const ProductList = ({products, productA, handleRelatedItemClick}) => {
       }}>
           ‹
       </div></div> : null}
-      {index < React.Children.count(products) - 3 ? <div className="indicators"><div className="rightArrow" onClick={() => {
+      {index < React.Children.count(products) - 4 ? <div className="indicators"><div className="rightArrow" onClick={() => {
         updateIndex(index + 1);
       }}>
           ›
