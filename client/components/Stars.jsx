@@ -18,9 +18,11 @@ const Stars = ({rating, productID, size = '12px'}) => {
     // Find nearest quarter rating to round to
     const mid = 0.125;
     const quarters = [0, 0.25, 0.5, 0.75, 1];
+    // The actual quarters look kinda strange on render, so these are sort of like, pseudo-quarters that look better when rendered inside the star
+    const renderQuarters = [0, .4, .5, .66, 1];
     for (let i = 0; i < quarters.length; i++) {
       if (decimal < (quarters[i] + mid)) {
-        setPercentRating((wholeRating + quarters[i]) / .05);
+        setPercentRating((wholeRating + renderQuarters[i]) / .05);
         break;
       }
     }
@@ -28,16 +30,15 @@ const Stars = ({rating, productID, size = '12px'}) => {
 
   useEffect(() => {
     if (productID) {
-      axios.get(`/reviews?product_id=${productID}`)
+      axios.get(`/reviews/meta?product_id=${productID}`)
         .then((response) => {
-          let results = response.data.results;
-          let sumRatings = 0;
-          for (let i = 0; i < results.length; i++) {
-            sumRatings += results[i].rating;
+          let numOfRatings = 0;
+          let totalRating = 0;
+          for (let rating in response.data.ratings) {
+            totalRating += rating * Number(response.data.ratings[rating]);
+            numOfRatings += Number(response.data.ratings[rating]);
           }
-          // Take total of ratings sum, divide by number of ratings to get average rating.  Divide average rating by 5 (highest possible rating), then multiple by 100 to get percent.
-
-          roundRating((sumRatings / results.length));
+          roundRating((totalRating / numOfRatings));
         })
         .catch((error) => {
           console.log(error);
@@ -52,7 +53,6 @@ const Stars = ({rating, productID, size = '12px'}) => {
 
   return percentRating ? (
     <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
-      {/* {console.log(percentRating)} */}
       <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: `${size}`}}>
         <div style={{position: 'absolute', width: '100%', height: `${size}`, backgroundColor: '#ddd', zIndex: -2}}/>
         <div style={{position: 'absolute', width: `${percentRating}%`, height: `${size}`, backgroundColor: 'black', zIndex: -1}}/>
