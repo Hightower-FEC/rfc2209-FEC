@@ -26,9 +26,11 @@ const OutfitList = ({product}) => {
   };
 
   const addOutfit = (item) => {
-    let newItem = [item];
-    const outfitCollection = outfits.concat(newItem);
-    setOutfits(outfitCollection);
+    if (outfits.filter(outfit => outfit.id === item.id).length === 0) {
+      let newItem = [item];
+      const outfitCollection = outfits.concat(newItem);
+      setOutfits(outfitCollection);
+    }
   };
 
   const removeOutfit = (index) => {
