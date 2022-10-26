@@ -56,7 +56,7 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
         handleRelatedItemClick(card.id);
         window.scrollTo({top: 20, behavior: 'smooth'});
       }}>
-        <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
+        <div className="upper-half">
           <span id="favorite-related" className="fa-solid fa-star" onClick={(event) => {
             event.stopPropagation();
             setShowModal(true);

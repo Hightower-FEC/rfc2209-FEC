@@ -208,6 +208,16 @@ button {
   color: #F1F1F1;
 }
 
+#remove-icon {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3s;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: #F1F1F1;
+}
+
 #favorite-related:hover {
   color: black;
   text-shadow: 0 0 10px white;
