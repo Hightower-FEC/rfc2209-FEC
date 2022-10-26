@@ -4,7 +4,7 @@ import Image from './Image.jsx';
 const Images = ({images}) => {
 
   return (
-    <div style={{display: 'flex', gap: '10px'}}>
+    <div>
       {images.map((image, i) => <Image url={image} key={i} />)}
     </div>
   );
