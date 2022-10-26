@@ -6,11 +6,10 @@ import QuestionModal from './QuestionModal.jsx';
 
 
 const QuestionsAnswers = ({productID, interactions}) => {
-  // default productID = 66642
 
   // For testing different products
   let testID = 66641;
-  let testCount = 10;
+  let testCount = 500;
 
   // Product name state
   const [name, setName] = useState('');
@@ -64,7 +63,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
     getQuestions();
     getProductName();
   }, [productID]);
-
+  // console.log('All questions:', questions);
 
   //----- Expand Question List Functionality -----
   // console.log('Question count', count);
@@ -73,7 +72,12 @@ const QuestionsAnswers = ({productID, interactions}) => {
   const expandQuestionList = (list, count, increment) => {
     return list.slice(0, count * increment);
   };
-  // let currentList = expandQuestionList(questions, count, increment);
+  // Function to switch between the default list and the filter list if the query has 3 or more characters in  search input
+  const switchList = (searchStr) => {
+    return searchStr.length < 3 ?
+      expandQuestionList(questions, count, increment) :
+      expandQuestionList(found, count, increment);
+  };
 
   // Helper function to show and hide the question list button
   const showMoreQuestionButton = (query, count, increment) => {
@@ -81,25 +85,70 @@ const QuestionsAnswers = ({productID, interactions}) => {
   };
   //---------------------------------------------
 
-  //------------------ TO DO ---------------------
+  //---- Submitting Questions and Answers ----
   // Helper function to submit question from modal
-  const submitQuestion = (questionObj) => {
-    console.log('Question from modal', questionObj);
-    // setQuestions([questionObj, ...questions]);
+  const submitQuestion = (question) => {
+    // Receive a 201 status upon successful question submission
+    axios.post(`${URL}/qa/questions`, {
+      body: question.body,
+      name: question.asker,
+      email: question.email,
+      product_id: question.productID
+    })
+      .then((res) => {
+        console.log('Submitted question! Response:', res);
+        getQuestions();
+      })
+      .catch((err) => {
+        console.log('Failed to submit question');
+      });
   };
   // Helper function to submit question from modal
-  const submitAnswer = (answerObj) => {
-    console.log('Answer from modal', answerObj);
+  const submitAnswer = (questionId, answerObj) => {
+    // Receive a 201 status upon successful answer submission
+    axios.post(`${URL}/qa/questions/${questionId}/answers`, {
+      body: answerObj.body,
+      name: answerObj.answerer_name,
+      email: answerObj.answerer_email,
+      photos: answerObj.photos
+    })
+      .then((res) => {
+        console.log('Submitted answer! Response:', res);
+        getQuestions();
+      })
+      .catch((err) => console.log('Failed to submit answer. Error:', err));
   };
+
+  // -------------- Upvote Helpulness -----------
   // Send a PUT request to update the question's helpfulness
-  const handleQuestionHelpful = (questionId, helpful) => {
-    let isHelpful = helpful ? 'helpful' : 'not helpful';
-    console.log(`Marked question id ${questionId} ${isHelpful}`);
+  const handleQuestionHelpful = (questionId) => {
+    // Receive a 204 status upon successful PUT request
+    axios.put(`${URL}/qa/questions/${questionId}/helpful`)
+      .then((res) => console.log(`Marked question id ${questionId} helpful. Response: `, res))
+      .catch((err) => console.log(`Could not mark question id ${questionId} helpful. Error: `, err));
   };
   // Send a PUT request to update the answer's helpfulness
-  const handleAnswerHelpful = (answerId, helpful) => {
-    let isHelpful = helpful ? 'helpful' : 'not helpful';
-    console.log(`Marked answer id ${answerId} ${isHelpful}`);
+  const handleAnswerHelpful = (answerId) => {
+    // Receive a status 204 upon successful PUT request
+    axios.put(`${URL}/qa/answers/${answerId}/helpful`)
+      .then((res) => console.log(`Marked answer id ${answerId} helpful. Response: `, res))
+      .catch((err) => console.log(`Could not mark answer id ${answerId} helpful. Error: `, err));
+  };
+
+  // -------------- Report to Admin  -----------
+  // Send a PUT request to report the question
+  const handleQuestionReport = (questionId) => {
+    // Receive a status 204 upon successful PUT request
+    axios.put(`${URL}/qa/questions/${questionId}/report`)
+      .then((res) => console.log(`Reported question id ${questionId} to admin. Response:`, res))
+      .catch((err) => console.log(`Could not report question id ${questionId} to admin. Error: `, err));
+  };
+  // Send a PUT request to report the answer
+  const handleAnswerReport = (answerId) => {
+    // Receive a status 204 upon successful PUT request
+    axios.put(`${URL}/qa/answers/${answerId}/report`)
+      .then((res) => console.log(`Reported answer id ${answerId} to admin. Response:`, res))
+      .catch((err) => console.log(`Could not report answer id ${answerId} to admin. Error: `, err));
   };
   //---------------------------------------------
 
@@ -145,12 +194,6 @@ const QuestionsAnswers = ({productID, interactions}) => {
   //   highlightWord(query);
   // }, [query]);
 
-  // Function to switch between the default list and the filter list if the query has 3 or more characters in the search input
-  const switchList = (searchStr) => {
-    return searchStr.length <= 2 ?
-      expandQuestionList(questions, count, increment) :
-      expandQuestionList(found, count, increment);
-  };
 
   // --------------- CSS Style ---------------
   const container = {
@@ -213,16 +256,19 @@ const QuestionsAnswers = ({productID, interactions}) => {
         questions={switchList(query)}
         submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
+        handleQuestionReport={handleQuestionReport}
         handleAnswerHelpful={handleAnswerHelpful}
+        handleAnswerReport={handleAnswerReport}
       />
 
       {(showMoreQuestionButton(query, count, increment)) &&
-      (<button className='moreQuestions' onClick={() => setCount(count + 1)} style={moreQuestionsBtn}>MORE ANSWERED QUESTIONS</button>)}
+      (<button data-testid='more-questions' className='moreQuestions' onClick={() => setCount(count + 1)} style={moreQuestionsBtn}>MORE ANSWERED QUESTIONS</button>)}
 
-      <button className='questionModal' onClick={() => setQShow(true)} style={addQuestionBtn}>ADD A QUESTION +</button>
+      <button data-testid='question-modal' className='questionModal' onClick={() => setQShow(true)} style={addQuestionBtn}>ADD A QUESTION +</button>
 
       <QuestionModal
         name={name}
+        productID={productID}
         showQModal={showQModal}
         onClose={() => setQShow(false)}
         submitQuestion={submitQuestion}

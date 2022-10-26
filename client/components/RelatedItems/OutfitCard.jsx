@@ -18,10 +18,10 @@ const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClic
   return (
     <>
       <div className="product-card" style={{width: width, backgroundImage: `url(${image})`, transform: `translateX(-${index * 110}%)`}}>
-        <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
-          <span id="favorite-related" onClick={() => {
+        <div className="upper-half">
+          <span id="remove-icon" onClick={() => {
             handleRemoveOutfitClick(number);
-          }}><strong>⊖</strong></span>
+          }}><strong>❌</strong></span>
         </div>
         <div className="bottom-half">
           <div className="category">{outfit.category}</div>

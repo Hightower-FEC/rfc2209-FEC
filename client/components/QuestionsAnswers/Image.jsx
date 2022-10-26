@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import ImageModal from './ImageModal.jsx';
 
 const Image = ({url}) => {
+
+  const [showImage, growImage] = useState(false);
 
   const imageStyle = {
     margin: '10px 0 5px 0',
@@ -16,8 +19,22 @@ const Image = ({url}) => {
     borderRadius: '5px'
   };
 
+  let largeImage = {
+    margin: '10px 15px 0 0',
+    border: '1px solid black'
+  };
+
+
   return (
-    <div style={imageStyle}></div>
+    <>
+      <div style={imageStyle} onClick={() => growImage(true)}></div>
+
+      <ImageModal
+        url={url}
+        showImage={showImage}
+        onClose={() => growImage(false)}
+      />
+    </>
   );
 };
 
