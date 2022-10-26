@@ -65,7 +65,7 @@ const Reviews = ({productID, reviews, handleSetSort}) =>{
       </div>
     </div>
 
-  );
+  ) : <></>;
 };
 
 export default Reviews;

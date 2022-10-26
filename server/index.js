@@ -19,7 +19,9 @@ const AUTH = {
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-
+/**
+ * Endpoint for fetching reviews for a certain product
+ */
 app.get('/reviews:page?:count?:sort?:product_id?', (req, res) => {
   // Can't do anything without a product_id
   if (!req.query.product_id) {
@@ -61,6 +63,9 @@ app.get('/reviews:page?:count?:sort?:product_id?', (req, res) => {
   }
 });
 
+/**
+ * Endpoint for marking a review as helpful
+ */
 app.put('/reviews/:review_id/helpful', (req, res) => {
   axios.put(`${URL}/reviews/${req.params.review_id}/helpful`, null, AUTH)
     .then((response) => {
@@ -78,6 +83,9 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
     });
 });
 
+/**
+ * Endpoint for reporting a review
+ */
 app.put('/reviews/:review_id/report', (req, res) => {
   console.log();
   axios.put(`${URL}/reviews/${req.params.review_id}/report`, null, AUTH)
@@ -90,6 +98,19 @@ app.put('/reviews/:review_id/report', (req, res) => {
     })
     .catch((error) => {
       console.log(error);
+      res.status(500).send(error);
+    });
+});
+
+/**
+ * Endpoint for getting review metadata for a certain product
+ */
+app.get('/reviews/meta:product_id?', (req, res) => {
+  axios.get(`${URL}/reviews/meta?product_id=${req.query.product_id}`, AUTH)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
       res.status(500).send(error);
     });
 });
