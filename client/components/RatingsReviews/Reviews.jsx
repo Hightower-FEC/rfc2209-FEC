@@ -2,17 +2,40 @@ import React, {useState, useEffect} from 'react';
 import Review from './Review.jsx';
 import axios from 'axios';
 
-const Reviews = ({productID, reviews, handleSetSort}) =>{
+import PostReviewModal from './PostReviewModal.jsx';
+
+const Reviews = ({productID, handleSetSort}) =>{
+  /**
+   * Init reviews as undefined - nothing is rendered unless this state has value
+   */
+  const [reviews, setReviews] = useState();
   const [sortedBy, setSortedBy] = useState('relevance');
   const [numofReviewsToRender, setNumofReviewsToRender] = useState(2);
   const sorts = ['relevance', 'helpfulness', 'newest'];
+  const [showModal, setShowModal] = useState(false);
+
+  /**
+   * On render, try and get reviews using the productID
+   */
+  useEffect(() => {
+    axios.get(`reviews?product_id=${productID}`)
+      .then((response) => {
+        setReviews(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [productID]);
 
   useEffect(() => {
-    handleSetSort(sortedBy);
+    axios.get(`reviews?product_id=${productID}&sort=${sortedBy}`)
+      .then((response) => {
+        setReviews(response.data.results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [sortedBy]);
-
-  const renderedReviews = reviews.slice(0, numofReviewsToRender);
-
 
   /**
    * Increments number of reviews to render
@@ -28,14 +51,21 @@ const Reviews = ({productID, reviews, handleSetSort}) =>{
     console.log('Add a review clicked');
   };
 
+  const handleCloseModal = () => {
+    console.log('Later');
+  };
+
+  const renderedReviews = reviews ? reviews.slice(0, numofReviewsToRender) : null;
+
+
   /**
    * Handles whether More Reviews button is rendered or not
    * So long as there are more reviews to render, then it will render
    */
-  const moreReviews = renderedReviews.length < reviews.length ? <button onClick={handleMoreReviewsClick}>More Reviews</button> : null;
+  const moreReviews = renderedReviews && renderedReviews.length < reviews.length ? <button onClick={handleMoreReviewsClick}>More Reviews</button> : null;
 
-  return (
-    <div>
+  return renderedReviews ? (
+    <div className="reviews-container">
       {/* Header */}
       <h4>
         {reviews.length} reviews, sorted by
@@ -63,9 +93,11 @@ const Reviews = ({productID, reviews, handleSetSort}) =>{
         {moreReviews}
         <button onClick={handleAddReviewClick}>Add a review +</button>
       </div>
+
+      <PostReviewModal/>
     </div>
 
-  );
+  ) : <></>;
 };
 
 export default Reviews;

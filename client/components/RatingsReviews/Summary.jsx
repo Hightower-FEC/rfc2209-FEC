@@ -1,74 +1,151 @@
 import React, {useState, useEffect} from 'react';
 
+import axios from 'axios';
+
 import Stars from '../Stars.jsx';
+import Pointer from '../Pointer.jsx';
 
 const Summary = ({productID, reviews}) => {
   const [averageRating, setAverageRating] = useState();
   const [percentWhoRecommend, setPercentWhoRecommend] = useState();
   const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
+  const [characteristics, setCharacteristics] = useState();
+
+  const minMax = {
+    Size: ['A size too small', 'Perfect', 'A size too wide'],
+    Width: ['Too narrow', 'Perfect', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Perfect'],
+    Quality: ['Poor', 'Perfect'],
+    Length: ['Runs short', 'Perfect', 'Runs long'],
+    Fit: ['Runs tight', 'Perfect', 'Runs long'],
+
+  };
 
   /**
    *
    */
   useEffect(() => {
-    let totalStars = 0;
-    let recommendations = 0;
-    let reviewsByStar = [0, 0, 0, 0, 0];
-
-
-    for (let i = 0; i < reviews.length; i++) {
-      totalStars += reviews[i].rating;
-      recommendations += reviews[i].recommend;
-      reviewsByStar[reviews[i].rating - 1]++;
-    }
-
-    setAverageRating(totalStars / reviews.length);
-    setPercentWhoRecommend(recommendations / reviews.length * 100);
-    setNumOfReviewsByStar(reviewsByStar);
+    axios.get(`/reviews/meta?product_id=${productID}`)
+      .then((response) => {
+        console.log(response.data);
+        response = response.data;
+        let numOfReviews = Number(response.recommended['true']) + Number(response.recommended['false']);
+        let reviewsByStar = [0, 0, 0, 0, 0];
+        let totalStars = 0;
+        for (let rating in response.ratings) {
+          totalStars += Number(rating) * response.ratings[rating];
+          reviewsByStar[rating - 1] = response.ratings[rating];
+        }
+        console.log(response.recommended);
+        setAverageRating((Math.round((totalStars / numOfReviews) * 100) / 100).toFixed(1));
+        setPercentWhoRecommend((Math.round((response.recommended['true'] / numOfReviews * 100) * 100) / 100).toFixed(0));
+        setNumOfReviewsByStar(reviewsByStar);
+        setCharacteristics(response.characteristics);
+      });
   }, [productID, reviews]);
 
 
   return averageRating ? (
-    <div>
-      <h1 style={{display: 'flex', flexDirection: 'row'}}>
-        {averageRating} <Stars productID={productID}/>
-      </h1>
-      <div>
-        <div>
-          {percentWhoRecommend}% of reviews recommend this product
+    <div className="summary-container">
+      <div style={{display: 'flex', flexDirection: 'row', gap: '10px', marginBottom: '20px'}}>
+        <div style={{fontSize: '32px', fontWeight: 'bold', marginTop: '3px'}}>{averageRating}</div>
+        <div style={{width: 'fit-content', height: '45px', }}>
+          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'} needsBackground={true}/>
+        </div>
+      </div>
+      <div style={{fontSize: '14px'}}>
+        <div style={{margin: '0 0 10px 0'}}>
+          <strong>{percentWhoRecommend}%</strong> of reviews recommend this product
         </div>
 
-        <div>
-          <div>
-            <a>5 stars</a><a>{numOfReviewsByStar[4]}</a>
+        <div className="summary-bars">
+          <div className="bar-container">
+            <div className="bar-labels">5 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[4] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>4 stars</a><a>{numOfReviewsByStar[3]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">4 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[3] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>3 stars</a><a>{numOfReviewsByStar[2]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">3 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[2] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>2 stars</a><a>{numOfReviewsByStar[1]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">2 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[1] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>1 stars</a><a>{numOfReviewsByStar[0]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">1 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[0] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
         </div>
 
-        <div>
-          <div>
-            <div>
-              <a>Size</a>
-            </div>
-            <a>-----------</a>
-          </div>
-          <div>
-            <div>
-              <a>Comfort</a>
-            </div>
-            <a>-----------</a>
-          </div>
+        <div className="summary-characteristics">
+          {Object.keys(characteristics).map((characteristic => {
+            return (
+              <div>
+                {console.log(characteristic)}
+                <div className="characteristic">{characteristic}</div>
+                <div style={{position: 'relative',
+                  width: '100%',
+                  height: '10px',
+                  background: 'rgba(0,0,0,0.2)',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'row'}}>
+
+                  <div style={{background: 'rgba(0,0,0,0.2)', width: `${characteristics[characteristic]['value'] / .05}%`, height: '10px'}}/>
+
+                  <div style={{position: 'relative', width: '16px', height: '16px', marginLeft: '-8px'}}><Pointer/></div>
+                </div>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                  {console.log(minMax.characteristic)}
+                  {minMax[characteristic].map((desc) => {
+                    return (
+                      <span>{desc}</span>
+                    );
+                  })}
+                </div>
+
+              </div>
+            );
+          }))}
+
         </div>
       </div>
     </div>

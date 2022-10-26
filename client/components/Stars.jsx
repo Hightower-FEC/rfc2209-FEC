@@ -5,8 +5,10 @@ import Star from './Star.jsx';
 
 import { URL } from '../../config/config.js';
 
-const Stars = ({rating, productID, size = '12px'}) => {
+const Stars = ({backgroundColor, rating, productID, size = '12px', needsBackground, color}) => {
   const [percentRating, setPercentRating] = useState();
+
+  needsBackground = needsBackground || false;
 
   const roundRating = (trueRating) => {
 
@@ -51,19 +53,39 @@ const Stars = ({rating, productID, size = '12px'}) => {
 
 
   return percentRating ? (
-    <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
-      {/* {console.log(percentRating)} */}
-      <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: `${size}`}}>
-        <div style={{position: 'absolute', width: '100%', height: `${size}`, backgroundColor: '#ddd', zIndex: -2}}/>
-        <div style={{position: 'absolute', width: `${percentRating}%`, height: `${size}`, backgroundColor: 'black', zIndex: -1}}/>
-        <Star/>
-        <Star/>
-        <Star/>
-        <Star/>
-        <Star/>
+    needsBackground ? (
+      <div style={{position: 'relative', width: 'fit-content', height: `${size}`}}>
+        <div style={{position: 'absolute', padding: '10px', backgroundColor: `${backgroundColor}`, zIndex: -4, height: `${size}`, width: '125px', borderRadius: '10px'}}>
+        </div>
+        <div style={{position: 'absolute', height: 'auto', width: 'auto'}}>
+          {/* {console.log(percentRating)} */}
+          <div style={{display: 'flex', position: 'absolute', flexDirection: 'rows', width: 'auto', height: `${size}`, top: '10px', left: '10px'}}>
+            <div style={{position: 'absolute', width: 'fit-content', height: `${size}`, backgroundColor: '#ddd', zIndex: -2}}/>
+            <div style={{position: 'absolute', width: `${percentRating}%`, height: `${size}`, backgroundColor: 'black', zIndex: -1}}/>
+            <Star/>
+            <Star/>
+            <Star/>
+            <Star/>
+            <Star/>
+          </div>
+        </div>
 
       </div>
-    </div>
+    )
+      :
+      <div style={{position: 'relative', height: 'auto', width: 'auto'}}>
+        {/* {console.log(percentRating)} */}
+        <div style={{display: 'flex', flexDirection: 'rows', width: 'auto', height: `${size}`}}>
+          <div style={{position: 'absolute', width: '100%', height: `${size}`, backgroundColor: '#ddd', zIndex: -2}}/>
+          <div style={{position: 'absolute', width: `${percentRating}%`, height: `${size}`, backgroundColor: 'black', zIndex: -1}}/>
+          <Star/>
+          <Star/>
+          <Star/>
+          <Star/>
+          <Star/>
+
+        </div>
+      </div>
   ) : <></>;
 };
 

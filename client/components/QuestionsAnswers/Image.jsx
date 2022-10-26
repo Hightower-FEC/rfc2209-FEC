@@ -5,11 +5,18 @@ const Image = ({url}) => {
 
   const [showImage, growImage] = useState(false);
 
-  let imageStyle = {
-    margin: '10px 15px 0 0',
+  const imageStyle = {
+    margin: '10px 0 5px 0',
     width: '100px',
     height: '100px',
-    border: '1px solid black'
+    padding: '5px',
+    backgroundImage: `url(${url})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: '#DDDDDD',
+    border: '1px solid rgba(0, 0, 0, 0.4)',
+    borderRadius: '5px'
   };
 
   let largeImage = {
@@ -20,7 +27,7 @@ const Image = ({url}) => {
 
   return (
     <>
-      <img src={url} style={imageStyle} onClick={() => growImage(true)}/>
+      <div style={imageStyle} onClick={() => growImage(true)}></div>
 
       <ImageModal
         url={url}

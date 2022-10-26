@@ -17,6 +17,148 @@ button {
   height: 40px
 }
 
+.zoom-out-button {
+  right: 40px;
+  height: 30px;
+  width: 30px;
+  top: 100px;
+  z-index: 6;
+  background-color: #F1F1F1;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-leftPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 32px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.gallery-rightPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 32px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.thumbnail-leftPointer {
+  position: absolute;
+  top: 88%;
+  transform: translate(0, -50%);
+  left: 60px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnail-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.thumbnail-rightPointer {
+  position: absolute;
+  top: 88%;
+  transform: translate(0, -50%);
+  right: 60px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnail-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.expanded-leftPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 160px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.expanded-rightPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 30px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.expanded-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.expanded-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.zoom-out-icon {
+  z-index: 7;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.zoom-out-button:hover {
+  background-color: rgb(34, 34, 34);
+  filter: drop-shadow(0 0 5px white);
+}
+
+.zoom-out-button:hover > .zoom-out-icon {
+  color: #F1F1F1;
+}
+
 .thumbnails {
   max-width: 250px;
   min-width: 150px;
@@ -39,26 +181,40 @@ button {
 /* RELATED ITEMS & OUTFITS */
 
 .category {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-name {
+  font-size: 26px;
+  font-weight: bolder;
+  margin: 5px 0 5px 0;
+  width: 250px;
+  white-space: wrap;
 }
 
 .default-price, .sale-price {
   font-size: 14px;
+  font-weight: 600;
 }
 
 #favorite-related {
   float: right;
-  cursor: alias;
+  cursor: pointer;
   font-size: 20px;
-  background: -webkit-radial-gradient(black, blanchedalmond);
-  color: blanchedalmond;
+  transition: 0.3s;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: #F1F1F1;
 }
 
 #favorite-related:hover {
-  font-size: 35px;
+  color: black;
+  text-shadow: 0 0 10px white;
 }
 
 .carousel {
+  margin: 0 120px 0 120px;
   overflow: hidden;
   position: relative;
 }
@@ -69,13 +225,12 @@ button {
 }
 
 .carousel-outfit {
-  display: flex;
-  /* overflow-x: auto; */
   white-space: nowrap;
 }
 
 .product-card {
   display: inline-block;
+  /* position: relative; */
   padding: 1%;
   margin: 1%;
   align-items: center;
@@ -85,11 +240,15 @@ button {
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 
-.outfit-card {
+.plus-card {
   display: inline-block;
+  position: absolute;
   padding: 1%;
   margin: 1%;
   align-items: center;
@@ -98,9 +257,8 @@ button {
   background-color: rgba(220,222,223,255);
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* flex-flow: column nowrap */
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 
 .indicators {
@@ -112,17 +270,110 @@ button {
   margin: 5px;
 }
 
-.compare-modal {
+.leftArrow, .rightArrow {
+  user-select: none;
+  position: absolute;
+  bottom: 40%;
+  font-size: 100px;
+  text-shadow: 0 0 10px #000;
+  color: white;
+  z-index: 1;
+}
+
+.leftArrow {
+  left: 2%;
+  cursor: pointer;
+}
+.rightArrow {
+  right: 2%;
+  cursor: pointer;
+}
+
+.upper-half {
+  height: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bottom-half {
+  bottom: 20px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+  width: 100%;
+  white-space: pre-wrap;
+  position: absolute;
+}
+
+.sale-price {
+  color: red;
+}
+
+.plus-container {
+  position: relative;
+  left: 0;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+}
+
+#plus-symbol {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+#plus-symbol:hover {
+  width: 75%;
+}
+
+.add-container {
+  position: relative;
+  left: 0;
+  top: 25%;
+  right: 0;
+  bottom: 0;
+}
+
+#add-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.go-top {
+  z-index: 1;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* MODAL */
+
+.modal {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.873);
+  background-color: rgba(0, 0, 0, .7);
   justify-content: center;
   align-items: center;
   display: flex;
-  z-index: 1;
+  z-index: 10;
+  animation-name: slidein;
+  animation-duration: 1s;
+}
+
+@keyframes slidein {
+  from {
+    margin-bottom: 100%;
+    width: 100%;
+  }
+  to {
+    margin-top: 0%;
+    width: 100%;
+  }
 }
 
 .modal-content {
@@ -184,68 +435,77 @@ tbody > * {
   padding: 1%;
 }
 
-.leftArrow, .rightArrow {
-  position: absolute;
-  bottom: 40%;
-  font-size: 50px;
-  text-shadow: 6px 0 #000;
-  font-weight: 600;
+/* Q&A */
+
+.moreAnswers {
+  margin: 10px 0 5px 30px;
+  text-align: left;
+  width: fit-content;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: black;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.moreAnswers:hover {
+  background-color: #000;
   color: white;
-  z-index: 1;
 }
 
-.leftArrow:hover, .rightArrow:hover {
-  font-size: 80px;
-}
-.leftArrow {
-  left: 10%;
-  cursor: w-resize;
-}
-.rightArrow {
-  right: 10%;
-  cursor: e-resize;
+/* Ratings */
+
+.ratings-reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 5%;
 }
 
-.upper-half {
-  height: 280px;
-  background-repeat: no-repeat;
-  background-size: cover;
+.summary-container {
+  width: 30%;
+  background-color: #DDDDDD;
+  padding: 20px 20px 20px 20px;
+  height: fit-content;
+  border-radius: 10px;
+  z-index: -2;
 }
 
-.sale-price {
-  color: red;
-}
-
-.plus-container {
-  position: relative;
-  left: 0;
-  top: 20%;
-  right: 0;
-  bottom: 0;
-}
-
-#plus-symbol {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.reviews-container {
   width: 60%;
 }
 
-#plus-symbol:hover {
-  width: 75%;
+.summary-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 20px 0;
 }
 
-.add-container {
-  position: relative;
-  left: 0;
-  top: 25%;
-  right: 0;
-  bottom: 0;
+.bar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+  align-content: center;
 }
 
-#add-button {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
+.bar-labels {
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
+}
+
+.summary-characteristics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.characteristic {
+  font-weight: bold;
 }

@@ -33,7 +33,10 @@ const Overview = ({ productID, interactions}) => {
       .then(() => {
         axios.get(`${URL}/products/${productID}/styles`)
           .then((response) => {
+            setSelectedSize('');
+            setSelectedQty('');
             setCurrentIndex(0);
+            setImageIndex(0);
             setCurrentProductStyles(response.data);
             setCurrentStyle(response.data.results[0]);
           });
@@ -41,6 +44,9 @@ const Overview = ({ productID, interactions}) => {
       .catch((err) => console.log(err));
   }, [productID]);
 
+  useEffect(() => {
+    console.log(currentStyle);
+  }, [currentStyle]);
 
   const overviewContainerStyles = {
     display: 'flex',
@@ -57,7 +63,7 @@ const Overview = ({ productID, interactions}) => {
     maxWidth: '400px',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    gap: '20px',
+    gap: '10px',
     alignContent: 'space-between',
   };
 
@@ -66,42 +72,60 @@ const Overview = ({ productID, interactions}) => {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'flex-start',
-    gap: '20px',
+    gap: '15px',
     marginTop: '10px',
     width: 'fit-content',
     height: 'fit-content',
     padding: '15px 25px 15px 25px',
     backgroundColor: '#DDDDDD',
     borderRadius: '10px',
-    marginRight: '40px'
+    // marginRight: '40px'
   };
 
   const styleStyles = (image) => {
     return {
-      height: '90px',
-      width: '90px',
+      height: '70px',
+      width: '70px',
+      padding: '2px',
       backgroundSize: 'cover',
+      backgroundPosition: 'center center',
       backgroundImage: 'center',
       cursor: 'pointer',
       backgroundImage: `url(${image.thumbnail_url})`,
       borderRadius: '50%',
-      flex: '0 0 auto'
+      flex: '0 0 auto',
+    };
+  };
+
+  const currentStyleStyles = (image) => {
+    return {
+      border: '2px solid rgb(34, 34, 34)',
+      height: '70px',
+      width: '70px',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundImage: 'center',
+      cursor: 'pointer',
+      backgroundImage: `url(${image.thumbnail_url})`,
+      borderRadius: '50%',
+      flex: '0 0 auto',
+      boxShadow: 'inset 0 0 10px rgba(34, 34, 34)'
     };
   };
 
   const itemCategoryStyle = {
-    fontSize: '20px',
+    fontSize: '16px',
     fontWeight: '500',
     marginBottom: '10px'
   };
 
   const itemNameStyle = {
-    fontSize: '70px',
+    fontSize: '50px',
     fontWeight: '700'
   };
 
   const selectedStyleStyles = {
-    fontSize: '20px',
+    fontSize: '16px',
   };
 
   const handleStyleClick = (index) => {
@@ -140,14 +164,14 @@ const Overview = ({ productID, interactions}) => {
     }
     return (
       <div ref={overviewRef} onClick={(e) => interactions(e, 'Overview')}>
-        <div style={{height: '125px'}}></div>
+        <div style={{height: '110px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
           <div style={productInfoContainerStyles}>
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
               <div style={{width: 'fit-content'}}>
-                <Stars productID={productID} size={'25px'}/>
+                <Stars productID={productID} size={'20px'}/>
               </div>
               <div style={itemNameStyle}>{currentProduct.name}</div>
             </div>
@@ -156,6 +180,14 @@ const Overview = ({ productID, interactions}) => {
               <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
               <div style={stylesContainer}>
                 {currentProductStyles.results.map((style, i) => {
+                  if (currentStyle.style_id === style.style_id) {
+                    return (
+                      <div key={i}
+                        style={currentStyleStyles(style.photos[0])}
+                        onClick={() => { handleStyleClick(i); }}
+                      ></div>
+                    );
+                  }
                   return (
                     <div key={i}
                       style={styleStyles(style.photos[0])}

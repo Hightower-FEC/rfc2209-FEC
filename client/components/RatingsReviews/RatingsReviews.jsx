@@ -16,7 +16,7 @@ const RatingsReviews = ({productID}) =>{
    * On render, try and get reviews using the productID
    */
   useEffect(() => {
-    axios.get(`${URL}/reviews?product_id=${productID}`)
+    axios.get(`reviews?product_id=${productID}`)
       .then((response) => {
         setReviews(response.data.results);
       })
@@ -29,10 +29,9 @@ const RatingsReviews = ({productID}) =>{
    * Retrieve reviews from API passing a specified sort parameter
    */
   const sortReviews = (sortBy) => {
-    axios.get(`${URL}/reviews?product_id=${productID}&sort=${sortBy}`)
+    axios.get(`reviews?product_id=${productID}&sort=${sortBy}`)
       .then((response) => {
         setReviews(response.data.results);
-
       })
       .catch((error) => {
         console.log(error);
@@ -44,11 +43,11 @@ const RatingsReviews = ({productID}) =>{
    * Only render Ratings and Reviews once we get reviews to render
    */
   return reviews ? (
-    <div>
-      <h3>
-        RatingsReviews
-      </h3>
-      <div style={{display: 'flex', flexDirection: 'row'}}>
+    <div style={{margin: '0 10rem 0 10rem'}}>
+      <h1 style={{margin: '40px 0 10px 0'}}>
+        Ratings and Reviews
+      </h1>
+      <div className="ratings-reviews">
         <Summary productID={productID} reviews={reviews}/>
         <Reviews productID={productID} reviews={reviews} handleSetSort={sortReviews}/>
       </div>

@@ -11,6 +11,7 @@
     "client-dev": "npx webpack --watch",
     "start": "webpack-dev-server .",
     "build": "webpack .",
+    "tailwind-css": "tailwindcss -i ./client/src/input.css -o ./client/public/output.css",
     "test": "jest",
     "test-watch": "jest --watchAll"
   },
@@ -44,6 +45,7 @@
     "jest": "^29.2.1",
     "jest-environment-jsdom": "^29.2.1",
     "style-loader": "^3.3.1",
+    "tailwindcss": "^3.2.1",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
