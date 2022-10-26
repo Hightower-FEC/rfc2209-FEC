@@ -1,6 +1,24 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const ImageModal = ({url, showImage, onClose}) => {
+
+  const viewRef = useRef(null);
+
+  useEffect(() => {
+    gsap.to(viewRef.current, {
+      delay: 0,
+      opacity: 0,
+      duration: 0,
+      ease: 'exp.out'
+    });
+    gsap.to(viewRef.current, {
+      delay: 0,
+      opacity: 1,
+      duration: 0.3,
+      ease: 'exp.out'
+    });
+  }, []);
 
   const modal = {
     position: 'fixed',

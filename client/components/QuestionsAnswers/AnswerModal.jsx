@@ -67,6 +67,12 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
     resize: 'none'
   };
 
+  const result = {
+    display: 'flex',
+    gap: '10px',
+    padding: '10px 0'
+  };
+
   const footer = {
     display: 'flex',
     justifyContent: 'center'
@@ -80,6 +86,30 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
     fontSize: '18px',
     width: '20%',
     height: '60px'
+  };
+
+  // Helper function to handle image uploads
+  const readImages = (e) => {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      const files = e.target.files;
+      const output = document.querySelector('#result');
+      output.innerHTML = '';
+      for (let i = 0; i < files.length; i++) {
+        if (!files[i].type.match('image')) {
+          continue;
+        }
+        const picReader = new FileReader();
+        picReader.addEventListener('load', function (event) {
+          const picFile = event.target;
+          const div = document.createElement('div');
+          div.innerHTML = `<img class='thumbnail' src='${picFile.result}' title='${picFile.name}'/>`;
+          output.appendChild(div);
+        });
+        picReader.readAsDataURL(files[i]);
+      }
+    } else {
+      alert('Your browser does not support File API');
+    }
   };
 
   // Helper function to verify email address
@@ -160,6 +190,10 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
           <label htmlFor='your-email'>Your Email*</label><br/>
           <input type='text' id='your-email' placeholder='Example: johndoe@gmail.com' onChange={(e) => setEmail(e.target.value)} style={emailStyle}/> <br/>
           <span>For authentication reasons, you will not be emailed</span><br/>
+
+          <label htmlFor='files' >Upload Your Photos!</label><br/>
+          <input type='file' id='files' multiple='multiple' accept='image/png, image/jepg image/jpg' onChange={(e) => readImages(e)}/>
+          <output id='result' />
         </div>
 
         {/* Modal Footer */}

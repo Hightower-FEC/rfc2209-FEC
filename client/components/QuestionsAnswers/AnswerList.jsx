@@ -78,11 +78,12 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
             handleAnswerReport={handleAnswerReport}
           />)}
         </span>
-        <span>
+        {(sortAnswers.length > 2) && <span>
           {showMoreAnswerLink(count, increment) ?
             (<a style={moreAnswer} className='moreAnswers' href='true' onClick={(e) => moreAnswers(e)}>MORE ANSWERS</a>) :
             (<a style={moreAnswer} className='collaspeAnswers' href='true' onClick={(e) => collapseAnswers(e)}>COLLAPSE ANSWERS</a>)}
         </span>
+        }
       </div>
       ) :
       <span className='noAnswer' style={noAnswer}>No answer for this question yet</span>
