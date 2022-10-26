@@ -5,13 +5,12 @@ import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 
-
-const QuestionsAnswers = ({productID}) => {
+const QuestionsAnswers = ({productID, interactions}) => {
   // default productID = 66642
 
   // For testing different products
   let testID = 66641;
-  let testPage = 1;
+  let testCount = 10;
 
   // Product name state
   const [name, setName] = useState('');
@@ -43,7 +42,8 @@ const QuestionsAnswers = ({productID}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: productID
+        product_id: testID,
+        count: 10
       }
     })
       .then((response) => {
@@ -111,16 +111,39 @@ const QuestionsAnswers = ({productID}) => {
         return question.question_body.toLowerCase().includes(e.target.value.toLowerCase());
       }
     });
-    // Future Enhancement of highlighting search word in real time
-    // results.map(question => {
-    //   let newQuestion = question.question_body.replace(
-    //     new RegExp(e.target.value, 'g'),
-    //     match => `<mark>${match}</mark>`);
-    //   return newQuestion;
-    // });
+    // console.log('Before regex Question', results);
     (results.length > 0) && console.log('Filtered questions: ', results);
     setFound(results);
+
+    // Future Enhancement of highlighting search word in real time
+    // let oldTexts = document.getElementsByClassName('question-body');
+    // console.log('getElements', oldTexts);
+    // for (let i = 0; i < oldTexts.length; i++) {
+    //   if (e.target.value.length >= 0) {
+    //     let text = oldTexts[i];
+    //     let re = new RegExp(e.target.value, 'g');
+    //     let newText = text.innerText.replace(re, `<mark>${e.target.value}</mark>`);
+    //     text.innerHTML = newText;
+    //   }
+    // }
   };
+
+  // const highlightWord = (e) => {
+  //   let oldTexts = document.getElementsByClassName('question-body');
+  //   console.log('getElements', oldTexts);
+  //   for (let i = 0; i < oldTexts.length; i++) {
+  //     if (e.target.value.length >= 0) {
+  //       let text = oldTexts[i];
+  //       let re = new RegExp(e.target.value, 'g');
+  //       let newText = text.innerText.replace(re, `<mark>${e.target.value}</mark>`);
+  //       text.innerHTML = newText;
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log('useEffect', query);
+  //   highlightWord(query);
+  // }, [query]);
 
   // Function to switch between the default list and the filter list if the query has 3 or more characters in the search input
   const switchList = (searchStr) => {
@@ -160,15 +183,27 @@ const QuestionsAnswers = ({productID}) => {
     width: '20%',
     height: '60px'
   };
+  const noQuestionMsg = {
+    display: 'block',
+    textAlign: 'center',
+    margin: '2rem 0 2rem 0',
+    justifyContent: 'center',
+    fontSize: '2em'
+  };
   //---------------------------------------------
 
   return (
-    <div style={container}>
+    <div style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
       <h1 >Questions and Answers</h1>
       <div >
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input type='search' value={query} onChange={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-        </form>
+        {questions.length > 0 ?
+          (<form onSubmit={(e) => e.preventDefault()}>
+            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+          </form>) :
+          (<span style={noQuestionMsg}>
+            No questions for this product yet. Be the first to add one!
+          </span>)
+        }
       </div>
       <QuestionList
         name={name}

@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
       let index = cookie.indexOf("=");
       let key = cookie.slice(0, index);
       let token = cookie.slice(index + 1);
-
+      console.log('Token', cookieString);
       cookies[key] = JSON.parse(decodeURIComponent(token));
     }
     return cookies;
