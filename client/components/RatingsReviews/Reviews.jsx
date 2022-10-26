@@ -34,8 +34,8 @@ const Reviews = ({productID, reviews, handleSetSort}) =>{
    */
   const moreReviews = renderedReviews.length < reviews.length ? <button onClick={handleMoreReviewsClick}>More Reviews</button> : null;
 
-  return (
-    <div>
+  return renderedReviews ? (
+    <div className="reviews-container">
       {/* Header */}
       <h4>
         {reviews.length} reviews, sorted by

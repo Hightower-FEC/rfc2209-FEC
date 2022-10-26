@@ -29,46 +29,106 @@ const Summary = ({productID, reviews}) => {
 
 
   return averageRating ? (
-    <div>
-      <h1 style={{display: 'flex', flexDirection: 'row'}}>
-        {averageRating} <Stars productID={productID}/>
-      </h1>
-      <div>
-        <div>
-          {percentWhoRecommend}% of reviews recommend this product
+    <div className="summary-container">
+      <h2 style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
+        {averageRating}
+        <div style={{width: 'fit-content', height: '45px', }}>
+          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'}/>
+        </div>
+      </h2>
+      <div style={{fontSize: '14px'}}>
+        <div style={{margin: '0 0 10px 0'}}>
+          <strong>{percentWhoRecommend}%</strong> of reviews recommend this product
         </div>
 
-        <div>
-          <div>
-            <a>5 stars</a><a>{numOfReviewsByStar[4]}</a>
+        <div className="summary-bars">
+          <div className="bar-container">
+            <div className="bar-labels">5 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[4] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>4 stars</a><a>{numOfReviewsByStar[3]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">4 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[3] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>3 stars</a><a>{numOfReviewsByStar[2]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">3 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[2] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>2 stars</a><a>{numOfReviewsByStar[1]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">2 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[1] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
-          <div>
-            <a>1 stars</a><a>{numOfReviewsByStar[0]}</a>
+          <div className="bar-container">
+            <div className="bar-labels">1 stars</div>
+            <div style={{position: 'relative',
+              width: '80%',
+              height: '15px',
+              background: 'rgba(0,0,0,0.2)',
+              overflow: 'hidden'}}>
+
+              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[0] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+            </div>
           </div>
         </div>
 
-        <div>
-          <div>
-            <div>
-              <a>Size</a>
-            </div>
-            <a>-----------</a>
-          </div>
-          <div>
-            <div>
-              <a>Comfort</a>
-            </div>
-            <a>-----------</a>
-          </div>
+        <div className="summary-characteristics">
+          {Object.keys(characteristics).map((characteristic => {
+            return (
+              <div>
+                {console.log(characteristic)}
+                <div className="characteristic">{characteristic}</div>
+                <div style={{position: 'relative',
+                  width: '100%',
+                  height: '10px',
+                  background: 'rgba(0,0,0,0.2)',
+                  overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'row'}}>
+
+                  <div style={{background: 'rgba(0,0,0,0.2)', width: `${characteristics[characteristic]['value'] / .05}%`, height: '10px'}}/>
+
+                  <div style={{position: 'relative', width: '16px', height: '16px', marginLeft: '-8px'}}><Pointer/></div>
+                </div>
+                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                  {console.log(minMax.characteristic)}
+                  {minMax[characteristic].map((desc) => {
+                    return (
+                      <span>{desc}</span>
+                    );
+                  })}
+                </div>
+
+              </div>
+            );
+          }))}
+
         </div>
       </div>
     </div>
