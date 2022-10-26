@@ -469,7 +469,7 @@ tbody > * {
 .summary-container {
   width: 30%;
   background-color: #DDDDDD;
-  padding: 0 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   height: fit-content;
   border-radius: 10px;
   z-index: -2;

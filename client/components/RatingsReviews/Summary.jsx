@@ -47,12 +47,12 @@ const Summary = ({productID, reviews}) => {
 
   return averageRating ? (
     <div className="summary-container">
-      <h2 style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
-        {averageRating}
+      <div style={{display: 'flex', flexDirection: 'row', gap: '10px', marginBottom: '20px'}}>
+        <div style={{fontSize: '32px', fontWeight: 'bold', marginTop: '3px'}}>{averageRating}</div>
         <div style={{width: 'fit-content', height: '45px', }}>
           <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'}/>
         </div>
-      </h2>
+      </div>
       <div style={{fontSize: '14px'}}>
         <div style={{margin: '0 0 10px 0'}}>
           <strong>{percentWhoRecommend}%</strong> of reviews recommend this product
