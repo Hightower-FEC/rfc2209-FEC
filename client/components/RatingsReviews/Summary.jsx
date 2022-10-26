@@ -1,41 +1,58 @@
 import React, {useState, useEffect} from 'react';
 
+import axios from 'axios';
+
 import Stars from '../Stars.jsx';
+import Pointer from '../Pointer.jsx';
 
 const Summary = ({productID, reviews}) => {
   const [averageRating, setAverageRating] = useState();
   const [percentWhoRecommend, setPercentWhoRecommend] = useState();
   const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
+  const [characteristics, setCharacteristics] = useState();
+
+  const minMax = {
+    Size: ['A size too small', 'Perfect', 'A size too wide'],
+    Width: ['Too narrow', 'Perfect', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Perfect'],
+    Quality: ['Poor', 'Perfect'],
+    Length: ['Runs short', 'Perfect', 'Runs long'],
+    Fit: ['Runs tight', 'Perfect', 'Runs long'],
+
+  };
 
   /**
    *
    */
   useEffect(() => {
-    let totalStars = 0;
-    let recommendations = 0;
-    let reviewsByStar = [0, 0, 0, 0, 0];
-
-
-    for (let i = 0; i < reviews.length; i++) {
-      totalStars += reviews[i].rating;
-      recommendations += reviews[i].recommend;
-      reviewsByStar[reviews[i].rating - 1]++;
-    }
-
-    setAverageRating(totalStars / reviews.length);
-    setPercentWhoRecommend(recommendations / reviews.length * 100);
-    setNumOfReviewsByStar(reviewsByStar);
+    axios.get(`/reviews/meta?product_id=${productID}`)
+      .then((response) => {
+        console.log(response.data);
+        response = response.data;
+        let numOfReviews = Number(response.recommended['true']) + Number(response.recommended['false']);
+        let reviewsByStar = [0, 0, 0, 0, 0];
+        let totalStars = 0;
+        for (let rating in response.ratings) {
+          totalStars += Number(rating) * response.ratings[rating];
+          reviewsByStar[rating - 1] = response.ratings[rating];
+        }
+        console.log(response.recommended);
+        setAverageRating((Math.round((totalStars / numOfReviews) * 100) / 100).toFixed(1));
+        setPercentWhoRecommend((Math.round((response.recommended['true'] / numOfReviews * 100) * 100) / 100).toFixed(0));
+        setNumOfReviewsByStar(reviewsByStar);
+        setCharacteristics(response.characteristics);
+      });
   }, [productID, reviews]);
 
 
   return averageRating ? (
     <div className="summary-container">
-      <h2 style={{display: 'flex', flexDirection: 'row', gap: '10px'}}>
-        {averageRating}
+      <div style={{display: 'flex', flexDirection: 'row', gap: '10px', marginBottom: '20px'}}>
+        <div style={{fontSize: '32px', fontWeight: 'bold', marginTop: '3px'}}>{averageRating}</div>
         <div style={{width: 'fit-content', height: '45px', }}>
-          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'}/>
+          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'} needsBackground={true}/>
         </div>
-      </h2>
+      </div>
       <div style={{fontSize: '14px'}}>
         <div style={{margin: '0 0 10px 0'}}>
           <strong>{percentWhoRecommend}%</strong> of reviews recommend this product

@@ -160,28 +160,31 @@ const QuestionsAnswers = ({productID, interactions}) => {
   const searchField = {
     display: 'inline-block',
     textAlign: 'left',
-    margin: '0 0 1rem 0',
-    height: '50px',
+    margin: '0 0 0 0',
+    height: '30px',
     width: '100%',
-    fontSize: '24px'
+    fontSize: '16px',
+    borderRadius: '10px',
+    border: '1px solid rgba(0, 0, 0, 0.4)',
+    padding: '20px 10px 20px 10px'
   };
   const moreQuestionsBtn = {
     display: 'inline-block',
     margin: '10px 20px 0 0',
     justifyContent: 'center',
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: '14px',
     width: '33%',
-    height: '60px'
+    height: '30px'
   };
   const addQuestionBtn = {
     display: 'inline-block',
     margin: '10px 20px 0 0',
     justifyContent: 'center',
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: '14px',
     width: '20%',
-    height: '60px'
+    height: '30px'
   };
   const noQuestionMsg = {
     display: 'block',
@@ -194,7 +197,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
 
   return (
     <div style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
-      <h1 >Questions and Answers</h1>
+      <h1 style={{fontSize: '30px'}} >Questions & Answers</h1>
       <div >
         {questions.length > 0 ?
           (<form onSubmit={(e) => e.preventDefault()}>
