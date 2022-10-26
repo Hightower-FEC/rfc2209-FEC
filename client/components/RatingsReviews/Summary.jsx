@@ -50,7 +50,7 @@ const Summary = ({productID, reviews}) => {
       <div style={{display: 'flex', flexDirection: 'row', gap: '10px', marginBottom: '20px'}}>
         <div style={{fontSize: '32px', fontWeight: 'bold', marginTop: '3px'}}>{averageRating}</div>
         <div style={{width: 'fit-content', height: '45px', }}>
-          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'}/>
+          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'} needsBackground={true}/>
         </div>
       </div>
       <div style={{fontSize: '14px'}}>
