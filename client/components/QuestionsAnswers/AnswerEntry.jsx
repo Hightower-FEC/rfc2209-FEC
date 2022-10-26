@@ -33,14 +33,11 @@ const AnswerEntry = ({answer, handleAnswerHelpful}) => {
   };
 
   const answerStyle = {
-    margin: '10px 30px 0 30px',
-    padding: '0 0 10px 0',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.4)'
+    margin: '10px 0 0 30px'
   };
   const answerer = {
-    fontStyle: 'italic',
-    fontSize: '12px',
-    margin: '30px 0 0 0',
+    fontSize: '16px',
+    margin: '25px 0',
     color: 'black'
   };
 

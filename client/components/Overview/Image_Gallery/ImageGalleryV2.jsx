@@ -1,40 +1,27 @@
 import React from 'react';
 import ImageSlider from './ImageSliderV2.jsx';
 import {styles} from './styles.js';
-import { gsap } from 'gsap';
 
-const {useEffect, useState, useRef} = React;
+const {useEffect, useState} = React;
 
-const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
+const ImageGallery = ({ productStyle, handleImageClick }) => {
   const [currentPhotos, setCurrentPhotos] = useState(productStyle.photos);
-  const [currentIndex, setCurrentIndex] = useState(imageIndex);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const [currentThumbnailIndex, setCurrentThumbnailIndex] = useState(0);
 
   const maxThumbnailSlides = Math.floor(productStyle.photos.length / 7);
 
-  const imageGalleryRef = useRef(null);
-
   useEffect(() => {
-
-    gsap.to(imageGalleryRef.current, {
-      delay: 0,
-      opacity: 0,
-      duration: 0,
-      ease: 'exp.out'
-    });
-    gsap.to(imageGalleryRef.current, {
-      delay: 0,
-      opacity: 1,
-      duration: 0.5,
-      ease: 'exp.out'
-    });
-
     console.log(productStyle);
     setCurrentPhotos(productStyle.photos);
-    setCurrentIndex(imageIndex);
-    setCurrentThumbnailIndex(Math.floor(imageIndex / 7));
+    setCurrentIndex(0);
+    setCurrentThumbnailIndex(0);
   }, [productStyle]);
+
+  useEffect(() => {
+    // console.log(currentIndex);
+  }, [currentIndex]);
 
   const goToNextImage = () => {
     if (currentIndex === currentPhotos.length - 1) {
@@ -69,15 +56,15 @@ const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
   };
 
   return (
-    <div ref={imageGalleryRef} style={{position: 'relative', height: '600px'}}>
+    <div style={{position: 'relative', height: '800px'}}>
       <div className="imageGalleryOptions">
-        <div className="gallery-leftPointer" onClick={goToPreviousImage}>‹</div>
-        <div className="gallery-rightPointer" onClick={goToNextImage}>›</div>
+        <div style={styles.leftPointer} onClick={goToPreviousImage}>‹</div>
+        <div style={styles.rightPointer} onClick={goToNextImage}>›</div>
         <div style={{height: '100%', width: '100%', cursor: 'zoom-in'}}
           onClick={() => { handleImageClick(currentPhotos, currentIndex); }}
         ></div>
-        <div className="thumbnail-leftPointer" onClick={goToPreviousSetOfThumbnails}>‹</div>
-        <div className="thumbnail-rightPointer" onClick={goToNextSetOfThumbnails}>›</div>
+        <div style={styles.leftThumbnailPointer} onClick={goToPreviousSetOfThumbnails}>‹</div>
+        <div style={styles.rightThumbnailPointer} onClick={goToNextSetOfThumbnails}>›</div>
 
         <div style={styles.thumbnailBackground}></div>
 
@@ -132,8 +119,8 @@ const ThumbnailSlider = ({ photo, currentIndex, handleThumbnailClick, currentPho
             borderRadius: '10px',
             cursor: 'pointer',
             marginRight: '10px',
-            height: '80px',
-            width: '80px',
+            height: '110px',
+            width: '110px',
             border: '2px solid white',
             backgroundImage: `url(${photo.thumbnail_url})`
           }}></div>
@@ -151,8 +138,8 @@ const ThumbnailSlider = ({ photo, currentIndex, handleThumbnailClick, currentPho
             borderRadius: '10px',
             cursor: 'pointer',
             marginRight: '10px',
-            height: '80px',
-            width: '80px',
+            height: '110px',
+            width: '110px',
             backgroundImage: `url(${photo.thumbnail_url})`
           }}></div>
       </div>

@@ -25,40 +25,34 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
 
   const questionStyle = {
     display: 'block',
-    fontSize: '16px',
-    margin: '30px 0 0 0',
-    padding: '10px',
-    backgroundColor: '#DDDDDD',
-    borderRadius: '10px'
-    // borderBottom: '2px solid rgba(0, 0, 0, 0.4)',
+    fontSize: '20px',
+    margin: '25px 0'
   };
   const Q = {
     display: 'inline-block',
     float: 'left',
     fontWeight: 'bold',
-    margin: '0 10px 0 0',
-    fontSize: '18px'
+    margin: '0 10px 0 0'
   };
   const questionBody = {
-    fontWeight: 'bold',
-    fontSize: '18px'
+    fontWeight: 'bold'
   };
   const links = {
     display: 'inline-block',
     float: 'right',
-    fontSize: '14px'
+    fontSize: '18px'
   };
 
   return (
     <div style={questionStyle}>
       <span style={Q}> Q: </span>
       <span className='question-body' style={questionBody}> {question.question_body} </span>
-      <span style={links}> Helpful?{' '}
+      <span style={links}> Helpful?
         {!helpfulness ?
           (<a href='javascript:null' onClick={handleClickHelpfulness}>Yes</a>) :
           <span> Voted </span> }
 
-        {' '} ({helpCount}) {' '} | {' '}
+         ({helpCount}) |
         <a href='javascript:null' onClick={() => setAShow(true)}>Add Answer</a>
       </span>
       <AnswerList

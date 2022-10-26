@@ -6,7 +6,7 @@ import QuestionEntry from './QuestionEntry.jsx';
 const QuestionList = ({questions, name, query, submitAnswer, handleQuestionHelpful, handleAnswerHelpful}) => {
 
   const questionListStyle = {
-    textAlign: 'left',
+    textAlign: 'left'
   };
 
   return (
