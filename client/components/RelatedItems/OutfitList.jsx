@@ -46,9 +46,9 @@ const OutfitList = ({product}) => {
           return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
         }) : <div className="product-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}}>
           <div className="plus-container">
-            <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
+            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x" onClick={() => {
               addOutfit(product);
-            }}></img>
+            }}></i>
           </div>
           <div className="add-container">
             <button id="add-button">Add to Outfit</button>
@@ -56,9 +56,9 @@ const OutfitList = ({product}) => {
         </div>}
         {outfits.length > 0 ? <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}}>
           <div className="plus-container">
-            <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
+            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x" onClick={() => {
               addOutfit(product);
-            }}></img>
+            }}></i>
           </div>
           <div className="add-container">
             <button id="add-button">Add to Outfit</button>
