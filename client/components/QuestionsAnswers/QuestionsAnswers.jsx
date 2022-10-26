@@ -63,7 +63,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
     getQuestions();
     getProductName();
   }, [productID]);
-  console.log('All questions:', questions);
+  // console.log('All questions:', questions);
 
   //----- Expand Question List Functionality -----
   // console.log('Question count', count);
