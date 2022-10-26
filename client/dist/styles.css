@@ -17,6 +17,148 @@ button {
   height: 40px
 }
 
+.zoom-out-button {
+  right: 40px;
+  height: 30px;
+  width: 30px;
+  top: 100px;
+  z-index: 6;
+  background-color: #F1F1F1;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-leftPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 32px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.gallery-rightPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 32px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.gallery-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.thumbnail-leftPointer {
+  position: absolute;
+  top: 88%;
+  transform: translate(0, -50%);
+  left: 60px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnail-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.thumbnail-rightPointer {
+  position: absolute;
+  top: 88%;
+  transform: translate(0, -50%);
+  right: 60px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.thumbnail-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px white;
+}
+
+.expanded-leftPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 160px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.expanded-rightPointer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 30px;
+  text-shadow: 0 0 2px black;
+  font-size: 100px;
+  color: white;
+  z-index: 3;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.expanded-leftPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.expanded-rightPointer:hover {
+  color: rgb(34, 34, 34);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.zoom-out-icon {
+  z-index: 7;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.zoom-out-button:hover {
+  background-color: rgb(34, 34, 34);
+  filter: drop-shadow(0 0 5px white);
+}
+
+.zoom-out-button:hover > .zoom-out-icon {
+  color: #F1F1F1;
+}
+
 .thumbnails {
   max-width: 250px;
   min-width: 150px;
@@ -67,11 +209,12 @@ button {
 }
 
 #favorite-related:hover {
+  color: black;
   text-shadow: 0 0 10px white;
 }
 
 .carousel {
-  margin: 0 10px 0 10px;
+  margin: 0 120px 0 120px;
   overflow: hidden;
   position: relative;
 }
@@ -128,24 +271,21 @@ button {
 }
 
 .leftArrow, .rightArrow {
+  user-select: none;
   position: absolute;
   bottom: 40%;
-  font-size: 50px;
-  text-shadow: 6px 0 #000;
-  font-weight: 600;
+  font-size: 100px;
+  text-shadow: 0 0 10px #000;
   color: white;
   z-index: 1;
 }
 
-.leftArrow:hover, .rightArrow:hover {
-  font-size: 80px;
-}
 .leftArrow {
-  left: 10%;
+  left: 2%;
   cursor: pointer;
 }
 .rightArrow {
-  right: 10%;
+  right: 2%;
   cursor: pointer;
 }
 

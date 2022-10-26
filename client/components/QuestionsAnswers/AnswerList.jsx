@@ -34,13 +34,14 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
 
   const answerStyle = {
     display: 'block',
-    margin: '10px 0'
+    margin: '10px 0',
+    fontSize: '16px'
   };
   const A = {
     display: 'inline-block',
     float: 'left',
-    fontSize: '20px',
-    fontWeight: 'bold',
+    fontSize: '18px',
+    fontWeight: 'normal',
     margin: '0 10px 0 0'
   };
   const moreAnswer = {
@@ -60,10 +61,10 @@ const AnswerList = ({answers, handleAnswerHelpful}) => {
             answer={answer} key={i}
             handleAnswerHelpful={handleAnswerHelpful} />)}
         </span>
-        <span>
+        <div>
           {showMoreAnswerLink(count, increment) &&
-          (<a style={moreAnswer} className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>MORE ANSWERS</a>)}
-        </span>
+          (<div className='moreAnswers' href='javascript:null' onClick={() => setCount(count + 1)}>MORE ANSWERS</div>)}
+        </div>
       </div>
       ) :
       <div>No answer for this question yet</div>

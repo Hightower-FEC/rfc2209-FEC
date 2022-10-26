@@ -3,14 +3,21 @@ import React, {useState, useEffect} from 'react';
 const Image = ({url}) => {
 
   const imageStyle = {
-    margin: '10px 15px 0 0',
+    margin: '10px 0 5px 0',
     width: '100px',
     height: '100px',
-    border: '1px solid black'
+    padding: '5px',
+    backgroundImage: `url(${url})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: '#DDDDDD',
+    border: '1px solid rgba(0, 0, 0, 0.4)',
+    borderRadius: '5px'
   };
 
   return (
-    <img src={url} style={imageStyle}/>
+    <div style={imageStyle}></div>
   );
 };
 
