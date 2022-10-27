@@ -1,14 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import Images from './Images.jsx';
 
 // Sub-component for AnswerList: AnswerEntry
 const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
   // console.log('Inside answer entry', answer);
   const [report, setReport] = useState(false);
-  const [helpfulness, setHelpfulness] = useState(false);
+  const [helpfulness, setHelpfulness] = useState(answer.helpful);
   const [helpCount, setHelpCount] = useState(answer.helpfulness);
-
+  console.log(answer);
   let helpful = false;
   // Helper function to toggle helpfulness flag and pass data to parent function
   const handleClickHelpfulness = (e) => {
