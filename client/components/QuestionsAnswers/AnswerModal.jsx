@@ -173,6 +173,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
       } else {
         let error = createErrorMsg('Cannot add more than 5 images');
         document.getElementsByClassName('error')[0].appendChild(error);
+        e.target.value = null;
       }
     }
   };
