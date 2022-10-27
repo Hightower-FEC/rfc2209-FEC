@@ -18,6 +18,7 @@ const App = () => {
   useEffect(() => {
     axios.get('/products/66646')
       .then((response) => {
+        console.log(response.data);
         setCurrentProduct(response.data);
       })
       .catch((error) => {
