@@ -4,9 +4,7 @@ import axios from 'axios';
 import Summary from './Summary.jsx';
 import Reviews from './Reviews.jsx';
 
-import { URL } from '../../../config/config.js';
-
-const RatingsReviews = ({productID}) =>{
+const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
   /**
    * Init reviews as undefined - nothing is rendered unless this state has value
    */
@@ -16,20 +14,20 @@ const RatingsReviews = ({productID}) =>{
    * On render, try and get reviews using the productID
    */
   useEffect(() => {
-    axios.get(`reviews?product_id=${productID}`)
+    axios.get(`reviews?product_id=${currentProduct.id}`)
       .then((response) => {
         setReviews(response.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [productID]);
+  }, [currentProduct]);
 
   /**
    * Retrieve reviews from API passing a specified sort parameter
    */
   const sortReviews = (sortBy) => {
-    axios.get(`reviews?product_id=${productID}&sort=${sortBy}`)
+    axios.get(`reviews?product_id=${currentProduct.id}&sort=${sortBy}`)
       .then((response) => {
         setReviews(response.data.results);
       })
@@ -48,8 +46,8 @@ const RatingsReviews = ({productID}) =>{
         Ratings and Reviews
       </h1>
       <div className="ratings-reviews">
-        <Summary productID={productID} reviews={reviews}/>
-        <Reviews productID={productID} reviews={reviews} handleSetSort={sortReviews}/>
+        <Summary currentProduct={currentProduct} reviewMetaData={reviewMetaData}/>
+        <Reviews currentProduct={currentProduct} reviews={reviews} handleSetSort={sortReviews}/>
       </div>
     </div>
   ) : <></>;
