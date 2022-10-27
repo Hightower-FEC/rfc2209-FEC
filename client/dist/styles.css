@@ -181,9 +181,31 @@ button {
 /* SEARCH BAR */
 
 #search {
-  float: left;
+  float: right;
   position: fixed;
+  margin-top: 13px;
+  margin-left: 25px;
   color: #f1f1f1;
+  z-index: 15;
+}
+
+#input-form {
+  width: 200px;
+  height: fit-content;
+}
+
+#search-button {
+  color:#f1f1f1;
+  background-color: #000;
+  border: none;
+}
+
+#search-button:hover {
+  margin-top: 7.5px;
+  color: #000;
+  background-color: #f1f1f1;
+  height: 25px;
+  border-radius: 20px;
 }
 
 /* RELATED ITEMS & OUTFITS */

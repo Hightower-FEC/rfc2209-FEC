@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
 
 const TopBar = () =>{
+  const [input, setInput] = useState('');
 
   const navBarStyles = {
     display: 'flex',
@@ -11,7 +13,8 @@ const TopBar = () =>{
     height: '30px',
     backgroundColor: 'black',
     padding: '20px',
-    margin: '0 !important'
+    margin: '0 !important',
+    flexDirection: 'row',
   };
 
   const titleStyles = {
@@ -29,8 +32,8 @@ const TopBar = () =>{
     color: 'white',
     transform: 'translate(0, 2px)',
     backgroundImage: 'url(./lib/globeIcon.svg)',
-    marginLeft: '10px'
-    // float: 'right',
+    marginLeft: '10px',
+    float: 'right'
   };
 
   return (
@@ -40,8 +43,16 @@ const TopBar = () =>{
         atelier
           <div style={logoStyles}></div>
         </div>
-        <div id="search">Search Bar</div>
       </div>
+      <form id="search">
+        <input id="input-form" placeholder="Search Items" onChange={() => {
+          setInput(event.target.value);
+        }}></input>
+        <button id="search-button" class="fa-solid fa-magnifying-glass fa-lg"
+          onClick={() => {
+            axios.get();
+          }}></button>
+      </form>
     </>
   );
 };
