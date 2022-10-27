@@ -1,21 +1,27 @@
 import React, {useState, useEffect} from 'react';
 
 import Star from '../Star.jsx';
-
-const PostReviewModal = ({showModal, onClose, name, submitReview, applicableCharacteristics}) => {
+const PostReviewModal = ({showModal, onClose, name, submitReview, applicableCharacteristics, interactions}) => {
 
   // The eight input fields for the review modal
   const [stars, setStars] = useState(0);
-  const [isRecommended, setIsRecommended] = useState();
+  const [isRecommended, setIsRecommended] = useState(true);
   const [characteristics, setCharacteristics] = useState();
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [images, setImages] = useState([]);
 
   //
   const [isRated, setIsRated] = useState(false);
   const [hoveredStar, setHoveredStar] = useState(0);
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
+
   // Modal style
   const modalStyle = {
     position: 'fixed',
@@ -27,7 +33,8 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: '100'
+    zIndex: '100',
+
   };
   const modalContent = {
     width: '75%',
@@ -49,7 +56,9 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
     borderTop: '1px solid #eee',
     borderBottom: '1px solid #eee',
     margin: '0 0 0 2rem',
-    display: 'inline-block'
+    display: 'inline-block',
+    overflowY: 'auto',
+    maxHeight: '400px'
   };
   const nicknameStyle = {
     display: 'inline-block',
@@ -94,6 +103,16 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
     height: '60px'
   };
 
+  const result = {
+    display: 'flex',
+    gap: '10px',
+    padding: '10px 0'
+  };
+
+  const thumbnail = {
+    height: '200px'
+  };
+
   const fill = '#000';
   const notFill = '#f1f1f1';
 
@@ -122,7 +141,11 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
     }
 
     // Check input fields
-    if (body === '') { // Body field
+    if (stars < 1 || stars > 5) {
+      valid = false;
+      let error = createErrorMsg('Must give a rating');
+      document.getElementsByClassName('error')[0].appendChild(error);
+    } else if (body === '') { // Body field
       valid = false;
       let error = createErrorMsg('Review cannot be blank');
       document.getElementsByClassName('error')[0].appendChild(error);
@@ -152,6 +175,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
         // // answers: {},
         // // reported: false
       };
+
       submitReview(formatReview);
       onClose();
     }
@@ -178,11 +202,45 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
 
   };
 
+  const handleRecommendedRadioChange = (e) => {
+    console.log(e);
+    setIsRecommended(e.target.value === 'true');
+  };
 
-
+  const handleImageUpload = (e) => {
+    setImages([]);
+    let newImages = [];
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      const files = e.target.files;
+      const output = document.querySelector("#result");
+      output.innerHTML = "";
+      if (files.length <= 5) {
+        for (let i = 0; i < files.length; i++) {
+          if (files[i].type.match("image")) {
+            const picReader = new FileReader();
+            picReader.addEventListener("load", function (event) {
+              const picFile = event.target;
+              const div = document.createElement("div");
+              div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+              output.appendChild(div);
+            });
+            picReader.readAsDataURL(files[i]);
+            newImages.push(files[i]);
+          }
+        }
+        setImages(newImages);
+      } else {
+        e.target.value = '';
+        let error = createErrorMsg('Cannot upload more than 5 images');
+        document.getElementsByClassName('error')[0].appendChild(error);
+      }
+    } else {
+      alert("Your browser does not support File API");
+    }
+  };
 
   const starRating =
-      <div style={{display: 'flex', flexDirection: 'row', height: '15px'}}>
+      <div style={{position: 'relative', display: 'flex', flexDirection: 'row', height: '15px'}}>
         <div style={{marginTop: '2px', position: 'absolute', width: '75px', height: '15px', backgroundColor: '#ddd', zIndex: 99}}/>
         <div style={{marginTop: '2px', position: 'absolute', width: `${15 * hoveredStar}px`, height: '15px', backgroundColor: 'black', zIndex: 100}} />
         <div style={{height: '15px', width: '15px', zIndex: 101}}>
@@ -243,15 +301,16 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
       </div>;
 
   const recommendRadio =
-      <div style={{justifyContent: 'flex-start'}}>
+      <div style={{justifyContent: 'flex-start'}} onChange={handleRecommendedRadioChange}>
         <span style={{paddingRight: '20px'}}>
-          <input type="radio" value="true" checked/>
-          <label for="yes">Yes</label>
+          {console.log(typeof isRecommended)}
+          <input type="radio" value="true" name="recommended" checked={isRecommended}/>
+          <label htmlFor="yes">Yes</label>
         </span>
 
         <span>
-          <input type="radio" value="false"/>
-          <label for="no">No</label>
+          <input type="radio" value="false" name="recommended" checked={!isRecommended}/>
+          <label htmlFor="no">No</label>
         </span>
       </div>;
 
@@ -287,7 +346,10 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
 
   return showModal ?
     <div className='modal' style={modalStyle} onClick={onClose}>
-      <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
+      <div className='modal-content' style={modalContent} onClick={(e) => {
+        interactions(e, 'RatingsReviews');
+        e.stopPropagation();
+      }}>
         {/* Modal Header */}
         <div className='modal-header' style={header}>
           <h4>Write Your Review</h4>
@@ -310,8 +372,11 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
           <label htmlFor='review-body'>Review Body*</label><br/>
           <textarea id='review-body' rows='4' cols='50' onChange={(e) => setBody(e.target.value)}/> <br/>
 
-          <label htmlFor='your-photos'>Upload Your Photos</label><br/>
-          <textarea id='your-photos' rows='4' cols='50'/> <br/>
+          <label for="files">Upload your photos: </label>
+          <input id="files" type="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" onChange={(e) => {
+            handleImageUpload(e);
+          }}/>
+          <output id="result"/>
 
           <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
           <input type='text' id='your-nickname'placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
