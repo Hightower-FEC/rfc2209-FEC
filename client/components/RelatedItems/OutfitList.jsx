@@ -44,21 +44,21 @@ const OutfitList = ({product}) => {
       <div className="carousel-outfit">
         {outfits.length > 0 ? outfits.map((outfit, key) => {
           return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
-        }) : <div className="product-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}}>
+        }) : <div className="plus-card" style={{width: '300px', position: 'relative', transform: `translateX(-${index * 110}%)`}} onClick={() => {
+          addOutfit(product);
+        }}>
           <div className="plus-container">
-            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x" onClick={() => {
-              addOutfit(product);
-            }}></i>
+            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x"></i>
           </div>
           <div className="add-container">
             <button id="add-button">Add to Outfit</button>
           </div>
         </div>}
-        {outfits.length > 0 ? <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}}>
+        {outfits.length > 0 ? <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}} onClick={() => {
+          addOutfit(product);
+        }}>
           <div className="plus-container">
-            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x" onClick={() => {
-              addOutfit(product);
-            }}></i>
+            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x"></i>
           </div>
           <div className="add-container">
             <button id="add-button">Add to Outfit</button>

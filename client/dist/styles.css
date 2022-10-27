@@ -279,6 +279,7 @@ h1 {
   transition: 0.5s;
   background-color: black;
 }
+
 .plus-card:hover #plus-icon {
   transition: 0.5s;
   color: #F1F1F1;
