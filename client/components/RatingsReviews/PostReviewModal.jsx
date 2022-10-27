@@ -4,14 +4,18 @@ import Star from '../Star.jsx';
 
 const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
 
-  // The three input fields for the review modal
+  // The eight input fields for the review modal
+  const [stars, setStars] = useState(0);
+  const [isRecommended, setIsRecommended] = useState();
+  const [characteristics, setCharacteristics] = useState();
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-  const [stars, setStars] = useState(0);
-  const [isRated, setisRating] = useState(false);
 
+  //
+  const [isRated, setIsRated] = useState(false);
+  const [hoveredStar, setHoveredStar] = useState(0);
   // Modal style
   const modalStyle = {
     position: 'fixed',
@@ -28,7 +32,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
   const modalContent = {
     width: '75%',
     borderRadius: '1rem',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   };
 
   const header = {
@@ -44,7 +48,8 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
     fontSize: '18px',
     borderTop: '1px solid #eee',
     borderBottom: '1px solid #eee',
-    margin: '0 0 0 2rem'
+    margin: '0 0 0 2rem',
+    display: 'inline-block'
   };
   const nicknameStyle = {
     display: 'inline-block',
@@ -153,20 +158,24 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
   };
 
   const handleStarHover = (star) => {
-    if (!isRated) {
-      setStars(star);
+    if (!isRated || star > stars) {
+      setHoveredStar(star);
     }
   };
 
   const handleStarUnHover = () => {
-    if (!isRated) {
-      setStars(0);
-    }
+    setHoveredStar(stars);
   };
 
   const handleStarClick = (star) => {
-    setIsRated(true);
-    setStars(star);
+    if (star === stars) {
+      setStars(0);
+    } else {
+      setIsRated(true);
+      setStars(star);
+      setHoveredStar(star);
+    }
+
   };
 
 
@@ -175,9 +184,10 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
   const starRating =
       <div style={{display: 'flex', flexDirection: 'row', height: '15px'}}>
         <div style={{marginTop: '2px', position: 'absolute', width: '75px', height: '15px', backgroundColor: '#ddd', zIndex: 99}}/>
-        <div style={{marginTop: '2px', position: 'absolute', width: '15px', height: '15px', backgroundColor: 'black', zIndex: 100}} />
+        <div style={{marginTop: '2px', position: 'absolute', width: `${15 * hoveredStar}px`, height: '15px', backgroundColor: 'black', zIndex: 100}} />
         <div style={{height: '15px', width: '15px', zIndex: 101}}>
           <Star
+            backgroundColor={'#fff'}
             onMouseEnter={() => {
               handleStarHover(1);
             }}
@@ -188,6 +198,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
         </div>
         <div style={{height: '15px', width: '15px', zIndex: 101}}>
           <Star
+            backgroundColor={'#fff'}
             onMouseEnter={() => {
               handleStarHover(2);
             }}
@@ -198,6 +209,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
         </div>
         <div style={{height: '15px', width: '15px', zIndex: 101}}>
           <Star
+            backgroundColor={'#fff'}
             onMouseEnter={() => {
               handleStarHover(3);
             }}
@@ -208,6 +220,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
         </div>
         <div style={{height: '15px', width: '15px', zIndex: 101}}>
           <Star
+            backgroundColor={'#fff'}
             onMouseEnter={() => {
               handleStarHover(4);
             }}
@@ -218,6 +231,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
         </div>
         <div style={{height: '15px', width: '15px', zIndex: 101}}>
           <Star
+            backgroundColor={'#fff'}
             onMouseEnter={() => {
               handleStarHover(5);
             }}
@@ -227,6 +241,49 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
             }}/>
         </div>
       </div>;
+
+  const recommendRadio =
+      <div style={{justifyContent: 'flex-start'}}>
+        <span style={{paddingRight: '20px'}}>
+          <input type="radio" value="true" checked/>
+          <label for="yes">Yes</label>
+        </span>
+
+        <span>
+          <input type="radio" value="false"/>
+          <label for="no">No</label>
+        </span>
+      </div>;
+
+  const characteristicsRadios =
+    <div>
+      <div style={{justifyContent: 'flex-start'}}>
+        <span>
+          <input type="radio" value="true" checked/>
+          <label for="yes">Yes</label>
+        </span>
+
+        <span>
+          <input type="radio" value="false"/>
+          <label for="no">No</label>
+        </span>
+
+        <span>
+          <input type="radio" value="false"/>
+          <label for="no">No</label>
+        </span>
+
+        <span>
+          <input type="radio" value="false"/>
+          <label for="no">No</label>
+        </span>
+
+        <span>
+          <input type="radio" value="false"/>
+          <label for="no">No</label>
+        </span>
+      </div>
+    </div>;
 
   return showModal ?
     <div className='modal' style={modalStyle} onClick={onClose}>
@@ -242,8 +299,10 @@ const PostReviewModal = ({showModal, onClose, name, submitReview}) => {
         <div className='modal-body' style={modalBody}>
           <label htmlFor='overall-rating'>Overall Rating*</label><br/>
           {starRating}
-          <label htmlFor='recommend-product'>Do you recommend this product?*</label><br/>
-          <label htmlFor='characteristics'>Characteristics*</label><br/>
+          <fieldset style={{marginTop: '20px'}}> <legend htmlFor='recommend-product'>Do you recommend this product?*</legend>
+            {recommendRadio} </fieldset>
+          <fieldset style={{marginTop: '20px'}}> <legend htmlFor='characteristics'>Characteristics*</legend>
+            {characteristicsRadios} </fieldset>
 
           <label htmlFor='review-summary'>Review Summary</label><br/>
           <textarea id='review-summary' rows='4' cols='50' onChange={(e) => setSummary(e.target.value)}/> <br/>
