@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import Star from '../Star.jsx';
-const PostReviewModal = ({showModal, onClose, name, submitReview, applicableCharacteristics, interactions}) => {
+const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, applicableCharacteristics, interactions}) => {
 
   // The eight input fields for the review modal
   const [stars, setStars] = useState(0);
@@ -16,6 +16,20 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
   //
   const [isRated, setIsRated] = useState(false);
   const [hoveredStar, setHoveredStar] = useState(0);
+
+  useEffect(() => {
+    let characteristicsToBe = {};
+    Object.keys(applicableCharacteristics).map((characteristic) => {
+      console.log(applicableCharacteristics[characteristic]);
+      characteristicsToBe[applicableCharacteristics[characteristic].id] = 3;
+    });
+    setCharacteristics(characteristicsToBe);
+  }, []);
+
+  useEffect(() => {
+    console.log(characteristics);
+  }, [characteristics]);
+
 
   useEffect(() => {
     console.log(images);
@@ -39,7 +53,6 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
   const modalContent = {
     width: '75%',
     borderRadius: '1rem',
-    backgroundColor: '#fff',
   };
 
   const header = {
@@ -206,8 +219,22 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
   };
 
   const handleRecommendedRadioChange = (e) => {
-    console.log(e);
     setIsRecommended(e.target.value === 'true');
+  };
+
+  const handleCharacteristicRadioChange = (e) => {
+    const characteristic = e.target.name;
+
+    const id = applicableCharacteristics[characteristic].id;
+
+    const newProperty = {};
+    newProperty[id] = Number(e.target.value);
+
+
+
+    let characteristicsToBe = Object.assign({}, characteristics, newProperty);
+
+    setCharacteristics(characteristicsToBe);
   };
 
   const handleImageUpload = (e) => {
@@ -242,11 +269,12 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
     }
   };
 
+  const starSize = '20px';
   const starRating =
-      <div style={{position: 'relative', display: 'flex', flexDirection: 'row', height: '15px'}}>
-        <div style={{marginTop: '2px', position: 'absolute', width: '75px', height: '15px', backgroundColor: '#ddd', zIndex: 99}}/>
-        <div style={{marginTop: '2px', position: 'absolute', width: `${15 * hoveredStar}px`, height: '15px', backgroundColor: 'black', zIndex: 100}} />
-        <div style={{height: '15px', width: '15px', zIndex: 101}}>
+      <div style={{position: 'relative', display: 'flex', flexDirection: 'row', height: {starSize}}}>
+        <div style={{position: 'absolute', width: `${Number(starSize.slice(0, 2)) * 5}px`, height: `${starSize}`, backgroundColor: '#ddd', zIndex: 99}}/>
+        <div style={{position: 'absolute', width: `${Number(starSize.slice(0, 2)) * hoveredStar}px`, height: `${starSize}`, backgroundColor: 'black', zIndex: 100}} />
+        <div style={{height: `${starSize}`, width: `${starSize}`, zIndex: 101}}>
           <Star
             backgroundColor={'#fff'}
             onMouseEnter={() => {
@@ -257,7 +285,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
               handleStarClick(1);
             }}/>
         </div>
-        <div style={{height: '15px', width: '15px', zIndex: 101}}>
+        <div style={{height: `${starSize}`, width: `${starSize}`, zIndex: 101}}>
           <Star
             backgroundColor={'#fff'}
             onMouseEnter={() => {
@@ -268,7 +296,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
               handleStarClick(2);
             }}/>
         </div>
-        <div style={{height: '15px', width: '15px', zIndex: 101}}>
+        <div style={{height: `${starSize}`, width: `${starSize}`, zIndex: 101}}>
           <Star
             backgroundColor={'#fff'}
             onMouseEnter={() => {
@@ -279,7 +307,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
               handleStarClick(3);
             }}/>
         </div>
-        <div style={{height: '15px', width: '15px', zIndex: 101}}>
+        <div style={{height: `${starSize}`, width: `${starSize}`, zIndex: 101}}>
           <Star
             backgroundColor={'#fff'}
             onMouseEnter={() => {
@@ -290,7 +318,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
               handleStarClick(4);
             }}/>
         </div>
-        <div style={{height: '15px', width: '15px', zIndex: 101}}>
+        <div style={{height: `${starSize}`, width: `${starSize}`, zIndex: 101}}>
           <Star
             backgroundColor={'#fff'}
             onMouseEnter={() => {
@@ -317,27 +345,59 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
         </span>
       </div>;
 
+  const minMax = {
+    Size: ['A size too small', 'Perfect', 'A size too wide'],
+    Width: ['Too narrow', 'Perfect', 'Too wide'],
+    Comfort: ['Uncomfortable', 'Perfect'],
+    Quality: ['Poor', 'Perfect'],
+    Length: ['Runs short', 'Perfect', 'Runs long'],
+    Fit: ['Runs tight', 'Perfect', 'Runs long'],
+  };
+
   const characteristicsRadios =
     <div>
       {Object.keys(applicableCharacteristics).map((characteristic) => {
         return (
-          <div style={{justifyContent: 'space-between'}}>
-            <label htmlFor={characteristic}>{characteristic}</label><br/>
-            <span >
-              <input type="radio" name={characteristic} value={1}/>
-            </span>
-            <span>
-              <input type="radio" name={characteristic} value={2}/>
-            </span>
-            <span>
-              <input type="radio" name={characteristic} value={3}/>
-            </span>
-            <span>
-              <input type="radio" name={characteristic} value={4}/>
-            </span>
-            <span>
-              <input type="radio" name={characteristic} value={5}/>
-            </span>
+          <div className="characteristic-modal">
+            <label htmlFor={characteristic}>{characteristic}</label>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}} onChange={handleCharacteristicRadioChange}>
+              <div>
+                <input type="radio" name={characteristic} value={1} checked={characteristics[applicableCharacteristics[characteristic].id] === 1}/>
+              </div>
+              <div>
+                <input type="radio" name={characteristic} value={2} checked={characteristics[applicableCharacteristics[characteristic].id] === 2}/>
+              </div>
+              <div>
+                <input type="radio" name={characteristic} value={3} checked={characteristics[applicableCharacteristics[characteristic].id] === 3}/>
+              </div>
+              <div>
+                <input type="radio" name={characteristic} value={4} checked={characteristics[applicableCharacteristics[characteristic].id] === 4}/>
+              </div>
+              <div>
+                <input type="radio" name={characteristic} value={5} checked={characteristics[applicableCharacteristics[characteristic].id] === 5}/>
+              </div>
+            </div>
+            <div className="characteristics-modal-options" style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',}}>
+              {minMax[characteristic].map((desc, index) => {
+                const align = minMax[characteristic].length === 3 ? ['left', 'center', 'right'] : ['left', 'right'];
+
+                let spaceStyle = {
+                  width: '50%',
+                  textAlign: `${align[index]}`
+                };
+                if (minMax[characteristic].length === 3) {
+                  spaceStyle = {
+                    width: '33%',
+                    textAlign: `${align[index]}`
+                  };
+                }
+
+                return (
+
+                  <div style={spaceStyle}>{desc}</div>
+                );
+              })}
+            </div>
           </div>
         );
       })}
@@ -350,40 +410,49 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
         e.stopPropagation();
       }}>
         {/* Modal Header */}
-        <div className='modal-header' style={header}>
-          <h4>Write Your Review</h4>
-          <h4 className='product'>About the {name}</h4>
-          <div className='error' style={error}></div><br/>
+        <div className='modal-header'>
+          <div>Write Your Review</div>
+          <div className='product'>About the {currentProduct.name}</div>
+          <div className="accent-underline"></div>
+          <div className='error'></div>
         </div>
 
         {/* Modal Body */}
         <div className='modal-body' style={modalBody}>
-          <label htmlFor='overall-rating'>Overall Rating*</label><br/>
+          <label htmlFor='overall-rating'>Overall Rating<span className="accent-star">*</span></label><br/>
           {starRating}
-          <fieldset style={{marginTop: '20px'}}> <legend htmlFor='recommend-product'>Do you recommend this product?*</legend>
+          <fieldset style={{marginTop: '20px'}}> <legend htmlFor='recommend-product'>Do you recommend this product?<span className="accent-star">*</span></legend>
             {recommendRadio} </fieldset>
-          <fieldset style={{marginTop: '20px'}}> <legend htmlFor='characteristics'>Characteristics*</legend>
+          <fieldset style={{marginTop: '20px'}}> <legend htmlFor='characteristics'>Characteristics<span className="accent-star">*</span></legend>
             {characteristicsRadios} </fieldset>
-
-          <label htmlFor='review-summary'>Review Summary</label><br/>
-          <textarea id='review-summary' rows='4' cols='50' onChange={(e) => setSummary(e.target.value)}/> <br/>
-
-          <label htmlFor='review-body'>Review Body*</label><br/>
-          <textarea id='review-body' rows='4' cols='50' onChange={(e) => setBody(e.target.value)}/> <br/>
-
-          <label for="files">Upload your photos: </label>
-          <input id="files" type="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" onChange={(e) => {
-            handleImageUpload(e);
-          }}/>
+          <div className="modal-segment">
+            <label htmlFor='review-summary'>Review Summary</label><br/>
+            <textarea id='review-summary' rows='4' cols='50' onChange={(e) => setSummary(e.target.value)}/> <br/>
+          </div>
+          <div className="modal-segment">
+            <label htmlFor='review-body'>Review Body<span className="accent-star">*</span></label><br/>
+            <textarea id='review-body' rows='4' cols='50' onChange={(e) => setBody(e.target.value)}/> <br/>
+          </div>
+          <div className="modal-segment">
+            <label for="files">Upload your photos: </label>
+            <input id="files" type="file" multiple="multiple" accept="image/jpeg, image/png, image/jpg" onChange={(e) => {
+              handleImageUpload(e);
+            }}/>
+          </div>
           <output id="result"/>
 
-          <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
-          <input type='text' id='your-nickname'placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
-          <div>For privacy reasons, do not use your full name or email address</div>
+          <div className="modal-segment">
+            <label htmlFor='your-nickname'>What is your nickname?<span className="accent-star">*</span></label><br/>
+            <input type='text' id='your-nickname'placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
+            <div style={{fontSize: '12px', fontDecoration: 'italic'}}>For privacy reasons, do not use your full name or email address</div>
+          </div>
 
-          <label htmlFor='your-email'>Your Email*</label><br/>
-          <input type='text' id='your-email' onChange={(e) => setEmail(e.target.value)}/> <br/>
-          <span>For authentication reasons, you will not be emailed</span>
+          <div className="modal-segment">
+            <label htmlFor='your-email'>Your Email<span className="accent-star">*</span></label><br/>
+            <input type='text' id='your-email' onChange={(e) => setEmail(e.target.value)}/> <br/>
+            <span>For authentication reasons, you will not be emailed</span>
+          </div>
+
         </div>
 
         {/* Modal Footer */}
