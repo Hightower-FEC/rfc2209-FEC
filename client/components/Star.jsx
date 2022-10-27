@@ -5,13 +5,13 @@ const Star = ({backgroundColor, onMouseEnter, onMouseLeave, onClick})=>{
   return (
     <svg id="eHPDQqGymj41" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" shapetendering="geometricPrecision" texttendering="geometricPrecision"
       onMouseEnter={() => {
-        onMouseEnter();
+        onMouseEnter ? onMouseEnter() : null;
       }}
       onMouseLeave={() => {
-        onMouseLeave();
+        onMouseLeave ? onMouseLeave() : null;
       }}
       onClick={()=> {
-        onClick();
+        onClick ? onClick() : null;
       }}>
       <polygon points="0,-11.000438 10.462038,-3.399322 6.465895,8.899541 -6.465895,8.899541 -10.462038,-3.399322 0,-11.000438" transform="translate(26.6 17.609597)" strokeWidth="0"/>
 
