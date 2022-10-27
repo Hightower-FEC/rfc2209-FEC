@@ -7,7 +7,7 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import ScrollToTop from './Scroll/ScrollToTop.jsx';
-//import ProductList from './RelatedItems/ProductList.jsx';
+import Results from './Results.jsx';
 
 const App = () => {
   const [currentProduct, setCurrentProduct] = useState();
@@ -80,7 +80,7 @@ const App = () => {
     return (
       <>
         <TopBar />
-        <RelatedItems currentProduct={searchResults[0]} handleRelatedItemClick={handleRelatedItemClick} />
+        <Results results={searchResults.slice(0, 10)} />
       </>
     );
   }

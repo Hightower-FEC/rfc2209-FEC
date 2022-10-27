@@ -40,7 +40,6 @@ const TopBar = ({searchResults, setSearchResults}) =>{
     event.preventDefault();
     axios.get('/products?count=1011')
       .then(response => {
-        console.log(response.data);
         setSearchResults(response.data);
       })
       .catch(error => console.log(error));
