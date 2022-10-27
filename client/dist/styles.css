@@ -208,6 +208,16 @@ button {
   color: #F1F1F1;
 }
 
+#remove-icon {
+  float: right;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3s;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  color: #F1F1F1;
+}
+
 #favorite-related:hover {
   color: black;
   text-shadow: 0 0 10px white;
@@ -225,13 +235,12 @@ button {
 }
 
 .carousel-outfit {
-  justify-content: space-between;
   white-space: nowrap;
-  /* overflow-x: auto; */
 }
 
 .product-card {
   display: inline-block;
+  /* position: relative; */
   padding: 1%;
   margin: 1%;
   align-items: center;
@@ -247,8 +256,9 @@ button {
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 
-.outfit-card {
+.plus-card {
   display: inline-block;
+  position: absolute;
   padding: 1%;
   margin: 1%;
   align-items: center;
@@ -257,9 +267,6 @@ button {
   background-color: rgba(220,222,223,255);
   color: rgba(241, 236, 236, 0.929);
   transition: transform 0.3s;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
   border-radius: 10px;
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
@@ -273,17 +280,97 @@ button {
   margin: 5px;
 }
 
-.compare-modal {
+.leftArrow, .rightArrow {
+  user-select: none;
+  position: absolute;
+  bottom: 40%;
+  font-size: 100px;
+  text-shadow: 0 0 10px #000;
+  color: white;
+  z-index: 1;
+}
+
+.leftArrow {
+  left: 2%;
+  cursor: pointer;
+}
+.rightArrow {
+  right: 2%;
+  cursor: pointer;
+}
+
+.upper-half {
+  height: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bottom-half {
+  bottom: 20px;
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
+  width: 100%;
+  white-space: pre-wrap;
+  position: absolute;
+}
+
+.sale-price {
+  color: red;
+}
+
+.plus-container {
+  position: relative;
+  left: 0;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+}
+
+#plus-symbol {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+#plus-symbol:hover {
+  width: 75%;
+}
+
+.add-container {
+  position: relative;
+  left: 0;
+  top: 25%;
+  right: 0;
+  bottom: 0;
+}
+
+#add-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.go-top {
+  z-index: 1;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+/* MODAL */
+
+.modal {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, .7);
   justify-content: center;
   align-items: center;
   display: flex;
-  z-index: 1;
+  z-index: 10;
   animation-name: slidein;
   animation-duration: 1s;
 }
@@ -291,11 +378,11 @@ button {
 @keyframes slidein {
   from {
     margin-bottom: 100%;
-    width: 100%
+    width: 100%;
   }
   to {
     margin-top: 0%;
-    width: 100%
+    width: 100%;
   }
 }
 
@@ -358,96 +445,77 @@ tbody > * {
   padding: 1%;
 }
 
-.leftArrow, .rightArrow {
-  user-select: none;
-  position: absolute;
-  bottom: 40%;
-  font-size: 100px;
-  text-shadow: 0 0 10px #000;
-  color: white;
-  z-index: 1;
-}
+/* Q&A */
 
-.leftArrow {
-  left: 2%;
-  cursor: pointer;
-}
-.rightArrow {
-  right: 2%;
-  cursor: pointer;
-}
-
-.upper-half {
-  height: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bottom-half {
-  bottom: 20px;
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
-  width: 100%;
-  white-space: pre-wrap;
-  position: absolute;
-}
-
-.sale-price {
-  color: red;
-}
-
-.plus-card {
-  display: inline-block;
-  position: absolute;
-  padding: 1%;
-  margin: 1%;
-  align-items: center;
-  justify-content: center;
-  height: 350px;
-  background-color: rgba(220,222,223,255);
-  color: rgba(241, 236, 236, 0.929);
-  transition: transform 0.3s;
+.moreAnswers {
+  margin: 10px 0 5px 30px;
+  text-align: left;
+  width: fit-content;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
   border-radius: 10px;
-  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+  color: black;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.plus-container {
-  position: relative;
-  display: inline-block;
-  left: 0;
-  top: 20%;
-  right: 0;
-  bottom: 0;
+.moreAnswers:hover {
+  background-color: #000;
+  color: white;
 }
 
-#plus-symbol {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+/* Ratings */
+
+.ratings-reviews {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 5%;
+}
+
+.summary-container {
+  width: 30%;
+  background-color: #DDDDDD;
+  padding: 20px 20px 20px 20px;
+  height: fit-content;
+  border-radius: 10px;
+  z-index: -2;
+}
+
+.reviews-container {
   width: 60%;
 }
 
-#plus-symbol:hover {
-  width: 75%;
+.summary-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 0 20px 0;
 }
 
-.add-container {
-  position: relative;
-  left: 0;
-  top: 25%;
-  right: 0;
-  bottom: 0;
+.bar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+  align-content: center;
 }
 
-#add-button {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 60%;
+.bar-labels {
+  font-weight: bold;
+  width: fit-content;
+  height: fit-content;
 }
 
-.go-top {
-  z-index: 1;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+.summary-characteristics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.characteristic {
+  font-weight: bold;
 }

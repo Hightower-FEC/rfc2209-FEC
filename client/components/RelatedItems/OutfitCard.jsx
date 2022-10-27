@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { URL } from '../../../config/config.js';
 
-const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClick, number}) => {
+const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClick, number, index}) => {
   const [image, setImage] = useState(null);
   const [salePrice, setSalePrice] = useState(null);
 
@@ -17,11 +17,11 @@ const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClic
 
   return (
     <>
-      <div className="outfit-card" style={{width: width, backgroundImage: `url(${image})`}}>
-        <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
-          <span id="favorite-related" onClick={() => {
+      <div className="product-card" style={{width: width, backgroundImage: `url(${image})`, transform: `translateX(-${index * 110}%)`}}>
+        <div className="upper-half">
+          <span id="remove-icon" onClick={() => {
             handleRemoveOutfitClick(number);
-          }}><strong>⊖</strong></span>
+          }}><strong>❌</strong></span>
         </div>
         <div className="bottom-half">
           <div className="category">{outfit.category}</div>

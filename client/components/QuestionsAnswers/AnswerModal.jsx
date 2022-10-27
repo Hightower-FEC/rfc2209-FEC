@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) => {
+const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, onClose}) => {
 
   // The three input fields for the question modal
   const [answer, setAnswer] = useState('');
@@ -17,7 +17,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: '9999999'
+    zIndex: '999'
   };
   const modalContent = {
     width: '75%',
@@ -84,8 +84,8 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
 
   // Helper function to verify email address
   const verifyEmail = (email) => {
-    let checkEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return email.match(checkEmail);
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return email.match(regex);
   };
   // Helper function to create a span that displays the error message on submission
   const createErrorMsg = (message) => {
@@ -119,20 +119,21 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, onClose}) =>
       valid = false;
       let error = createErrorMsg('Email cannot be blank');
       document.getElementsByClassName('error')[0].appendChild(error);
-    } else if (!verifyEmail(email)) {
+    } else if (!verifyEmail(email)) { // Invalid Email
       valid = false;
       let error = createErrorMsg('Email is not valid');
       document.getElementsByClassName('error')[0].appendChild(error);
     }
 
-    // If still valid, then submit form
+    // If still valid, then collect information and submit form
     if (valid) {
       let formatAnswer = {
         body: answer,
         answerer_name: nickname,
-        answerer_email: email
+        answerer_email: email,
+        photos: []
       };
-      submitAnswer(formatAnswer);
+      submitAnswer(questionId, formatAnswer);
       onClose();
     }
   };

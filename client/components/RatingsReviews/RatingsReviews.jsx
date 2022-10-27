@@ -43,11 +43,11 @@ const RatingsReviews = ({productID}) =>{
    * Only render Ratings and Reviews once we get reviews to render
    */
   return reviews ? (
-    <div>
-      <h3>
-        RatingsReviews
-      </h3>
-      <div style={{display: 'flex', flexDirection: 'row'}}>
+    <div style={{margin: '0 10rem 0 10rem'}}>
+      <h1 style={{margin: '40px 0 10px 0'}}>
+        Ratings and Reviews
+      </h1>
+      <div className="ratings-reviews">
         <Summary productID={productID} reviews={reviews}/>
         <Reviews productID={productID} reviews={reviews} handleSetSort={sortReviews}/>
       </div>
