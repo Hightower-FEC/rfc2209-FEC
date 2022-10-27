@@ -759,3 +759,13 @@ tbody > * {
   background-color: var(--primary-page-bg);
   border-color: var(--primary-text-color);
 }
+
+#result {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.thumbnail {
+  width: 100px;
+}

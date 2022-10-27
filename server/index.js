@@ -3,10 +3,29 @@ const express = require("express");
 const path = require("path");
 const axios = require('axios');
 const cookieHandler = require('./middleware/cookieHandler');
-
+const compression = require('compression');
 const app = express();
 app.use(cookieHandler);
 app.use(express.json());
+
+const shouldCompress = (req, res) => {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses if this request header is present
+    return false;
+  }
+
+  // fallback to standard compression
+  return compression.filter(req, res);
+};
+
+app.use(compression({
+  // filter decides if the response should be compressed or not,
+  // based on the `shouldCompress` function above
+  filter: shouldCompress,
+  // threshold is the byte threshold for the response body size
+  // before compression is considered, the default is 1kb
+  threshold: 0
+}));
 
 const GIT_KEY = process.env.GIT_KEY;
 const URL = process.env.URL + process.env.CAMPUS_CODE;
@@ -348,6 +367,9 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     });
 });
 
+/**
+ * Endpoint for posting a review
+ */
 app.post('/reviews', (req, res) => {
   axios.post(`${URL}/reviews`, req.body, POSTHEADERS)
     .then((response) => {
@@ -362,7 +384,9 @@ app.post('/reviews', (req, res) => {
     });
 });
 
-
+/**
+ * Endpoint for posting a question
+ */
 app.post('/qa/questions', (req, res) => {
   axios.post(`${URL}/qa/questions`, req.body, POSTHEADERS)
     .then((response) => {
@@ -377,6 +401,9 @@ app.post('/qa/questions', (req, res) => {
     });
 });
 
+/**
+ * Endpoint for posting an answer
+ */
 app.post('/qa/questions/:question_id/answers', (req, res) => {
   axios.post(`${URL}/qa/questions/${req.params.question_id}/answers`, req.body, POSTHEADERS)
     .then((response) => {
