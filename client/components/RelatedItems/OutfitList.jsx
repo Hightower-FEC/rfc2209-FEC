@@ -43,7 +43,7 @@ const OutfitList = ({product}) => {
     <div className="carousel">
       <div className="carousel-outfit">
         {outfits.length > 0 ? outfits.map((outfit, key) => {
-          return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
+          return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} key={key} width={'300px'} />;
         }) : <div className="plus-card" style={{width: '300px', position: 'relative', transform: `translateX(-${index * 110}%)`}} onClick={() => {
           addOutfit(product);
         }}>

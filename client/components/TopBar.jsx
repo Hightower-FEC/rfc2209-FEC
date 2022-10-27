@@ -37,7 +37,8 @@ const TopBar = () =>{
   };
 
   const submitEntry = (text) => {
-    axios.get('products?count=1011')
+    event.preventDefault();
+    axios.get('/products?count=1011')
       .then(response => console.log(response.data))
       .catch(error => console.log(error));
   };
@@ -54,7 +55,7 @@ const TopBar = () =>{
         <input id="input-form" placeholder="Search Items" onChange={() => {
           setEntry(event.target.value);
         }}></input>
-        <button id="search-button" class="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
+        <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
       </form>
     </>
   );
