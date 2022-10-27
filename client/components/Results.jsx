@@ -3,7 +3,7 @@ import React from 'react';
 const Results = ({results}) => {
   return (
     <>
-      <div>
+      <div className="results">
         These are the results:
       </div>
       {results.map((result, key) => {

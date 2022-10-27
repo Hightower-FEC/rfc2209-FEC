@@ -80,7 +80,8 @@ const App = () => {
     return (
       <>
         <TopBar />
-        <Results results={searchResults.slice(0, 10)} />
+        <Results results={searchResults} />
+        <ScrollToTop />
       </>
     );
   }

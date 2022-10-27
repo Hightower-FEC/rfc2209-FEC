@@ -642,7 +642,7 @@ tbody > * {
 
 /* RESULTS */
 
-.results-page {
-  height: 400px;
-  text-align: center;
+.results {
+  position: relative;
+  display: block;
 }
