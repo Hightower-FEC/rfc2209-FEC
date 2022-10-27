@@ -80,8 +80,8 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
         </span>
         <span>
           {showMoreAnswerLink(count, increment) ?
-            (<a style={moreAnswer} className='moreAnswers' href='true' onClick={(e) => moreAnswers(e)}>MORE ANSWERS</a>) :
-            (<a style={moreAnswer} className='collaspeAnswers' href='true' onClick={(e) => collapseAnswers(e)}>COLLAPSE ANSWERS</a>)}
+            (<button className='black-button moreAnswers'onClick={(e) => moreAnswers(e)}>MORE ANSWERS</button>) :
+            (<button className='black-button moreAnswers' onClick={(e) => collapseAnswers(e)}>COLLAPSE ANSWERS</button>)}
         </span>
       </div>
       ) :

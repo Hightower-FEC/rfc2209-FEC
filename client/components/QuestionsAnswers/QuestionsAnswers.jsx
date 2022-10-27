@@ -198,7 +198,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // --------------- CSS Style ---------------
   const container = {
     textAlign: 'left',
-    margin: '0 10rem 0 10rem'
+    margin: '80px 10rem 0 10rem'
   };
   const searchField = {
     display: 'inline-block',
@@ -262,9 +262,9 @@ const QuestionsAnswers = ({productID, interactions}) => {
       />
 
       {(showMoreQuestionButton(query, count, increment)) &&
-      (<button data-testid='more-questions' className='moreQuestions' onClick={() => setCount(count + 1)} style={moreQuestionsBtn}>MORE ANSWERED QUESTIONS</button>)}
+      (<button data-testid='more-questions' className='black-button QA-buttons' onClick={() => setCount(count + 1)}>MORE ANSWERED QUESTIONS</button>)}
 
-      <button data-testid='question-modal' className='questionModal' onClick={() => setQShow(true)} style={addQuestionBtn}>ADD A QUESTION +</button>
+      <button data-testid='question-modal' className='black-button QA-buttons' onClick={() => setQShow(true)}>ADD A QUESTION +</button>
 
       <QuestionModal
         name={name}

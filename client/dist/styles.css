@@ -461,9 +461,13 @@ tbody > * {
   cursor: pointer;
 }
 
+.QA-buttons {
+  margin: 20px 0 0 0;
+}
+
 .moreAnswers:hover {
   background-color: #000;
-  color: white;
+  color: #F1F1F1;
 }
 
 /* Ratings */
@@ -518,4 +522,58 @@ tbody > * {
 
 .characteristic {
   font-weight: bold;
+}
+
+.reviews-heading {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.review-name {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+}
+
+.review-date {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.review-summary {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
+
+.review-body {
+  font: 14px;
+  margin: 0 0 20px 0;
+}
+
+.review-options {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.blue-text {
+  color: blue;
+}
+
+.black-button {
+  background-color: #000;
+  border: 2px solid #f1f1f1;
+  color: #f1f1f1;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-right: 10px;
+  transition: 0.3s;
+  padding: 0 10px 0 10px;
+  cursor: pointer;
+}
+
+.black-button:hover {
+  color: #000;
+  background-color: #f1f1f1;
+  border-color: #000;
 }

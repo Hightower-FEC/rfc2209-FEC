@@ -44,7 +44,7 @@ const RatingsReviews = ({productID}) =>{
    */
   return reviews ? (
     <div style={{margin: '0 10rem 0 10rem'}}>
-      <h1 style={{margin: '40px 0 10px 0'}}>
+      <h1 style={{margin: '80px 0 20px 0'}}>
         Ratings and Reviews
       </h1>
       <div className="ratings-reviews">
