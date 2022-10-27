@@ -12,6 +12,7 @@ const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
   const [numofReviewsToRender, setNumofReviewsToRender] = useState(2);
   const sorts = ['relevance', 'helpfulness', 'newest'];
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState();
 
   /**
    * If we change sort, call callback function that handles call to API

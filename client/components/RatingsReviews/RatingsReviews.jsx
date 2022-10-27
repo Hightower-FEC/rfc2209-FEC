@@ -6,7 +6,7 @@ import Reviews from './Reviews.jsx';
 
 const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
   /**
-   * Init reviews as undefined - nothing is rendered unless this state has value
+   * Only render Ratings and Reviews once we get a product for which we need to render reviews for
    */
   const [reviews, setReviews] = useState();
 
@@ -43,7 +43,7 @@ const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
   return reviews ? (
     <div style={{margin: '0 10rem 0 10rem'}}>
       <h1 style={{margin: '40px 0 10px 0'}}>
-        Ratings and Reviews
+        RatingsReviews
       </h1>
       <div className="ratings-reviews">
         <Summary currentProduct={currentProduct} reviewMetaData={reviewMetaData}/>
@@ -52,5 +52,4 @@ const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
     </div>
   ) : <></>;
 };
-
 export default RatingsReviews;
