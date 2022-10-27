@@ -3,9 +3,7 @@ import axios from 'axios';
 
 import Star from './Star.jsx';
 
-import { URL } from '../../config/config.js';
-
-const Stars = ({backgroundColor, rating, productID, size = '12px', needsBackground, color}) => {
+const Stars = ({backgroundColor, rating, reviewMetaData, size = '12px', needsBackground, color}) => {
   const [percentRating, setPercentRating] = useState();
 
   needsBackground = needsBackground || false;
@@ -31,24 +29,20 @@ const Stars = ({backgroundColor, rating, productID, size = '12px', needsBackgrou
   };
 
   useEffect(() => {
-    if (productID) {
-      axios.get(`/reviews/meta?product_id=${productID}`)
-        .then((response) => {
-          let numOfRatings = 0;
-          let totalRating = 0;
-          for (let rating in response.data.ratings) {
-            totalRating += rating * Number(response.data.ratings[rating]);
-            numOfRatings += Number(response.data.ratings[rating]);
-          }
-          roundRating((totalRating / numOfRatings));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    if (reviewMetaData) {
+      let numOfRatings = 0;
+      let totalRating = 0;
+
+      for (let rating in reviewMetaData.ratings) {
+        totalRating += rating * Number(reviewMetaData.ratings[rating]);
+        numOfRatings += Number(reviewMetaData.ratings[rating]);
+      }
+      roundRating((totalRating / numOfRatings));
+
     } else if (rating) {
       roundRating(rating);
     }
-  }, [rating, productID]);
+  }, [rating, reviewMetaData]);
 
 
 
