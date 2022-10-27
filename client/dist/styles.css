@@ -555,6 +555,28 @@ h1 {
   }
 }
 
+.characteristics-modal-options {
+  font-size: 14px;
+}
+
+.characteristic-modal {
+  background-color: var(--secondary-bg-color);
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.modal-segment {
+  margin: 20px 0 0 0;
+}
+
+.error {
+  font-weight: normal;
+  margin-top: 20px;
+  font-size: 16px;
+  color: var(--accent-color);
+}
+
 .modal-content {
   width: 500px;
   background-color: var(--primary-page-bg);
@@ -568,11 +590,8 @@ h1 {
 }
 
 .modal-header {
-  margin: 0;
-  padding-top: 15px;
-  font-size: 12px;
-  font-weight: normal;
-  text-align: left;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .product-col1 {
@@ -772,6 +791,10 @@ tbody > * {
   color: var(--accent-color);
   text-decoration: underline;
   cursor: pointer;
+}
+
+.accent-star {
+  color: var(--accent-color);
 }
 
 .black-button {
