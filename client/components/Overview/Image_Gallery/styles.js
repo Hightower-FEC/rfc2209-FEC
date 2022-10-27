@@ -8,7 +8,6 @@ export const styles = {
       borderRadius: '10px',
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
-      backgroundColor: '#DDDDDD',
       backgroundSize: 'contain',
       backgroundImage: `url(${currentPhoto.url})`,
       cursor: 'zoom-in'
@@ -89,7 +88,6 @@ export const styles = {
     top: '90%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     borderRadius: '10px',
     height: '80px',
     width: '80%'
@@ -153,7 +151,6 @@ export const styles = {
     height: '90px',
     width: '600px',
     borderRadius: '10px',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
     padding: '10px 50px 10px 50px',
     bottom: '10px',
     left: '50px',

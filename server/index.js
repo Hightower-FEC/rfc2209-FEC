@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
  */
 app.get('/products:page?:count?', (req, res) => {
   const page = req.query.page || 1;
-  const count = req.query.page || 5;
+  const count = req.query.count || 5;
 
   axios.get(`${URL}/products?page=${page}&count=${count}`, AUTH)
     .then((response) => {

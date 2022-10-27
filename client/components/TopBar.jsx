@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+//import ScrollToTop from './Scroll/ScrollToTop.jsx';
 
-const TopBar = () =>{
+const TopBar = ({searchResults, setSearchResults}) =>{
+  const [entry, setEntry] = useState('');
+  const [currentResults, setCurrentResults] = useState([]);
 
   const navBarStyles = {
     display: 'flex',
@@ -9,9 +13,10 @@ const TopBar = () =>{
     justifyContent: 'center',
     width: '100%',
     height: '30px',
-    backgroundColor: 'black',
+    backgroundColor: '#090909',
     padding: '20px',
-    margin: '0 !important'
+    margin: '0 !important',
+    flexDirection: 'row',
   };
 
   const titleStyles = {
@@ -30,16 +35,34 @@ const TopBar = () =>{
     transform: 'translate(0, 2px)',
     backgroundImage: 'url(./lib/globeIcon.svg)',
     marginLeft: '10px',
-    float: 'right',
+    float: 'right'
+  };
+
+  const submitEntry = (text) => {
+    event.preventDefault();
+    axios.get('/products?count=1011')
+      .then(response => {
+        console.log(response.data);
+        setSearchResults(response.data);
+      })
+      .catch(error => console.log(error));
   };
 
   return (
-    <div style={navBarStyles}>
-      <div style={titleStyles}>
+    <>
+      <div className="top-bar" style={navBarStyles}>
+        <div style={titleStyles}>
         atelier
-        <div style={logoStyles}></div>
+          <div style={logoStyles}></div>
+        </div>
       </div>
-    </div>
+      <form id="search">
+        <input id="input-form" placeholder="Search Items" onChange={() => {
+          setEntry(event.target.value);
+        }}></input>
+        <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
+      </form>
+    </>
   );
 };
 
