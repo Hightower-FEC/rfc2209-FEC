@@ -4,37 +4,21 @@ import axios from 'axios';
 
 import PostReviewModal from './PostReviewModal.jsx';
 
-const Reviews = ({productID, handleSetSort}) =>{
+const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
   /**
    * Init reviews as undefined - nothing is rendered unless this state has value
    */
-  const [reviews, setReviews] = useState();
   const [sortedBy, setSortedBy] = useState('relevance');
   const [numofReviewsToRender, setNumofReviewsToRender] = useState(2);
   const sorts = ['relevance', 'helpfulness', 'newest'];
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState();
 
   /**
-   * On render, try and get reviews using the productID
+   * If we change sort, call callback function that handles call to API
    */
   useEffect(() => {
-    axios.get(`reviews?product_id=${productID}`)
-      .then((response) => {
-        setReviews(response.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [productID]);
-
-  useEffect(() => {
-    axios.get(`reviews?product_id=${productID}&sort=${sortedBy}`)
-      .then((response) => {
-        setReviews(response.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    handleSetSort(sortedBy);
   }, [sortedBy]);
 
   /**
@@ -48,11 +32,11 @@ const Reviews = ({productID, handleSetSort}) =>{
    * Provides a pop-up modal for posting a review to API (NOT YET IMPLEMENTED)
    */
   const handleAddReviewClick = () => {
-    console.log('Add a review clicked');
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    console.log('Later');
+    setShowModal(false);
   };
 
   const renderedReviews = reviews ? reviews.slice(0, numofReviewsToRender) : null;
@@ -88,7 +72,7 @@ const Reviews = ({productID, handleSetSort}) =>{
       <div>
         {renderedReviews.map((review) => {
           return (
-            <Review productID={productID} review={review}/>
+            <Review review={review}/>
           );
         })}
       </div>
@@ -99,7 +83,7 @@ const Reviews = ({productID, handleSetSort}) =>{
         <button className="black-button" onClick={handleAddReviewClick}>ADD A REVIEW +</button>
       </div>
 
-      <PostReviewModal/>
+      <PostReviewModal showModal={showModal} onClose={handleCloseModal} name={currentProduct.name} submitReview={()=>{}} applicableCharacteristics={()=>{}}/>
     </div>
 
   ) : <></>;

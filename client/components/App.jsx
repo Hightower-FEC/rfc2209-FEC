@@ -8,27 +8,44 @@ import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import ScrollToTop from './Scroll/ScrollToTop.jsx';
 
-import { URL } from '../../config/config.js';
-
 const App = () => {
-  const [currentProductID, setCurrentProductID] = useState();
+  const [currentProduct, setCurrentProduct] = useState();
+  const [reviewMetaData, setReviewMetaData] = useState();
 
+  /**
+   * Initialize currentProduct to arbitary product on app start
+   */
   useEffect(() => {
-    console.log('id:', currentProductID);
-  });
-
-  useEffect(() => {
-    axios.get(`${URL}/products`)
+    axios.get('/products/66646')
       .then((response) => {
-        setCurrentProductID(response.data[4].id);
+        setCurrentProduct(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const handleRelatedItemClick = (id) => {
-    setCurrentProductID(id);
+  /**
+   * Update review meta data on product change
+   */
+  useEffect(() => {
+    if (currentProduct) {
+      axios.get(`/reviews/meta?product_id=${currentProduct.id}`)
+        .then((response) => {
+          setReviewMetaData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [currentProduct]);
+
+  /**
+   * Sets currentProduct to the related item that was clicked
+   * @param productClicked: product to change currentProduct to
+   */
+  const handleRelatedItemClick = (productClicked) => {
+    setCurrentProduct(productClicked);
   };
 
   // Function to track and send user click activity
@@ -42,20 +59,16 @@ const App = () => {
       module: widget
     };
     console.log('Click info:', interaction);
-
-    // axios.post('[INSERT URL]', interaction)
-    //   .then(res => console.log('Sent interaction'))
-    //   .catch(err => console.log('Failed to send interaction', err));
   };
 
-  if (currentProductID) {
+  if (currentProduct) {
     return (
       <div >
         <TopBar/>
-        <Overview productID={currentProductID} interactions={interactions}/>
-        <RelatedItems productID={currentProductID} handleRelatedItemClick={handleRelatedItemClick} interactions={interactions}/>
-        <QuestionsAnswers productID={currentProductID} interactions={interactions}/>
-        <RatingsReviews productID={currentProductID}/>
+        <Overview currentProduct={currentProduct} reviewMetaData={reviewMetaData} interactions={interactions}/>
+        <RelatedItems currentProduct={currentProduct} handleRelatedItemClick={handleRelatedItemClick} interactions={interactions}/>
+        <QuestionsAnswers currentProduct={currentProduct} interactions={interactions}/>
+        <RatingsReviews currentProduct={currentProduct} reviewMetaData={reviewMetaData} interactions={interactions}/>
         <ScrollToTop />
       </div>
     );

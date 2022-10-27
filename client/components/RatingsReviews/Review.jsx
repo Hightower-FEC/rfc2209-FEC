@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import Stars from '../Stars.jsx';
-const Review = ({productID, review}) =>{
+const Review = ({review}) =>{
   const [isHelpful, setisHelpful] = useState(review.helpful);
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
   const [isReported, setIsReported] = useState(false);

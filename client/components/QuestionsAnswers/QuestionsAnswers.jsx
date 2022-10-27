@@ -1,18 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { URL } from '../../../config/config.js';
 import QuestionList from './QuestionList.jsx';
 import QuestionModal from './QuestionModal.jsx';
 
 
-const QuestionsAnswers = ({productID, interactions}) => {
+const QuestionsAnswers = ({currentProduct, interactions}) => {
 
   // For testing different products
   let testID = 66641;
   let testCount = 500;
 
-  // Product name state
-  const [name, setName] = useState('');
   // Sorted questions state
   const [questions, setQuestions] = useState([]);
   // Searched questions state
@@ -26,25 +23,9 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // Renders two questions at a time
   let increment = 2;
 
-  // Get product name for question modal
-  const getProductName = () => {
-    axios.get(`${URL}/products/${productID}`)
-      .then((response) => {
-        setName(response.data.name);
-      })
-      .catch((err) => {
-        console.log('Failed to get product name', err);
-      });
-  };
-
   // Helper function to send a GET request to questions endpoint using the productID as the params and setting the questions state to the result
   const getQuestions = () => {
-    axios.get(`${URL}/qa/questions`, {
-      params: {
-        product_id: testID,
-        count: 10
-      }
-    })
+    axios.get(`/qa/questions?product_id=${currentProduct.id}`)
       .then((response) => {
         // Data is array of objects where each object contains properties for a question like question_body, question_date, answers (object), etc
         let allQuestions = response.data.results;
@@ -61,8 +42,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // Fetch questions and product name for id upon page render and when productID changes
   useEffect(() => {
     getQuestions();
-    getProductName();
-  }, [productID]);
+  }, [currentProduct]);
   // console.log('All questions:', questions);
 
   //----- Expand Question List Functionality -----
@@ -89,7 +69,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // Helper function to submit question from modal
   const submitQuestion = (question) => {
     // Receive a 201 status upon successful question submission
-    axios.post(`${URL}/qa/questions`, {
+    axios.post('/qa/questions', {
       body: question.body,
       name: question.asker,
       email: question.email,
@@ -106,7 +86,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // Helper function to submit question from modal
   const submitAnswer = (questionId, answerObj) => {
     // Receive a 201 status upon successful answer submission
-    axios.post(`${URL}/qa/questions/${questionId}/answers`, {
+    axios.post(`/qa/questions/${questionId}/answers`, {
       body: answerObj.body,
       name: answerObj.answerer_name,
       email: answerObj.answerer_email,
@@ -123,14 +103,14 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // Send a PUT request to update the question's helpfulness
   const handleQuestionHelpful = (questionId) => {
     // Receive a 204 status upon successful PUT request
-    axios.put(`${URL}/qa/questions/${questionId}/helpful`)
+    axios.put(`/qa/questions/${questionId}/helpful`)
       .then((res) => console.log(`Marked question id ${questionId} helpful. Response: `, res))
       .catch((err) => console.log(`Could not mark question id ${questionId} helpful. Error: `, err));
   };
   // Send a PUT request to update the answer's helpfulness
   const handleAnswerHelpful = (answerId) => {
     // Receive a status 204 upon successful PUT request
-    axios.put(`${URL}/qa/answers/${answerId}/helpful`)
+    axios.put(`/qa/answers/${answerId}/helpful`)
       .then((res) => console.log(`Marked answer id ${answerId} helpful. Response: `, res))
       .catch((err) => console.log(`Could not mark answer id ${answerId} helpful. Error: `, err));
   };
@@ -139,14 +119,14 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // Send a PUT request to report the question
   const handleQuestionReport = (questionId) => {
     // Receive a status 204 upon successful PUT request
-    axios.put(`${URL}/qa/questions/${questionId}/report`)
+    axios.put(`/qa/questions/${questionId}/report`)
       .then((res) => console.log(`Reported question id ${questionId} to admin. Response:`, res))
       .catch((err) => console.log(`Could not report question id ${questionId} to admin. Error: `, err));
   };
   // Send a PUT request to report the answer
   const handleAnswerReport = (answerId) => {
     // Receive a status 204 upon successful PUT request
-    axios.put(`${URL}/qa/answers/${answerId}/report`)
+    axios.put(`/qa/answers/${answerId}/report`)
       .then((res) => console.log(`Reported answer id ${answerId} to admin. Response:`, res))
       .catch((err) => console.log(`Could not report answer id ${answerId} to admin. Error: `, err));
   };
@@ -252,7 +232,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
         }
       </div>
       <QuestionList
-        name={name}
+        name={currentProduct.name}
         questions={switchList(query)}
         submitAnswer={submitAnswer}
         handleQuestionHelpful={handleQuestionHelpful}
@@ -268,7 +248,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
 
       <QuestionModal
         name={name}
-        productID={productID}
+        currentProduct={currentProduct}
         showQModal={showQModal}
         onClose={() => setQShow(false)}
         submitQuestion={submitQuestion}

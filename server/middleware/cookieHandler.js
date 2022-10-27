@@ -15,11 +15,13 @@ module.exports = (req, res, next) => {
       let index = cookie.indexOf("=");
       let key = cookie.slice(0, index);
       let token = cookie.slice(index + 1);
-      console.log('Token', cookieString);
       cookies[key] = JSON.parse(decodeURIComponent(token));
     }
     return cookies;
   }, {});
+
+  console.log(parsedCookies);
+
 
   /**
    * Init req.helpfulReviews
@@ -31,7 +33,7 @@ module.exports = (req, res, next) => {
   }
 
   /**
-   * Init req.helpfulReviews
+   * Init req.helpfulQuestions
    */
   if (parsedCookies.helpfulQuestions) {
     req.helpfulQuestions = parsedCookies.helpfulQuestions;
@@ -40,24 +42,13 @@ module.exports = (req, res, next) => {
   }
 
   /**
-   * Init req.helpfulReviews
+   * Init req.helpfulAnswers
    */
   if (parsedCookies.helpfulAnswers) {
     req.helpfulAnswers = parsedCookies.helpfulAnswers;
   } else {
     req.helpfulAnswers = {};
   }
-
-  // /**
-  //  * Init req.reportedReviews
-  //  */
-  // if (parsedCookies.reportedReviews) {
-  //   //console.log('hey: ', parsedCookies);
-  //   req.reportedReviews = parsedCookies.reportedReviews;
-  // } else {
-  //   req.reportedReviews = {};
-  // }
-  // //console.log(req.reportedReviews);
 
   /**
    * If req is a PUT, add id to
@@ -66,7 +57,7 @@ module.exports = (req, res, next) => {
     var partitions = req.url.split('/');
     var anchor = partitions[1];
     var slug = partitions[partitions.length - 1];
-    var id = partitions[2];
+    var id = partitions[partitions.length - 2];
 
     /**
      * Check if req is sent to helpful or report, then add id to helpfulReviews or reportedReviews in request
@@ -77,9 +68,9 @@ module.exports = (req, res, next) => {
 
 
     if (anchor === 'qa' && slug === 'helpful') {
-      if (partitions[1] === 'questions') {
+      if (partitions[2] === 'questions') {
         req.helpfulQuestions[id] = true;
-      } else if (partitions[1] === 'answers') {
+      } else if (partitions[2] === 'answers') {
         req.helpfulAnswers[id] = true;
       }
     }
