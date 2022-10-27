@@ -20,9 +20,7 @@ const ProductList = ({products, currentProduct, handleRelatedItemClick}) => {
   return (
     <div className="carousel">
       <div className="carousel-related">
-        {console.log(products)}
         {products.filter(Boolean).map((product, key) => {
-          console.log(product);
           return <ProductCard product={product} currentProduct={currentProduct} index={index} key={key} width={'300px'} handleRelatedItemClick={handleRelatedItemClick}/>;
         })}
       </div>

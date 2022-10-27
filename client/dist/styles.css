@@ -178,6 +178,36 @@ button {
   opacity: 1;
 }
 
+/* SEARCH BAR */
+
+#search {
+  float: right;
+  position: fixed;
+  margin-top: 13px;
+  margin-left: 25px;
+  color: #f1f1f1;
+  z-index: 15;
+}
+
+#input-form {
+  width: 200px;
+  height: fit-content;
+}
+
+#search-button {
+  color:#f1f1f1;
+  background-color: #000;
+  border: none;
+}
+
+#search-button:hover {
+  margin-top: 7.5px;
+  color: #000;
+  background-color: #f1f1f1;
+  height: 25px;
+  border-radius: 20px;
+}
+
 /* RELATED ITEMS & OUTFITS */
 
 h1 {
@@ -532,30 +562,6 @@ tbody > * {
   font-weight: bold;
 }
 
-/* SCROLL BUTTON */
-
-.go-top {
-  z-index: 1;
-  position: fixed;
-  bottom: 20px;
-  right: 0;
-}
-
-.go-top-button {
-  border: 2px solid #F1F1F1;
-  border-radius: 20px 0% 0% 20px;
-  width: 150px;
-  background-color: #000;
-  color: white;
-  font-weight: 800;
-}
-
-.go-top-button:hover {
-  border: 2px solid black;
-  background-color: #F1F1F1;
-  color: black;
-}
-
 .reviews-heading {
   display: flex;
   gap: 10px;
@@ -608,6 +614,37 @@ tbody > * {
   color: #000;
   background-color: #f1f1f1;
   border-color: #000;
+}
+
+/* SCROLL BUTTON */
+
+.go-top {
+  z-index: 1;
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+}
+
+.go-top-button {
+  border: 2px solid #F1F1F1;
+  border-radius: 20px 0% 0% 20px;
+  width: 150px;
+  background-color: #000;
+  color: white;
+  font-weight: 800;
+}
+
+.go-top-button:hover {
+  border: 2px solid black;
+  background-color: #F1F1F1;
+  color: black;
+}
+
+/* RESULTS */
+
+.results {
+  position: relative;
+  display: block;
 }
 
 #result {

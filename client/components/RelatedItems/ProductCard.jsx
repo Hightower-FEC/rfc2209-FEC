@@ -5,7 +5,7 @@ import Stars from '../Stars.jsx';
 
 
 const ProductCard = ({product, currentProduct, index, width, handleRelatedItemClick}) => {
-  const [relatedProduct, setCard] = useState({});
+  const [relatedProduct, setRelatedProduct] = useState({});
   const [image, setImage] = useState(currentProduct);
   const [salePrice, setSalePrice] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +14,7 @@ const ProductCard = ({product, currentProduct, index, width, handleRelatedItemCl
   useEffect(() => {
     axios.get(`/products/${product}`)
       .then((response) => {
-        setCard(response.data);
+        setRelatedProduct(response.data);
       })
       .then(() => {
         axios.get(`/products/${product}/styles`)

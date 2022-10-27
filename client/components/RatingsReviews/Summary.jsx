@@ -27,7 +27,6 @@ const Summary = ({currentProduct, reviewMetaData}) => {
   useEffect(() => {
     axios.get(`/reviews/meta?product_id=${currentProduct.id}`)
       .then((response) => {
-        console.log(response.data);
         response = response.data;
         let numOfReviews = Number(response.recommended['true']) + Number(response.recommended['false']);
         let reviewsByStar = [0, 0, 0, 0, 0];
@@ -36,7 +35,6 @@ const Summary = ({currentProduct, reviewMetaData}) => {
           totalStars += Number(rating) * response.ratings[rating];
           reviewsByStar[rating - 1] = response.ratings[rating];
         }
-        console.log(response.recommended);
         setAverageRating((Math.round((totalStars / numOfReviews) * 100) / 100).toFixed(1));
         setPercentWhoRecommend((Math.round((response.recommended['true'] / numOfReviews * 100) * 100) / 100).toFixed(0));
         setNumOfReviewsByStar(reviewsByStar);
@@ -119,7 +117,6 @@ const Summary = ({currentProduct, reviewMetaData}) => {
           {Object.keys(characteristics).map((characteristic => {
             return (
               <div>
-                {console.log(characteristic)}
                 <div className="characteristic">{characteristic}</div>
                 <div style={{position: 'relative',
                   width: '100%',
@@ -134,7 +131,6 @@ const Summary = ({currentProduct, reviewMetaData}) => {
                   <div style={{position: 'relative', width: '16px', height: '16px', marginLeft: '-8px'}}><Pointer/></div>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                  {console.log(minMax.characteristic)}
                   {minMax[characteristic].map((desc) => {
                     return (
                       <span>{desc}</span>
