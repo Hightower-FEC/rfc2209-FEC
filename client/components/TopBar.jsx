@@ -29,17 +29,20 @@ const TopBar = () =>{
     color: 'white',
     transform: 'translate(0, 2px)',
     backgroundImage: 'url(./lib/globeIcon.svg)',
-    marginLeft: '10px',
-    float: 'right',
+    marginLeft: '10px'
+    // float: 'right',
   };
 
   return (
-    <div style={navBarStyles}>
-      <div style={titleStyles}>
+    <>
+      <div style={navBarStyles}>
+        <div style={titleStyles}>
         atelier
-        <div style={logoStyles}></div>
+          <div style={logoStyles}></div>
+        </div>
+        <div id="search">Search Bar</div>
       </div>
-    </div>
+    </>
   );
 };
 
