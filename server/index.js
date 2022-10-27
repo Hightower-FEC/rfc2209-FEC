@@ -405,6 +405,27 @@ app.post('/qa/questions', (req, res) => {
  * Endpoint for posting an answer
  */
 app.post('/qa/questions/:question_id/answers', (req, res) => {
+  const photos = req.body.photos;
+
+  let photoUrls = [];
+
+  for (let i = 0; i < photos.length; i++) {
+    fs.writeFile(`../client/dist/assets/${req.params.question_id}_${i}`, photos[i].data, 'binary', function(err) {
+      if (err) {
+        throw err;
+      }
+      console.log('File saved.');
+      photoUrls.push(`../client/dist/assets/${req.params.question_id}_${i}`);
+    });
+  }
+
+  req.body.photos = photoUrls;
+
+
+
+
+
+
   axios.post(`${URL}/qa/questions/${req.params.question_id}/answers`, req.body, POSTHEADERS)
     .then((response) => {
       if (response.status === 201) {
