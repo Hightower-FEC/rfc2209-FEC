@@ -646,3 +646,13 @@ tbody > * {
   position: relative;
   display: block;
 }
+
+#result {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.thumbnail {
+  width: 100px;
+}
