@@ -37,7 +37,12 @@ const ImageModal = ({url, showImage, onClose}) => {
   };
   const modalImage = {
     display: 'block',
-    border: '10px solid white'
+    justifyContent: 'center',
+    border: '10px solid white',
+    width: '100%',
+    height: '100%',
+    maxWidth: '75rem',
+    maxHeight: '75em'
   };
   const X = {
     fontSize: '30px'
