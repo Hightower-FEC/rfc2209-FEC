@@ -47,7 +47,7 @@ const RatingsReviews = ({currentProduct, reviewMetaData, interactions}) =>{
       </h1>
       <div className="ratings-reviews">
         <Summary currentProduct={currentProduct} reviewMetaData={reviewMetaData}/>
-        <Reviews currentProduct={currentProduct} reviews={reviews} handleSetSort={sortReviews}/>
+        <Reviews currentProduct={currentProduct} reviews={reviews} handleSetSort={sortReviews} interactions={interactions}/>
       </div>
     </div>
   ) : <></>;
