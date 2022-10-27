@@ -44,11 +44,15 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
 
   const answerStyle = {
     display: 'inline-block',
-    margin: '10px 0',
+    margin: '0',
     fontSize: '16px',
     maxHeight: '400px',
     width: '100%',
     overflowY: 'auto'
+  };
+  const answerList = {
+    display: 'flex',
+    margin: '10px 0 0 0'
   };
   const A = {
     display: 'inline',
@@ -73,14 +77,17 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
   return (
     hasAnswer() ?
       (<div id='answer-list'>
-        <span style={A}> A: </span>
-        <span style={answerStyle}>{currentList.map((answer, i) =>
-          <AnswerEntry
-            answer={answer} key={i}
-            handleAnswerHelpful={handleAnswerHelpful}
-            handleAnswerReport={handleAnswerReport}
-          />)}
-        </span>
+        <div style={answerList}>
+          <div style={A}> A: </div>
+          <div style={answerStyle}>{currentList.map((answer, i) =>
+            <AnswerEntry
+              answer={answer} key={i}
+              handleAnswerHelpful={handleAnswerHelpful}
+              handleAnswerReport={handleAnswerReport}
+            />)}
+          </div>
+        </div>
+
         {(sortAnswers.length > 2) && <span>
           {showMoreAnswerLink(count, increment) ?
             (<a style={moreAnswer} className='moreAnswers' href='true' onClick={(e) => moreAnswers(e)}>MORE ANSWERS</a>) :

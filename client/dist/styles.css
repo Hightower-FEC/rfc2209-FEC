@@ -520,3 +520,27 @@ tbody > * {
 .thumbnail {
   width: 200px;
 }
+.img-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  z-index: 10;
+  animation-name: image-slide;
+  animation-duration: 0.2s;
+}
+@keyframes image-slide {
+  from {
+    margin-bottom: 100%;
+    width: 100%;
+  }
+  to {
+    margin-top: 0%;
+    width: 100%;
+  }
+}

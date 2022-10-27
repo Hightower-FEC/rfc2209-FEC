@@ -29,27 +29,30 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     setAShow(true);
   };
 
-
   const questionStyle = {
     display: 'block',
     fontSize: '16px',
     margin: '30px 0 0 0',
     padding: '10px',
     backgroundColor: '#DDDDDD',
-    borderRadius: '10px'
-    // borderBottom: '2px solid rgba(0, 0, 0, 0.4)',
+    borderRadius: '10px',
+    minHeight: '100px'
   };
   const questionHeader = {
-
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
   };
   const Q = {
-    display: 'inline-block',
+    display: 'inline',
     float: 'left',
     fontWeight: 'bold',
     margin: '0 10px 0 0',
     fontSize: '18px'
   };
   const questionBody = {
+    display: 'flex',
     fontWeight: 'bold',
     fontSize: '18px'
   };
@@ -64,17 +67,19 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     <div style={questionStyle}>
       <div style={questionHeader}>
         {/* Question body */}
-        <span style={Q}> Q: </span>
-        <span className='question-body' style={questionBody}> {question.question_body} </span>
+        <div>
+          <div style={Q}> Q: </div>
+          <div className='question-body' style={questionBody}>{question.question_body} </div>
+        </div>
         {/* Links */}
-        <span style={links}> Helpful?{' '}
+        <div style={links}> Helpful?{' '}
           {!helpfulness ?
             (<a href='true' onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
             <span> Voted </span> }
           {' '} ({helpCount}) {' '} |  {' '}
           <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
           <a href='true' onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
-        </span>
+        </div>
       </div>
 
       <AnswerList

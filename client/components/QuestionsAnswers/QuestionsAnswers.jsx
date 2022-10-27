@@ -8,7 +8,7 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAnswers = ({productID, interactions}) => {
 
   // For testing different products
-  let testID = 66645;
+  let testID = 66646;
   let testCount = 500;
 
   // Product name state
@@ -66,8 +66,6 @@ const QuestionsAnswers = ({productID, interactions}) => {
   // console.log('All questions:', questions);
 
   //----- Expand Question List Functionality -----
-  // console.log('Question count', count);
-  // console.log('Total questions: ', questions);
   // Helper function to slice the list in increments of two
   const expandQuestionList = (list, count, increment) => {
     return list.slice(0, count * increment);
@@ -152,6 +150,23 @@ const QuestionsAnswers = ({productID, interactions}) => {
   };
   //---------------------------------------------
 
+  // const highlightWord = (word) => {
+  //   let oldTexts = document.getElementsByClassName('question-body');
+  //   console.log('getElements', oldTexts);
+  //   for (let i = 0; i < oldTexts.length; i++) {
+  //     if (word.length >= 0) {
+  //       let text = oldTexts[i];
+  //       let re = new RegExp(word, 'g');
+  //       let newText = text.innerText.replace(re, `<mark>${word}</mark>`);
+  //       text.innerHTML = newText;
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log('useEffect', query);
+  //   highlightWord(query);
+  // }, [query]);
+
   // Function to filter questions list in real time
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -176,23 +191,6 @@ const QuestionsAnswers = ({productID, interactions}) => {
     //   }
     // }
   };
-
-  // const highlightWord = (e) => {
-  //   let oldTexts = document.getElementsByClassName('question-body');
-  //   console.log('getElements', oldTexts);
-  //   for (let i = 0; i < oldTexts.length; i++) {
-  //     if (e.target.value.length >= 0) {
-  //       let text = oldTexts[i];
-  //       let re = new RegExp(e.target.value, 'g');
-  //       let newText = text.innerText.replace(re, `<mark>${e.target.value}</mark>`);
-  //       text.innerHTML = newText;
-  //     }
-  //   }
-  // };
-  // useEffect(() => {
-  //   console.log('useEffect', query);
-  //   highlightWord(query);
-  // }, [query]);
 
 
   // --------------- CSS Style ---------------

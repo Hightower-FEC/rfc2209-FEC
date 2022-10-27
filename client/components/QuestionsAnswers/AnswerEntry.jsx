@@ -34,14 +34,14 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
   };
 
   const answerStyle = {
-    margin: '10px 30px 0 30px',
+    margin: '0px 30px 10px 0px',
     padding: '0 0 10px 0',
     borderBottom: '1px solid rgba(0, 0, 0, 0.4)'
   };
   const answerer = {
     fontStyle: 'italic',
     fontSize: '12px',
-    margin: '30px 0 0 0',
+    margin: '10px 0 0 0',
     color: 'black'
   };
 
@@ -50,7 +50,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
       {answer.body} <br/>
       { (answer.photos.length > 0) &&
       <Images images={answer.photos} />}
-      <span style={answerer}>
+      <div style={answerer}>
         by {answer.answerer_name}, {formatDate(answer.date)} | Helpful?
         {!helpfulness ?
           (<a href='true' onClick={((e) => handleClickHelpfulness(e))}> Yes </a> ) : <span> Voted </span>}
@@ -59,7 +59,7 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
         {!report ?
           <a href='true' onClick={(e) => handleClickReport(e)}> Report </a> :
           <span> Reported </span>}
-      </span>
+      </div>
     </div>
   );
 };
