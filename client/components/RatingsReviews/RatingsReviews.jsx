@@ -8,51 +8,18 @@ import { URL } from '../../../config/config.js';
 
 const RatingsReviews = ({productID}) =>{
   /**
-   * Init reviews as undefined - nothing is rendered unless this state has value
+   * Only render Ratings and Reviews once we get a product for which we need to render reviews for
    */
-  const [reviews, setReviews] = useState();
-
-  /**
-   * On render, try and get reviews using the productID
-   */
-  useEffect(() => {
-    axios.get(`reviews?product_id=${productID}`)
-      .then((response) => {
-        setReviews(response.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [productID]);
-
-  /**
-   * Retrieve reviews from API passing a specified sort parameter
-   */
-  const sortReviews = (sortBy) => {
-    axios.get(`reviews?product_id=${productID}&sort=${sortBy}`)
-      .then((response) => {
-        setReviews(response.data.results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
-  /**
-   * Only render Ratings and Reviews once we get reviews to render
-   */
-  return reviews ? (
+  return productID ? (
     <div>
       <h3>
         RatingsReviews
       </h3>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Summary productID={productID} reviews={reviews}/>
-        <Reviews productID={productID} reviews={reviews} handleSetSort={sortReviews}/>
+        <Summary productID={productID}/>
+        <Reviews productID={productID} />
       </div>
     </div>
   ) : <></>;
 };
-
 export default RatingsReviews;
