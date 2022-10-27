@@ -301,7 +301,7 @@ button {
 #search {
   float: right;
   position: fixed;
-  margin-top: 13px;
+  margin-top: 20px;
   margin-left: 25px;
   color: #f1f1f1;
   z-index: 15;
@@ -313,17 +313,19 @@ button {
 }
 
 #search-button {
+  margin-left: 5px;
+  padding: 0 5px 0 5px;
   color:#f1f1f1;
-  background-color: #000;
+  background-color: rgb(9, 9, 9);
   border: none;
+  height: 30px;
+  border-radius: 20px;
+  transition: 0.3s;
 }
 
 #search-button:hover {
-  margin-top: 7.5px;
-  color: #000;
+  color: rgb(9, 9, 9);
   background-color: #f1f1f1;
-  height: 25px;
-  border-radius: 20px;
 }
 
 /* RELATED ITEMS & OUTFITS */
