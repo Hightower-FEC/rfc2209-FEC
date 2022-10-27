@@ -10,14 +10,19 @@ const RatingsReviews = ({productID}) =>{
   /**
    * Only render Ratings and Reviews once we get a product for which we need to render reviews for
    */
-  return productID ? (
+  const [reviews, setReviews] = useState();
+
+  /**
+   * Only render Ratings and Reviews once we get reviews to render
+   */
+  return reviews ? (
     <div>
       <h3>
         RatingsReviews
       </h3>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Summary productID={productID}/>
-        <Reviews productID={productID} />
+        <Summary productID={productID} reviews={reviews}/>
+        <Reviews productID={productID} reviews={reviews} handleSetSort={sortReviews}/>
       </div>
     </div>
   ) : <></>;

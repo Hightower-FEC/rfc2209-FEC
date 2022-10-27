@@ -31,10 +31,16 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
     let repeatedFeatures = {};
     let combinedFeatures = [];
     for (let i = 0; i < product1.length; i++) {
+      if (!product1[i].value) {
+        continue;
+      }
       repeatedFeatures[product1[i].feature] = product1[i].value;
       combinedFeatures.push(product1[i]);
     }
     for (let i = 0; i < product2.length; i++) {
+      if (!product2[i].value) {
+        continue;
+      }
       if (product2[i].value === repeatedFeatures[product2[i].feature]) {
         continue;
       }
@@ -46,10 +52,11 @@ const ProductCard = ({product, productA, index, width, handleRelatedItemClick}) 
   return (
 
     <>
-      <div className="product-card" style={{width: '300px', transform: `translateX(-${index * 100}%)`, backgroundImage: `url(${image})`, position: 'relative'}} onClick={() => {
+      <div className="product-card" style={{width: width, transform: `translateX(-${index * 110}%)`, backgroundImage: `url(${image})`}} onClick={() => {
         handleRelatedItemClick(card.id);
+        window.scrollTo({top: 20, behavior: 'smooth'});
       }}>
-        <div className="upper-half" /*style={{backgroundImage: `url(${image})`}}*/>
+        <div className="upper-half">
           <span id="favorite-related" className="fa-solid fa-star" onClick={(event) => {
             event.stopPropagation();
             setShowModal(true);
