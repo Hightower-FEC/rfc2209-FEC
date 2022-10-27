@@ -6,7 +6,7 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
   // The eight input fields for the review modal
   const [stars, setStars] = useState(0);
   const [isRecommended, setIsRecommended] = useState(true);
-  const [characteristics, setCharacteristics] = useState();
+  const [characteristics, setCharacteristics] = useState({});
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [nickname, setNickname] = useState('');
@@ -168,12 +168,15 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
     // If still valid, then submit form
     if (valid) {
       let formatReview = {
-        // question_body: ask,
-        // asker_name: nickname,
-        // asker_email: email
-        // // question_helpfulness: 0,
-        // // answers: {},
-        // // reported: false
+        product_id: currentProduct.id,
+        rating: stars,
+        summary: summary,
+        body: body,
+        recommend: isRecommended,
+        name: nickname,
+        email: email,
+        photos: images,
+        characteristics: characteristics
       };
 
       submitReview(formatReview);
@@ -316,32 +319,28 @@ const PostReviewModal = ({showModal, onClose, name, submitReview, applicableChar
 
   const characteristicsRadios =
     <div>
-      <div style={{justifyContent: 'flex-start'}}>
-        <span>
-          <input type="radio" value="true" checked/>
-          <label for="yes">Yes</label>
-        </span>
-
-        <span>
-          <input type="radio" value="false"/>
-          <label for="no">No</label>
-        </span>
-
-        <span>
-          <input type="radio" value="false"/>
-          <label for="no">No</label>
-        </span>
-
-        <span>
-          <input type="radio" value="false"/>
-          <label for="no">No</label>
-        </span>
-
-        <span>
-          <input type="radio" value="false"/>
-          <label for="no">No</label>
-        </span>
-      </div>
+      {Object.keys(applicableCharacteristics).map((characteristic) => {
+        return (
+          <div style={{justifyContent: 'space-between'}}>
+            <label htmlFor={characteristic}>{characteristic}</label><br/>
+            <span >
+              <input type="radio" name={characteristic} value={1}/>
+            </span>
+            <span>
+              <input type="radio" name={characteristic} value={2}/>
+            </span>
+            <span>
+              <input type="radio" name={characteristic} value={3}/>
+            </span>
+            <span>
+              <input type="radio" name={characteristic} value={4}/>
+            </span>
+            <span>
+              <input type="radio" name={characteristic} value={5}/>
+            </span>
+          </div>
+        );
+      })}
     </div>;
 
   return showModal ?
