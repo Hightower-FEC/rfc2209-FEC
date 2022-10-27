@@ -13,18 +13,27 @@ const Reviews = ({productID, handleSetSort}) =>{
   const [numofReviewsToRender, setNumofReviewsToRender] = useState(2);
   const sorts = ['relevance', 'helpfulness', 'newest'];
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState();
 
   /**
    * On render, try and get reviews using the productID
    */
   useEffect(() => {
-    axios.get(`reviews?product_id=${productID}`)
+    axios.get(`/reviews?product_id=${productID}`)
       .then((response) => {
         setReviews(response.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfc/products?product_id=${productID}`)
+      .then((response) => {
+        setName(response.data.name);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
   }, [productID]);
 
   useEffect(() => {
@@ -48,11 +57,11 @@ const Reviews = ({productID, handleSetSort}) =>{
    * Provides a pop-up modal for posting a review to API (NOT YET IMPLEMENTED)
    */
   const handleAddReviewClick = () => {
-    console.log('Add a review clicked');
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    console.log('Later');
+    setShowModal(false);
   };
 
   const renderedReviews = reviews ? reviews.slice(0, numofReviewsToRender) : null;
@@ -94,7 +103,7 @@ const Reviews = ({productID, handleSetSort}) =>{
         <button onClick={handleAddReviewClick}>Add a review +</button>
       </div>
 
-      <PostReviewModal/>
+      <PostReviewModal showModal={showModal} onClose={handleCloseModal} name={name} submitReview={()=>{}}/>
     </div>
 
   ) : <></>;
