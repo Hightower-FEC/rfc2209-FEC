@@ -3,9 +3,7 @@ import axios from 'axios';
 
 import Star from './Star.jsx';
 
-import { URL } from '../../config/config.js';
-
-const Stars = ({backgroundColor, rating, productID, size = '12px', needsBackground, color}) => {
+const Stars = ({backgroundColor, rating, reviewMetaData, size = '12px', needsBackground, color}) => {
   const [percentRating, setPercentRating] = useState();
 
   needsBackground = needsBackground || false;
@@ -20,34 +18,31 @@ const Stars = ({backgroundColor, rating, productID, size = '12px', needsBackgrou
     // Find nearest quarter rating to round to
     const mid = 0.125;
     const quarters = [0, 0.25, 0.5, 0.75, 1];
+    // The actual quarters look kinda strange on render, so these are sort of like, pseudo-quarters that look better when rendered inside the star
+    const renderQuarters = [0, .4, .5, .66, 1];
     for (let i = 0; i < quarters.length; i++) {
       if (decimal < (quarters[i] + mid)) {
-        setPercentRating((wholeRating + quarters[i]) / .05);
+        setPercentRating((wholeRating + renderQuarters[i]) / .05);
         break;
       }
     }
   };
 
   useEffect(() => {
-    if (productID) {
-      axios.get(`/reviews?product_id=${productID}`)
-        .then((response) => {
-          let results = response.data.results;
-          let sumRatings = 0;
-          for (let i = 0; i < results.length; i++) {
-            sumRatings += results[i].rating;
-          }
-          // Take total of ratings sum, divide by number of ratings to get average rating.  Divide average rating by 5 (highest possible rating), then multiple by 100 to get percent.
+    if (reviewMetaData) {
+      let numOfRatings = 0;
+      let totalRating = 0;
 
-          roundRating((sumRatings / results.length));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      for (let rating in reviewMetaData.ratings) {
+        totalRating += rating * Number(reviewMetaData.ratings[rating]);
+        numOfRatings += Number(reviewMetaData.ratings[rating]);
+      }
+      roundRating((totalRating / numOfRatings));
+
     } else if (rating) {
       roundRating(rating);
     }
-  }, [rating, productID]);
+  }, [rating, reviewMetaData]);
 
 
 

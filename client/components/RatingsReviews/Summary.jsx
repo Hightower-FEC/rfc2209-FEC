@@ -5,7 +5,7 @@ import axios from 'axios';
 import Stars from '../Stars.jsx';
 import Pointer from '../Pointer.jsx';
 
-const Summary = ({productID, reviews}) => {
+const Summary = ({currentProduct, reviewMetaData}) => {
   const [averageRating, setAverageRating] = useState();
   const [percentWhoRecommend, setPercentWhoRecommend] = useState();
   const [numOfReviewsByStar, setNumOfReviewsByStar] = useState();
@@ -25,7 +25,7 @@ const Summary = ({productID, reviews}) => {
    *
    */
   useEffect(() => {
-    axios.get(`/reviews/meta?product_id=${productID}`)
+    axios.get(`/reviews/meta?product_id=${currentProduct.id}`)
       .then((response) => {
         console.log(response.data);
         response = response.data;
@@ -42,7 +42,7 @@ const Summary = ({productID, reviews}) => {
         setNumOfReviewsByStar(reviewsByStar);
         setCharacteristics(response.characteristics);
       });
-  }, [productID, reviews]);
+  }, [currentProduct]);
 
 
   return averageRating ? (
@@ -50,7 +50,7 @@ const Summary = ({productID, reviews}) => {
       <div style={{display: 'flex', flexDirection: 'row', gap: '10px', marginBottom: '20px'}}>
         <div style={{fontSize: '32px', fontWeight: 'bold', marginTop: '3px'}}>{averageRating}</div>
         <div style={{width: 'fit-content', height: '45px', }}>
-          <Stars productID={productID} size={'25px'} backgroundColor={'#F1F1F1'} needsBackground={true}/>
+          <Stars reviewMetaData={reviewMetaData} size={'25px'} backgroundColor={'#F1F1F1'} needsBackground={true}/>
         </div>
       </div>
       <div style={{fontSize: '14px'}}>

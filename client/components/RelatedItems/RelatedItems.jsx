@@ -2,34 +2,29 @@ import React, {useState, useEffect} from 'react';
 import ProductList from './ProductList.jsx';
 import OutfitList from './OutfitList.jsx';
 import axios from 'axios';
-import { URL } from '../../../config/config.js';
 
-const RelatedItems = ({productID, handleRelatedItemClick, interactions}) => {
+const RelatedItems = ({currentProduct, handleRelatedItemClick, interactions}) => {
   const [products, setProducts] = useState([]);
-  const [currentProduct, setCurrentProduct] = useState({});
 
+  /**
+   * Get related products
+   */
   useEffect(() => {
-    axios.get(`${URL}/products/${productID}/related`)
+    axios.get(`/products/${currentProduct.id}/related`)
       .then((response) => {
         setProducts(response.data);
-      })
-      .then(() => {
-        axios.get(`${URL}/products/${productID}`)
-          .then((response) => {
-            setCurrentProduct(response.data);
-          });
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [productID]);
+  }, [currentProduct]);
 
   return (
     <div onClick={(e) => interactions(e, 'RelatedItems')}>
       <h1>
         Related Items
       </h1>
-      <ProductList products={products} productA={currentProduct} handleRelatedItemClick={handleRelatedItemClick} />
+      <ProductList products={products} currentProduct={currentProduct} handleRelatedItemClick={handleRelatedItemClick} />
       <h1>
         Your Outfit
       </h1>

@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { URL } from '../../../config/config.js';
 
 const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClick, number, index}) => {
   const [image, setImage] = useState(null);
   const [salePrice, setSalePrice] = useState(null);
 
   useEffect(() => {
-    axios.get(`${URL}/products/${outfit.id}/styles`)
+    axios.get(`/products/${outfit.id}/styles`)
       .then((response) => {
         setImage(response.data.results[0].photos[0].url);
         setSalePrice(response.data.results[0].sale_price);

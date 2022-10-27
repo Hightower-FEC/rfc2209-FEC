@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ProductCard from './ProductCard.jsx';
 
-const ProductList = ({products, productA, handleRelatedItemClick}) => {
+const ProductList = ({products, currentProduct, handleRelatedItemClick}) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -20,8 +20,10 @@ const ProductList = ({products, productA, handleRelatedItemClick}) => {
   return (
     <div className="carousel">
       <div className="carousel-related">
+        {console.log(products)}
         {products.filter(Boolean).map((product, key) => {
-          return <ProductCard product={product} productA={productA} index={index} key={key} width={'300px'} handleRelatedItemClick={handleRelatedItemClick}/>;
+          console.log(product);
+          return <ProductCard product={product} currentProduct={currentProduct} index={index} key={key} width={'300px'} handleRelatedItemClick={handleRelatedItemClick}/>;
         })}
       </div>
       {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {

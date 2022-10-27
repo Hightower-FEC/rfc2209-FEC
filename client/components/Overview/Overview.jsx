@@ -6,15 +6,12 @@ import Stars from '../Stars.jsx';
 import axios from 'axios';
 import { gsap } from 'gsap';
 
-
-import { URL } from '../../../config/config.js';
 const { useEffect, useState, useRef } = React;
 
-const Overview = ({ productID, interactions}) => {
+const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
   const [currentProductStyles, setCurrentProductStyles] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStyle, setCurrentStyle] = useState(null);
-  const [currentProduct, setCurrentProduct] = useState(null);
 
   const [currentImages, setCurrentImages] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
@@ -26,23 +23,17 @@ const Overview = ({ productID, interactions}) => {
   const overviewRef = useRef(null);
 
   useEffect(() => {
-    axios.get(`${URL}/products/${productID}`)
+    axios.get(`/products/${currentProduct.id}/styles`)
       .then((response) => {
-        setCurrentProduct(response.data);
-      })
-      .then(() => {
-        axios.get(`${URL}/products/${productID}/styles`)
-          .then((response) => {
-            setSelectedSize('');
-            setSelectedQty('');
-            setCurrentIndex(0);
-            setImageIndex(0);
-            setCurrentProductStyles(response.data);
-            setCurrentStyle(response.data.results[0]);
-          });
+        setSelectedSize('');
+        setSelectedQty('');
+        setCurrentIndex(0);
+        setImageIndex(0);
+        setCurrentProductStyles(response.data);
+        setCurrentStyle(response.data.results[0]);
       })
       .catch((err) => console.log(err));
-  }, [productID]);
+  }, [currentProduct]);
 
   useEffect(() => {
     console.log(currentStyle);
@@ -171,7 +162,7 @@ const Overview = ({ productID, interactions}) => {
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
               <div style={{width: 'fit-content'}}>
-                <Stars productID={productID} size={'20px'}/>
+                <Stars reviewMetaData={reviewMetaData} size={'20px'}/>
               </div>
               <div style={itemNameStyle}>{currentProduct.name}</div>
             </div>
