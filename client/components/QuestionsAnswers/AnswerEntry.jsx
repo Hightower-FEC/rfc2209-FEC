@@ -7,7 +7,6 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
   const [report, setReport] = useState(false);
   const [helpfulness, setHelpfulness] = useState(answer.helpful);
   const [helpCount, setHelpCount] = useState(answer.helpfulness);
-  console.log(answer);
   let helpful = false;
   // Helper function to toggle helpfulness flag and pass data to parent function
   const handleClickHelpfulness = (e) => {
