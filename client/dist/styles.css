@@ -516,5 +516,6 @@ tbody > * {
   padding: 10px 0;
 }
 .thumbnail {
-  height: 200px
+  height: 100px;
+  width: 100px
 }

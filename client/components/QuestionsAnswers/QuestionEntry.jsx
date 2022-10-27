@@ -14,11 +14,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   let helpful = false;
   const handleClickHelpfulness = (e) => {
     e.preventDefault();
-    /* Pseudocode-ish
-    Once the user clicks on 'Yes', send a PUT request to server. The server will keep track of the answer.id and a boolean will be set to false. In the server, any repeat PUT requests to the same answer id will be handled to just return the boolean instead of sending another PUT request. On the client side, I'll use the boolean to disable the link to upvote the helpfulness.
-    */
     !helpfulness && setHelpCount(helpCount + 1);
-    // The helpfulness state should be set to the boolean sent back by the server
     setHelpfulness(true);
     handleQuestionHelpful(question.question_id, helpful);
   };
@@ -57,7 +53,8 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   const links = {
     display: 'inline-block',
     float: 'right',
-    fontSize: '14px'
+    fontSize: '14px',
+    margin: '0 30px 0 0'
   };
 
   return (
