@@ -62,7 +62,7 @@ const App = () => {
     console.log('Click info:', interaction);
   };
 
-  if (currentProduct) {
+  if (currentProduct && reviewMetaData) {
     return (
       <div >
         <TopBar/>
