@@ -8,7 +8,7 @@ import { URL } from '../../../config/config.js';
 
 const RatingsReviews = ({productID}) =>{
   /**
-   * Init reviews as undefined - nothing is rendered unless this state has value
+   * Only render Ratings and Reviews once we get a product for which we need to render reviews for
    */
   const [reviews, setReviews] = useState();
 
@@ -45,7 +45,7 @@ const RatingsReviews = ({productID}) =>{
   return reviews ? (
     <div style={{margin: '0 10rem 0 10rem'}}>
       <h1 style={{margin: '40px 0 10px 0'}}>
-        Ratings and Reviews
+        RatingsReviews
       </h1>
       <div className="ratings-reviews">
         <Summary productID={productID} reviews={reviews}/>
@@ -54,5 +54,4 @@ const RatingsReviews = ({productID}) =>{
     </div>
   ) : <></>;
 };
-
 export default RatingsReviews;
