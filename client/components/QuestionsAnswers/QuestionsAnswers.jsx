@@ -181,13 +181,12 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
     margin: '80px 10rem 0 10rem'
   };
   const searchField = {
-    display: 'inline-block',
     textAlign: 'left',
-    margin: '0 0 0 0',
+    margin: '7px 0 0 0',
     height: '30px',
-    width: '100%',
+    width: '350px',
     fontSize: '16px',
-    borderRadius: '10px',
+    borderRadius: '20px',
     border: '1px solid rgba(0, 0, 0, 0.4)',
     padding: '20px 10px 20px 10px'
   };
@@ -220,16 +219,23 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
 
   return (
     <div style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
-      <h1 style={{fontSize: '30px'}} >Questions & Answers</h1>
-      <div >
-        {questions.length > 0 ?
-          (<form onSubmit={(e) => e.preventDefault()}>
-            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-          </form>) :
-          (<span style={noQuestionMsg}>
-            No questions for this product yet. Be the first to add one!
-          </span>)
-        }
+      <div className="qa-heading-container">
+        <div>
+          <div className="qa-heading" style={{fontSize: '30px'}} >Questions & Answers</div>
+          <div className="accent-underline"></div>
+
+        </div>
+        <div >
+          {questions.length > 0 ?
+            (<form onSubmit={(e) => e.preventDefault()}>
+              <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+            </form>) :
+            (<span style={noQuestionMsg}>
+              No questions for this product yet. Be the first to add one!
+            </span>)
+          }
+        </div>
+
       </div>
       <QuestionList
         name={currentProduct.name}

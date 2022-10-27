@@ -46,32 +46,17 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
     justifyContent: 'center',
   };
 
-  const productInfoContainerStyles = {
-    margin: '0 0 0 20px',
-    flex: '1 2 auto',
-    display: 'flex',
-    // minWidth: '400px',
-    maxWidth: '400px',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    gap: '10px',
-    alignContent: 'space-between',
-  };
-
-  const stylesContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    gap: '15px',
-    marginTop: '10px',
-    width: 'fit-content',
-    height: 'fit-content',
-    padding: '15px 25px 15px 25px',
-    backgroundColor: '#DDDDDD',
-    borderRadius: '10px',
-    // marginRight: '40px'
-  };
+  // const productInfoContainerStyles = {
+  //   margin: '0 0 0 20px',
+  //   flex: '1 2 auto',
+  //   display: 'flex',
+  //   // minWidth: '400px',
+  //   maxWidth: '400px',
+  //   flexDirection: 'column',
+  //   justifyContent: 'space-between',
+  //   gap: '10px',
+  //   alignContent: 'space-between',
+  // };
 
   const styleStyles = (image) => {
     return {
@@ -111,7 +96,7 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
   };
 
   const itemNameStyle = {
-    fontSize: '50px',
+    fontSize: '40px',
     fontWeight: '700'
   };
 
@@ -158,18 +143,19 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
         <div style={{height: '110px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
-          <div style={productInfoContainerStyles}>
+          <div className="productInfoContainer">
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
               <div style={{width: 'fit-content'}}>
                 <Stars reviewMetaData={reviewMetaData} size={'20px'}/>
               </div>
               <div style={itemNameStyle}>{currentProduct.name}</div>
+              <div className="accent-underline"></div>
             </div>
             <div>{currentStyle.original_price}</div>
             <div>
               <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
-              <div style={stylesContainer}>
+              <div className="stylesContainer">
                 {currentProductStyles.results.map((style, i) => {
                   if (currentStyle.style_id === style.style_id) {
                     return (

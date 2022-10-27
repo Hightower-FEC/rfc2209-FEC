@@ -50,7 +50,7 @@ const Summary = ({currentProduct, reviewMetaData}) => {
       <div style={{display: 'flex', flexDirection: 'row', gap: '10px', marginBottom: '20px'}}>
         <div style={{fontSize: '32px', fontWeight: 'bold', marginTop: '3px'}}>{averageRating}</div>
         <div style={{width: 'fit-content', height: '45px', }}>
-          <Stars reviewMetaData={reviewMetaData} size={'25px'} backgroundColor={'#F1F1F1'} needsBackground={true}/>
+          <Stars reviewMetaData={reviewMetaData} size={'25px'} needsBackground={true}/>
         </div>
       </div>
       <div style={{fontSize: '14px'}}>
@@ -61,56 +61,51 @@ const Summary = ({currentProduct, reviewMetaData}) => {
         <div className="summary-bars">
           <div className="bar-container">
             <div className="bar-labels">5 stars</div>
-            <div style={{position: 'relative',
+            <div className="percent-bars-bg" style={{position: 'relative',
               width: '80%',
               height: '15px',
-              background: 'rgba(0,0,0,0.2)',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[4] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span className="percent-bars" style={{position: 'absolute', width: `${(numOfReviewsByStar[4] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div className="bar-container">
             <div className="bar-labels">4 stars</div>
-            <div style={{position: 'relative',
+            <div className="percent-bars-bg" style={{position: 'relative',
               width: '80%',
               height: '15px',
-              background: 'rgba(0,0,0,0.2)',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[3] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span className="percent-bars" style={{position: 'absolute', width: `${(numOfReviewsByStar[3] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div className="bar-container">
             <div className="bar-labels">3 stars</div>
-            <div style={{position: 'relative',
+            <div className="percent-bars-bg" style={{position: 'relative',
               width: '80%',
               height: '15px',
-              background: 'rgba(0,0,0,0.2)',
               overflow: 'hidden'}}>
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[2] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span className="percent-bars" style={{position: 'absolute', width: `${(numOfReviewsByStar[2] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div className="bar-container">
             <div className="bar-labels">2 stars</div>
-            <div style={{position: 'relative',
+            <div className="percent-bars-bg" style={{position: 'relative',
               width: '80%',
               height: '15px',
-              background: 'rgba(0,0,0,0.2)',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[1] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span className="percent-bars" style={{position: 'absolute', width: `${(numOfReviewsByStar[1] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
           <div className="bar-container">
             <div className="bar-labels">1 stars</div>
-            <div style={{position: 'relative',
+            <div className="percent-bars-bg" style={{position: 'relative',
               width: '80%',
               height: '15px',
-              background: 'rgba(0,0,0,0.2)',
               overflow: 'hidden'}}>
 
-              <span style={{position: 'absolute', background: '#000', width: `${(numOfReviewsByStar[0] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
+              <span className="percent-bars" style={{position: 'absolute', width: `${(numOfReviewsByStar[0] / Math.max(...numOfReviewsByStar)) * 100}%`, zIndex: '1', height: '15px'}}></span>
             </div>
           </div>
         </div>
@@ -121,15 +116,14 @@ const Summary = ({currentProduct, reviewMetaData}) => {
               <div>
                 {console.log(characteristic)}
                 <div className="characteristic">{characteristic}</div>
-                <div style={{position: 'relative',
+                <div className="percent-bars-bg" style={{position: 'relative',
                   width: '100%',
                   height: '10px',
-                  background: 'rgba(0,0,0,0.2)',
                   overflow: 'hidden',
                   display: 'flex',
                   flexDirection: 'row'}}>
 
-                  <div style={{background: 'rgba(0,0,0,0.2)', width: `${characteristics[characteristic]['value'] / .05}%`, height: '10px'}}/>
+                  <div className="percent-bars" style={{ width: `${characteristics[characteristic]['value'] / .05}%`, height: '10px'}}/>
 
                   <div style={{position: 'relative', width: '16px', height: '16px', marginLeft: '-8px'}}><Pointer/></div>
                 </div>

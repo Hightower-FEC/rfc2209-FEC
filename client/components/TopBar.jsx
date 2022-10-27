@@ -9,7 +9,7 @@ const TopBar = () =>{
     justifyContent: 'center',
     width: '100%',
     height: '30px',
-    backgroundColor: 'black',
+    backgroundColor: '#090909',
     padding: '20px',
     margin: '0 !important'
   };
@@ -34,7 +34,7 @@ const TopBar = () =>{
   };
 
   return (
-    <div style={navBarStyles}>
+    <div className="top-bar" style={navBarStyles}>
       <div style={titleStyles}>
         atelier
         <div style={logoStyles}></div>

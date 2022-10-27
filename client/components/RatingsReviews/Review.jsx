@@ -58,10 +58,10 @@ const Review = ({review}) =>{
     return `${month} ${date}, ${year}`;
   };
 
-  const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick} className="blue-text"> Report </u>;
+  const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick} className="accent-text"> Report </u>;
   const recommended = review.recommend ? <div></div> : null;
   const response = review.response ? <div></div> : null;
-  const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick} className="blue-text"> Yes </u>;
+  const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick} className="accent-text"> Yes </u>;
 
   return (
     <div style={{padding: '20px', borderBottom: '1px solid rgba(0, 0, 0, 0.4)'}}>

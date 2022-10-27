@@ -79,7 +79,7 @@ const ImageGallery = ({ productStyle, handleImageClick, imageIndex }) => {
         <div className="thumbnail-leftPointer" onClick={goToPreviousSetOfThumbnails}>‹</div>
         <div className="thumbnail-rightPointer" onClick={goToNextSetOfThumbnails}>›</div>
 
-        <div style={styles.thumbnailBackground}></div>
+        <div className="gallery-thumbnails-container" style={styles.thumbnailBackground}></div>
 
         <div style={styles.thumbnailCarousel}>
           <div style={{
@@ -123,7 +123,7 @@ const ThumbnailSlider = ({ photo, currentIndex, handleThumbnailClick, currentPho
   if (index === currentIndex) {
     return (
       <div style={styles.thumbContainerStyles}>
-        <div
+        <div className="selected-thumbnails"
           onClick={() => { handleThumbnailClick(index); }}
           style={{
             backgroundSize: 'cover',
@@ -134,7 +134,7 @@ const ThumbnailSlider = ({ photo, currentIndex, handleThumbnailClick, currentPho
             marginRight: '10px',
             height: '80px',
             width: '80px',
-            border: '2px solid white',
+            // border: '2px solid white',
             backgroundImage: `url(${photo.thumbnail_url})`
           }}></div>
       </div>

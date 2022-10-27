@@ -42,9 +42,10 @@ const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
    */
   return reviews ? (
     <div style={{margin: '0 10rem 0 10rem'}}>
-      <h1 style={{margin: '80px 0 20px 0'}}>
+      <h1 style={{margin: '80px 0 0 0'}}>
         Ratings and Reviews
       </h1>
+      <div className="accent-underline-reviews"></div>
       <div className="ratings-reviews">
         <Summary currentProduct={currentProduct} reviewMetaData={reviewMetaData}/>
         <Reviews currentProduct={currentProduct} reviews={reviews} handleSetSort={sortReviews}/>
