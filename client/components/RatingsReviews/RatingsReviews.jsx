@@ -4,7 +4,7 @@ import axios from 'axios';
 import Summary from './Summary.jsx';
 import Reviews from './Reviews.jsx';
 
-const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
+const RatingsReviews = ({currentProduct, reviewMetaData, interactions}) =>{
   /**
    * Only render Ratings and Reviews once we get a product for which we need to render reviews for
    */
@@ -41,7 +41,8 @@ const RatingsReviews = ({currentProduct, reviewMetaData}) =>{
    * Only render Ratings and Reviews once we get reviews to render
    */
   return reviews ? (
-    <div style={{margin: '0 10rem 0 10rem'}}>
+    <div style={{margin: '0 10rem 0 10rem'}}
+      onClick={(e)=>interactions(e, 'RatingsReviews')}>
       <h1 style={{margin: '80px 0 0 0'}}>
         Ratings and Reviews
       </h1>
