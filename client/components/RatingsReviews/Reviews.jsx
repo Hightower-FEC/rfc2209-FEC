@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import PostReviewModal from './PostReviewModal.jsx';
 
-const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
+const Reviews = ({currentProduct, reviews, handleSetSort, interactions}) =>{
   /**
    * Init reviews as undefined - nothing is rendered unless this state has value
    */
@@ -70,7 +70,7 @@ const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
       </div>
       {/* Map reviews */}
       <div>
-        {renderedReviews.map((review) => {
+        {renderedReviews.map((review, key) => {
           return (
             <Review review={review}/>
           );
@@ -83,7 +83,7 @@ const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
         <button className="black-button" onClick={handleAddReviewClick}>ADD A REVIEW +</button>
       </div>
 
-      <PostReviewModal showModal={showModal} onClose={handleCloseModal} name={currentProduct.name} submitReview={()=>{}} applicableCharacteristics={()=>{}}/>
+      <PostReviewModal showModal={showModal} onClose={handleCloseModal} name={currentProduct.name} submitReview={()=>{}} applicableCharacteristics={()=>{}} interactions={interactions}/>
     </div>
 
   ) : <></>;
