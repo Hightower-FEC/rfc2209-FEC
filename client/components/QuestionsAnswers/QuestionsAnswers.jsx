@@ -8,7 +8,7 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAnswers = ({productID, interactions}) => {
 
   // For testing different products
-  let testID = 66646;
+  let testID = 66642;
   let testCount = 500;
 
   // Product name state
@@ -240,14 +240,20 @@ const QuestionsAnswers = ({productID, interactions}) => {
     <div style={container} onClick={(e)=>interactions(e, 'QuestionsAnswers')}>
       <h1 style={{fontSize: '30px'}} >Questions & Answers</h1>
       <div >
-        {questions.length > 0 ?
-          (<form onSubmit={(e) => e.preventDefault()}>
-            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-          </form>) :
-          (<span style={noQuestionMsg}>
-            No questions for this product yet. Be the first to add one!
-          </span>)
-        }
+        {/* Render seach bar if there is at one question in list */}
+        {questions.length > 0 &&
+        (<input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+        )}
+        {/* Render default message of no questions */}
+        {switchList(query).length === 0 && query.length === 0 &&
+        (<span style={noQuestionMsg}>
+          No questions for this product yet. Be the first to add one!
+        </span>)}
+        {/* Render message of no results found*/}
+        {switchList(query).length === 0 && query.length > 0 &&
+        (<span style={noQuestionMsg}>
+          No results found
+        </span>)}
       </div>
       <QuestionList
         name={name}
