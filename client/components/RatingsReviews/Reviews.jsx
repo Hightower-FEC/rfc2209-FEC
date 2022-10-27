@@ -46,23 +46,28 @@ const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
    * Handles whether More Reviews button is rendered or not
    * So long as there are more reviews to render, then it will render
    */
-  const moreReviews = renderedReviews && renderedReviews.length < reviews.length ? <button onClick={handleMoreReviewsClick}>More Reviews</button> : null;
+  const moreReviews = renderedReviews && renderedReviews.length < reviews.length ? <button className="black-button" onClick={handleMoreReviewsClick}>MORE REVIEWS</button> : null;
 
   return renderedReviews ? (
     <div className="reviews-container">
       {/* Header */}
-      <h4>
-        {reviews.length} reviews, sorted by
-        <select onChange={(event) => {
-          setSortedBy(event.target.value);
-        }}>
-          {sorts.map((sort, index) => {
-            return (
-              <option value={sort}>{sort}</option>
-            );
-          })}
-        </select>
-      </h4>
+      <div className="reviews-heading">
+        <div>
+          <strong>{reviews.length}</strong> REVIEWS
+        </div>
+        <div>
+          <strong>SORT BY:</strong>
+          <select style={{marginLeft: '10px', padding: '0 0 0 10px'}} onChange={(event) => {
+            setSortedBy(event.target.value);
+          }}>
+            {sorts.map((sort, index) => {
+              return (
+                <option value={sort}>{sort}</option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
       {/* Map reviews */}
       <div>
         {renderedReviews.map((review) => {
@@ -75,7 +80,7 @@ const Reviews = ({currentProduct, reviews, handleSetSort}) =>{
       {/* Buttons for adding or loading reviews */}
       <div style={{padding: '20px'}}>
         {moreReviews}
-        <button onClick={handleAddReviewClick}>Add a review +</button>
+        <button className="black-button" onClick={handleAddReviewClick}>ADD A REVIEW +</button>
       </div>
 
       <PostReviewModal showModal={showModal} onClose={handleCloseModal} name={currentProduct.name} submitReview={()=>{}} applicableCharacteristics={()=>{}}/>

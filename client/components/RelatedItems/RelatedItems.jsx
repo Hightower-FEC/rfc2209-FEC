@@ -21,7 +21,7 @@ const RelatedItems = ({currentProduct, handleRelatedItemClick, interactions}) =>
 
   return (
     <div onClick={(e) => interactions(e, 'RelatedItems')}>
-      <h1 style={{margin: '80px 0 0 138px', fontSize: '30px'}}>
+      <h1>
         Related Items
       </h1>
       <ProductList products={products} currentProduct={currentProduct} handleRelatedItemClick={handleRelatedItemClick} />
