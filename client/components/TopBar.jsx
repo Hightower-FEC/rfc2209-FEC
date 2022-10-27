@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-const TopBar = () =>{
+const TopBar = ({searchResults, setSearchResults}) =>{
   const [entry, setEntry] = useState('');
 
   const navBarStyles = {
@@ -39,7 +39,10 @@ const TopBar = () =>{
   const submitEntry = (text) => {
     event.preventDefault();
     axios.get('/products?count=1011')
-      .then(response => console.log(response.data))
+      .then(response => {
+        console.log(response.data);
+        setSearchResults(response.data);
+      })
       .catch(error => console.log(error));
   };
 

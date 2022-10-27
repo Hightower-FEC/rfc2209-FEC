@@ -7,10 +7,12 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import ScrollToTop from './Scroll/ScrollToTop.jsx';
+//import ProductList from './RelatedItems/ProductList.jsx';
 
 const App = () => {
   const [currentProduct, setCurrentProduct] = useState();
   const [reviewMetaData, setReviewMetaData] = useState();
+  const [searchResults, setSearchResults] = useState([]);
 
   /**
    * Initialize currentProduct to arbitary product on app start
@@ -61,16 +63,25 @@ const App = () => {
     console.log('Click info:', interaction);
   };
 
-  if (currentProduct) {
+  if (currentProduct && searchResults.length === 0) {
     return (
       <div >
-        <TopBar/>
+        <TopBar searchResults={searchResults} setSearchResults={setSearchResults}/>
         <Overview currentProduct={currentProduct} reviewMetaData={reviewMetaData} interactions={interactions}/>
         <RelatedItems currentProduct={currentProduct} handleRelatedItemClick={handleRelatedItemClick} interactions={interactions}/>
         <QuestionsAnswers currentProduct={currentProduct} interactions={interactions}/>
         <RatingsReviews currentProduct={currentProduct} reviewMetaData={reviewMetaData} interactions={interactions}/>
         <ScrollToTop />
       </div>
+    );
+  }
+
+  if (searchResults.length > 1) {
+    return (
+      <>
+        <TopBar />
+        <RelatedItems currentProduct={searchResults[0]} handleRelatedItemClick={handleRelatedItemClick} />
+      </>
     );
   }
 

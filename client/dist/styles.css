@@ -639,3 +639,10 @@ tbody > * {
   background-color: #F1F1F1;
   color: black;
 }
+
+/* RESULTS */
+
+.results-page {
+  height: 400px;
+  text-align: center;
+}
