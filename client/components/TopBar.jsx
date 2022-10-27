@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 const TopBar = () =>{
-  const [input, setInput] = useState('');
+  const [entry, setEntry] = useState('');
 
   const navBarStyles = {
     display: 'flex',
@@ -36,6 +36,12 @@ const TopBar = () =>{
     float: 'right'
   };
 
+  const submitEntry = (text) => {
+    axios.get('products?count=1011')
+      .then(response => console.log(response.data))
+      .catch(error => console.log(error));
+  };
+
   return (
     <>
       <div style={navBarStyles}>
@@ -46,12 +52,9 @@ const TopBar = () =>{
       </div>
       <form id="search">
         <input id="input-form" placeholder="Search Items" onChange={() => {
-          setInput(event.target.value);
+          setEntry(event.target.value);
         }}></input>
-        <button id="search-button" class="fa-solid fa-magnifying-glass fa-lg"
-          onClick={() => {
-            axios.get();
-          }}></button>
+        <button id="search-button" class="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
       </form>
     </>
   );
