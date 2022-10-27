@@ -525,7 +525,7 @@ h1 {
 
 .modal-content {
   width: 500px;
-  background-color: rgb(224, 219, 219);
+  background-color: var(--primary-page-bg);
   display: flex;
   flex-flow: row wrap;
 }
