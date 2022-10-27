@@ -39,6 +39,9 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     borderRadius: '10px'
     // borderBottom: '2px solid rgba(0, 0, 0, 0.4)',
   };
+  const questionHeader = {
+
+  };
   const Q = {
     display: 'inline-block',
     float: 'left',
@@ -59,16 +62,21 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
 
   return (
     <div style={questionStyle}>
-      <span style={Q}> Q: </span>
-      <span className='question-body' style={questionBody}> {question.question_body} </span>
-      <span style={links}> Helpful?{' '}
-        {!helpfulness ?
-          (<a href='true' onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
-          <span> Voted </span> }
-        {' '} ({helpCount}) {' '} |  {' '}
-        <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
-        <a href='true' onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
-      </span>
+      <div style={questionHeader}>
+        {/* Question body */}
+        <span style={Q}> Q: </span>
+        <span className='question-body' style={questionBody}> {question.question_body} </span>
+        {/* Links */}
+        <span style={links}> Helpful?{' '}
+          {!helpfulness ?
+            (<a href='true' onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
+            <span> Voted </span> }
+          {' '} ({helpCount}) {' '} |  {' '}
+          <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
+          <a href='true' onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
+        </span>
+      </div>
+
       <AnswerList
         answers = {question.answers}
         handleAnswerHelpful={handleAnswerHelpful}

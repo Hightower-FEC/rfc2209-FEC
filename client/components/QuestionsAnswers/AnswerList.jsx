@@ -43,12 +43,15 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
   };
 
   const answerStyle = {
-    display: 'block',
+    display: 'inline-block',
     margin: '10px 0',
-    fontSize: '16px'
+    fontSize: '16px',
+    maxHeight: '400px',
+    width: '100%',
+    overflowY: 'auto'
   };
   const A = {
-    display: 'inline-block',
+    display: 'inline',
     float: 'left',
     fontSize: '18px',
     fontWeight: 'normal',
@@ -69,7 +72,7 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
 
   return (
     hasAnswer() ?
-      (<div style={answerStyle}>
+      (<div id='answer-list'>
         <span style={A}> A: </span>
         <span style={answerStyle}>{currentList.map((answer, i) =>
           <AnswerEntry
