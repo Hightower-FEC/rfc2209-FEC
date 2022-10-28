@@ -23,7 +23,6 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
   const modalContent = {
     width: '75%',
     borderRadius: '1rem',
-    backgroundColor: '#fff'
   };
 
   const header = {

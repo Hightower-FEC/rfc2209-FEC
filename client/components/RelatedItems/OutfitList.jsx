@@ -43,18 +43,27 @@ const OutfitList = ({product}) => {
     <div className="carousel">
       <div className="carousel-outfit">
         {outfits.length > 0 ? outfits.map((outfit, key) => {
-          return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} width={'300px'} />;
-        }) : null}
-        <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}}>
+          return <OutfitCard outfit={outfit} index={index} handleRemoveOutfitClick={removeOutfit} number={key} key={key} width={'300px'} />;
+        }) : <div className="plus-card" style={{width: '300px', position: 'relative', transform: `translateX(-${index * 110}%)`}} onClick={() => {
+          addOutfit(product);
+        }}>
           <div className="plus-container">
-            <img src="assets/blueplus.webp" alt="plus symbol" id="plus-symbol" onClick={() => {
-              addOutfit(product);
-            }}></img>
+            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x"></i>
           </div>
           <div className="add-container">
             <button id="add-button">Add to Outfit</button>
           </div>
-        </div>
+        </div>}
+        {outfits.length > 0 ? <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}} onClick={() => {
+          addOutfit(product);
+        }}>
+          <div className="plus-container">
+            <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x"></i>
+          </div>
+          <div className="add-container">
+            <button id="add-button">Add to Outfit</button>
+          </div>
+        </div> : null}
       </div>
       {index > 0 ? <div className="indicators"><div className="leftArrow" onClick={() => {
         updateIndex(index - 1);

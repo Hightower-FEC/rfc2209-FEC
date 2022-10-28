@@ -5,7 +5,7 @@ import AnswerModal from './AnswerModal.jsx';
 // Sub-component for QuestionList: QuestionEntry
 const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHelpful, handleQuestionReport, handleAnswerHelpful, handleAnswerReport}) => {
 
-  const [helpfulness, setHelpfulness] = useState(false);
+  const [helpfulness, setHelpfulness] = useState(question.helpful);
   const [helpCount, setHelpCount] = useState(question.question_helpfulness);
   const [report, setReport] = useState(false);
   const [showAModal, setAShow] = useState(false);

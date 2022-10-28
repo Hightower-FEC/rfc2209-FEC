@@ -6,15 +6,12 @@ import Stars from '../Stars.jsx';
 import axios from 'axios';
 import { gsap } from 'gsap';
 
-
-import { URL } from '../../../config/config.js';
 const { useEffect, useState, useRef } = React;
 
-const Overview = ({ productID, interactions}) => {
+const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
   const [currentProductStyles, setCurrentProductStyles] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentStyle, setCurrentStyle] = useState(null);
-  const [currentProduct, setCurrentProduct] = useState(null);
 
   const [currentImages, setCurrentImages] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
@@ -26,23 +23,17 @@ const Overview = ({ productID, interactions}) => {
   const overviewRef = useRef(null);
 
   useEffect(() => {
-    axios.get(`${URL}/products/${productID}`)
+    axios.get(`/products/${currentProduct.id}/styles`)
       .then((response) => {
-        setCurrentProduct(response.data);
-      })
-      .then(() => {
-        axios.get(`${URL}/products/${productID}/styles`)
-          .then((response) => {
-            setSelectedSize('');
-            setSelectedQty('');
-            setCurrentIndex(0);
-            setImageIndex(0);
-            setCurrentProductStyles(response.data);
-            setCurrentStyle(response.data.results[0]);
-          });
+        setSelectedSize('');
+        setSelectedQty('');
+        setCurrentIndex(0);
+        setImageIndex(0);
+        setCurrentProductStyles(response.data);
+        setCurrentStyle(response.data.results[0]);
       })
       .catch((err) => console.log(err));
-  }, [productID]);
+  }, [currentProduct]);
 
   useEffect(() => {
     console.log(currentStyle);
@@ -55,32 +46,17 @@ const Overview = ({ productID, interactions}) => {
     justifyContent: 'center',
   };
 
-  const productInfoContainerStyles = {
-    margin: '0 0 0 20px',
-    flex: '1 2 auto',
-    display: 'flex',
-    // minWidth: '400px',
-    maxWidth: '400px',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    gap: '10px',
-    alignContent: 'space-between',
-  };
-
-  const stylesContainer = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    gap: '15px',
-    marginTop: '10px',
-    width: 'fit-content',
-    height: 'fit-content',
-    padding: '15px 25px 15px 25px',
-    backgroundColor: '#DDDDDD',
-    borderRadius: '10px',
-    // marginRight: '40px'
-  };
+  // const productInfoContainerStyles = {
+  //   margin: '0 0 0 20px',
+  //   flex: '1 2 auto',
+  //   display: 'flex',
+  //   // minWidth: '400px',
+  //   maxWidth: '400px',
+  //   flexDirection: 'column',
+  //   justifyContent: 'space-between',
+  //   gap: '10px',
+  //   alignContent: 'space-between',
+  // };
 
   const styleStyles = (image) => {
     return {
@@ -99,7 +75,7 @@ const Overview = ({ productID, interactions}) => {
 
   const currentStyleStyles = (image) => {
     return {
-      border: '2px solid rgb(34, 34, 34)',
+      // border: '2px solid rgb(34, 34, 34)',
       height: '70px',
       width: '70px',
       backgroundSize: 'cover',
@@ -120,7 +96,7 @@ const Overview = ({ productID, interactions}) => {
   };
 
   const itemNameStyle = {
-    fontSize: '50px',
+    fontSize: '40px',
     fontWeight: '700'
   };
 
@@ -167,22 +143,24 @@ const Overview = ({ productID, interactions}) => {
         <div style={{height: '110px'}}></div>
         <div style={overviewContainerStyles}>
           <ImageGallery style={{flex: '2 1 auto'}} imageIndex={imageIndex} handleImageClick={handleImageClick} productStyle={currentStyle}/>
-          <div style={productInfoContainerStyles}>
+          <div className="productInfoContainer">
             <div>
               <div style={itemCategoryStyle}>{currentProduct.category.toUpperCase()}</div>
               <div style={{width: 'fit-content'}}>
-                <Stars productID={productID} size={'20px'}/>
+                <Stars reviewMetaData={reviewMetaData} size={'20px'}/>
               </div>
               <div style={itemNameStyle}>{currentProduct.name}</div>
+              <div className="accent-underline"></div>
             </div>
             <div>{currentStyle.original_price}</div>
             <div>
               <div style={selectedStyleStyles}><b>STYLE {':'}  </b>{currentStyle.name}</div>
-              <div style={stylesContainer}>
+              <div className="stylesContainer">
                 {currentProductStyles.results.map((style, i) => {
                   if (currentStyle.style_id === style.style_id) {
                     return (
                       <div key={i}
+                        className="selected-style"
                         style={currentStyleStyles(style.photos[0])}
                         onClick={() => { handleStyleClick(i); }}
                       ></div>
@@ -190,6 +168,7 @@ const Overview = ({ productID, interactions}) => {
                   }
                   return (
                     <div key={i}
+                      // className="selected-style"
                       style={styleStyles(style.photos[0])}
                       onClick={() => { handleStyleClick(i); }}
                     ></div>
@@ -210,12 +189,11 @@ const Overview = ({ productID, interactions}) => {
           height: 'fit-content',
           margin: '20px auto'
         }}>
-          <div style={{
+          <div className="item-desc-seperator" style={{
             display: 'flex',
             flexDirection: 'column',
             width: '65%',
             marginTop: '30px',
-            borderRight: '2px solid rgba(0, 0, 0, 0.3)'
           }}>
             <div style={{
               fontSize: '24px',
