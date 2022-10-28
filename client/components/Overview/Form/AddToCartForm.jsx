@@ -117,7 +117,7 @@ const AddToCartForm = ({currentStyle, handleSizeChange, handleQtyChange, selecte
         <div style={shareButtonStyles}>
           <div>
             <FacebookShareButton
-              url={'http://github.com'}
+              url={'http://18.237.82.198:3001/?'}
               quote={'Checkout this PRODUCT_NAME from Atelier'}>
               <FacebookIcon size={40} round={true}/>
             </FacebookShareButton>
@@ -125,7 +125,7 @@ const AddToCartForm = ({currentStyle, handleSizeChange, handleQtyChange, selecte
 
           <div>
             <TwitterShareButton
-              url={'http://github.com'}
+              url={'http://18.237.82.198:3001/?'}
               quote={'Checkout this PRODUCT_NAME from Atelier'}>
               <TwitterIcon size={40} round={true}/>
             </TwitterShareButton>
@@ -133,7 +133,7 @@ const AddToCartForm = ({currentStyle, handleSizeChange, handleQtyChange, selecte
 
           <div>
             <PinterestShareButton
-              url={'http://github.com'}
+              url={'http://18.237.82.198:3001/?'}
               media={currentStyle.photos[0].url}
               quote={'Checkout this PRODUCT_NAME from Atelier'}>
               <PinterestIcon size={40} round={true}/>
