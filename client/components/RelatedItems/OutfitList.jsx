@@ -51,7 +51,7 @@ const OutfitList = ({product}) => {
             <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x"></i>
           </div>
           <div className="add-container">
-            <button id="add-button">Add to Outfit</button>
+            <div id="add-button">Add to Outfit</div>
           </div>
         </div>}
         {outfits.length > 0 ? <div className="plus-card" style={{width: '300px', transform: `translateX(-${index * 110}%)`}} onClick={() => {
@@ -61,7 +61,7 @@ const OutfitList = ({product}) => {
             <i id="plus-icon" className="fa-solid fa-heart-circle-plus fa-5x"></i>
           </div>
           <div className="add-container">
-            <button id="add-button">Add to Outfit</button>
+            <div id="add-button">Add to Outfit</div>
           </div>
         </div> : null}
       </div>

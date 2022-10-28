@@ -1,13 +1,15 @@
 
-* {
+body * {
   font-family: 'Montserrat', sans-serif;
-
+  transition: background-color 0.5s, fill 0.24s, border 0.5s;
+  /* transition: fill 0.3s; */
 }
 
 body {
   margin: 0px;
   color: var(--primary-text-color);
   background-color: var(--primary-page-bg);
+  transition: 0.5s;
 
   --default-white: #f1f1f1;
 
@@ -22,6 +24,8 @@ body.dark {
   margin: 0px;
   color: var(--primary-text-color);
   background-color: var(--primary-page-bg);
+  transition: 0.5s;
+
   --default-white: #f1f1f1;
 
   --accent-color: #f05656;
@@ -37,6 +41,10 @@ select {
 
 button {
   height: 40px
+}
+
+.item-desc-seperator {
+  border-right: 5px solid var(--secondary-bg-color);
 }
 
 .accent-underline {
@@ -58,6 +66,10 @@ button {
   width: 188px;
   margin: 10px 0 30px 0;
   height: 15px;
+}
+
+.svg-pointer {
+  fill: var(--accent-color)
 }
 
 .star-svg {
@@ -103,6 +115,17 @@ button {
   /* margin-right: 40px; */
 }
 
+.thumbnail-reviews {
+  height: 100px;
+  width: 100px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--secondary-bg-color);
+  border: 1px solid var(--transparent-bg-color);
+  border-radius: 5px;
+}
+
 .gallery-thumbnails-container {
   background-color: var(--transparent-bg-color);
 }
@@ -112,6 +135,10 @@ button {
 }
 
 .selected-thumbnails {
+  border: 2px solid var(--accent-color);
+}
+
+.selected-style {
   border: 2px solid var(--accent-color);
 }
 
@@ -301,8 +328,6 @@ button {
 #search {
   float: right;
   position: fixed;
-  margin-top: 13px;
-  margin-left: 25px;
   color: #f1f1f1;
   z-index: 15;
 }
@@ -313,17 +338,19 @@ button {
 }
 
 #search-button {
+  margin-left: 5px;
+  padding: 0 5px 0 5px;
   color:#f1f1f1;
-  background-color: #000;
+  background-color: rgb(9, 9, 9);
   border: none;
+  height: 30px;
+  border-radius: 20px;
+  transition: 0.3s;
 }
 
 #search-button:hover {
-  margin-top: 7.5px;
-  color: #000;
-  background-color: #f1f1f1;
-  height: 25px;
-  border-radius: 20px;
+  color: rgb(9, 9, 9);
+  background-color: var(--accent-color);
 }
 
 /* RELATED ITEMS & OUTFITS */
@@ -380,8 +407,8 @@ h1 {
 }
 
 #favorite-related:hover, #remove-icon:hover {
-  color: #161616;
-  text-shadow: 0 0 10px white;
+  color: var(--accent-color);
+  text-shadow: 0 0 5px white;
 }
 
 .carousel {
@@ -438,7 +465,7 @@ h1 {
 
 .plus-card:hover #plus-icon {
   transition: 1s;
-  color: var(--primary-page-bg);
+  color: var(--accent-color);
 }
 
 .plus-card:hover #add-button {
@@ -517,6 +544,10 @@ h1 {
 }
 
 #add-button {
+  color: var(--primary-page-bg);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
   display: block;
   transition: 1s;
   opacity: 0;
@@ -553,11 +584,40 @@ h1 {
   }
 }
 
+.characteristics-modal-options {
+  font-size: 14px;
+}
+
+.characteristic-modal {
+  background-color: var(--secondary-bg-color);
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.modal-segment {
+  margin: 20px 0 0 0;
+}
+
+.error {
+  font-weight: normal;
+  margin-top: 20px;
+  font-size: 16px;
+  color: var(--accent-color);
+}
+
 .modal-content {
   width: 500px;
   background-color: var(--primary-page-bg);
+  height: fit-content;
+  width: 75%;
+  border-radius: 1rem;
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-between;
+  gap: 10px;
 }
 
 .modal-content > * {
@@ -566,11 +626,9 @@ h1 {
 }
 
 .modal-header {
-  margin: 0;
-  padding-top: 15px;
-  font-size: 12px;
-  font-weight: normal;
-  text-align: left;
+  height: fit-content;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .product-col1 {
@@ -602,6 +660,7 @@ h1 {
   margin: 0;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
 h3 {
@@ -618,6 +677,10 @@ tbody > * {
   display: flex;
   justify-content: space-between;
 }
+
+/* .q-text {
+  color: var(--primary-text-color);
+} */
 
 .qa-heading {
   font-weight: bold;
@@ -770,6 +833,10 @@ tbody > * {
   color: var(--accent-color);
   text-decoration: underline;
   cursor: pointer;
+}
+
+.accent-star {
+  color: var(--accent-color);
 }
 
 .black-button {

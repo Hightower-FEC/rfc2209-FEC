@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import PostReviewModal from './PostReviewModal.jsx';
 
-const Reviews = ({currentProduct, reviews, handleSetSort, interactions}) =>{
+const Reviews = ({currentProduct, reviewMetaData, reviews, handleSetSort, interactions}) =>{
   /**
    * Init reviews as undefined - nothing is rendered unless this state has value
    */
@@ -37,6 +37,11 @@ const Reviews = ({currentProduct, reviews, handleSetSort, interactions}) =>{
 
   const handleCloseModal = () => {
     setShowModal(false);
+  };
+
+  const handleSubmitReview = () => {
+    handleCloseModal();
+    setSortedBy(sorts[2]);
   };
 
   const renderedReviews = reviews ? reviews.slice(0, numofReviewsToRender) : null;
@@ -82,8 +87,7 @@ const Reviews = ({currentProduct, reviews, handleSetSort, interactions}) =>{
         {moreReviews}
         <button className="black-button" onClick={handleAddReviewClick}>ADD A REVIEW +</button>
       </div>
-
-      <PostReviewModal showModal={showModal} onClose={handleCloseModal} name={currentProduct.name} submitReview={()=>{}} applicableCharacteristics={()=>{}} interactions={interactions}/>
+      <PostReviewModal currentProduct={currentProduct} showModal={showModal} onSubmit={handleSubmitReview} onClose={handleCloseModal} applicableCharacteristics={reviewMetaData.characteristics} interactions={interactions}/>
     </div>
 
   ) : <></>;

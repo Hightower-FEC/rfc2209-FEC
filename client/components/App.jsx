@@ -88,7 +88,7 @@ const App = () => {
     setCurrentResults(results);
   };
 
-  if (currentProduct && currentResults.length === 0) {
+  if (currentProduct && reviewMetaData && currentResults.length === 0) {
     return (
       <div >
         <TopBar submitSearch={submitEntry} />

@@ -67,7 +67,6 @@ const Review = ({review}) =>{
     <div style={{padding: '20px', borderBottom: '1px solid rgba(0, 0, 0, 0.4)'}}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <a className="review-name"><strong style={{marginRight: '10px', fontSize: '18px'}}>{review.reviewer_name}</strong></a>
-        {/* **********************We need to fix this!!! Terrible formatting of date********************** */}
       </div>
       <div style={{width: 'fit-content', margin: '0 0 5px 0'}}>
         <Stars size={'18px'} rating={review.rating}/>
