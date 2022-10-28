@@ -63,6 +63,15 @@ const Review = ({review}) =>{
   const response = review.response ? <div></div> : null;
   const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick} className="accent-text"> Yes </u>;
 
+  // Retrieve url from reviews prop and store in array
+  // console.log('Review prop: ', review.photos[0].url);
+  let photosURL = [];
+  for (let i = 0; i < review.photos.length; i++) {
+    let currentPhoto = review.photos[i].url;
+    photosURL.push(currentPhoto);
+  }
+  // console.log('Photo URL: ', photosURL);
+
   return (
     <div style={{padding: '20px', borderBottom: '1px solid rgba(0, 0, 0, 0.4)'}}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
@@ -80,11 +89,53 @@ const Review = ({review}) =>{
       <div className="review-body">
         {review.body}
       </div>
+      <div className='review-photos'>
+        <Photos images={photosURL} />
+      </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <a className="review-options">Helpful? {helpful} ({helpfulCount}) | {reported}</a>
       </div>
     </div>
 
+  );
+};
+
+const Photos = ({images}) => {
+
+  return (
+    <div style={{display: 'flex', gap: '10px'}}>
+      {images.map((image, i) => <Photo url={image} key={i} />)}
+    </div>
+  );
+};
+
+const Photo = ({url}) => {
+
+  const [showImage, growImage] = useState(false);
+
+  const imageStyle = {
+    margin: '10px 0 5px 0',
+    width: '100px',
+    height: '100px',
+    padding: '5px',
+    backgroundImage: `url(${url})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundColor: '#DDDDDD',
+    border: '1px solid rgba(0, 0, 0, 0.4)',
+    borderRadius: '5px'
+  };
+
+  let largeImage = {
+    margin: '10px 15px 0 0',
+    border: '1px solid black'
+  };
+
+  return (
+    <>
+      <div style={imageStyle} onClick={() => growImage(true)}></div>
+    </>
   );
 };
 
