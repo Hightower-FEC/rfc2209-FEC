@@ -43,18 +43,18 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
   const nicknameStyle = {
     display: 'inline-block',
     textAlign: 'left',
-    margin: '0 0 1rem 0',
-    height: '40px',
+    margin: '0 0 20px 0',
+    height: '20px',
     width: '50%',
-    fontSize: '24px'
+    fontSize: '14px'
   };
   const emailStyle = {
     display: 'inline-block',
     textAlign: 'left',
-    margin: '0 0 1rem 0',
-    height: '40px',
+    margin: '0 0 5px 0',
+    height: '20px',
     width: '50%',
-    fontSize: '24px'
+    fontSize: '14px'
   };
   const questionStyle = {
     width: '90%',
@@ -71,16 +71,6 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
   const footer = {
     display: 'flex',
     justifyContent: 'center'
-  };
-  const btn = {
-    display: 'inline-block',
-    margin: '10px 4rem 0 0',
-    justifyContent: 'center',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: '18px',
-    width: '20%',
-    height: '60px'
   };
 
   // Helper function to verify email address
@@ -144,28 +134,35 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
       <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
         <div className='modal-header' style={header}>
-          <h4>Ask Your Question</h4>
-          <h4 className='product'>About the {name}</h4>
-          <div className='error' style={error}></div><br/>
+          <div>Ask Your Question</div>
+          <div className='product'>About the {name}</div>
+          <div className='error' style={error}></div>
+          <div className='accent-underline'></div>
         </div>
 
         {/* Modal Body */}
         <div className='modal-body' style={modalBody}>
-          <label htmlFor='your-question'>Your Question*</label><br/>
-          <textarea id='your-question' rows='5' cols='200' placeholder='Enter your question here' onChange={(e) => setAsk(e.target.value)} style={questionStyle}/> <br/>
+          <div className='modal-segment'>
+            <div htmlFor='your-question'>Your Question<span className="accent-star">*</span></div>
+            <textarea style={{marginTop: '5px'}} rows='5' cols='200' placeholder='Enter your question here' onChange={(e) => setAsk(e.target.value)} style={questionStyle}/>
+          </div>
 
-          <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
-          <input type='text' id='your-nickname' placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} style={nicknameStyle}/> <br/>
+          <div className='modal-segment'>
+            <label htmlFor='your-nickname'>What is your nickname?<span className="accent-star">*</span></label><br/>
+            <input style={{marginTop: '5px', height: '20px'}} type='text' id='your-nickname' placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} style={nicknameStyle}/>
+          </div>
 
-          <label htmlFor='your-email'>Your Email*</label><br/>
-          <input type='text' id='your-email' placeholder='Example: johndoe@gmail.com' onChange={(e) => setEmail(e.target.value)} style={emailStyle}/> <br/>
-          <span>For privacy reasons, do NOT use your full name or email address!</span>
+          <div className='modal-segment'>
+            <label htmlFor='your-email'>Your Email<span className="accent-star">*</span></label><br/>
+            <input style={{marginTop: '5px'}} type='text' id='your-email' placeholder='Example: johndoe@gmail.com' onChange={(e) => setEmail(e.target.value)} style={emailStyle}/> <br/>
+            <span style={{fontSize: '12px', fontStyle: 'italic', marginTop: '5px'}}>For privacy reasons, do NOT use your full name or email address!</span>
+          </div>
         </div>
 
         {/* Modal Footer */}
         <div className='modal-footer' style={footer}>
-          <button className='submitBtn' onClick={handleSubmit}style={btn}>Submit</button>
-          <button className='closeBtn' onClick={onClose} style={btn} >Close</button>
+          <button className='black-button' onClick={handleSubmit}>Submit</button>
+          <button className='black-button' onClick={onClose} >Close</button>
         </div>
       </div>
     </div>

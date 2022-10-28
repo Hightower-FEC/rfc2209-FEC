@@ -7,20 +7,21 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import ScrollToTop from './Scroll/ScrollToTop.jsx';
-import Results from './Results.jsx';
+import ResultsList from './ResultsList.jsx';
 
 const App = () => {
   const [currentProduct, setCurrentProduct] = useState();
   const [reviewMetaData, setReviewMetaData] = useState();
   const [searchResults, setSearchResults] = useState([]);
+  const [currentResults, setCurrentResults] = useState([]);
 
+  const [isLightMode, setIsLightMode] = useState(true);
   /**
    * Initialize currentProduct to arbitary product on app start
    */
   useEffect(() => {
     axios.get('/products/66646')
       .then((response) => {
-        console.log(response.data);
         setCurrentProduct(response.data);
       })
       .catch((error) => {
@@ -28,6 +29,24 @@ const App = () => {
       });
   }, []);
 
+  //Cache all the products so that the entire catalogue can be iterated with each search entry
+  useEffect(() => {
+    axios.get('/products?count=1011')
+      .then((response) => {
+        setSearchResults(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (!isLightMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [isLightMode]);
   /**
    * Update review meta data on product change
    */
@@ -43,10 +62,15 @@ const App = () => {
     }
   }, [currentProduct]);
 
+  const handleThemeToggle = (e) => {
+    e.preventDefault();
+    setIsLightMode(!isLightMode);
+  };
   /**
    * Sets currentProduct to the related item that was clicked
    * @param productClicked: product to change currentProduct to
    */
+
   const handleRelatedItemClick = (productClicked) => {
     setCurrentProduct(productClicked);
   };
@@ -64,10 +88,22 @@ const App = () => {
     console.log('Click info:', interaction);
   };
 
-  if (currentProduct && reviewMetaData && searchResults.length === 0) {
+  const submitEntry = (text) => {
+    event.preventDefault();
+    let results = [];
+    const allItems = searchResults.slice();
+    allItems.forEach((item) => {
+      if (item.category.toLowerCase() === text.toLowerCase() || item.name.toLowerCase() === text.toLowerCase()) {
+        results.push(item);
+      }
+    });
+    setCurrentResults(results);
+  };
+
+  if (currentProduct && reviewMetaData && currentResults.length === 0) {
     return (
       <div >
-        <TopBar searchResults={searchResults} setSearchResults={setSearchResults}/>
+        <TopBar submitSearch={submitEntry} handleThemeToggle={handleThemeToggle}/>
         <Overview currentProduct={currentProduct} reviewMetaData={reviewMetaData} interactions={interactions}/>
         <RelatedItems currentProduct={currentProduct} handleRelatedItemClick={handleRelatedItemClick} interactions={interactions}/>
         <QuestionsAnswers currentProduct={currentProduct} interactions={interactions}/>
@@ -77,11 +113,12 @@ const App = () => {
     );
   }
 
-  if (searchResults.length > 1) {
+  if (currentResults.length > 1) {
     return (
       <>
-        <TopBar />
-        <Results results={searchResults} />
+        <TopBar handleThemeToggle={handleThemeToggle}/>
+        <div style={{height: '150px'}}></div>
+        <ResultsList results={currentResults} />
         <ScrollToTop />
       </>
     );

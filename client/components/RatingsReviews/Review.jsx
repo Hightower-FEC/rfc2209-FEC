@@ -16,13 +16,17 @@ const Review = ({review}) =>{
     setHelpfulCount(review.helpfulness);
   }, [review]);
 
+  useEffect(() => {
+    console.log('WHAA');
+  }, [isHelpful]);
+
   /**
    * Report review to API in PUT req and store that report in localStorage
    */
   const handleReportClick = () => {
     axios.put(`/reviews/${review.review_id}/report`)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 204) {
           setIsReported(true);
         }
       })
@@ -38,7 +42,7 @@ const Review = ({review}) =>{
   const handleHelpfulClick = () => {
     axios.put(`/reviews/${review.review_id}/helpful`)
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 204) {
           setisHelpful(true);
           setHelpfulCount(helpfulCount + 1);
         }
@@ -61,7 +65,7 @@ const Review = ({review}) =>{
   const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick} className="accent-text"> Report </u>;
   const recommended = review.recommend ? <div></div> : null;
   const response = review.response ? <div></div> : null;
-  const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick} className="accent-text"> Yes </u>;
+  const helpful = isHelpful ? <u> Voted </u> : <u onClick={handleHelpfulClick} className="accent-text"> Yes </u>;
 
   return (
     <div style={{padding: '20px', borderBottom: '1px solid rgba(0, 0, 0, 0.4)'}}>

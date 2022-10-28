@@ -9,13 +9,15 @@ const ComparisonModal = ({show, onClose, currentProduct, relatedProduct, feature
   return (
     <div className="modal" onClick={onClose}>
       <div className="modal-content">
-        <h5 className="modal-header">COMPARING</h5>
+        <div>
+          <div className="modal-header">COMPARING</div>
+          <div className="accent-underline"></div>
+        </div>
         <div id="product-names">
           <h3>{currentProduct.name}</h3>
           <h3 className="blank"></h3>
-          <h3>{currentProduct.name}</h3>
+          <h3>{relatedProduct.name}</h3>
         </div>
-        <div className="blank"></div>
         <table>
           <tbody>
             {features.filter(Boolean).map((feature, key) => {
