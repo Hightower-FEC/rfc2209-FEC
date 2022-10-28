@@ -7,6 +7,10 @@ const QuestionList = ({questions, name, query, submitAnswer, handleQuestionHelpf
 
   const questionListStyle = {
     textAlign: 'left',
+    maxHeight: '1000px',
+    width: '100%',
+    overflowY: 'auto',
+    // scrollBehaviour: 'smooth',
   };
 
   return (

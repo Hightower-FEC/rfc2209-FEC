@@ -1,7 +1,7 @@
 
 body * {
   font-family: 'Montserrat', sans-serif;
-  transition: background-color 0.5s;
+  transition: background-color 0.5s, fill 0.24s, border 0.5s;
   /* transition: fill 0.3s; */
 }
 
@@ -110,6 +110,17 @@ button {
   background-color: var(--secondary-bg-color);
   border-radius: 10px;
   /* margin-right: 40px; */
+}
+
+.thumbnail-reviews {
+  height: 100px;
+  width: 100px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: var(--secondary-bg-color);
+  border: 1px solid var(--transparent-bg-color);
+  border-radius: 5px;
 }
 
 .gallery-thumbnails-container {
@@ -314,8 +325,6 @@ button {
 #search {
   float: right;
   position: fixed;
-  margin-top: 20px;
-  margin-left: 25px;
   color: #f1f1f1;
   z-index: 15;
 }

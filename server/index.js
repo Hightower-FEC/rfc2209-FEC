@@ -1,5 +1,23 @@
+
 require("dotenv").config();
+const GIT_KEY = process.env.GIT_KEY;
+const API_URL = process.env.API_URL + process.env.CAMPUS_CODE;
+const BASE_URL = process.env.BASE_URL;
+const PORT = process.env.PORT;
+const fs = require('fs');
 const express = require("express");
+const multer = require('multer');
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, './uploads');
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  })
+});
+
 const path = require("path");
 const axios = require('axios');
 const cookieHandler = require('./middleware/cookieHandler');
@@ -7,6 +25,7 @@ const compression = require('compression');
 const app = express();
 app.use(cookieHandler);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const shouldCompress = (req, res) => {
   if (req.headers['x-no-compression']) {
@@ -27,8 +46,6 @@ app.use(compression({
   threshold: 0
 }));
 
-const GIT_KEY = process.env.GIT_KEY;
-const URL = process.env.URL + process.env.CAMPUS_CODE;
 
 const AUTH = {
   headers: {
@@ -41,7 +58,10 @@ const POSTHEADERS = {
   headers: Object.assign({}, AUTH.headers, {'Content-Type': 'application/json'})
 };
 
+app.use('/uploads', express.static('uploads'));
+app.use('/assets', express.static('assets'));
 app.use(express.static(path.join(__dirname, '../client/dist')));
+
 
 /**
  * Endpoint for fetching products
@@ -49,8 +69,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('/products:page?:count?', (req, res) => {
   const page = req.query.page || 1;
   const count = req.query.count || 5;
-
-  axios.get(`${URL}/products?page=${page}&count=${count}`, AUTH)
+  axios.get(`${API_URL}/products?page=${page}&count=${count}`, AUTH)
     .then((response) => {
       if (response.status === 200) {
         res.send(response.data);
@@ -69,8 +88,9 @@ app.get('/products:page?:count?', (req, res) => {
  */
 app.get('/products/:product_id', (req, res) => {
   const product_id = req.params.product_id;
+  console.log(GIT_KEY);
 
-  axios.get(`${URL}/products/${product_id}`, AUTH)
+  axios.get(`${API_URL}/products/${product_id}`, AUTH)
     .then((response) => {
       if (response.status === 200) {
         res.send(response.data);
@@ -90,7 +110,7 @@ app.get('/products/:product_id', (req, res) => {
 app.get('/products/:product_id/styles', (req, res) => {
   const product_id = req.params.product_id;
 
-  axios.get(`${URL}/products/${product_id}/styles`, AUTH)
+  axios.get(`${API_URL}/products/${product_id}/styles`, AUTH)
     .then((response) => {
       if (response.status === 200) {
         res.send(response.data);
@@ -110,7 +130,7 @@ app.get('/products/:product_id/styles', (req, res) => {
 app.get('/products/:product_id/related', (req, res) => {
   const product_id = req.params.product_id;
 
-  axios.get(`${URL}/products/${product_id}/related`, AUTH)
+  axios.get(`${API_URL}/products/${product_id}/related`, AUTH)
     .then((response) => {
       if (response.status === 200) {
         res.send(response.data);
@@ -139,7 +159,7 @@ app.get('/reviews:page?:count?:sort?:product_id?', (req, res) => {
     const sort = req.query.sort || 'relevant';
 
     // Send GET to API using params
-    axios.get(`${URL}/reviews?product_id=${product_id}&page=${page}&count=${count}&sort=${sort}`, AUTH)
+    axios.get(`${API_URL}/reviews?product_id=${product_id}&page=${page}&count=${count}&sort=${sort}`, AUTH)
       .then((response) => {
         if (response.status === 200) {
           let data = response.data;
@@ -173,7 +193,7 @@ app.get('/reviews/meta:product_id?', (req, res) => {
   if (!req.query.product_id) {
     res.status(422).send('Must pass a product_id into params');
   } else {
-    axios.get(`${URL}/reviews/meta?product_id=${req.query.product_id}`, AUTH)
+    axios.get(`${API_URL}/reviews/meta?product_id=${req.query.product_id}`, AUTH)
       .then((response) => {
         res.send(response.data);
       })
@@ -197,7 +217,7 @@ app.get('/qa/questions:product_id?:page?:count?', (req, res) => {
     const count = req.query.count || 5000;
 
     // Send GET to API using params
-    axios.get(`${URL}/qa/questions?product_id=${product_id}&page=${page}&count=${count}`, AUTH)
+    axios.get(`${API_URL}/qa/questions?product_id=${product_id}&page=${page}&count=${count}`, AUTH)
       .then((response) => {
         if (response.status === 200) {
           let data = response.data;
@@ -240,7 +260,7 @@ app.get('/qa/questions:product_id?:page?:count?', (req, res) => {
  * Returns answers for a given question.  This does not include any reported answers.
  */
 app.get('/qa/questions/:question_id/answers', (req, res) => {
-  axios.get(`${URL}/qa/questions/${req.params.question_id}/answers`, AUTH)
+  axios.get(`${API_URL}/qa/questions/${req.params.question_id}/answers`, AUTH)
     .then((response) => {
       if (response.status === 200) {
         let data = response.data;
@@ -266,11 +286,11 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
  * Endpoint for marking a review as helpful
  */
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  axios.put(`${URL}/reviews/${req.params.review_id}/helpful`, null, AUTH)
+  axios.put(`${API_URL}/reviews/${req.params.review_id}/helpful`, null, AUTH)
     .then((response) => {
       if (response.status === 204) {
         res.cookie('helpfulReviews', JSON.stringify(req.helpfulReviews));
-        res.send('Successfully marked review as helpful');
+        res.status(204).send('Successfully marked review as helpful');
       } else {
         res.status(500).send(response);
       }
@@ -284,10 +304,10 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
  * Endpoint for reporting a review
  */
 app.put('/reviews/:review_id/report', (req, res) => {
-  axios.put(`${URL}/reviews/${req.params.review_id}/report`, null, AUTH)
+  axios.put(`${API_URL}/reviews/${req.params.review_id}/report`, null, AUTH)
     .then((response) => {
       if (response.status === 204) {
-        res.send('Successfully reported review');
+        res.status(204).send('Successfully reported review');
       } else {
         res.status(500).send(response);
       }
@@ -301,11 +321,11 @@ app.put('/reviews/:review_id/report', (req, res) => {
  * Endpoint for marking a question as helpful
  */
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
-  axios.put(`${URL}/qa/questions/${req.params.question_id}/helpful`, null, AUTH)
+  axios.put(`${API_URL}/qa/questions/${req.params.question_id}/helpful`, null, AUTH)
     .then((response) => {
       if (response.status === 204) {
         res.cookie('helpfulQuestions', JSON.stringify(req.helpfulQuestions));
-        res.send('Successfully marked question as helpful');
+        res.status(204).send('Successfully marked question as helpful');
       } else {
         res.status(500).send(response);
       }
@@ -319,10 +339,10 @@ app.put('/qa/questions/:question_id/helpful', (req, res) => {
  * Endpoint for reporting a question
  */
 app.put('/qa/questions/:question_id/report', (req, res) => {
-  axios.put(`${URL}/qa/questions/${req.params.review_id}/report`, null, AUTH)
+  axios.put(`${API_URL}/qa/questions/${req.params.review_id}/report`, null, AUTH)
     .then((response) => {
       if (response.status === 204) {
-        res.send('Successfully reported question');
+        res.status(204).send('Successfully reported question');
       } else {
         res.status(500).send(response);
       }
@@ -336,11 +356,11 @@ app.put('/qa/questions/:question_id/report', (req, res) => {
  * Endpoint for marking an answer as helpful
  */
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
-  axios.put(`${URL}/qa/answers/${req.params.answer_id}/helpful`, null, AUTH)
+  axios.put(`${API_URL}/qa/answers/${req.params.answer_id}/helpful`, null, AUTH)
     .then((response) => {
       if (response.status === 204) {
         res.cookie('helpfulAnswers', JSON.stringify(req.helpfulAnswers));
-        res.send('Successfully marked answer as helpful');
+        res.status(204).send('Successfully marked answer as helpful');
       } else {
         res.status(500).send(response);
       }
@@ -354,10 +374,10 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
  * Endpoint for reporting a question
  */
 app.put('/qa/answers/:answer_id/report', (req, res) => {
-  axios.put(`${URL}/qa/answers/${req.params.answer_id}/report`, null, AUTH)
+  axios.put(`${API_URL}/qa/answers/${req.params.answer_id}/report`, null, AUTH)
     .then((response) => {
       if (response.status === 204) {
-        res.send('Successfully reported answer');
+        res.status(204).send('Successfully reported answer');
       } else {
         res.status(500).send(response);
       }
@@ -370,28 +390,53 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
 /**
  * Endpoint for posting a review
  */
-app.post('/reviews', (req, res) => {
-  axios.post(`${URL}/reviews`, req.body, POSTHEADERS)
+app.post('/reviews', upload.array('files'), (req, res) => {
+  const images = req.files;
+  let data = {};
+
+  Object.keys(req.body).map(key => {
+    let val = req.body[key];
+    if (key === 'product_id' || key === 'rating') {
+      val = Number(val);
+    } else if (key === 'recommend') {
+      val = val === 'true';
+    } else if (key === 'characteristics') {
+      val = JSON.parse(val);
+    }
+    data[key] = val;
+  });
+
+  let photos = [];
+  for (let i = 0; i < images.length; i++) {
+    photos.push(`${BASE_URL}:${PORT}/${images[i].path}`);
+  }
+
+  data.photos = photos;
+
+  console.log(data);
+  axios.post(`${API_URL}/reviews`, data, POSTHEADERS)
     .then((response) => {
       if (response.status === 201) {
-        res.send('Successfully posted review');
+        res.status(201).send('Successfully posted review');
       } else {
         res.status(500).send(response);
       }
     })
     .catch((error) => {
       res.status(500).send(error);
+      //console.log(error);
     });
+
 });
 
 /**
  * Endpoint for posting a question
  */
 app.post('/qa/questions', (req, res) => {
-  axios.post(`${URL}/qa/questions`, req.body, POSTHEADERS)
+  axios.post(`${API_URL}/qa/questions`, req.body, POSTHEADERS)
     .then((response) => {
       if (response.status === 201) {
-        res.send('Successfully posted question');
+        res.status(201).send('Successfully posted question');
       } else {
         res.status(500).send(response);
       }
@@ -421,15 +466,10 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
 
   req.body.photos = photoUrls;
 
-
-
-
-
-
-  axios.post(`${URL}/qa/questions/${req.params.question_id}/answers`, req.body, POSTHEADERS)
+  axios.post(`${API_URL}/qa/questions/${req.params.question_id}/answers`, req.body, POSTHEADERS)
     .then((response) => {
       if (response.status === 201) {
-        res.send('Successfully posted answer');
+        res.status(201).send('Successfully posted answer');
       } else {
         res.status(500).send(response);
       }
@@ -437,6 +477,12 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
     .catch((error) => {
       res.status(500).send(error);
     });
+});
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+  res.set('Content-Type', 'image/gif');
+  res.redirect('/assets/not-found.gif');
 });
 
 app.listen(3001);

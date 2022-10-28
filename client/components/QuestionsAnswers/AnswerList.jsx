@@ -43,12 +43,19 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
   };
 
   const answerStyle = {
-    display: 'block',
-    margin: '10px 0',
-    fontSize: '16px'
+    display: 'inline-block',
+    margin: '0',
+    fontSize: '16px',
+    maxHeight: '400px',
+    width: '100%',
+    overflowY: 'auto'
+  };
+  const answerList = {
+    display: 'flex',
+    margin: '10px 0 0 0'
   };
   const A = {
-    display: 'inline-block',
+    display: 'inline',
     float: 'left',
     fontSize: '18px',
     fontWeight: 'normal',
@@ -69,20 +76,24 @@ const AnswerList = ({answers, handleAnswerHelpful, handleAnswerReport}) => {
 
   return (
     hasAnswer() ?
-      (<div style={answerStyle}>
-        <span style={A}> A: </span>
-        <span style={answerStyle}>{currentList.map((answer, i) =>
-          <AnswerEntry
-            answer={answer} key={i}
-            handleAnswerHelpful={handleAnswerHelpful}
-            handleAnswerReport={handleAnswerReport}
-          />)}
-        </span>
-        <span>
+      (<div id='answer-list'>
+        <div style={answerList}>
+          <div style={A}> A: </div>
+          <div style={answerStyle}>{currentList.map((answer, i) =>
+            <AnswerEntry
+              answer={answer} key={i}
+              handleAnswerHelpful={handleAnswerHelpful}
+              handleAnswerReport={handleAnswerReport}
+            />)}
+          </div>
+        </div>
+
+        {(sortAnswers.length > 2) && <span>
           {showMoreAnswerLink(count, increment) ?
             (<button className='black-button moreAnswers'onClick={(e) => moreAnswers(e)}>MORE ANSWERS</button>) :
             (<button className='black-button moreAnswers' onClick={(e) => collapseAnswers(e)}>COLLAPSE ANSWERS</button>)}
         </span>
+        }
       </div>
       ) :
       <span className='noAnswer' style={noAnswer}>No answer for this question yet</span>
