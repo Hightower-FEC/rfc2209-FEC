@@ -84,12 +84,9 @@ const App = () => {
         results.push(item);
       }
     });
+    console.log('these are the results set by submit entry', results);
     setCurrentResults(results);
   };
-
-  // useEffect(() => {
-  //   console.log('search results', searchResults.slice());
-  // }, [searchResults]);
 
   if (currentProduct && currentResults.length === 0) {
     return (

@@ -7,15 +7,14 @@ const ResultsList = ({results}) => {
 
   const loadResults = () => {
     let newIndex = currentSlice + 5;
-    let newResults = results.slice(currentSlice, newIndex);
-    let combinedResults = currentResults.concat(newResults);
+    let newSlice = results.slice(currentSlice, newIndex);
+    let combinedResults = currentResults.concat(newSlice);
     setCurrentResults(combinedResults);
     setCurrentSlice(newIndex);
-    console.log('combined results', combinedResults, 'new results', newResults);
   };
 
   useEffect(() => {
-    console.log('current results', currentResults);
+    console.log('current results of useEffect', currentResults);
   }, [currentResults]);
 
   return (
