@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 //import ScrollToTop from './Scroll/ScrollToTop.jsx';
 
 const TopBar = ({searchResults, setSearchResults}) =>{
   const [entry, setEntry] = useState('');
   const [currentResults, setCurrentResults] = useState([]);
+  const [isLightMode, setIsLightMode] = useState(true);
 
   const navBarStyles = {
     display: 'flex',
@@ -38,6 +39,14 @@ const TopBar = ({searchResults, setSearchResults}) =>{
     float: 'right'
   };
 
+  useEffect(() => {
+    if (!isLightMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [isLightMode]);
+
   const submitEntry = (text) => {
     event.preventDefault();
     axios.get('/products?count=1011')
@@ -46,6 +55,11 @@ const TopBar = ({searchResults, setSearchResults}) =>{
         setSearchResults(response.data);
       })
       .catch(error => console.log(error));
+  };
+
+  const handleThemeToggle = (e) => {
+    e.preventDefault();
+    setIsLightMode(!isLightMode);
   };
 
   return (
@@ -61,6 +75,7 @@ const TopBar = ({searchResults, setSearchResults}) =>{
           setEntry(event.target.value);
         }}></input>
         <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
+        <button onClick={handleThemeToggle}></button>
       </form>
     </>
   );
