@@ -223,16 +223,16 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
           <div className="qa-heading" style={{fontSize: '30px'}} >Questions & Answers</div>
           <div className="accent-underline"></div>
         </div>
-      </div>
-      <div >
-        {questions.length > 0 ?
-          (<form onSubmit={(e) => e.preventDefault()}>
-            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-          </form>) :
-          (<span style={noQuestionMsg}>
-            No questions for this product yet. Be the first to add one!
-          </span>)
-        }
+        <div >
+          {questions.length > 0 ?
+            (<form onSubmit={(e) => e.preventDefault()}>
+              <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+            </form>) :
+            (<span style={noQuestionMsg}>
+              No questions for this product yet. Be the first to add one!
+            </span>)
+          }
+        </div>
       </div>
       <QuestionList
         name={currentProduct.name}
