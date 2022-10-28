@@ -433,8 +433,8 @@ h1 {
   align-items: center;
   justify-content: center;
   height: 350px;
-  background-color: rgba(220,222,223,255);
-  color: rgba(241, 236, 236, 0.929);
+  background-color: var(--primary-page-bg);
+  color: var(--primary-text-color);
   transition: transform 0.3s;
   background-repeat: no-repeat;
   background-position: center;
@@ -488,7 +488,7 @@ h1 {
   bottom: 40%;
   font-size: 100px;
   text-shadow: 0 0 10px var(--primary-text-color);
-  color: white;
+  color: var(--default-white);
   z-index: 1;
 }
 
@@ -499,6 +499,10 @@ h1 {
 .rightArrow {
   right: 2%;
   cursor: pointer;
+}
+
+.leftArrow:hover, .rightArrow:hover {
+  color: var(--accent-color);
 }
 
 .upper-half {
@@ -564,7 +568,7 @@ h1 {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: var(--primary-page-bg);
   justify-content: center;
   align-items: center;
   display: flex;

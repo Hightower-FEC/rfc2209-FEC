@@ -40,6 +40,7 @@ const TopBar = ({submitSearch}) =>{
   };
 
   useEffect(() => {
+    console.log('is light', isLightMode);
     if (!isLightMode) {
       document.body.classList.add('dark');
     } else {
