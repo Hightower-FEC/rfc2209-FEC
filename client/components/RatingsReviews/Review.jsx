@@ -63,8 +63,8 @@ const Review = ({review}) =>{
   };
 
   const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick} className="accent-text"> Report </u>;
-  const recommended = review.recommend ? <div></div> : null;
-  const response = review.response ? <div></div> : null;
+  const recommended = review.recommend ? <div> ✔ I recommend this product</div> : null;
+  const response = review.response ? <><div> Response: </div><div> {review.response} </div></> : null;
   const helpful = isHelpful ? <u> Voted </u> : <u onClick={handleHelpfulClick} className="accent-text"> Yes </u>;
 
   return (
@@ -83,6 +83,9 @@ const Review = ({review}) =>{
       </div>
       <div className="review-body">
         {review.body}
+      </div>
+      <div className="review-recommend">
+        {recommended}
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
         <a className="review-options">Helpful? {helpful} ({helpfulCount}) | {reported}</a>
