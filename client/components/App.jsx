@@ -88,6 +88,11 @@ const App = () => {
     console.log('Click info:', interaction);
   };
 
+  const handleSearchItemClick = (newProduct) => {
+    setCurrentResults('');
+    setCurrentProduct(newProduct);
+  };
+
   const submitEntry = (text) => {
     event.preventDefault();
     let results = [];
@@ -98,6 +103,8 @@ const App = () => {
       }
     });
     setCurrentResults(results);
+    setCurrentProduct(undefined);
+    setReviewMetaData(undefined);
   };
 
   if (currentProduct && reviewMetaData && currentResults.length === 0) {
@@ -118,7 +125,7 @@ const App = () => {
       <>
         <TopBar handleThemeToggle={handleThemeToggle}/>
         <div style={{height: '150px'}}></div>
-        <ResultsList results={currentResults} />
+        <ResultsList results={currentResults} onClick={handleSearchItemClick}/>
         <ScrollToTop />
       </>
     );
