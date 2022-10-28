@@ -46,7 +46,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
   const nicknameStyle = {
     display: 'inline-block',
     textAlign: 'left',
-    margin: '0 0 1rem 0',
+    margin: '0 0 0 0',
     height: '40px',
     width: '50%',
     fontSize: '24px'
@@ -54,7 +54,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
   const emailStyle = {
     display: 'inline-block',
     textAlign: 'left',
-    margin: '0 0 1rem 0',
+    margin: '0 0 0 0',
     height: '40px',
     width: '50%',
     fontSize: '24px'
@@ -201,38 +201,40 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
 
   return (showAModal && (
     <div className='modal' style={modalStyle} onClick={onClose}>
-      <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
+      <div className='modal-content' onClick={(e) => e.stopPropagation()}>
         {/* Modal Header */}
         <div className='modal-header' style={header}>
-          <h4 className='modal-timer'>Submit Your Answer</h4>
-          <h4>{name}: {questionBody}</h4>
+          <div className='modal-timer'>Submit Your Answer</div>
+          <div>{name}: {questionBody}</div>
+          <div className='accent-underline'></div>
           <div className='error' style={error}></div><br/>
+
         </div>
 
         {/* Modal Body */}
         <div className='modal-body' style={modalBody}>
           {/* Your Answer */}
-          <label htmlFor='your-answer'>Your Answer*</label><br/>
+          <label htmlFor='your-answer'>Your Answer<span className="accent-star">*</span></label><br/>
           <textarea id='your-answer' rows='5' cols='200' placeholder='Enter your answer here' onChange={(e) => setAnswer(e.target.value)} style={answerStyle}/> <br/>
           {/* Your Photos */}
           <label id='files' htmlFor='files' >Upload Your Photos!</label><br/>
           <input type='file' id='files' multiple='multiple' accept='image/png image/jepg image/jpg' onChange={(e) => readImages(e)}/>
           <output id='result' />
           {/* Your Nickname */}
-          <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
-          <input type='text' id='your-nickname' placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} style={nicknameStyle}/> <br/>
-          <span>For privacy reasons, do not use your full name or email address</span><br/>
+          <label htmlFor='your-nickname'>What is your nickname?<span className="accent-star">*</span></label><br/>
+          <input type='text' id='your-nickname' style={{marginTop: '5px', height: '20px'}}placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} style={nicknameStyle}/> <br/>
+          <span style={{fontSize: '12px', fontStyle: 'italic', marginTop: '5px'}}>For privacy reasons, do not use your full name or email address</span><br/>
           {/* Your Email */}
-          <label htmlFor='your-email'>Your Email*</label><br/>
+          <label htmlFor='your-email'>Your Email<span className="accent-star">*</span></label><br/>
           <input type='text' id='your-email' placeholder='Example: johndoe@gmail.com' onChange={(e) => setEmail(e.target.value)} style={emailStyle}/> <br/>
-          <span>For authentication reasons, you will not be emailed</span><br/>
+          <span style={{fontSize: '12px', fontStyle: 'italic', marginTop: '5px'}}>For authentication reasons, you will not be emailed</span><br/>
 
         </div>
 
         {/* Modal Footer */}
-        <div className='modal-footer' style={footer}>
-          <button className='submitBtn' onClick={handleSubmit} style={btn}>Submit Answer</button>
-          <button className='closeBtn' onClick={onClose} style={btn}>Close</button>
+        <div className='modal-footer'>
+          <button className='black-button' onClick={handleSubmit}>Submit Answer</button>
+          <button className='black-button' onClick={onClose} >Close</button>
         </div>
       </div>
     </div>
