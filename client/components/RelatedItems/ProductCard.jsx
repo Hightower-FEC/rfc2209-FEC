@@ -21,11 +21,9 @@ const ProductCard = ({product, currentProduct, index, width, handleRelatedItemCl
       .then(() => {
         axios.get(`/products/${product}/styles`)
           .then((response) => {
-            if (response.data.results[0].photos[0].url === null) {
-              setImage('./lib/placeholder.gif');
-            } else {
-              setImage(response.data.results[0].photos[0].url);
-            }
+
+            setImage(response.data.results[0].photos[0].url);
+
             setSalePrice(response.data.results[0].sale_price);
           });
       })
