@@ -7,7 +7,7 @@ import QuestionsAnswers from './QuestionsAnswers/QuestionsAnswers.jsx';
 import RatingsReviews from './RatingsReviews/RatingsReviews.jsx';
 import RelatedItems from './RelatedItems/RelatedItems.jsx';
 import ScrollToTop from './Scroll/ScrollToTop.jsx';
-import Results from './Results.jsx';
+import ResultsList from './ResultsList.jsx';
 
 const App = () => {
   const [currentProduct, setCurrentProduct] = useState();
@@ -109,8 +109,8 @@ const App = () => {
     return (
       <>
         <TopBar />
-        <div style={{height: '110px'}}></div>
-        <Results results={currentResults} />
+        <div style={{height: '150px'}}></div>
+        <ResultsList results={currentResults} />
         <ScrollToTop />
       </>
     );

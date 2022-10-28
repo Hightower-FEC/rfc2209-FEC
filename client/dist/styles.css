@@ -794,7 +794,27 @@ tbody > * {
 
 .results {
   position: relative;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.results-card {
   display: block;
+  width: 250px;
+  height: 100px;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  background-color: rgba(220,222,223,255);
+  color: #000;
+  transition: transform 0.3s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 
 #result {
