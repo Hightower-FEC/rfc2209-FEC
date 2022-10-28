@@ -15,6 +15,7 @@ const ComparisonModal = ({show, onClose, currentProduct, relatedProduct, feature
         </div>
         <div id="product-names">
           <h3>{currentProduct.name}</h3>
+          <h3 className="blank"></h3>
           <h3>{relatedProduct.name}</h3>
         </div>
         <table>
