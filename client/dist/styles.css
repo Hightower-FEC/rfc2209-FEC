@@ -39,6 +39,10 @@ button {
   height: 40px
 }
 
+.item-desc-seperator {
+  border-right: 5px solid var(--secondary-bg-color);
+}
+
 .accent-underline {
   background-color: var(--accent-color);
   width: 188px;
@@ -59,6 +63,7 @@ button {
   margin: 10px 0 30px 0;
   height: 15px;
 }
+
 
 .star-svg {
   fill: var(--primary-text-color)
@@ -112,6 +117,10 @@ button {
 }
 
 .selected-thumbnails {
+  border: 2px solid var(--accent-color);
+}
+
+.selected-style {
   border: 2px solid var(--accent-color);
 }
 
@@ -325,7 +334,7 @@ button {
 
 #search-button:hover {
   color: rgb(9, 9, 9);
-  background-color: #f1f1f1;
+  background-color: var(--accent-color);
 }
 
 /* RELATED ITEMS & OUTFITS */
@@ -382,8 +391,8 @@ h1 {
 }
 
 #favorite-related:hover, #remove-icon:hover {
-  color: #161616;
-  text-shadow: 0 0 10px white;
+  color: var(--accent-color);
+  text-shadow: 0 0 5px white;
 }
 
 .carousel {
@@ -440,7 +449,7 @@ h1 {
 
 .plus-card:hover #plus-icon {
   transition: 1s;
-  color: var(--primary-page-bg);
+  color: var(--accent-color);
 }
 
 .plus-card:hover #add-button {
@@ -580,8 +589,15 @@ h1 {
 .modal-content {
   width: 500px;
   background-color: var(--primary-page-bg);
+  height: fit-content;
+  width: 75%;
+  border-radius: 1rem;
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: space-between;
+  gap: 10px;
 }
 
 .modal-content > * {
@@ -590,6 +606,7 @@ h1 {
 }
 
 .modal-header {
+  height: fit-content;
   font-size: 30px;
   font-weight: bold;
 }

@@ -75,7 +75,7 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
 
   const currentStyleStyles = (image) => {
     return {
-      border: '2px solid rgb(34, 34, 34)',
+      // border: '2px solid rgb(34, 34, 34)',
       height: '70px',
       width: '70px',
       backgroundSize: 'cover',
@@ -160,6 +160,7 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
                   if (currentStyle.style_id === style.style_id) {
                     return (
                       <div key={i}
+                        className="selected-style"
                         style={currentStyleStyles(style.photos[0])}
                         onClick={() => { handleStyleClick(i); }}
                       ></div>
@@ -167,6 +168,7 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
                   }
                   return (
                     <div key={i}
+                      // className="selected-style"
                       style={styleStyles(style.photos[0])}
                       onClick={() => { handleStyleClick(i); }}
                     ></div>
@@ -187,12 +189,11 @@ const Overview = ({ currentProduct, reviewMetaData, interactions}) => {
           height: 'fit-content',
           margin: '20px auto'
         }}>
-          <div style={{
+          <div className="item-desc-seperator" style={{
             display: 'flex',
             flexDirection: 'column',
             width: '65%',
             marginTop: '30px',
-            borderRight: '2px solid rgba(0, 0, 0, 0.3)'
           }}>
             <div style={{
               fontSize: '24px',
