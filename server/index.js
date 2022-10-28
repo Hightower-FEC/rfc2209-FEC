@@ -489,5 +489,5 @@ app.get('*', function(req, res){
   res.redirect('/assets/not-found.gif');
 });
 
-app.listen(3001);
-console.log('Listening at http://localhost:3001');
+app.listen(PORT);
+console.log(`Listening at ${BASE_URL}:${PORT}`);
