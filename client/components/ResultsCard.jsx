@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const ResultsCard = ({result}) => {
+const ResultsCard = ({result, onClick}) => {
   const [card, setCard] = useState({});
   const [image, setImage] = useState(null);
 
@@ -21,7 +21,9 @@ const ResultsCard = ({result}) => {
 
   return (
     <>
-      <div className="results-card" style={{backgroundImage: `url(${image})`}}>
+      <div className="results-card" style={{backgroundImage: `url(${image})`}} onClick={() => {
+        onClick(card);
+      }}>
         <div>{result.name}</div>
         <div>{result.default_price}</div>
         <div className="blank"></div>
