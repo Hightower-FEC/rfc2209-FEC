@@ -141,7 +141,7 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
   const clearFields = () => {
     setStars(0);
     setHoveredStar(0);
-    setisRated(false);
+    setIsRated(false);
     setIsRecommended(true);
 
     let characteristicsToBe = {};
@@ -231,19 +231,19 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
         }
       })
         .then((response) => {
+          console.log(response.status);
           if (response.status === 201) {
             clearFields();
             onSubmit();
           } else {
             let error = createErrorMsg('There was an issue posting your review');
             document.getElementsByClassName('error')[0].appendChild(error);
-            console.log(err);
           }
         })
         .catch((err) => {
+          console.log(err);
           let error = createErrorMsg('There was an issue posting your review');
           document.getElementsByClassName('error')[0].appendChild(error);
-          console.log(err);
         });
     }
   };
