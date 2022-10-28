@@ -24,7 +24,7 @@ const OutfitCard = ({width, outfit, handleAddOutfitClick, handleRemoveOutfitClic
         </div>
         <div className="bottom-half">
           <div className="category">{outfit.category}</div>
-          <div><strong>{outfit.name}</strong></div>
+          <div className="card-name">{outfit.name}</div>
           <div className="default-price">{outfit.default_price}</div>
         </div>
       </div>

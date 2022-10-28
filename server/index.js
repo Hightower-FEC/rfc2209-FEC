@@ -449,32 +449,36 @@ app.post('/qa/questions', (req, res) => {
 /**
  * Endpoint for posting an answer
  */
-app.post('/qa/questions/:question_id/answers', (req, res) => {
-  const photos = req.body.photos;
+app.post('/qa/questions/:question_id/answers', upload.array('files'), (req, res) => {
+  const images = req.files;
+  let data = {};
 
-  let photoUrls = [];
+  Object.keys(req.body).map(key => {
+    let val = req.body[key];
+    data[key] = val;
+  });
 
-  for (let i = 0; i < photos.length; i++) {
-    fs.writeFile(`../client/dist/assets/${req.params.question_id}_${i}`, photos[i].data, 'binary', function(err) {
-      if (err) {
-        throw err;
-      }
-      console.log('File saved.');
-      photoUrls.push(`../client/dist/assets/${req.params.question_id}_${i}`);
-    });
+  let photos = [];
+  for (let i = 0; i < images.length; i++) {
+    photos.push(`${BASE_URL}:${PORT}/${images[i].path}`);
   }
 
-  req.body.photos = photoUrls;
+  data.question_id = req.params.question_id;
+  data.photos = photos;
 
-  axios.post(`${API_URL}/qa/questions/${req.params.question_id}/answers`, req.body, POSTHEADERS)
+  console.log(data);
+
+  axios.post(`${API_URL}/qa/questions/${req.params.question_id}/answers`, data, POSTHEADERS)
     .then((response) => {
       if (response.status === 201) {
         res.status(201).send('Successfully posted answer');
       } else {
+        //console.log(response);
         res.status(500).send(response);
       }
     })
     .catch((error) => {
+      //console.log(error);
       res.status(500).send(error);
     });
 });

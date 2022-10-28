@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Review from './Review.jsx';
-import axios from 'axios';
 
 import PostReviewModal from './PostReviewModal.jsx';
 

@@ -84,12 +84,7 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
   // Helper function to submit question from modal
   const submitAnswer = (questionId, answerObj) => {
     // Receive a 201 status upon successful answer submission
-    axios.post(`/qa/questions/${questionId}/answers`, {
-      body: answerObj.body,
-      name: answerObj.answerer_name,
-      email: answerObj.answerer_email,
-      photos: answerObj.photos
-    })
+    axios.post(`/qa/questions/${questionId}/answers`, answerObj, {headers: {'Content-Type': 'multipart/form-data'}})
       .then((res) => {
         console.log('Submitted answer! Response:', res);
         getQuestions();
@@ -223,16 +218,16 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
           <div className="qa-heading" style={{fontSize: '30px'}} >Questions & Answers</div>
           <div className="accent-underline"></div>
         </div>
-      </div>
-      <div >
-        {questions.length > 0 ?
-          (<form onSubmit={(e) => e.preventDefault()}>
-            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-          </form>) :
-          (<span style={noQuestionMsg}>
-            No questions for this product yet. Be the first to add one!
-          </span>)
-        }
+        <div >
+          {questions.length > 0 ?
+            (<form onSubmit={(e) => e.preventDefault()}>
+              <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+            </form>) :
+            (<span style={noQuestionMsg}>
+              No questions for this product yet. Be the first to add one!
+            </span>)
+          }
+        </div>
       </div>
       <QuestionList
         name={currentProduct.name}
@@ -250,7 +245,7 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
       <button data-testid='question-modal' className='black-button QA-buttons' onClick={() => setQShow(true)}>ADD A QUESTION +</button>
 
       <QuestionModal
-        name={name}
+        name={currentProduct.name}
         currentProduct={currentProduct}
         showQModal={showQModal}
         onClose={() => setQShow(false)}
