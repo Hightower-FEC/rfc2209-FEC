@@ -8,7 +8,7 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAnswers = ({productID, interactions}) => {
 
   // For testing different products
-  let testID = 66642;
+  let testID = 66641;
   let testCount = 500;
 
   // Product name state
@@ -41,7 +41,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   const getQuestions = () => {
     axios.get(`${URL}/qa/questions`, {
       params: {
-        product_id: testID,
+        product_id: productID,
         count: 10
       }
     })
@@ -150,6 +150,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
   };
   //---------------------------------------------
 
+  // [NOT fully functional] Future Enhancement of highlighting search word in real time
   // const highlightWord = (word) => {
   //   let oldTexts = document.getElementsByClassName('question-body');
   //   console.log('getElements', oldTexts);
@@ -179,7 +180,7 @@ const QuestionsAnswers = ({productID, interactions}) => {
     (results.length > 0) && console.log('Filtered questions: ', results);
     setFound(results);
 
-    // Future Enhancement of highlighting search word in real time
+    // [NOT fully functional] Future Enhancement of highlighting search word in real time
     // let oldTexts = document.getElementsByClassName('question-body');
     // console.log('getElements', oldTexts);
     // for (let i = 0; i < oldTexts.length; i++) {
