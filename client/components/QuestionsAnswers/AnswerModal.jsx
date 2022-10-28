@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
+import {v4} from 'uuid';
+
 const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, onClose}) => {
 
   // The three input fields for the question modal
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [images, setImages] = useState([]);
 
   const modalStyle = {
     position: 'fixed',
@@ -134,24 +137,40 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
 
     // If still valid, then collect information and submit form
     if (valid) {
-      let formatAnswer = {
-        body: answer,
-        answerer_name: nickname,
-        answerer_email: email,
-        photos: []
-      };
-      submitAnswer(questionId, formatAnswer);
+      let formData = new FormData();
+
+      formData.append('body', answer);
+      formData.append('name', nickname);
+      formData.append('email', email);
+
+      for (let i = 0; i < images.length; i++) {
+        let type = images[i].name.split('.');
+        type = type[type.length - 1];
+        formData.append('files', images[i], `${v4()}.${type}`);
+      }
+
+
+      // let formatAnswer = {
+      //   body: answer,
+      //   answerer_name: nickname,
+      //   answerer_email: email,
+      //   photos: []
+      // };
+      submitAnswer(questionId, formData);
       onClose();
     }
   };
 
   // Helper function to handle image uploads
   const readImages = (e) => {
+
     let errors = document.getElementsByClassName('error')[0];
     if (errors.firstChild) {
       errors.removeChild(errors.firstChild);
     }
 
+    setImages([]);
+    let newImages = [];
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       const files = e.target.files;
       const output = document.querySelector('#result');
@@ -167,9 +186,11 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
             const div = document.createElement('div');
             div.innerHTML = `<img class='thumbnail' src='${picFile.result}' title='${picFile.name}'/>`;
             output.appendChild(div);
+            newImages.push(files[i]);
           });
           picReader.readAsDataURL(files[i]);
         }
+        setImages(newImages);
       } else {
         let error = createErrorMsg('Cannot add more than 5 images');
         document.getElementsByClassName('error')[0].appendChild(error);
