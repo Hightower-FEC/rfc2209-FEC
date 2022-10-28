@@ -135,10 +135,12 @@ button {
 }
 
 .selected-thumbnails {
+  transition: 0s;
   border: 2px solid var(--accent-color);
 }
 
 .selected-style {
+  transition: 0s;
   border: 2px solid var(--accent-color);
 }
 
