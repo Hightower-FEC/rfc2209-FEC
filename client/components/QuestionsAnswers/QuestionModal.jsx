@@ -136,8 +136,8 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
         <div className='modal-header' style={header}>
           <div>Ask Your Question</div>
           <div className='product'>About the {name}</div>
-          <div className='error' style={error}></div>
           <div className='accent-underline'></div>
+          <div className='error' style={error}></div>
         </div>
 
         {/* Modal Body */}
