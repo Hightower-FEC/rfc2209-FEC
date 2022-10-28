@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 
+import axios from 'axios';
+import {v4} from 'uuid';
 import Star from '../Star.jsx';
-const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, applicableCharacteristics, interactions}) => {
+const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicableCharacteristics, interactions}) => {
 
   // The eight input fields for the review modal
   const [stars, setStars] = useState(0);
@@ -20,16 +22,10 @@ const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, appl
   useEffect(() => {
     let characteristicsToBe = {};
     Object.keys(applicableCharacteristics).map((characteristic) => {
-      console.log(applicableCharacteristics[characteristic]);
       characteristicsToBe[applicableCharacteristics[characteristic].id] = 3;
     });
     setCharacteristics(characteristicsToBe);
   }, []);
-
-  useEffect(() => {
-    console.log(characteristics);
-  }, [characteristics]);
-
 
   useEffect(() => {
     console.log(images);
@@ -142,6 +138,25 @@ const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, appl
     return errorSpan;
   };
 
+  const clearFields = () => {
+    setStars(0);
+    setHoveredStar(0);
+    setisRated(false);
+    setIsRecommended(true);
+
+    let characteristicsToBe = {};
+    Object.keys(applicableCharacteristics).map((characteristic) => {
+      characteristicsToBe[applicableCharacteristics[characteristic].id] = 3;
+    });
+    setCharacteristics(characteristicsToBe);
+
+    setSummary('');
+    setBody('');
+    setNickname('');
+    setEmail('');
+    setImages([]);
+  };
+
   // Pass formatted question data to parent component
   const handleSubmit = () => {
     // Flags for checking if input is correct
@@ -178,22 +193,58 @@ const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, appl
       document.getElementsByClassName('error')[0].appendChild(error);
     }
 
+    console.log(images);
     // If still valid, then submit form
     if (valid) {
-      let formatReview = {
-        product_id: currentProduct.id,
-        rating: stars,
-        summary: summary,
-        body: body,
-        recommend: isRecommended,
-        name: nickname,
-        email: email,
-        photos: images,
-        characteristics: characteristics
-      };
 
-      submitReview(formatReview);
-      onClose();
+      let formData = new FormData();
+
+      formData.append('product_id', currentProduct.id);
+      formData.append('rating', stars);
+      formData.append('summary', summary);
+      formData.append('body', body);
+      formData.append('recommend', isRecommended);
+      formData.append('name', nickname);
+      formData.append('email', email);
+      for (let i = 0; i < images.length; i++) {
+        let type = images[i].name.split('.');
+        type = type[type.length - 1];
+        formData.append('files', images[i], `${v4()}.${type}`);
+      }
+      formData.append('characteristics', JSON.stringify(characteristics));
+
+      // let data = {
+      //   product_id: currentProduct.id,
+      //   rating: stars,
+      //   summary: summary,
+      //   body: body,
+      //   recommend: isRecommended,
+      //   name: nickname,
+      //   email: email,
+      //   photos: images,
+      //   characteristics: characteristics,
+      // };
+
+      axios.post('/reviews', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then((response) => {
+          if (response.status === 201) {
+            clearFields();
+            onSubmit();
+          } else {
+            let error = createErrorMsg('There was an issue posting your review');
+            document.getElementsByClassName('error')[0].appendChild(error);
+            console.log(err);
+          }
+        })
+        .catch((err) => {
+          let error = createErrorMsg('There was an issue posting your review');
+          document.getElementsByClassName('error')[0].appendChild(error);
+          console.log(err);
+        });
     }
   };
 
@@ -251,11 +302,12 @@ const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, appl
             picReader.addEventListener("load", function (event) {
               const picFile = event.target;
               const div = document.createElement("div");
-              div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+              div.innerHTML = `<img class="thumbnail" src="${picFile.result}"/>`;
               output.appendChild(div);
+              newImages.push(files[i]);
             });
             picReader.readAsDataURL(files[i]);
-            newImages.push(files[i]);
+
           }
         }
         setImages(newImages);
