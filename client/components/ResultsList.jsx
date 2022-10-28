@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ResultsCard from './ResultsCard.jsx';
 
-const ResultsList = ({results}) => {
+const ResultsList = ({results, onClick}) => {
   const [currentSlice, setCurrentSlice] = useState(5);
   const [currentResults, setCurrentResults] = useState(results.slice(0, currentSlice));
 
@@ -17,7 +17,7 @@ const ResultsList = ({results}) => {
     <>
       <div className="results">
         {currentResults.map((result, key) => {
-          return <ResultsCard result={result} key={key} />;
+          return <ResultsCard result={result} key={key} onClick={onClick}/>;
         })}
       </div>
       <div className="show-more-container">
