@@ -116,7 +116,7 @@ const App = () => {
   if (currentResults.length > 1) {
     return (
       <>
-        <TopBar />
+        <TopBar handleThemeToggle={handleThemeToggle}/>
         <div style={{height: '150px'}}></div>
         <ResultsList results={currentResults} />
         <ScrollToTop />
