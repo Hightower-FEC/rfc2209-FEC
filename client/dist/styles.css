@@ -135,10 +135,12 @@ button {
 }
 
 .selected-thumbnails {
+  transition: 0s;
   border: 2px solid var(--accent-color);
 }
 
 .selected-style {
+  transition: 0s;
   border: 2px solid var(--accent-color);
 }
 
@@ -433,8 +435,8 @@ h1 {
   align-items: center;
   justify-content: center;
   height: 350px;
-  background-color: rgba(220,222,223,255);
-  color: rgba(241, 236, 236, 0.929);
+  background-color: var(--primary-page-bg);
+  color: var(--default-white);
   transition: transform 0.3s;
   background-repeat: no-repeat;
   background-position: center;
@@ -488,7 +490,7 @@ h1 {
   bottom: 40%;
   font-size: 100px;
   text-shadow: 0 0 10px var(--primary-text-color);
-  color: white;
+  color: var(--default-white);
   z-index: 1;
 }
 
@@ -499,6 +501,10 @@ h1 {
 .rightArrow {
   right: 2%;
   cursor: pointer;
+}
+
+.leftArrow:hover, .rightArrow:hover {
+  color: var(--accent-color);
 }
 
 .upper-half {
@@ -564,7 +570,7 @@ h1 {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: var(--primary-page-bg);
   justify-content: center;
   align-items: center;
   display: flex;
@@ -649,7 +655,7 @@ h1 {
   padding: 1%;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .blank {
@@ -861,7 +867,48 @@ tbody > * {
 
 .results {
   position: relative;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.results-card {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 220px;
+  height: 80px;
+  padding: 1%;
+  margin: 1%;
+  align-items: center;
+  justify-content: center;
+  height: 350px;
+  background-color: rgba(220,222,223,255);
+  color: var(--primary-text-color);
+  transition: transform 0.3s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
+}
+
+.show-more-container, #show-more {
   display: block;
+  /* transition: 1s;
+  opacity: 0; */
+  margin: auto;
+  text-align: center;
+  width: 50%;
+  border-radius: 40px;
+}
+
+#show-more {
+  background-color: var(--accent-color);
+  color: var(--primary-text-color);
+  font-weight: 700;
+}
+
+.show-more-container {
+  padding: 100px;
 }
 
 #result {

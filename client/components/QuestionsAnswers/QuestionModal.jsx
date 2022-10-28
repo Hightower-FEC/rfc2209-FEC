@@ -143,8 +143,8 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
         {/* Modal Body */}
         <div className='modal-body' style={modalBody}>
           <div className='modal-segment'>
-            <label htmlFor='your-question'>Your Question<span className="accent-star">*</span></label>
-            <textarea style={{marginTop: '5px'}} id='review-summary' rows='5' cols='200' placeholder='Enter your question here' onChange={(e) => setAsk(e.target.value)} style={questionStyle}/>
+            <div htmlFor='your-question'>Your Question<span className="accent-star">*</span></div>
+            <textarea style={{marginTop: '5px'}} rows='5' cols='200' placeholder='Enter your question here' onChange={(e) => setAsk(e.target.value)} style={questionStyle}/>
           </div>
 
           <div className='modal-segment'>
@@ -161,8 +161,8 @@ const QuestionModal = ({ name, productID, showQModal, onClose, submitQuestion}) 
 
         {/* Modal Footer */}
         <div className='modal-footer' style={footer}>
-          <button className='black-button' onClick={handleSubmit}style={btn}>Submit</button>
-          <button className='black-button' onClick={onClose} style={btn} >Close</button>
+          <button className='black-button' onClick={handleSubmit}>Submit</button>
+          <button className='black-button' onClick={onClose} >Close</button>
         </div>
       </div>
     </div>
