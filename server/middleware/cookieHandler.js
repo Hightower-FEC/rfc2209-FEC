@@ -20,9 +20,6 @@ module.exports = (req, res, next) => {
     return cookies;
   }, {});
 
-  console.log(parsedCookies);
-
-
   /**
    * Init req.helpfulReviews
    */
