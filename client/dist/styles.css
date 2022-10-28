@@ -68,6 +68,9 @@ button {
   height: 15px;
 }
 
+.svg-pointer {
+  fill: var(--accent-color)
+}
 
 .star-svg {
   fill: var(--primary-text-color)
@@ -541,6 +544,10 @@ h1 {
 }
 
 #add-button {
+  color: var(--primary-page-bg);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
   display: block;
   transition: 1s;
   opacity: 0;
@@ -653,6 +660,7 @@ h1 {
   margin: 0;
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-between;
 }
 
 h3 {
@@ -669,6 +677,10 @@ tbody > * {
   display: flex;
   justify-content: space-between;
 }
+
+/* .q-text {
+  color: var(--primary-text-color);
+} */
 
 .qa-heading {
   font-weight: bold;

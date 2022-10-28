@@ -39,7 +39,6 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
     fontStyle: 'italic',
     fontSize: '12px',
     margin: '10px 0 0 0',
-    color: 'black'
   };
 
   return (

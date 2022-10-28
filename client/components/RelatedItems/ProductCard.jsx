@@ -11,6 +11,8 @@ const ProductCard = ({product, currentProduct, index, width, handleRelatedItemCl
   const [showModal, setShowModal] = useState(false);
   const [features, setFeatures] = useState([]);
 
+
+
   useEffect(() => {
     axios.get(`/products/${product}`)
       .then((response) => {
@@ -19,7 +21,9 @@ const ProductCard = ({product, currentProduct, index, width, handleRelatedItemCl
       .then(() => {
         axios.get(`/products/${product}/styles`)
           .then((response) => {
+
             setImage(response.data.results[0].photos[0].url);
+
             setSalePrice(response.data.results[0].sale_price);
           });
       })

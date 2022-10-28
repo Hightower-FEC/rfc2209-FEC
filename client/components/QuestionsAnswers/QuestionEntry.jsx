@@ -34,7 +34,6 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     fontSize: '16px',
     margin: '30px 0 0 0',
     padding: '10px',
-    backgroundColor: '#DDDDDD',
     borderRadius: '10px',
     minHeight: '100px'
   };
@@ -64,7 +63,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   };
 
   return (
-    <div style={questionStyle}>
+    <div className="q-bg" style={questionStyle}>
       <div style={questionHeader}>
         {/* Question body */}
         <div>
@@ -74,11 +73,11 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
         {/* Links */}
         <div style={links}> Helpful?{' '}
           {!helpfulness ?
-            (<a href='true' onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
+            (<a href='true' className="accent-text" onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
             <span> Voted </span> }
           {' '} ({helpCount}) {' '} |  {' '}
-          <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
-          <a href='true' onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
+          <a href='true' className="accent-text" onClick={(e) => handleClickReport(e)}>Report</a> |
+          <a href='true' className="accent-text" onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
         </div>
       </div>
 
