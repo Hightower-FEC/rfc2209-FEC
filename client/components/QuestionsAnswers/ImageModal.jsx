@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const ImageModal = ({url, showImage, onClose}) => {
 
@@ -8,7 +8,7 @@ const ImageModal = ({url, showImage, onClose}) => {
     top: '0',
     right: '0',
     bottom: '0',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -19,10 +19,12 @@ const ImageModal = ({url, showImage, onClose}) => {
   };
   const modalImage = {
     display: 'block',
-    border: '10px solid white'
-  };
-  const X = {
-    fontSize: '30px'
+    justifyContent: 'center',
+    border: '10px solid white',
+    width: '100%',
+    height: '100%',
+    maxWidth: '75rem',
+    maxHeight: '75em'
   };
 
   return (
@@ -30,7 +32,6 @@ const ImageModal = ({url, showImage, onClose}) => {
     (<div className="img-modal" onClick={onClose} style={modal}>
       <div className="modal-body" style={modalContent}>
         <img src={url} id="modal-image" style={modalImage}/>
-        {/* <span className="close" style={X}>&times;</span> */}
       </div>
     </div>)
   );

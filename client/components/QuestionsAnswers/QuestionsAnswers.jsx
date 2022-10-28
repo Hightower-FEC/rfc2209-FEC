@@ -46,8 +46,6 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
   // console.log('All questions:', questions);
 
   //----- Expand Question List Functionality -----
-  // console.log('Question count', count);
-  // console.log('Total questions: ', questions);
   // Helper function to slice the list in increments of two
   const expandQuestionList = (list, count, increment) => {
     return list.slice(0, count * increment);
@@ -132,6 +130,24 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
   };
   //---------------------------------------------
 
+  // [NOT fully functional] Future Enhancement of highlighting search word in real time
+  // const highlightWord = (word) => {
+  //   let oldTexts = document.getElementsByClassName('question-body');
+  //   console.log('getElements', oldTexts);
+  //   for (let i = 0; i < oldTexts.length; i++) {
+  //     if (word.length >= 0) {
+  //       let text = oldTexts[i];
+  //       let re = new RegExp(word, 'g');
+  //       let newText = text.innerText.replace(re, `<mark>${word}</mark>`);
+  //       text.innerHTML = newText;
+  //     }
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log('useEffect', query);
+  //   highlightWord(query);
+  // }, [query]);
+
   // Function to filter questions list in real time
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -144,7 +160,7 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
     (results.length > 0) && console.log('Filtered questions: ', results);
     setFound(results);
 
-    // Future Enhancement of highlighting search word in real time
+    // [NOT fully functional] Future Enhancement of highlighting search word in real time
     // let oldTexts = document.getElementsByClassName('question-body');
     // console.log('getElements', oldTexts);
     // for (let i = 0; i < oldTexts.length; i++) {
@@ -156,23 +172,6 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
     //   }
     // }
   };
-
-  // const highlightWord = (e) => {
-  //   let oldTexts = document.getElementsByClassName('question-body');
-  //   console.log('getElements', oldTexts);
-  //   for (let i = 0; i < oldTexts.length; i++) {
-  //     if (e.target.value.length >= 0) {
-  //       let text = oldTexts[i];
-  //       let re = new RegExp(e.target.value, 'g');
-  //       let newText = text.innerText.replace(re, `<mark>${e.target.value}</mark>`);
-  //       text.innerHTML = newText;
-  //     }
-  //   }
-  // };
-  // useEffect(() => {
-  //   console.log('useEffect', query);
-  //   highlightWord(query);
-  // }, [query]);
 
 
   // --------------- CSS Style ---------------
@@ -223,19 +222,17 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
         <div>
           <div className="qa-heading" style={{fontSize: '30px'}} >Questions & Answers</div>
           <div className="accent-underline"></div>
-
         </div>
-        <div >
-          {questions.length > 0 ?
-            (<form onSubmit={(e) => e.preventDefault()}>
-              <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
-            </form>) :
-            (<span style={noQuestionMsg}>
-              No questions for this product yet. Be the first to add one!
-            </span>)
-          }
-        </div>
-
+      </div>
+      <div >
+        {questions.length > 0 ?
+          (<form onSubmit={(e) => e.preventDefault()}>
+            <input type='search' value={query} onInput={handleInputChange} placeholder =' Have a question? Search for answers...' style={searchField}/>
+          </form>) :
+          (<span style={noQuestionMsg}>
+            No questions for this product yet. Be the first to add one!
+          </span>)
+        }
       </div>
       <QuestionList
         name={currentProduct.name}
