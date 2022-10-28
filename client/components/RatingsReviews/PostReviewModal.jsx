@@ -67,7 +67,7 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
     margin: '0 0 0 2rem',
     display: 'inline-block',
     overflowY: 'auto',
-    maxHeight: '400px'
+    maxHeight: '550px'
   };
   const nicknameStyle = {
     display: 'inline-block',
@@ -302,7 +302,7 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
             picReader.addEventListener("load", function (event) {
               const picFile = event.target;
               const div = document.createElement("div");
-              div.innerHTML = `<img class="thumbnail" src="${picFile.result}"/>`;
+              div.innerHTML = `<div class="thumbnail-reviews" style="background-image: url(${picFile.result});" title="${picFile.name}"></div>`;
               output.appendChild(div);
               newImages.push(files[i]);
             });
@@ -323,7 +323,7 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
 
   const starSize = '20px';
   const starRating =
-      <div style={{position: 'relative', display: 'flex', flexDirection: 'row', height: {starSize}}}>
+      <div style={{position: 'relative', display: 'flex', flexDirection: 'row', height: {starSize}, marginTop: '10px'}}>
         <div style={{position: 'absolute', width: `${Number(starSize.slice(0, 2)) * 5}px`, height: `${starSize}`, backgroundColor: '#ddd', zIndex: 99}}/>
         <div style={{position: 'absolute', width: `${Number(starSize.slice(0, 2)) * hoveredStar}px`, height: `${starSize}`, backgroundColor: 'black', zIndex: 100}} />
         <div style={{height: `${starSize}`, width: `${starSize}`, zIndex: 101}}>
@@ -479,11 +479,11 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
             {characteristicsRadios} </fieldset>
           <div className="modal-segment">
             <label htmlFor='review-summary'>Review Summary</label><br/>
-            <textarea id='review-summary' rows='4' cols='50' onChange={(e) => setSummary(e.target.value)}/> <br/>
+            <textarea style={{marginTop: '5px'}} id='review-summary' rows='4' cols='50' onChange={(e) => setSummary(e.target.value)}/> <br/>
           </div>
           <div className="modal-segment">
             <label htmlFor='review-body'>Review Body<span className="accent-star">*</span></label><br/>
-            <textarea id='review-body' rows='4' cols='50' onChange={(e) => setBody(e.target.value)}/> <br/>
+            <textarea style={{marginTop: '5px'}} id='review-body' rows='4' cols='50' onChange={(e) => setBody(e.target.value)}/> <br/>
           </div>
           <div className="modal-segment">
             <label for="files">Upload your photos: </label>
@@ -495,22 +495,22 @@ const PostReviewModal = ({currentProduct, showModal, onSubmit, onClose, applicab
 
           <div className="modal-segment">
             <label htmlFor='your-nickname'>What is your nickname?<span className="accent-star">*</span></label><br/>
-            <input type='text' id='your-nickname'placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
-            <div style={{fontSize: '12px', fontDecoration: 'italic'}}>For privacy reasons, do not use your full name or email address</div>
+            <input style={{marginTop: '5px'}} type='text' id='your-nickname'placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} /> <br/>
+            <div style={{fontSize: '12px', fontStyle: 'italic', marginTop: '5px'}}>For privacy reasons, do not use your full name or email address</div>
           </div>
 
           <div className="modal-segment">
             <label htmlFor='your-email'>Your Email<span className="accent-star">*</span></label><br/>
-            <input type='text' id='your-email' onChange={(e) => setEmail(e.target.value)}/> <br/>
-            <span>For authentication reasons, you will not be emailed</span>
+            <input style={{marginTop: '5px'}} type='text' id='your-email' onChange={(e) => setEmail(e.target.value)}/> <br/>
+            <span style={{fontSize: '12px', fontStyle: 'italic', marginTop: '5px'}}>For authentication reasons, you will not be emailed</span>
           </div>
 
         </div>
 
         {/* Modal Footer */}
         <div className='modal-footer' style={footer}>
-          <button className='submitBtn' onClick={handleSubmit}style={btn}>Submit</button>
-          <button className='closeBtn' onClick={onClose} style={btn} >Close</button>
+          <button className='black-button' onClick={handleSubmit} style={{marginBottom: '10px'}}>Submit</button>
+          <button className='black-button' onClick={onClose} style={{marginBottom: '10px'}} >Close</button>
         </div>
       </div>
     </div> : <></>;

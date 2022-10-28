@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 //import ScrollToTop from './Scroll/ScrollToTop.jsx';
 
 const TopBar = ({searchResults, setSearchResults}) =>{
   const [entry, setEntry] = useState('');
   const [currentResults, setCurrentResults] = useState([]);
+  const [isLightMode, setIsLightMode] = useState(true);
 
   const navBarStyles = {
     display: 'flex',
     position: 'fixed',
     zIndex: 15,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width: '100%',
     height: '30px',
     backgroundColor: '#090909',
@@ -38,6 +39,14 @@ const TopBar = ({searchResults, setSearchResults}) =>{
     float: 'right'
   };
 
+  useEffect(() => {
+    if (!isLightMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [isLightMode]);
+
   const submitEntry = (text) => {
     event.preventDefault();
     axios.get('/products?count=1011')
@@ -48,21 +57,33 @@ const TopBar = ({searchResults, setSearchResults}) =>{
       .catch(error => console.log(error));
   };
 
+  const handleThemeToggle = (e) => {
+    e.preventDefault();
+    setIsLightMode(!isLightMode);
+  };
+
   return (
-    <>
-      <div className="top-bar" style={navBarStyles}>
+    <div className="top-bar" style={navBarStyles}>
+      <div>
+        <form id="search">
+          <input id="input-form" placeholder="Search Items" onChange={() => {
+            setEntry(event.target.value);
+          }}></input>
+          <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
+        </form>
+      </div>
+
+      <div>
         <div style={titleStyles}>
         atelier
           <div style={logoStyles}></div>
         </div>
       </div>
-      <form id="search">
-        <input id="input-form" placeholder="Search Items" onChange={() => {
-          setEntry(event.target.value);
-        }}></input>
-        <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
-      </form>
-    </>
+
+      <div>
+        <button className="black-button" style={{height: '35px', marginRight: '30px'}} onClick={handleThemeToggle}>Change Theme</button>
+      </div>
+    </div>
   );
 };
 

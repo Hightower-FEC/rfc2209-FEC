@@ -14,11 +14,7 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
   let helpful = false;
   const handleClickHelpfulness = (e) => {
     e.preventDefault();
-    /* Pseudocode-ish
-    Once the user clicks on 'Yes', send a PUT request to server. The server will keep track of the answer.id and a boolean will be set to false. In the server, any repeat PUT requests to the same answer id will be handled to just return the boolean instead of sending another PUT request. On the client side, I'll use the boolean to disable the link to upvote the helpfulness.
-    */
     !helpfulness && setHelpCount(helpCount + 1);
-    // The helpfulness state should be set to the boolean sent back by the server
     setHelpfulness(true);
     handleQuestionHelpful(question.question_id, helpful);
   };
@@ -33,44 +29,59 @@ const QuestionEntry = ({question, i, name, query, submitAnswer, handleQuestionHe
     setAShow(true);
   };
 
-
   const questionStyle = {
     display: 'block',
     fontSize: '16px',
     margin: '30px 0 0 0',
     padding: '10px',
-    borderRadius: '10px'
-    // borderBottom: '2px solid rgba(0, 0, 0, 0.4)',
+    backgroundColor: '#DDDDDD',
+    borderRadius: '10px',
+    minHeight: '100px'
+  };
+  const questionHeader = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%'
   };
   const Q = {
-    display: 'inline-block',
+    display: 'inline',
     float: 'left',
     fontWeight: 'bold',
     margin: '0 10px 0 0',
     fontSize: '18px'
   };
   const questionBody = {
+    display: 'flex',
     fontWeight: 'bold',
     fontSize: '18px'
   };
   const links = {
     display: 'inline-block',
     float: 'right',
-    fontSize: '14px'
+    fontSize: '14px',
+    margin: '0 30px 0 0'
   };
 
   return (
-    <div className="q-bg" style={questionStyle}>
-      <span style={Q}> Q: </span>
-      <span className='question-body' style={questionBody}> {question.question_body} </span>
-      <span style={links}> Helpful?{' '}
-        {!helpfulness ?
-          (<a className="accent-text" onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
-          <span> Voted </span> }
-        {' '} ({helpCount}) {' '} |  {' '}
-        <a className="accent-text" onClick={(e) => handleClickReport(e)}>Report</a> |
-        <a className="accent-text" onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
-      </span>
+    <div style={questionStyle}>
+      <div style={questionHeader}>
+        {/* Question body */}
+        <div>
+          <div style={Q}> Q: </div>
+          <div className='question-body' style={questionBody}>{question.question_body} </div>
+        </div>
+        {/* Links */}
+        <div style={links}> Helpful?{' '}
+          {!helpfulness ?
+            (<a href='true' onClick={(e) => handleClickHelpfulness(e)}>Yes</a>) :
+            <span> Voted </span> }
+          {' '} ({helpCount}) {' '} |  {' '}
+          <a href='true' onClick={(e) => handleClickReport(e)}>Report</a> |
+          <a href='true' onClick={(e) => handleClickAddAnswer(e)}>Add Answer</a>
+        </div>
+      </div>
+
       <AnswerList
         answers = {question.answers}
         handleAnswerHelpful={handleAnswerHelpful}
