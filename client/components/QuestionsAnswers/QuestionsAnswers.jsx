@@ -222,8 +222,8 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
         <div>
           <div className="qa-heading" style={{fontSize: '30px'}} >Questions & Answers</div>
           <div className="accent-underline"></div>
-
         </div>
+      </div>
       <div >
         {questions.length > 0 ?
           (<form onSubmit={(e) => e.preventDefault()}>
