@@ -39,6 +39,11 @@ const Reviews = ({currentProduct, reviewMetaData, reviews, handleSetSort, intera
     setShowModal(false);
   };
 
+  const handleSubmitReview = () => {
+    handleCloseModal();
+    setSortedBy(sorts[2]);
+  };
+
   const renderedReviews = reviews ? reviews.slice(0, numofReviewsToRender) : null;
 
 
@@ -82,7 +87,7 @@ const Reviews = ({currentProduct, reviewMetaData, reviews, handleSetSort, intera
         {moreReviews}
         <button className="black-button" onClick={handleAddReviewClick}>ADD A REVIEW +</button>
       </div>
-      <PostReviewModal currentProduct={currentProduct} showModal={showModal} onClose={handleCloseModal} submitReview={()=>{}} applicableCharacteristics={reviewMetaData.characteristics} interactions={interactions}/>
+      <PostReviewModal currentProduct={currentProduct} showModal={showModal} onSubmit={handleSubmitReview} onClose={handleCloseModal} applicableCharacteristics={reviewMetaData.characteristics} interactions={interactions}/>
     </div>
 
   ) : <></>;
