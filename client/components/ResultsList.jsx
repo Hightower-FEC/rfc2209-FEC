@@ -1,36 +1,33 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import ResultsCard from './ResultsCard.jsx';
 
 const ResultsList = ({results}) => {
-  const [image, setImage] = useState([]);
+  const [currentSlice, setCurrentSlice] = useState(5);
+  const [currentResults, setCurrentResults] = useState(results.slice(0, currentSlice));
 
-  // useEffect(() => {
-  //   axios.get(`/products/${}`)
-  //     .then((response) => {
-  //       setRelatedProduct(response.data);
-  //     })
-  //     .then(() => {
-  //       axios.get(`/products/${product}/styles`)
-  //         .then((response) => {
-  //           setImage(response.data.results[0].photos[0].url);
-  //           setSalePrice(response.data.results[0].sale_price);
-  //         });
-  //     })
-  //     .catch(err => console.log(err));
-  // }, []);
+  const loadResults = () => {
+    let newIndex = currentSlice + 5;
+    let newResults = results.slice(currentSlice, newIndex);
+    let combinedResults = currentResults.concat(newResults);
+    setCurrentResults(combinedResults);
+    setCurrentSlice(newIndex);
+    console.log('combined results', combinedResults, 'new results', newResults);
+  };
+
+  useEffect(() => {
+    console.log('current results', currentResults);
+  }, [currentResults]);
 
   return (
     <>
       <div className="results">
-        {results.slice(0, 5).map((result, key) => {
-          return (
-            <div className="results-card">
-              <div>{result.name}</div>
-              <div>{result.description}</div>
-              <div>{result.default_price}</div>
-            </div>
-          );
+        {currentResults.map((result, key) => {
+          return <ResultsCard result={result} key={key} />;
         })}
       </div>
+      <button id="show-more" onClick={() => {
+        loadResults();
+      }}>Show More Button goes here</button>
     </>
   );
 };

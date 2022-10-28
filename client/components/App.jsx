@@ -77,7 +77,6 @@ const App = () => {
 
   const submitEntry = (text) => {
     event.preventDefault();
-    console.log('search results', searchResults);
     let results = [];
     const allItems = searchResults.slice();
     allItems.forEach((item) => {
