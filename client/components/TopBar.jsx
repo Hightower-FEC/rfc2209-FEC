@@ -11,7 +11,7 @@ const TopBar = ({searchResults, setSearchResults}) =>{
     display: 'flex',
     position: 'fixed',
     zIndex: 15,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     width: '100%',
     height: '30px',
     backgroundColor: '#090909',
@@ -63,21 +63,27 @@ const TopBar = ({searchResults, setSearchResults}) =>{
   };
 
   return (
-    <>
-      <div className="top-bar" style={navBarStyles}>
+    <div className="top-bar" style={navBarStyles}>
+      <div>
+        <form id="search">
+          <input id="input-form" placeholder="Search Items" onChange={() => {
+            setEntry(event.target.value);
+          }}></input>
+          <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
+        </form>
+      </div>
+
+      <div>
         <div style={titleStyles}>
         atelier
           <div style={logoStyles}></div>
         </div>
       </div>
-      <form id="search">
-        <input id="input-form" placeholder="Search Items" onChange={() => {
-          setEntry(event.target.value);
-        }}></input>
-        <button id="search-button" className="fa-solid fa-magnifying-glass fa-lg" onClick={submitEntry}></button>
-        <button onClick={handleThemeToggle}></button>
-      </form>
-    </>
+
+      <div>
+        <button className="black-button" style={{height: '35px', marginRight: '30px'}} onClick={handleThemeToggle}>Change Theme</button>
+      </div>
+    </div>
   );
 };
 

@@ -251,7 +251,7 @@ const PostReviewModal = ({currentProduct, showModal, onClose, submitReview, appl
             picReader.addEventListener("load", function (event) {
               const picFile = event.target;
               const div = document.createElement("div");
-              div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+              div.innerHTML = `<div class="thumbnail-reviews" style="background-image: url(${picFile.result});" title="${picFile.name}"></div>`;
               output.appendChild(div);
             });
             picReader.readAsDataURL(files[i]);
