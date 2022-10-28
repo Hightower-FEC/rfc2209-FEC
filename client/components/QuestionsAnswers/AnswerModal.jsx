@@ -67,6 +67,12 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
     resize: 'none'
   };
 
+  const result = {
+    display: 'flex',
+    gap: '10px',
+    padding: '10px 0'
+  };
+
   const footer = {
     display: 'flex',
     justifyContent: 'center'
@@ -81,6 +87,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
     width: '20%',
     height: '60px'
   };
+
 
   // Helper function to verify email address
   const verifyEmail = (email) => {
@@ -105,7 +112,7 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
     }
 
     // Check input fields
-    if (answer === '') { // Questin field
+    if (answer === '') { // Question field
       valid = false;
       let error = createErrorMsg('Answer cannot be blank');
       document.getElementsByClassName('error')[0].appendChild(error);
@@ -138,6 +145,39 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
     }
   };
 
+  // Helper function to handle image uploads
+  const readImages = (e) => {
+    let errors = document.getElementsByClassName('error')[0];
+    if (errors.firstChild) {
+      errors.removeChild(errors.firstChild);
+    }
+
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+      const files = e.target.files;
+      const output = document.querySelector('#result');
+      output.innerHTML = '';
+      if (files.length < 6) {
+        for (let i = 0; i < files.length; i++) {
+          if (!files[i].type.match('image')) {
+            continue;
+          }
+          const picReader = new FileReader();
+          picReader.addEventListener('load', function (event) {
+            const picFile = event.target;
+            const div = document.createElement('div');
+            div.innerHTML = `<img class='thumbnail' src='${picFile.result}' title='${picFile.name}'/>`;
+            output.appendChild(div);
+          });
+          picReader.readAsDataURL(files[i]);
+        }
+      } else {
+        let error = createErrorMsg('Cannot add more than 5 images');
+        document.getElementsByClassName('error')[0].appendChild(error);
+        e.target.value = null;
+      }
+    }
+  };
+
   return (showAModal && (
     <div className='modal' style={modalStyle} onClick={onClose}>
       <div className='modal-content' style={modalContent} onClick={(e) => e.stopPropagation()}>
@@ -150,16 +190,22 @@ const AnswerModal = ({showAModal, submitAnswer, name, questionBody, questionId, 
 
         {/* Modal Body */}
         <div className='modal-body' style={modalBody}>
+          {/* Your Answer */}
           <label htmlFor='your-answer'>Your Answer*</label><br/>
           <textarea id='your-answer' rows='5' cols='200' placeholder='Enter your answer here' onChange={(e) => setAnswer(e.target.value)} style={answerStyle}/> <br/>
-
+          {/* Your Photos */}
+          <label id='files' htmlFor='files' >Upload Your Photos!</label><br/>
+          <input type='file' id='files' multiple='multiple' accept='image/png image/jepg image/jpg' onChange={(e) => readImages(e)}/>
+          <output id='result' />
+          {/* Your Nickname */}
           <label htmlFor='your-nickname'>What is your nickname?*</label><br/>
           <input type='text' id='your-nickname' placeholder='Example: jackson11!' onChange={(e) => setNickname(e.target.value)} style={nicknameStyle}/> <br/>
           <span>For privacy reasons, do not use your full name or email address</span><br/>
-
+          {/* Your Email */}
           <label htmlFor='your-email'>Your Email*</label><br/>
           <input type='text' id='your-email' placeholder='Example: johndoe@gmail.com' onChange={(e) => setEmail(e.target.value)} style={emailStyle}/> <br/>
           <span>For authentication reasons, you will not be emailed</span><br/>
+
         </div>
 
         {/* Modal Footer */}
