@@ -27,7 +27,7 @@ const ScrollToTop = () => {
 
   return (
     <div className="go-top">
-      {isVisible ? <button onClick={scrollTop}>Go to top</button> : null}
+      {isVisible ? <button className="go-top-button" onClick={scrollTop}>GO TO TOP</button> : null}
     </div>
   );
 };

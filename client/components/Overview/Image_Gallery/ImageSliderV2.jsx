@@ -16,7 +16,7 @@ const ImageSlider = ({ photo, currentIndex, handleImageClick, currentPhotos }) =
     <div style={styles.containerStyles} >
       <div
         onClick={() => { handleImageClick(currentPhotos, currentIndex); }}
-        style={styles.currentPhoto(photo)}></div>
+        className="gallery-current-photo" style={styles.currentPhoto(photo)}></div>
     </div>
   );
 };

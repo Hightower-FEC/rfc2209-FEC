@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import Images from './Images.jsx';
 
 // Sub-component for AnswerList: AnswerEntry
 const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
   // console.log('Inside answer entry', answer);
   const [report, setReport] = useState(false);
-  const [helpfulness, setHelpfulness] = useState(false);
+  const [helpfulness, setHelpfulness] = useState(answer.helpful);
   const [helpCount, setHelpCount] = useState(answer.helpfulness);
-
   let helpful = false;
   // Helper function to toggle helpfulness flag and pass data to parent function
   const handleClickHelpfulness = (e) => {
@@ -36,28 +34,26 @@ const AnswerEntry = ({answer, handleAnswerHelpful, handleAnswerReport}) => {
   const answerStyle = {
     margin: '10px 30px 0 30px',
     padding: '0 0 10px 0',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.4)'
   };
   const answerer = {
     fontStyle: 'italic',
     fontSize: '12px',
     margin: '30px 0 0 0',
-    color: 'black'
   };
 
   return (
-    <div style={answerStyle}>
+    <div className="answer" style={answerStyle}>
       {answer.body} <br/>
       { (answer.photos.length > 0) &&
       <Images images={answer.photos} />}
       <span style={answerer}>
         by {answer.answerer_name}, {formatDate(answer.date)} | Helpful?
         {!helpfulness ?
-          (<a href='true' onClick={((e) => handleClickHelpfulness(e))}> Yes </a> ) : <span> Voted </span>}
+          (<a className="accent-text" onClick={((e) => handleClickHelpfulness(e))}> Yes </a> ) : <span> Voted </span>}
 
         ({helpCount}) |
         {!report ?
-          <a href='true' onClick={(e) => handleClickReport(e)}> Report </a> :
+          <a className="accent-text" onClick={(e) => handleClickReport(e)}> Report </a> :
           <span> Reported </span>}
       </span>
     </div>

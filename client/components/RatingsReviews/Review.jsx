@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import Stars from '../Stars.jsx';
-const Review = ({productID, review}) =>{
+const Review = ({review}) =>{
   const [isHelpful, setisHelpful] = useState(review.helpful);
   const [helpfulCount, setHelpfulCount] = useState(review.helpfulness);
   const [isReported, setIsReported] = useState(false);
@@ -58,26 +58,31 @@ const Review = ({productID, review}) =>{
     return `${month} ${date}, ${year}`;
   };
 
-  const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick}> Report </u>;
+  const reported = isReported ? <u>Reported</u> : <u onClick={handleReportClick} className="accent-text"> Report </u>;
   const recommended = review.recommend ? <div></div> : null;
   const response = review.response ? <div></div> : null;
-  const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick}> Yes </u>;
+  const helpful = isHelpful ? <u> Yes!</u> : <u onClick={handleHelpfulClick} className="accent-text"> Yes </u>;
 
   return (
-    <div style={{padding: '20px', borderBottom: 'solid'}}>
+    <div style={{padding: '20px', borderBottom: '1px solid rgba(0, 0, 0, 0.4)'}}>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <Stars rating={review.rating}/>
+        <a className="review-name"><strong style={{marginRight: '10px', fontSize: '18px'}}>{review.reviewer_name}</strong></a>
         {/* **********************We need to fix this!!! Terrible formatting of date********************** */}
-        <a>{review.reviewer_name}, {parseDate(review.date)}</a>
       </div>
-      <h4>
+      <div style={{width: 'fit-content', margin: '0 0 5px 0'}}>
+        <Stars size={'18px'} rating={review.rating}/>
+      </div>
+      <div className="review-date">
+        {parseDate(review.date)}
+      </div>
+      <div className="review-summary">
         {review.summary}
-      </h4>
-      <div>
-        <p>{review.body}</p>
+      </div>
+      <div className="review-body">
+        {review.body}
       </div>
       <div style={{display: 'flex', flexDirection: 'row'}}>
-        <a>Helpful? {helpful} ({helpfulCount}) | {reported}</a>
+        <a className="review-options">Helpful? {helpful} ({helpfulCount}) | {reported}</a>
       </div>
     </div>
 
