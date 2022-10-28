@@ -102,9 +102,11 @@ const App = () => {
         results.push(item);
       }
     });
-    setCurrentResults(results);
-    setCurrentProduct(undefined);
-    setReviewMetaData(undefined);
+    if (results.length > 0) {
+      setCurrentResults(results);
+      setCurrentProduct(undefined);
+      setReviewMetaData(undefined);
+    }
   };
 
   if (currentProduct && reviewMetaData && currentResults.length === 0) {
