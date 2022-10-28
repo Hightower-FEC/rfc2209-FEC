@@ -84,12 +84,7 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
   // Helper function to submit question from modal
   const submitAnswer = (questionId, answerObj) => {
     // Receive a 201 status upon successful answer submission
-    axios.post(`/qa/questions/${questionId}/answers`, {
-      body: answerObj.body,
-      name: answerObj.answerer_name,
-      email: answerObj.answerer_email,
-      photos: answerObj.photos
-    })
+    axios.post(`/qa/questions/${questionId}/answers`, answerObj, {headers: {'Content-Type': 'multipart/form-data'}})
       .then((res) => {
         console.log('Submitted answer! Response:', res);
         getQuestions();
