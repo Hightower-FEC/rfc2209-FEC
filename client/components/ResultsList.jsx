@@ -20,9 +20,11 @@ const ResultsList = ({results}) => {
           return <ResultsCard result={result} key={key} />;
         })}
       </div>
-      <button id="show-more" onClick={() => {
-        loadResults();
-      }}>Show More Button goes here</button>
+      <div className="show-more-container">
+        <button id="show-more" onClick={() => {
+          loadResults();
+        }}>SHOW MORE</button>
+      </div>
     </>
   );
 };

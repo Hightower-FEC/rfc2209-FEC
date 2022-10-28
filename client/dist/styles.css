@@ -889,13 +889,23 @@ tbody > * {
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 
-#show-more {
+.show-more-container, #show-more {
   display: block;
   /* transition: 1s;
   opacity: 0; */
   margin: auto;
   text-align: center;
   width: 50%;
+  border-radius: 40px;
+}
+
+#show-more {
+  background-color: var(--accent-color);
+  color: var(--primary-text-color);
+}
+
+.show-more-container {
+  padding: 100px;
 }
 
 #result {
