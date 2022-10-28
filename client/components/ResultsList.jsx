@@ -13,10 +13,6 @@ const ResultsList = ({results}) => {
     setCurrentSlice(newIndex);
   };
 
-  useEffect(() => {
-    console.log('current results of useEffect', currentResults);
-  }, [currentResults]);
-
   return (
     <>
       <div className="results">

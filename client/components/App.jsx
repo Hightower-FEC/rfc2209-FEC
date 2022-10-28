@@ -15,6 +15,7 @@ const App = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [currentResults, setCurrentResults] = useState([]);
 
+  const [isLightMode, setIsLightMode] = useState(true);
   /**
    * Initialize currentProduct to arbitary product on app start
    */
@@ -39,6 +40,13 @@ const App = () => {
       });
   }, []);
 
+  useEffect(() => {
+    if (!isLightMode) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }, [isLightMode]);
   /**
    * Update review meta data on product change
    */
@@ -54,10 +62,15 @@ const App = () => {
     }
   }, [currentProduct]);
 
+  const handleThemeToggle = (e) => {
+    e.preventDefault();
+    setIsLightMode(!isLightMode);
+  };
   /**
    * Sets currentProduct to the related item that was clicked
    * @param productClicked: product to change currentProduct to
    */
+
   const handleRelatedItemClick = (productClicked) => {
     setCurrentProduct(productClicked);
   };
@@ -84,14 +97,13 @@ const App = () => {
         results.push(item);
       }
     });
-    console.log('these are the results set by submit entry', results);
     setCurrentResults(results);
   };
 
   if (currentProduct && reviewMetaData && currentResults.length === 0) {
     return (
       <div >
-        <TopBar submitSearch={submitEntry} />
+        <TopBar submitSearch={submitEntry} handleThemeToggle={handleThemeToggle}/>
         <Overview currentProduct={currentProduct} reviewMetaData={reviewMetaData} interactions={interactions}/>
         <RelatedItems currentProduct={currentProduct} handleRelatedItemClick={handleRelatedItemClick} interactions={interactions}/>
         <QuestionsAnswers currentProduct={currentProduct} interactions={interactions}/>

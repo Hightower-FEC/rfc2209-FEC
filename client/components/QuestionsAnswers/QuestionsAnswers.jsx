@@ -250,7 +250,7 @@ const QuestionsAnswers = ({currentProduct, interactions}) => {
       <button data-testid='question-modal' className='black-button QA-buttons' onClick={() => setQShow(true)}>ADD A QUESTION +</button>
 
       <QuestionModal
-        name={name}
+        name={currentProduct.name}
         currentProduct={currentProduct}
         showQModal={showQModal}
         onClose={() => setQShow(false)}
