@@ -63,7 +63,7 @@ const Reviews = ({currentProduct, reviewMetaData, reviews, handleSetSort, intera
           <strong>SORT BY:</strong>
           <select style={{marginLeft: '10px', padding: '0 0 0 10px'}} onChange={(event) => {
             setSortedBy(event.target.value);
-          }}>
+          }} value={sortedBy}>
             {sorts.map((sort, index) => {
               return (
                 <option value={sort}>{sort}</option>
