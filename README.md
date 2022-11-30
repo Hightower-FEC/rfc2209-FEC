@@ -20,7 +20,7 @@ API_URL should end in a / but base URL should not.  Do not include quotations or
 
 
 ## Description
-Project Atelier is a front-end business app for online retail. It was designed with simplicity and visual appeal in mind. The sleek and user-friendly design of the website brings the products at the forefront in the image gallery, which was implemented as a slider component to allow for a seamless transition when viewing the different styles that are available.
+Project Atelier is a front-end business app for online retail. It was designed with simplicity and visual appeal in mind. The sleek, straight-forward and user-friendly design of the website allows for easy access to the navigation panel that is always present at the top of the page regardless of where the viewport is. brings the products at the forefront in the image gallery, which was implemented as a slider component to allow for a seamless transition when viewing the different styles that are available.
 
 
 
@@ -34,9 +34,10 @@ In order to run the project locally please read [Requirements](#requirements) se
 
 ## Requirements
 
-Node.js - version 16.0+
+Node.js - version 16.0 or higher
 
 
 ### Installing Dependencies
-From within the root directory:
-> 1. Run ```npm install``` to install all required dependencies
+
+> 1. Move into the root directory of the repository
+> 2. Run ```npm install``` to install all required dependencies
