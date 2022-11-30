@@ -24,7 +24,7 @@ Project Atelier is a front-end business app for online retail. It was designed w
 
 The Overview is the first component that the user sees, which brings the products at the forefront in the image gallery. The image gallery was implemented as a slider component to allow for a seamless transition when viewing the different styles that are available.
 
-The Related Products component follows that is was also envisioned as a slider component for a better user experience while browsing through the catalog. Each related product is displayed as a card that will redirect to the image gallery when clicked. The card includes a star icon that brings up a modal to compare the features of the current product in the image gallery with the respective card that was selected.
+The Related Products component that follows was also envisioned as a slider component to provide a better user experience while browsing through the catalog. Each related product is displayed as a card that will redirect to the image gallery when clicked. The card includes a star icon that brings up a modal to compare the features of the current product in the image gallery with the respective card that was selected.
 
 Immediately below is the Outfit Creation component where the user can store a product with the Add to Outfit card. Any stored products will remain on the user's list even when refreshing or leaving the website.
 
