@@ -33,7 +33,7 @@ There is also a button at the bottom-right corner for convenience to scroll back
 
 
 ## Technical Overview
-Atelier was built with Node.js, React, Axios, and conventional CSS.
+Atelier was built with Node.js, Webpack, Babel, React, Axios, and conventional CSS.
 
 
 ## Usage
