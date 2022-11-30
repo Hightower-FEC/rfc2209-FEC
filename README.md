@@ -28,7 +28,11 @@ The Related Products component that follows was also envisioned as a slider comp
 
 Immediately below is the Outfit Creation component where the user can store a product with the Add to Outfit card. Any stored products will remain on the user's list even when refreshing or leaving the website.
 
+The Questions and Answers component contains three subcomponents: a search bar for questions, a display area for the answers, and a button to add a question.
 
+The Ratings and Reviews component contains two main subcomponents: a star ratings section and a review section.
+
+There is also a button at the bottom-right corner for convenience to scroll back to the top.
 
 
 ## Technical Overview
