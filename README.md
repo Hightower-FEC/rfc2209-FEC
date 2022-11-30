@@ -1,8 +1,5 @@
 # rfc2209-FEC
 
-Rename .env.example to .env and supply appropriate values:
-API_URL should end in a / but base URL should not.  Do not include quotations or semi-colons
-
 > ### Group members<br>
 [Michael Raisch](https://github.com/LikeMike07),
 [Miles Owens](https://github.com/milrilowe),
@@ -50,4 +47,5 @@ Node.js - version 16.0 or higher
 ### Installing Dependencies
 
 > 1. Move into the root directory of the repository
-> 2. Run ```npm install``` to install all required dependencies
+> 2. Rename .env.example to .env and supply the appropriate values. Note: API_URL should end with / but base URL should not. Do not include quotation marks or semi-colons.
+> 3. Run ```npm install``` to install all required dependencies
