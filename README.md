@@ -20,6 +20,8 @@ API_URL should end in a / but base URL should not.  Do not include quotations or
 
 
 ## Description
+Project Atelier is a front-end business app for online retail. It was designed with simplicity and visual appeal in mind. The sleek and user-friendly design of the website brings the products at the forefront in the image gallery, which was implemented as a slider component to allow for a seamless transition when viewing the different styles that are available.
+
 
 
 
