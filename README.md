@@ -20,7 +20,13 @@ API_URL should end in a / but base URL should not.  Do not include quotations or
 
 
 ## Description
-Project Atelier is a front-end business app for online retail. It was designed with simplicity and visual appeal in mind. The sleek, straight-forward and user-friendly design of the website allows for easy access to the navigation panel that is always present at the top of the page regardless of where the viewport is. brings the products at the forefront in the image gallery, which was implemented as a slider component to allow for a seamless transition when viewing the different styles that are available.
+Project Atelier is a front-end business app for online retail. It was designed with simplicity and visual appeal in mind. The sleek, straight-forward, and user-friendly design of the website allows for easy access to the navigation panel that is always present at the top of the page no matter where the viewport is located. The navigation panel includes a search bar and a button to switch to dark-mode.
+
+The Overview is the first component that the user sees, which brings the products at the forefront in the image gallery. The image gallery was implemented as a slider component to allow for a seamless transition when viewing the different styles that are available.
+
+The Related Products component follows that is was also envisioned as a slider component for a better user experience while browsing through the catalog. Each related product is displayed as a card that will redirect to the image gallery when clicked. The card includes a star icon that brings up a modal to compare the features of the current product in the image gallery with the respective card that was selected.
+
+Immediately below is the Outfit Creation component where the user can store a product with the Add to Outfit card. Any stored products will remain on the user's list even when refreshing or leaving the website.
 
 
 
