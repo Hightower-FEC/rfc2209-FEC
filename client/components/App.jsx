@@ -20,8 +20,9 @@ const App = () => {
    * Initialize currentProduct to arbitary product on app start
    */
   useEffect(() => {
-    axios.get('/products/66646')
+    axios.get('/products/37315')
       .then((response) => {
+        console.log('response', response.data)
         setCurrentProduct(response.data);
       })
       .catch((error) => {
@@ -52,6 +53,7 @@ const App = () => {
    */
   useEffect(() => {
     if (currentProduct) {
+      console.log('currentProduct', currentProduct.id)
       axios.get(`/reviews/meta?product_id=${currentProduct.id}`)
         .then((response) => {
           setReviewMetaData(response.data);
@@ -104,8 +106,8 @@ const App = () => {
     });
     if (results.length > 0) {
       setCurrentResults(results);
-      setCurrentProduct(undefined);
-      setReviewMetaData(undefined);
+      // setCurrentProduct(undefined);
+      // setReviewMetaData(undefined);
     }
   };
 

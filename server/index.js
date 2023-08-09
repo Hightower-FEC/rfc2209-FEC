@@ -20,10 +20,10 @@ const upload = multer({
 
 const path = require("path");
 const axios = require('axios');
-const cookieHandler = require('./middleware/cookieHandler');
+// const cookieHandler = require('./middleware/cookieHandler');
 const compression = require('compression');
 const app = express();
-app.use(cookieHandler);
+// app.use(cookieHandler);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -89,6 +89,7 @@ app.get('/products:page?:count?', (req, res) => {
 app.get('/products/:product_id', (req, res) => {
   const product_id = req.params.product_id;
   console.log(GIT_KEY);
+  console.log(product_id)
 
   axios.get(`${API_URL}/products/${product_id}`, AUTH)
     .then((response) => {
@@ -190,6 +191,7 @@ app.get('/reviews:page?:count?:sort?:product_id?', (req, res) => {
  * Endpoint for getting review metadata for a certain product
  */
 app.get('/reviews/meta:product_id?', (req, res) => {
+  console.log(req.query.product_id);
   if (!req.query.product_id) {
     res.status(422).send('Must pass a product_id into params');
   } else {
@@ -484,10 +486,6 @@ app.post('/qa/questions/:question_id/answers', upload.array('files'), (req, res)
 });
 
 //The 404 Route (ALWAYS Keep this as the last route)
-app.get('*', function(req, res){
-  res.set('Content-Type', 'image/gif');
-  res.redirect('/assets/not-found.gif');
-});
 
 app.listen(PORT);
 console.log(`Listening at ${BASE_URL}:${PORT}`);
